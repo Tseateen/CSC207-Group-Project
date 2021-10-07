@@ -1,12 +1,17 @@
 public interface iEmployee {
 
-    public String getName();
+    // If we need a constant variable, please use public static final as its Access Modifier.
+    // Access modifier(defaulted): public abstract. Thus, we do not need to claim.
 
-    public void setName(String name);
+    String getName();
 
-    public int getId();
+    void setName(String name);
 
-    public int getAttendance();
+    int getId();
 
-    public void setAttendance();
+    int getAttendance();
+
+    void setAttendance();
+
+    String toString();
 }
