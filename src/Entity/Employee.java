@@ -1,8 +1,7 @@
 public abstract class Employee{
     public static int totalEmployee;
     public static int totalLeaveEmployee;
-    // TODO: 不確定final 是否可以加在這。。。需要確認
-    private int id;
+    private final int id;
     private String name;
     private int attendance;
 
