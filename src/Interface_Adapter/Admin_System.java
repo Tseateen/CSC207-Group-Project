@@ -19,13 +19,12 @@ public class Admin_System {
             return managerEmployee.verifyAccountExist(username, password);
 
     }
-    public boolean verifyAuthority(int username, int password){
-        return managerEmployee.verifyAuthority(username, password);
+    public boolean verifyAccIsAdmin(int username, int password){
+        return managerEmployee.verifyisAdmin(username, password);
     }
 
     public void createUser(int accountNumber, int password, String name, int phone, String address, String status,
                               String department, String position, int wage, int level, int id){
-        ac.createEmployee(accountNumber, password, name, phone,
-                address,status,department,position,wage,level,id);
+
     }
 }
