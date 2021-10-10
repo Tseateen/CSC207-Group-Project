@@ -1,5 +1,6 @@
 package Entity;
 
+
 public class User implements Userable{
     private int account;
     private int password;
@@ -7,6 +8,8 @@ public class User implements Userable{
     private String name;
     private int phone;
     private String address;
+    private int vaccination;
+
 
     public User(int accountNumber,int password, String name, int phone, String address, int id){
         this.id = id;
@@ -71,6 +74,12 @@ public class User implements Userable{
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public int getVaccination(){return this.vaccination;}
+
+    @Override
+    public void setVaccination(int vac){this.vaccination = vac;}
 
     @Override
     public boolean equal(Object obj) {

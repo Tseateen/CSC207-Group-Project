@@ -8,6 +8,7 @@ public abstract class Employee{
     private int attendance;
     private int level;
 
+
     public Employee(String department, String position, int wage, int level){
         this.department = department;
         this.position = position;
@@ -55,6 +56,7 @@ public abstract class Employee{
     public void setLevel(int level){
         this.level = level;
     }
+
 
     @Override
     public String toString(){

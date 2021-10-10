@@ -15,6 +15,7 @@ public interface Userable {
     public abstract String getAddress();
     public abstract void setAddress(String address);
     public abstract boolean equal(Object other);
-
+    public abstract int getVaccination();
+    public abstract void setVaccination(int vac);
 
 }
