@@ -6,7 +6,6 @@ import java.time.*;
 public class PartTimeEmployee extends Employee{
     private HashMap<String, LocalTime[]> schedule;
 
-
     public PartTimeEmployee(String department, String position, int wage, int level) {
         super(department, position, wage, level);
     }
