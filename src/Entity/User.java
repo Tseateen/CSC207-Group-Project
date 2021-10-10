@@ -1,8 +1,7 @@
 package Entity;
 
-public class User implements Userable {
-    public static int totalEmployee;
-    public static int totalLeaveEmployee;
+
+public class User implements Userable{
     private int account;
     private int password;
     private final int id;
@@ -11,8 +10,9 @@ public class User implements Userable {
     private String address;
     private int vaccination;
 
-    public User(int accountNumber,int password, String name, int phone, String address){
-        this.id = User.totalEmployee + User.totalLeaveEmployee + 1;
+
+    public User(int accountNumber,int password, String name, int phone, String address, int id){
+        this.id = id;
         this.account = accountNumber;
         this.password = password;
         this.name = name;
