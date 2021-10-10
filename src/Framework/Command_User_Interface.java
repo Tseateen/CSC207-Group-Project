@@ -2,7 +2,6 @@ package Framework;
 
 import Interface_Adapter.Admin_System;
 import Interface_Adapter.Employee_System;
-import Uses_Cases.Verifier;
 
 import java.util.Scanner;
 
@@ -52,8 +51,8 @@ public class Command_User_Interface {
                 int level = keyIn.nextInt();
                 System.out.println("Please assign an id to this employee !");
                 int id = keyIn.nextInt();
-                adminSystem.createUser(accountNumber, passwordNumber, name, phone, address, status,
-                        department, position, wage, level, id);
+                adminSystem.createUser(accountNumber, passwordNumber, name, phone,
+                        address,status,department,position,wage,level);
                 System.out.println("Success to build the new employee");
             } else if (action.equals("L")) {
                 System.out.println("Success, Loading Employee interface");
