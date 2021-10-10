@@ -5,9 +5,9 @@ public class FullTimeEmployee extends Employee {
     private int totalVacationWithSalary;
     private int vacationUsed;
 
-    public FullTimeEmployee(String department, String position, int wage, int level, int totalVacationWithSalary) {
+    public FullTimeEmployee(String department, String position, int wage, int level) {
         super(department, position, wage, level);
-        this.totalVacationWithSalary = totalVacationWithSalary;
+        this.totalVacationWithSalary = 0;
         this.vacationUsed = 0;
     }
 

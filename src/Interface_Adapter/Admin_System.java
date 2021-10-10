@@ -20,5 +20,9 @@ public class Admin_System {
         return managerEmployee.verifyAuthority(username, password);
     }
 
-    public void createEmployee(String)
+    public void createUser(int accountNumber, int password, String name, int phone, String address, String status,
+                              String department, String position, int wage, int level){
+        managerEmployee.createEmployee(accountNumber, password, name, phone,
+                address,status,department,position,wage,level);
+    }
 }
