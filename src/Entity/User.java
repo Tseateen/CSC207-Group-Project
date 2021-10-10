@@ -10,7 +10,7 @@ public class User implements Userable{
     private int phone;
     private String address;
 
-    User(int accountNumber,int password, String name, int phone, String address){
+    public User(int accountNumber,int password, String name, int phone, String address){
         this.id = User.totalEmployee + User.totalLeaveEmployee + 1;
         this.account = accountNumber;
         this.password = password;
@@ -21,7 +21,7 @@ public class User implements Userable{
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
@@ -31,12 +31,12 @@ public class User implements Userable{
 
     @Override
     public int getID() {
-        return 0;
+        return this.id;
     }
 
     @Override
     public int getAccount() {
-        return 0;
+        return this.account;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class User implements Userable{
 
     @Override
     public int getPassword() {
-        return 0;
+        return this.password;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class User implements Userable{
 
     @Override
     public int getPhone() {
-        return 0;
+        return this.phone;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class User implements Userable{
 
     @Override
     public String getAddress() {
-        return null;
+        return this.address;
     }
 
     @Override
