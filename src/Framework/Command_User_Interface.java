@@ -49,8 +49,10 @@ public class Command_User_Interface {
                 int wage = keyIn.nextInt();
                 System.out.println("Please give the Authority Level of employee !");
                 int level = keyIn.nextInt();
+                System.out.println("Please assign an id to this employee !");
+                int id = keyIn.nextInt();
                 adminSystem.createUser(accountNumber, passwordNumber, name, phone, address, status,
-                        department, position, wage, level);
+                        department, position, wage, level, id);
                 System.out.println("Success to build the new employee");
             } else if (action.equals("L")) {
                 System.out.println("Success, Loading Employee interface");
