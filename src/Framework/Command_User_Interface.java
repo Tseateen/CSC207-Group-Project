@@ -16,8 +16,8 @@ public class Command_User_Interface {
             int accountNumber = keyIn.nextInt();
             System.out.println("Please enter your password: ");
             int passwordNumber = keyIn.nextInt();
-            System.out.println("If you want to manager employee, then please type M. " + "\n" +
-                    "If you want to look up personal info, then please type L.");
+            System.out.println("If you want to manager employee, please type M. " + "\n" +
+                    "If you want to look up personal info, please type L.");
             keyIn.nextLine();
             String action = keyIn.nextLine();
 
