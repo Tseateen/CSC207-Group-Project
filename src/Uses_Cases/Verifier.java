@@ -36,7 +36,8 @@ public class Verifier {
             }
         }
         return false;
-    }public boolean verifyisAdmin(int account, int password){
+    }
+    public boolean verifyisAdmin(int account, int password){
         if (account == 1 && password == 0){
             return true;
         }return false;
