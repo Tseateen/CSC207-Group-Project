@@ -1,5 +1,4 @@
 package Uses_Cases;
-import java.time.LocalDateTime;
 import Entity.*;
 
 import java.util.HashMap;
@@ -12,18 +11,18 @@ public class AccountManager {
     private int totalPart_time = 0;
     private int totalFull_time = 0;
 
-    public AccountManager(HashMap<Userable, Employee> list) {
-        employeeList = list;
-        totalEmployee = employeeList.size();
-        totalFull_time = CountFulltime((HashMap)employeeList);
-        totalPart_time = totalEmployee - totalFull_time;
-        total_number = employeeList.size();
+    public AccountManager(){
+        this.employeeList = new HashMap<Userable, Employee>();
+        createEmployee(1, 0, "Admin", 0, "", "F",
+                "HR", "Admin", 0, 0);
     }
 
-    public AccountManager(){
-        employeeList = new HashMap<Userable, Employee>();
-        createEmployee(1, 0, "Admin", 0, "", "",
-                "HR", "Admin", 0, 0);
+    public AccountManager(HashMap<Userable, Employee> list) {
+        this.employeeList = list;
+        this.totalEmployee = employeeList.size();
+        this.totalFull_time = CountFulltime((HashMap)employeeList);
+        this.totalPart_time = totalEmployee - totalFull_time;
+        this.total_number = employeeList.size();
     }
 
     private int CountFulltime(HashMap<Userable, Employee> list) {
@@ -34,7 +33,7 @@ public class AccountManager {
         return num;
     }
 
-    public boolean createEmployee(int accountNumber, int password, String name, int phone, String address, String status,
+    public void createEmployee(int accountNumber, int password, String name, int phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
         Userable newUser = new User(accountNumber, password, name, phone, address, total_number);
@@ -43,17 +42,14 @@ public class AccountManager {
             newEmployee = new PartTimeEmployee(department, position, wage, level);
             totalPart_time++;
             totalEmployee++;
+            employeeList.put(newUser,newEmployee);
         }
         else if (status.equals("F")) {
             newEmployee = new FullTimeEmployee(department, position, wage, level);
             totalFull_time++;
             totalEmployee++;
+            employeeList.put(newUser,newEmployee);
         }
-        else {
-            return false;
-        }
-        employeeList.put(newUser,newEmployee);
-        return true;
     }
 
     public boolean deleteEmployee(int id) {
@@ -82,5 +78,7 @@ public class AccountManager {
         return totalPart_time;
     }
 
-
+    public Map<Userable, Employee> getEmployeeList(){
+        return this.employeeList;
+    }
 }

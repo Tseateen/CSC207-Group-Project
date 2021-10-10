@@ -1,3 +1,4 @@
 package Entity;
-    public abstract void getPay();
+    public interface Payable {
 }
+
