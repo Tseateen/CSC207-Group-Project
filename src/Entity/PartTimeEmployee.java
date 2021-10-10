@@ -11,7 +11,6 @@ public class PartTimeEmployee extends Employee{
         this.schedule = schedule;
     }
 
-
     public String getSchedule(){return this.schedule;}
 
     public void setSchedule(String schedule){
