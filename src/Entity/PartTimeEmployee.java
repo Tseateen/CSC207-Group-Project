@@ -1,8 +1,7 @@
 package Entity;
 
-import java.lang.reflect.Array;
+import java.time.LocalTime;
 import java.util.HashMap;
-import java.time.*;
 public class PartTimeEmployee extends Employee{
     private HashMap<String, LocalTime[]> schedule;
 
