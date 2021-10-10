@@ -10,7 +10,9 @@ public class Admin_System {
     private Pay_Manager mangerPay;
 
     public Admin_System(){
-        this.managerEmployee = new Verifier();
+        this.ac = new AccountManager();
+        System.out.println(ac.getEmployeeList());
+        this.managerEmployee = new Verifier(ac.getEmployeeList());
         this.mangerPay = new Pay_Manager();
     }
 
