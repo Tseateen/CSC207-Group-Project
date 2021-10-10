@@ -2,6 +2,7 @@ package Framework;
 
 import Interface_Adapter.Admin_System;
 import Interface_Adapter.Employee_System;
+import Uses_Cases.Verifier;
 
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Command_User_Interface {
             int accountNumber = keyIn.nextInt();
             System.out.println("Please enter your password: ");
             int passwordNumber = keyIn.nextInt();
-            System.out.println("If you want to manager employee, please type M. " + "\n" +
+            System.out.println("If you want to manage employee, please type M. " + "\n" +
                     "If you want to look up personal info, please type L.");
             keyIn.nextLine();
             String action = keyIn.nextLine();
@@ -27,7 +28,7 @@ public class Command_User_Interface {
                     System.out.println("Wrong account number or wrong password! Please type again !");
                     continue;
                 }
-                if (!adminSystem.verifyAuthority(accountNumber, passwordNumber)){
+                if (!adminSystem.verifyAccIsAdmin(accountNumber, passwordNumber)){
                     System.out.println("You have no authority! Please check again your action !");
                     continue;
                 }
