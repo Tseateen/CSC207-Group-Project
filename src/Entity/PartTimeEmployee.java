@@ -1,15 +1,9 @@
-public class PartTimeEmployee extends Employee implements Payable{
-    public PartTimeEmployee(String name) {
-        super(name);
-    }
+package Entity;
 
-    @Override
-    public String toString(){
-        return this.getName();
-    }
+public class PartTimeEmployee extends Employee{
 
-    @Override
-    public void getPay() {
 
+    public PartTimeEmployee(String department, String position, int wage, int level) {
+        super(department, position, wage, level);
     }
 }

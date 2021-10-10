@@ -1,28 +1,19 @@
+package Entity;
+
 public abstract class Employee{
-    public static int totalEmployee;
-    public static int totalLeaveEmployee;
-    private final int id;
-    private String name;
+
+    private String department;
+    private String position;
+    private int wage;
     private int attendance;
+    private int level;
 
-    public Employee(String name){
-        // Guarantee id uniq
-        this.id = Employee.totalEmployee + Employee.totalLeaveEmployee +  1;
-        this.name = name;
-        Employee.totalEmployee ++;
+    public Employee(String department, String position, int wage, int level){
+        this.department = department;
+        this.position = position;
+        this.wage = wage;
+        this.level = level;
         this.attendance = 0;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public int getId(){
-        return this.id;
     }
 
     public int getAttendance(){
@@ -31,6 +22,38 @@ public abstract class Employee{
 
     public void setAttendance(){
         this.attendance ++;
+    }
+
+    public int getWage(){
+        return this.wage;
+    }
+
+    public void setWage(int wage){
+        this.wage = wage;
+    }
+
+    public String getDepartment(){
+        return this.department;
+    }
+
+    public void setDepartment(String department){
+        this.department = department;
+    }
+
+    public String getPosition(){
+        return this.position;
+    }
+
+    public void setPosition(String position){
+        this.position = position;
+    }
+
+    public int getLevel(){
+        return this.level;
+    }
+
+    public void setLevel(int level){
+        this.level = level;
     }
 
     @Override
