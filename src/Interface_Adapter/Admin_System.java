@@ -1,17 +1,14 @@
 package Interface_Adapter;
 
-import Uses_Cases.AccountManager;
-import Uses_Cases.Verifier;
+import Uses_Cases.Employee_Manager;
 import Uses_Cases.Pay_Manager;
-import Uses_Cases.Verifier;
 
 public class Admin_System {
-    private Verifier managerEmployee;
-    private AccountManager ac;
+    private Employee_Manager managerEmployee;
     private Pay_Manager mangerPay;
 
     public Admin_System(){
-        this.managerEmployee = new Verifier();
+        this.managerEmployee = new Employee_Manager();
         this.mangerPay = new Pay_Manager();
     }
 
@@ -24,8 +21,8 @@ public class Admin_System {
     }
 
     public void createUser(int accountNumber, int password, String name, int phone, String address, String status,
-                              String department, String position, int wage, int level, int id){
-        ac.createEmployee(accountNumber, password, name, phone,
-                address,status,department,position,wage,level,id);
+                              String department, String position, int wage, int level){
+        managerEmployee.createEmployee(accountNumber, password, name, phone,
+                address,status,department,position,wage,level);
     }
 }
