@@ -36,7 +36,7 @@ public class Verifier {
         }
         return false;
     }
-    public boolean verifyisAdmin(String account, String password){
+    public boolean verifyAdmin(String account, String password){
         return account.equals("1") && password.equals("0");
 
     }
