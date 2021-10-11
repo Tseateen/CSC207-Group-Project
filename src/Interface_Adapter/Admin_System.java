@@ -15,15 +15,15 @@ public class Admin_System {
         this.mangerPay = new Pay_Manager();
     }
 
-    public boolean verifyAccountExistence(int username, int password){
+    public boolean verifyAccountExistence(String username, String password){
             return managerEmployee.verifyAccountExist(username, password);
 
     }
-    public boolean verifyAccIsAdmin(int username, int password){
+    public boolean verifyAccIsAdmin(String username, String password){
         return managerEmployee.verifyisAdmin(username, password);
     }
 
-    public void createUser(int accountNumber, int password, String name, int phone, String address, String status,
+    public void createUser(String accountNumber, String password, String name, String phone, String address, String status,
                            String department, String position, int wage, int level){
         ac.createEmployee(accountNumber, password, name, phone, address,status,department,position,wage,level);
 

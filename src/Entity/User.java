@@ -2,16 +2,16 @@ package Entity;
 
 
 public class User implements Userable{
-    private int account;
-    private int password;
+    private String account;
+    private String password;
     private final int id;
     private String name;
-    private int phone;
+    private String phone;
     private String address;
     private int vaccination;
 
 
-    public User(int accountNumber,int password, String name, int phone, String address, int id){
+    public User(String accountNumber,String password, String name, String phone, String address, int id){
         this.id = id;
         this.account = accountNumber;
         this.password = password;
@@ -36,32 +36,32 @@ public class User implements Userable{
     }
 
     @Override
-    public int getAccount() {
+    public String getAccount() {
         return this.account;
     }
 
     @Override
-    public void setAccount(int account) {
+    public void setAccount(String account) {
         this.account = account;
     }
 
     @Override
-    public int getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
     @Override
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     @Override
-    public int getPhone() {
+    public String getPhone() {
         return this.phone;
     }
 
     @Override
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

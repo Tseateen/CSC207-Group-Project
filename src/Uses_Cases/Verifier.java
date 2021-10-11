@@ -14,20 +14,20 @@ public class Verifier {
 
     }
 
-    public boolean verifyAccountExist(int account, int password) {
+    public boolean verifyAccountExist(String account, String password) {
         Set<Userable> keys = this.employeeList.keySet();
         for (Userable key : keys) {
-            if (key.getAccount() == account && key.getPassword() == password) {
+            if (key.getAccount().equals(account) && key.getPassword().equals(password)) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean verifyAuthority(int account, int password) {
+    public boolean verifyAuthority(String account, String password) {
         Set<Userable> keys = employeeList.keySet();
         for (Userable key : keys) {
-            if (key.getAccount() == account && key.getPassword() == password) {
+            if (key.getAccount().equals(account) && key.getPassword().equals(password)) {
                 if (employeeList.get(key).getLevel() == 1) {
                     return true;
                 }
@@ -35,8 +35,8 @@ public class Verifier {
         }
         return false;
     }
-    public boolean verifyisAdmin(int account, int password){
-        return account == 1 && password == 0;
+    public boolean verifyisAdmin(String account, String password){
+        return account.equals("1") && password.equals("0");
 
     }
 

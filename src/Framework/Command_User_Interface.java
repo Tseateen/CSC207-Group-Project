@@ -12,13 +12,13 @@ public class Command_User_Interface {
         Admin_System adminSystem = new Admin_System();
         Employee_System employeeSystem = new Employee_System();
         while(true) {
-            System.out.println("Please type your account number: ");
-            int accountNumber = keyIn.nextInt();
+            System.out.println("Please type your account: ");
+            String accountNumber = keyIn.nextLine();
             System.out.println("Please enter your password: ");
-            int passwordNumber = keyIn.nextInt();
+            String passwordNumber = keyIn.nextLine();
             System.out.println("If you want to manage employee, please type M. " + "\n" +
                     "If you want to look up personal info, please type L.");
-            keyIn.nextLine();
+
             String action = keyIn.nextLine();
 
             if (action.equals("M")) {
@@ -34,9 +34,8 @@ public class Command_User_Interface {
                 System.out.println("Please give the new name of employee !");
                 String name = keyIn.nextLine();
                 System.out.println("Please give the phone number of employee !");
-                int phone = keyIn.nextInt();
+                String phone = keyIn.nextLine();
                 System.out.println("Please give the new address of employee !");
-                keyIn.nextLine();
                 String address = keyIn.nextLine();
                 System.out.println("Please type \"P\"(i.e represent Parttime), or type \"F\"(i.e represent Fulltime) ");
                 String status = keyIn.nextLine();
