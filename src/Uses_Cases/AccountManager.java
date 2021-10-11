@@ -21,7 +21,7 @@ public class AccountManager {
 
     public AccountManager(){
         this.employeeList = new HashMap<Userable, Employee>();
-        createEmployee("1", "0", "Admin", "0", "", "F",
+        createEmployee("1", "0", "Admin", "", "", "",
                 "HR", "Admin", 0, 0);
     }
 
@@ -41,7 +41,21 @@ public class AccountManager {
         return num;
     }
 
-    public void createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
+    /**
+     * 用于生成一个新的员工，如果生成成功会返还生成的员工
+     * @param accountNumber
+     * @param password
+     * @param name
+     * @param phone
+     * @param address
+     * @param status
+     * @param department
+     * @param position
+     * @param wage
+     * @param level
+     * @return
+     */
+    public Object createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
         Userable newUser = new User(accountNumber, password, name, phone, address, String.valueOf(total_number));
@@ -51,16 +65,25 @@ public class AccountManager {
             totalPart_time++;
             totalEmployee++;
             employeeList.put(newUser,newEmployee);
+            return newUser;
         }
         else if (status.equals("F")) {
             newEmployee = new FullTimeEmployee(department, position, wage, level);
             totalFull_time++;
             totalEmployee++;
             employeeList.put(newUser,newEmployee);
+            return newUser;
         }
+        return null;
     }
 
-    public boolean deleteEmployee(String id) {
+    /**
+     * 删除一个员工，如果删除成功会返还被删除的员工
+     * @param id
+     * @return
+     */
+
+    public Object deleteEmployee(String id) {
         for (Userable i : employeeList.keySet()) {
             if (Objects.equals(((User) i).getID(), id)) {
                 Employee j = employeeList.remove(i);
@@ -70,10 +93,10 @@ public class AccountManager {
                     totalFull_time--;
                 }
                 totalEmployee--;
-                return true;
+                return j;
             }
         }
-        return false;
+        return null;
     }
 
     public int getTotalEmployee () {return totalEmployee;}

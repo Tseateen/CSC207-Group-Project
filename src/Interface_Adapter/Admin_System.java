@@ -12,7 +12,7 @@ public class Admin_System {
 
     public Admin_System(){
         this.ac = new AccountManager();
-        this.managerEmployee = new Verifier(ac.getEmployeeList());
+        this.managerEmployee = new Verifier(ac);
         this.mangerPay = new Pay_Manager();
     }
 
