@@ -3,9 +3,16 @@ import Entity.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class AccountManager {
+    /**
+     * 用于管理所有用户账号的工具，主要用于生成新员工和删除员工
+     * 同时也会统计各种员工的数量
+     *
+     * @param total_number 公司一共有过多少用，包括删除的员工，用于辅助生成id
+     */
     private Map<Userable, Employee> employeeList;
     private int total_number = 0;
     private int totalEmployee = 0;
@@ -37,10 +44,10 @@ public class AccountManager {
     public void createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
-        Userable newUser = new User(accountNumber, password, name, phone, address, total_number);
+        Userable newUser = new User(accountNumber, password, name, phone, address, String.valueOf(total_number));
         Employee newEmployee;
         if(status.equals("P")) {
-            newEmployee = new PartTimeEmployee(department, position, wage, level);
+            newEmployee = new PartTimeEmployee(department, wage, level);
             totalPart_time++;
             totalEmployee++;
             employeeList.put(newUser,newEmployee);
@@ -53,9 +60,9 @@ public class AccountManager {
         }
     }
 
-    public boolean deleteEmployee(int id) {
+    public boolean deleteEmployee(String id) {
         for (Userable i : employeeList.keySet()) {
-            if (((User)i).getID() == id) {
+            if (Objects.equals(((User) i).getID(), id)) {
                 Employee j = employeeList.remove(i);
                 if (j instanceof PartTimeEmployee) {
                     totalPart_time--;

@@ -21,7 +21,7 @@ public class Admin_System {
 
     }
     public boolean verifyAccIsAdmin(String username, String password){
-        return managerEmployee.verifyisAdmin(username, password);
+        return managerEmployee.verifyAdmin(username, password);
     }
 
     public void createUser(String accountNumber, String password, String name, String phone, String address, String status,
