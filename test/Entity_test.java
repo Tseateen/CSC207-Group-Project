@@ -18,6 +18,9 @@ public class Entity_test {
         VA = new Verifier(AM);
     }
 
+    /**
+     * 这部分是个最简单的测试，仅仅是测试初始化
+     */
     @Test
     public void test1() {
         for (Userable i: AM.getEmployeeList().keySet()) {
@@ -26,6 +29,10 @@ public class Entity_test {
         assertFalse(VA.verifyExist("30"));
     }
 
+    /**
+     * 这部分主要是测试账号的创建，添加，删除
+     * 还有verifier中的一些验证功能
+     */
     @Test
     public void test2() {
         assertEquals(AM.getTotalEmployee(), 1);
