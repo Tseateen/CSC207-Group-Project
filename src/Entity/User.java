@@ -2,15 +2,20 @@ package Entity;
 
 
 public class User implements Userable{
+    /**
+     * 一个用户的与工作无关的信息储存位置，并保存有一个独一无二的id
+     *
+     * @param id 每个员工独一无二的标签
+     */
     private String account;
     private String password;
-    private final int id;
+    private final String id;
     private String name;
     private String phone;
     private String address;
     private int vaccination;
 
-    public User(String accountNumber,String password, String name, String phone, String address, int id){
+    public User(String accountNumber,String password, String name, String phone, String address, String id){
         this.id = id;
         this.account = accountNumber;
         this.password = password;
@@ -30,7 +35,7 @@ public class User implements Userable{
     }
 
     @Override
-    public int getID() {
+    public String getID() {
         return this.id;
     }
 

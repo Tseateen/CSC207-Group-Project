@@ -1,10 +1,13 @@
 package Entity;
 
 public interface Userable {
+    /**
+     * 一个对User的虚拟接口
+     */
 
     public abstract String getName();
     public abstract void setName(String name);
-    public abstract int getID();
+    public abstract String getID();
     public abstract String getAccount();
     public abstract void setAccount(String account);
     public abstract String getPassword();
