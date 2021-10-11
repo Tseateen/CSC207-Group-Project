@@ -1,5 +1,6 @@
 package Uses_Cases;
 import Entity.*;
+import kotlin.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class AccountManager {
 
     public AccountManager(){
         this.employeeList = new HashMap<Userable, Employee>();
-        createEmployee("1", "0", "Admin", "", "", "",
+        createEmployee("1", "0", "Admin", "", "", "F",
                 "HR", "Admin", 0, 0);
     }
 

@@ -9,22 +9,22 @@ public class PartTimeEmployee extends Employee{
      * @param schedule keys:星期几，item:时段（是否应该改成string去储存时段？）
      */
 
-    private HashMap<String, LocalTime[]> schedule;
+    private HashMap<String, String[]> schedule;
 
 
     public PartTimeEmployee(String department, int wage, int level) {
         super(department, wage, level);
     }
-    public PartTimeEmployee(String department, int wage, int level, HashMap<String, LocalTime[]> schedule) {
+    public PartTimeEmployee(String department, int wage, int level, HashMap<String, String[]> schedule) {
         super(department, wage, level);
         this.schedule = schedule;
     }
 
-    public HashMap<String, LocalTime[]> getSchedule(){
+    public HashMap<String, String[]> getSchedule(){
         return this.schedule;
     }
 
-    public void setSchedule(HashMap<String, LocalTime[]> schedule){
+    public void setSchedule(HashMap<String, String[]> schedule){
         this.schedule = schedule;
     }
 
