@@ -10,7 +10,6 @@ public class User implements Userable{
     private String address;
     private int vaccination;
 
-
     public User(String accountNumber,String password, String name, String phone, String address, int id){
         this.id = id;
         this.account = accountNumber;

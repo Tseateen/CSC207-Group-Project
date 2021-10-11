@@ -21,6 +21,7 @@ public class Command_User_Interface {
 
             String action = keyIn.nextLine();
 
+
             if (action.equals("M")) {
                 System.out.println("Success. Loading Manager interface");
                 if(!adminSystem.verifyAccountExistence(accountNumber, passwordNumber)){
