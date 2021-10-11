@@ -40,7 +40,7 @@ public class AccountManager {
         Userable newUser = new User(accountNumber, password, name, phone, address, total_number);
         Employee newEmployee;
         if(status.equals("P")) {
-            newEmployee = new PartTimeEmployee(department, position, wage, level);
+            newEmployee = new PartTimeEmployee(department, wage, level);
             totalPart_time++;
             totalEmployee++;
             employeeList.put(newUser,newEmployee);
