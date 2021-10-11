@@ -11,7 +11,6 @@ public class Admin_System {
 
     public Admin_System(){
         this.ac = new AccountManager();
-        System.out.println(ac.getEmployeeList());
         this.managerEmployee = new Verifier(ac.getEmployeeList());
         this.mangerPay = new Pay_Manager();
     }
