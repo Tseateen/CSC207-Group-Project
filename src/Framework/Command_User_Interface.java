@@ -35,7 +35,6 @@ public class Command_User_Interface {
                 String name = keyIn.nextLine();
                 System.out.println("Please give the phone number of employee !");
                 int phone = keyIn.nextInt();
-                System.out.println(phone);
                 System.out.println("Please give the new address of employee !");
                 keyIn.nextLine();
                 String address = keyIn.nextLine();
