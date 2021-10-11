@@ -6,22 +6,22 @@ import Uses_Cases.Verifier;
 
 
 public class Admin_System {
-    private Verifier managerEmployee;
+    private Verifier managerVerifier;
     private AccountManager ac;
     private Pay_Manager mangerPay;
 
     public Admin_System(){
         this.ac = new AccountManager();
-        this.managerEmployee = new Verifier(ac);
+        this.managerVerifier = new Verifier(ac);
         this.mangerPay = new Pay_Manager();
     }
 
     public boolean verifyAccountExistence(String username, String password){
-            return managerEmployee.verifyAccountExist(username, password);
+            return managerVerifier.verifyAccountExist(username, password);
 
     }
     public boolean verifyAccIsAdmin(String username, String password){
-        return managerEmployee.verifyAdmin(username, password);
+        return managerVerifier.verifyAuthority(username, password);
     }
 
     /**
