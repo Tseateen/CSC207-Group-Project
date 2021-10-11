@@ -1,7 +1,6 @@
 package Uses_Cases;
 
-import Entity.Employee;
-import Entity.Userable;
+import Entity.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +32,7 @@ public class Verifier {
     public void RmAccount(Userable user) {
         AccountList.remove(user.getAccount());
     }
+
     /**
      * 这里要不要把验证账号存在和验证账号密码的步骤分开？用于后面的创建账号之类的
      * @param account
@@ -48,6 +48,21 @@ public class Verifier {
         return false;
     }
 
+    /**
+     * 这一小段是用来验证账号的存在的，如果感觉不需要就删掉就好
+     * @param account
+     * @return
+     */
+    public boolean verifyExist(String account) {
+        return AccountList.containsKey(account);
+    }
+
+    /**
+     * 这里是不是只用账号去判定会好一些，在登陆之后用账号判定
+     * @param account
+     * @param password
+     * @return
+     */
     public boolean verifyAuthority(String account, String password) {
         if (verifyAccountExist(account,password)) {
             if (AM.getEmployeeList().get(AccountList.get(account)).getLevel() < 1) {
@@ -58,7 +73,7 @@ public class Verifier {
     }
 
     /**
-     * 这个东西我没明白要干啥，感觉是不是没什么存在的必要？
+     * 这个东西我没明白要干啥，如果仅仅是为了第一个admin去创建的，是不是可以考虑删除掉用authority去判定
      * @param account
      * @param password
      * @return

@@ -24,6 +24,19 @@ public class Admin_System {
         return managerEmployee.verifyAdmin(username, password);
     }
 
+    /**
+     * 这里如果账号创建失败要不要考虑去return一个报告，比如说是因为什么原因之类的
+     * @param accountNumber
+     * @param password
+     * @param name
+     * @param phone
+     * @param address
+     * @param status
+     * @param department
+     * @param position
+     * @param wage
+     * @param level
+     */
     public void createUser(String accountNumber, String password, String name, String phone, String address, String status,
                            String department, String position, int wage, int level){
         ac.createEmployee(accountNumber, password, name, phone, address,status,department,position,wage,level);
