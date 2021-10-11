@@ -4,6 +4,7 @@ import Entity.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class AccountManager {
     private Map<Userable, Employee> employeeList;
     private int total_number = 0;
@@ -13,7 +14,7 @@ public class AccountManager {
 
     public AccountManager(){
         this.employeeList = new HashMap<Userable, Employee>();
-        createEmployee(1, 0, "Admin", 0, "", "F",
+        createEmployee("1", "0", "Admin", "0", "", "F",
                 "HR", "Admin", 0, 0);
     }
 
@@ -33,7 +34,7 @@ public class AccountManager {
         return num;
     }
 
-    public void createEmployee(int accountNumber, int password, String name, int phone, String address, String status,
+    public void createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
         Userable newUser = new User(accountNumber, password, name, phone, address, total_number);
