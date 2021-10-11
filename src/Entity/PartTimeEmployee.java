@@ -6,7 +6,7 @@ public class PartTimeEmployee extends Employee{
     /**
      * A Part Time Employee without position and vacation, but have a work schedule 用于查看他的工作时间
      *
-     * @param schedule keys:星期几，item:时段（是否应该改成string去储存时段？）
+     * @param schedule keys:星期几，item:时段（是否应该改成string去储存时段？
      */
 
     private HashMap<String, String[]> schedule;

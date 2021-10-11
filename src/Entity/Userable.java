@@ -3,6 +3,7 @@ package Entity;
 public interface Userable {
     /**
      * 一个对User的虚拟接口
+     * 降低dependence
      */
 
     public abstract String getName();
