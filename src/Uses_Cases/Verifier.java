@@ -10,7 +10,6 @@ public class Verifier {
     private Map<Userable, Employee> employeeList;
 
     public Verifier(Map<Userable, Employee> employeeList){
-        System.out.println("Successs");
         this.employeeList = employeeList;
 
     }
@@ -18,7 +17,6 @@ public class Verifier {
     public boolean verifyAccountExist(int account, int password) {
         Set<Userable> keys = this.employeeList.keySet();
         for (Userable key : keys) {
-            System.out.println(key.getAccount());
             if (key.getAccount() == account && key.getPassword() == password) {
                 return true;
             }
