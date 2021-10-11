@@ -41,9 +41,7 @@ public class Verifier {
      */
     public boolean verifyAccountExist(String account, String password) {
         if (AccountList.containsKey(account)) {
-            if (AccountList.get(account).getPassword().equals(password)) {
-                return true;
-            }
+            return AccountList.get(account).getPassword().equals(password);
         }
         return false;
     }
@@ -65,22 +63,9 @@ public class Verifier {
      */
     public boolean verifyAuthority(String account, String password) {
         if (verifyAccountExist(account,password)) {
-            if (AM.getEmployeeList().get(AccountList.get(account)).getLevel() < 1) {
-                return true;
-            }
+            return AM.getEmployeeList().get(AccountList.get(account)).getLevel() < 1;
         }
         return false;
-    }
-
-    /**
-     * 这个东西我没明白要干啥，如果仅仅是为了第一个admin去创建的，是不是可以考虑删除掉用authority去判定
-     * @param account
-     * @param password
-     * @return
-     */
-    public boolean verifyAdmin(String account, String password){
-        return account.equals("1") && password.equals("0");
-
     }
 
 }
