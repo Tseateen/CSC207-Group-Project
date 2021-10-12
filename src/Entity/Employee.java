@@ -57,5 +57,7 @@ public abstract class Employee{
 
 
     @Override
-    public abstract String toString();
+    public String toString(){
+        return "This is an employee in the department of " + this.department;
+    };
 }

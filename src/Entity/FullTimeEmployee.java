@@ -55,7 +55,8 @@ public class FullTimeEmployee extends Employee {
         this.vacationUsed = vacationUsed;
     }
 
+    @Override
     public String toString() {
-        return this.getPosition() + " of " + this.getDepartment() +  ", " + this.getLevel() + " level.";
+        return " " + this.getPosition() + " of " + this.getDepartment() +  ", " + this.getLevel() + " level.";
     }
 }
