@@ -112,4 +112,9 @@ public class AccountManager {
     public Map<Userable, Employee> getEmployeeList(){
         return this.employeeList;
     }
+
+    @Override
+    public String toString(){
+        return "This is account manager.";
+    }
 }

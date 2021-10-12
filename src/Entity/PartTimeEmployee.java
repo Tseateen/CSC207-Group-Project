@@ -1,6 +1,5 @@
 package Entity;
 
-import java.time.LocalTime;
 import java.util.HashMap;
 public class PartTimeEmployee extends Employee{
     /**
@@ -29,6 +28,6 @@ public class PartTimeEmployee extends Employee{
     }
 
     public String toString() {
-        return  "Part time worker of" + this.getDepartment() + this.getLevel() + "level.";
+        return  " Part time worker of" + this.getDepartment() + this.getLevel() + "level.";
     }
 }

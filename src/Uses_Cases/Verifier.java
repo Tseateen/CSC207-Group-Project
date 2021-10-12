@@ -1,10 +1,9 @@
 package Uses_Cases;
 
-import Entity.*;
+import Entity.Userable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 
 public class Verifier {
@@ -68,4 +67,8 @@ public class Verifier {
         return false;
     }
 
+    @Override
+    public String toString(){
+        return "This is a verifier";
+    }
 }
