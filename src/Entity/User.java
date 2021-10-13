@@ -2,19 +2,36 @@ package Entity;
 
 
 public class User implements Userable{
-    /**
-     * 一个用户的与工作无关的信息储存位置，并保存有一个独一无二的id
-     *
-     * @param id 每个员工独一无二的标签
-     */
-    private String account;
-    private String password;
-    private final String id;
-    private String name;
-    private String phone;
-    private String address;
-    private int vaccination;
 
+    // === Instance Variables ===
+
+    // The unique id for this user.
+    private final String id;
+    // The account number for this user.
+    private String account;
+    // The password for this user.
+    private String password;
+    // The name of this user.
+    private String name;
+    // The phone number of this user.
+    private String phone;
+    // The living address of this user.
+    private String address;
+    //TODO: Delete vacation instance variable.
+
+    /* === Representation Invariants ===
+     * id should be unique, and it cannot be modified after initial
+     */
+
+    /**
+     * Construct a User, giving them the given account number, password, name, phone number, address and unique id.
+     * @param accountNumber Account number for this user.
+     * @param password Password for this user.
+     * @param name Name for this user.
+     * @param phone Phone number for this user.
+     * @param address Address for this user.
+     * @param id Unique identity for this user.
+     */
     public User(String accountNumber,String password, String name, String phone, String address, String id){
         this.id = id;
         this.account = accountNumber;
@@ -24,67 +41,112 @@ public class User implements Userable{
         this.address = address;
     }
 
+    // === Regular methods ===
+
+    /**
+     *
+     * @return This method will return the name of this user.
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     *
+     * @param name The new name for this user.
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return This method will return the unique identity of this user.
+     */
     @Override
     public String getID() {
         return this.id;
     }
 
+    /**
+     *
+     * @return This method will return the account number for this user.
+     */
     @Override
     public String getAccount() {
         return this.account;
     }
 
+    /**
+     *
+     * @param account The new account number for this user
+     */
     @Override
     public void setAccount(String account) {
         this.account = account;
     }
 
+    /**
+     *
+     * @return This method will return the password of this user.
+     */
     @Override
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     *
+     * @param password The new password for this user.
+     */
     @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return This method will return the phone number of this user.
+     */
     @Override
     public String getPhone() {
         return this.phone;
     }
 
+    /**
+     *
+     * @param phone The new phone number for this user.
+     */
     @Override
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     *
+     * @return This method will return the living address of this user.
+     */
     @Override
     public String getAddress() {
         return this.address;
     }
 
+    /**
+     *
+     * @param address The new living address of this user.
+     */
     @Override
     public void setAddress(String address) {
         this.address = address;
     }
 
-    @Override
-    public int getVaccination(){return this.vaccination;}
-
-    @Override
-    public void setVaccination(int vac){this.vaccination = vac;}
-
+    /**
+     *
+     * @param obj The object needs to compare with this user.
+     * @return This method will return true iff the obj have the same Class type and id as this user.
+     */
     @Override
     public boolean equal(Object obj) {
         if(!(obj instanceof User)){
@@ -98,9 +160,14 @@ public class User implements Userable{
         }
         User other = (User) obj;
 
-        return (this.id == other.id);
+        return (this.id.equals(other.id));
     }
 
+    /**
+     *
+     * @return This method will return the string representation of this user. For instance, My identity is 1, and my
+     * name is Andy.
+     */
     @Override
     public String toString(){
         String identity = String.valueOf(this.id);
