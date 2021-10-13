@@ -32,6 +32,7 @@ public class PartTimeEmployee extends Employee{
         this.schedule = schedule;
     }
 
+    // === Regular methods ===
 
     public HashMap<String, String[]> getSchedule(){
         return this.schedule;
