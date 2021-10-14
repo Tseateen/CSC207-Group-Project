@@ -23,7 +23,7 @@ public class Entity_test {
      */
     @Test
     public void test1() {
-        for (Userable i: AM.getEmployeeList().keySet()) {
+        for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
         assertFalse(VA.verifyExist("30"));
@@ -45,12 +45,12 @@ public class Entity_test {
         assertEquals(AM.getTotalFull_time(), 1);
         assertEquals(AM.getTotalPart_time(), 1);
         VA.AddAccount((Userable)c);
-        for (Userable i: AM.getEmployeeList().keySet()) {
+        for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
-        assertTrue(VA.verifyAccountExist("2", "0"));
-        assertFalse(VA.verifyAccountExist("2", "1"));
-        for (Userable i: AM.getEmployeeList().keySet()) {
+        assertTrue(VA.verifyForLogin("2", "0"));
+        assertFalse(VA.verifyForLogin("2", "1"));
+        for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
         Object d = AM.deleteEmployee("1");
@@ -59,12 +59,12 @@ public class Entity_test {
         assertEquals(AM.getTotalFull_time(), 0);
         assertEquals(AM.getTotalPart_time(), 1);
         VA.AddAccount((Userable)c);
-        for (Userable i: AM.getEmployeeList().keySet()) {
+        for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
-        assertFalse(VA.verifyAccountExist("1", "0"));
-        assertFalse(VA.verifyAccountExist("2", "1"));
-        for (Userable i: AM.getEmployeeList().keySet()) {
+        assertFalse(VA.verifyForLogin("1", "0"));
+        assertFalse(VA.verifyForLogin("2", "1"));
+        for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
 
