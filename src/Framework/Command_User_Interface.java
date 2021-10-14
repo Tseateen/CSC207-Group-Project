@@ -1,7 +1,6 @@
 package Framework;
 
 import Interface_Adapter.Admin_System;
-import Interface_Adapter.Employee_System;
 
 import java.util.Scanner;
 
@@ -10,7 +9,6 @@ public class Command_User_Interface {
     public static void main(String[] args) {
         Scanner keyIn = new Scanner(System.in);
         Admin_System adminSystem = new Admin_System();
-        Employee_System employeeSystem = new Employee_System();
         while(true) {
             System.out.println("Please type your account: ");
             String accountNumber = keyIn.nextLine();
