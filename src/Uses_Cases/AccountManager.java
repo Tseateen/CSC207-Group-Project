@@ -7,33 +7,57 @@ import java.util.Objects;
 
 
 public class AccountManager {
-    /**
-     * 用于管理所有用户账号的工具，主要用于生成新员工和删除员工
-     * 同时也会统计各种员工的数量
-     *
-     * @param total_number 公司一共有过多少用，包括删除的员工，用于辅助生成id
-     */
-    private Map<Userable, Employee> employeeList;
+
+    // === Instance Variables ===
+
+    // The map of user and employee. i.e. key = Userable Object, item = Employee Object
+    // TODO: should it be final?
+    private Map<Userable, Employee> employeeMap;
+    // total_number is a counter for assigning unique identity.
     private int total_number = 0;
+    // TODO: should we make this as static variable ?
+    // totalEmployee can record the current total number of employee.
     private int totalEmployee = 0;
+    // TODO: should we make this as static variable ?
+    // totalPart_time can record the current total number of part-time employee.
     private int totalPart_time = 0;
+    // TODO: should we make this as static variable ?
+    // totalFull_time can record the current total number of full-time employee.
     private int totalFull_time = 0;
 
+    /* === Representation Invariants ===
+     * the number for both totalPart_time and totalFull_time should always greater or equal to 0, but the sum of both
+     * number should always equal to the number of totalEmployee.
+     * i.e. 0 <= totalPart_time and 0 <= totalFull_time and totalPart_time + totalFull_time = totalEmployee.
+     *
+     * the total_number should always greater or equal to totalEmployee. i.e. totalEmployee <= total_number.
+     */
+
+
+    /* Construct the AccountManager.
+     * In this constructor, it will give a first admin for initial purpose.
+     * TODO: we may use DB and GATEWAY to assign the first admin.
+     */
     public AccountManager(){
-        this.employeeList = new HashMap<Userable, Employee>();
+        this.employeeMap = new HashMap<Userable, Employee>();
         createEmployee("1", "0", "Admin", "", "", "F",
                 "HR", "Admin", 0, 0);
     }
 
+    /* Overload constructor.
+     * TODO: 我不確定這overload 要做什麼。 需要補充
+     */
     public AccountManager(HashMap<Userable, Employee> list) {
-        this.employeeList = list;
-        this.totalEmployee = employeeList.size();
-        this.totalFull_time = CountFulltime((HashMap)employeeList);
+        this.employeeMap = list;
+        this.totalEmployee = employeeMap.size();
+        this.totalFull_time = CountFullTime((HashMap) employeeMap);
         this.totalPart_time = totalEmployee - totalFull_time;
-        this.total_number = employeeList.size();
+        this.total_number = employeeMap.size();
     }
 
-    private int CountFulltime(HashMap<Userable, Employee> list) {
+    // === Regular methods ===
+
+    private int CountFullTime(HashMap<Userable, Employee> list) {
         int num = 0;
         for (Userable i : list.keySet()) {
             if (i instanceof FullTimeEmployee) { num++;}
@@ -42,19 +66,20 @@ public class AccountManager {
     }
 
     /**
-     * 用于生成一个新的员工，如果生成成功会返还生成的员工
-     * @param accountNumber
-     * @param password
-     * @param name
-     * @param phone
-     * @param address
-     * @param status
-     * @param department
-     * @param position
-     * @param wage
-     * @param level
-     * @return
+     *  Create a new user and put into employee list.
+     * @param accountNumber Given account number for this new user.
+     * @param password Given password for this new user.
+     * @param name Given name for this new user.
+     * @param phone Given phone number for this new user.
+     * @param address Given address for this new user.
+     * @param status Given the user status. i.e "F" represents full-time employee. "P" represents part-time employee.
+     * @param department Given the department of this user.
+     * @param position Given the position of this user.
+     * @param wage Given the minimum wage of this user.
+     * @param level Given the authority level of this user.
+     * @return Userable object iff creates user successful. Otherwise, return null.
      */
+    // TODO: return object 屬於不安全操作。建議return null 變throw custom exception，然後在admin system 使用 try-catch module
     public Object createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
@@ -64,57 +89,78 @@ public class AccountManager {
             newEmployee = new PartTimeEmployee(department, wage, level);
             totalPart_time++;
             totalEmployee++;
-            employeeList.put(newUser,newEmployee);
+            employeeMap.put(newUser,newEmployee);
             return newUser;
         }
         else if (status.equals("F")) {
             newEmployee = new FullTimeEmployee(department, position, wage, level);
             totalFull_time++;
             totalEmployee++;
-            employeeList.put(newUser,newEmployee);
+            employeeMap.put(newUser,newEmployee);
             return newUser;
         }
         return null;
     }
 
     /**
-     * 删除一个员工，如果删除成功会返还被删除的员工
-     * @param id
-     * @return
+     *
+     * @param id an unique identity for a Employee.
+     * @return Employee object iff delete employee successfully. Otherwise, return null
      */
-
+    // TODO: 同create object. 我們是否不該 return object?
     public Object deleteEmployee(String id) {
-        for (Userable i : employeeList.keySet()) {
+        for (Userable i : employeeMap.keySet()) {
+            // TODO: I don't think this if condition is correct.
             if (Objects.equals(((User) i).getID(), id)) {
-                Employee j = employeeList.remove(i);
+                Employee j = employeeMap.remove(i);
                 if (j instanceof PartTimeEmployee) {
                     totalPart_time--;
                 } else {
                     totalFull_time--;
                 }
                 totalEmployee--;
-                return j;
+                return i;
             }
         }
         return null;
     }
 
+    /**
+     *
+     * @return a number that represents the total number of employee.
+     */
     public int getTotalEmployee () {return totalEmployee;}
 
+    /**
+     *
+     * @return a number that represents the total number of Full-Time employee.
+     */
     public int getTotalFull_time() {
         return totalFull_time;
     }
 
+    /**
+     *
+     * @return a number that represents the total number of Part-Time employee.
+     */
     public int getTotalPart_time() {
         return totalPart_time;
     }
 
-    public Map<Userable, Employee> getEmployeeList(){
-        return this.employeeList;
+    /**
+     *
+     * @return a map that key = Userable object and its items = Employee object.
+     */
+    public Map<Userable, Employee> getEmployeeMap(){
+        return this.employeeMap;
     }
 
+    /**
+     *
+     * @return string of representation for future code testing. i.e. This is an account manager.
+     */
     @Override
     public String toString(){
-        return "This is account manager.";
+        return "This is an account manager.";
     }
 }
