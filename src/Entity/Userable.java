@@ -2,8 +2,8 @@ package Entity;
 
 public interface Userable {
     /**
-     * 一个对User的虚拟接口
-     * 降低dependence
+     * An interface of User class, for reducing dependency purpose.
+     *
      */
 
     public abstract String getName();
