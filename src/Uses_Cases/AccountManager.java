@@ -119,7 +119,7 @@ public class AccountManager {
                     totalFull_time--;
                 }
                 totalEmployee--;
-                return j;
+                return i;
             }
         }
         return null;
