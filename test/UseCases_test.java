@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-public class Entity_test {
+public class UseCases_test {
     AccountManager AM;
     Verifier VA;
 
@@ -62,7 +62,7 @@ public class Entity_test {
         for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
         }
-        assertFalse(VA.verifyForLogin("1", "0"));
+        assertTrue(VA.verifyForLogin("1", "0"));
         assertFalse(VA.verifyForLogin("2", "1"));
         for (Userable i: AM.getEmployeeMap().keySet()) {
             assertTrue(VA.verifyExist(i.getAccount()));
