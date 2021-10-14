@@ -44,8 +44,9 @@ public class AccountManager {
                 "HR", "Admin", 0, 0);
     }
 
-    /* Overload constructor.
-     * TODO: 我不確定這overload 要做什麼。 需要補充
+    /**
+     * Overload constructor for accounts other than the initial admin account (which is the first constructor).
+     *
      */
     public AccountManager(HashMap<Userable, Employee> list) {
         this.employeeMap = list;
