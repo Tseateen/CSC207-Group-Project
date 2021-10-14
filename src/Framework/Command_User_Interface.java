@@ -24,7 +24,7 @@ public class Command_User_Interface {
 
             if (action.equals("M")) {
                 System.out.println("Success. Loading Manager interface");
-                if(!adminSystem.verifyAccountExistence(accountNumber, passwordNumber)){
+                if(!adminSystem.verifyForLogin(accountNumber, passwordNumber)){
                     System.out.println("Wrong account number or wrong password! Please type again !");
                     continue;
                 }

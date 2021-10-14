@@ -7,68 +7,81 @@ import java.util.Map;
 
 
 public class Verifier {
-    /**
-     * 用于验证账号和权限
-     */
-    private Map<String, Userable> AccountList; //key是account number，item是user
-    private AccountManager AM;
+
+    // === Instance Variables ===
+
+    // TODO: Should we make employeeMap and managerAccount as final variable?
+    // This is the employee map. Key = Userable object. Item = Employee Object
+    private Map<String, Userable> employeeMap;
+    // This is the variable store the AccountManager type Object.
+    private AccountManager managerAccount;
 
     /**
-     * 从外部输入一个由AccountManager生成的map 从而生成AccountList
-     * @param AM
+     * Construct a Verifier, giving them the given mangerAccount object.
+     * @param managerAccount Given the AccountManger object to manger account.
      */
-    public Verifier(AccountManager AM){
-        this.AM = AM;
-        AccountList =new HashMap<String, Userable>();
-        for (Userable i : AM.getEmployeeList().keySet()) {
-            AccountList.put(i.getAccount(), i);
+    public Verifier(AccountManager managerAccount){
+        this.managerAccount = managerAccount;
+        employeeMap =new HashMap<String, Userable>();
+        for (Userable i : managerAccount.getEmployeeMap().keySet()) {
+            employeeMap.put(i.getAccount(), i);
         }
     }
 
+    // TODO: I don't think AddAccount should put in this uses cases.
     public void AddAccount(Userable user) {
-        AccountList.put(user.getAccount(), user);
-    }
-    public void RmAccount(Userable user) {
-        AccountList.remove(user.getAccount());
+        employeeMap.put(user.getAccount(), user);
     }
 
+    // TODO: I don't think RemoveAccount should put in this uses cases.
+    public void RmAccount(Userable user) {
+        employeeMap.remove(user.getAccount());
+    }
+
+    // TODO: 这里要不要把验证账号存在和验证账号密码的步骤分开？用于后面的创建账号之类的
     /**
-     * 这里要不要把验证账号存在和验证账号密码的步骤分开？用于后面的创建账号之类的
-     * @param account
-     * @param password
-     * @return
+     * @param account Given the account number.
+     * @param password Given the password.
+     * @return true iff given the correct account number and password. Otherwise, return false.
      */
-    public boolean verifyAccountExist(String account, String password) {
-        if (AccountList.containsKey(account)) {
-            return AccountList.get(account).getPassword().equals(password);
+    public boolean verifyForLogin(String account, String password) {
+        if (employeeMap.containsKey(account)) {
+            return employeeMap.get(account).getPassword().equals(password);
         }
         return false;
     }
 
     /**
-     * 这一小段是用来验证账号的存在的，如果感觉不需要就删掉就好
-     * @param account
-     * @return
+     *
+     * @param account Given the account number.
+     * @return true iff account number already exists.
      */
     public boolean verifyExist(String account) {
-        return AccountList.containsKey(account);
+        return employeeMap.containsKey(account);
     }
 
+    // TODO: 这里是不是只用账号去判定会好一些，在登陆之后用账号判定 <---- Andy: I agree with this idea.
     /**
-     * 这里是不是只用账号去判定会好一些，在登陆之后用账号判定
-     * @param account
-     * @param password
-     * @return
+     *
+     * @param account Given a user account number.
+     * @param password Given a user password number.
+     * @return true iff user have enough authority level to modified other user account. Otherwise, return false.
      */
     public boolean verifyAuthority(String account, String password) {
-        if (verifyAccountExist(account,password)) {
-            return AM.getEmployeeList().get(AccountList.get(account)).getLevel() < 1;
+        // TODO: I think we need to use this.verifyAccountExist(account,password) instead of
+        //  verifyAccountExist(account,password) for convention.
+        if (verifyForLogin(account,password)) {
+            return managerAccount.getEmployeeMap().get(employeeMap.get(account)).getLevel() < 1;
         }
         return false;
     }
 
+    /**
+     *
+     * @return a string of representation. For instance, "This is a verifier."
+     */
     @Override
     public String toString(){
-        return "This is a verifier";
+        return "This is a verifier.";
     }
 }
