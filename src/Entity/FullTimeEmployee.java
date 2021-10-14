@@ -9,7 +9,9 @@ public class FullTimeEmployee extends Employee {
     // the number of annual leave have been used by this employee.
     private int vacationUsed;
     // The position of this employee. For instance, sales, engineer, manger....
-    private String position; //职位
+    private String position;
+    // The state of employee. For instance, working, vacation...
+    private String state = "Working";
 
     /* === Representation Invariants ===
      * totalVacationWithSalary should always equal or greater than 0.
@@ -92,11 +94,19 @@ public class FullTimeEmployee extends Employee {
     }
 
     /**
-     * TODO: Is this setter implement correctly?
+     *
      * @param vacationUsed Given the new total number of annual paid leave have been used.
      */
     public void setVacationUsed(int vacationUsed){
         this.vacationUsed = vacationUsed;
+    }
+
+    public void setState(String i) {
+        this.state = i;
+    }
+
+    public String getState() {
+        return state;
     }
 
     /**
