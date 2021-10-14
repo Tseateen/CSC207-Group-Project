@@ -34,10 +34,20 @@ public class PartTimeEmployee extends Employee{
 
     // === Regular methods ===
 
+    /**
+     *
+     * @return This method returns the schedule of a part-time employee.
+     */
+
     public HashMap<String, String[]> getSchedule(){
         return this.schedule;
     }
 
+    /**
+     *
+     *
+     * @param schedule The schedule that is going to modify a part-time employee's schedule.
+     */
     public void setSchedule(HashMap<String, String[]> schedule){
         this.schedule = schedule;
     }

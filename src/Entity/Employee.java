@@ -20,7 +20,7 @@ public abstract class Employee{
      */
 
     /**
-     * Construct a Employee, giving them the given department,
+     * Construct an Employee, giving them the given department,
      * wage, and level.
      *
      * @param department Department for this employee.
