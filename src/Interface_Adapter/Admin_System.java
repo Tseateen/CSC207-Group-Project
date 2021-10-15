@@ -47,7 +47,7 @@ public class Admin_System {
         return managerVerifier.verifyAuthority(accountNumber, password);
     }
 
-    // TODO: 这里如果账号创建失败要不要考虑去return一个报告，比如说是因为什么原因之类的
+
     /**
      *  This is method that can let admin create a new user.
      * @param accountNumber Given account number for new user
