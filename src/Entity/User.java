@@ -148,7 +148,7 @@ public class User implements Userable{
      * @return This method will return true iff the obj have the same Class type and id as this user.
      */
     @Override
-    public boolean equal(Object obj) {
+    public boolean equals(Object obj) {
         if(!(obj instanceof User)){
             return false;
         }

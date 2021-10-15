@@ -17,5 +17,5 @@ public interface Userable {
     public abstract void setPhone(String phone);
     public abstract String getAddress();
     public abstract void setAddress(String address);
-    public abstract boolean equal(Object other);
+    public abstract boolean equals(Object other);
 }
