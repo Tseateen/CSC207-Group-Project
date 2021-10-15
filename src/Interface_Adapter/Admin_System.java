@@ -1,7 +1,7 @@
 package Interface_Adapter;
 
 import Uses_Cases.AccountManager;
-import Uses_Cases.Pay_Manager;
+import Uses_Cases.PayManager;
 import Uses_Cases.Verifier;
 
 
@@ -13,7 +13,7 @@ public class Admin_System {
     // TODO: Should we make following variable as final variable?
     private Verifier managerVerifier;
     private AccountManager managerAccount;
-    private Pay_Manager mangerPay;
+    private PayManager mangerPay;
 
     /**
      *  Construct the admin system. This system can let admin manager employee by Uses Cases.
@@ -21,7 +21,7 @@ public class Admin_System {
     public Admin_System(){
         this.managerAccount = new AccountManager();
         this.managerVerifier = new Verifier(managerAccount);
-        this.mangerPay = new Pay_Manager();
+        this.mangerPay = new PayManager();
     }
 
     // === Regular methods ===
