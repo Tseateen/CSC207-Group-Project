@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Command_User_Interface {
 
+    /* Currently, we assume there exists an Admin, which account number is 1 and password 0.
+     * Only Admin can use action "M" for creating new employee. Other people will be refused for option "M".
+     */
     public static void main(String[] args) {
         Scanner keyIn = new Scanner(System.in);
         Admin_System adminSystem = new Admin_System();
@@ -21,7 +24,6 @@ public class Command_User_Interface {
 
             // TODO: Use Try catch for the following code.
             if (action.equals("M")) {
-                System.out.println("Success. Loading Manager interface");
                 if(!adminSystem.verifyForLogin(accountNumber, passwordNumber)){
                     System.out.println("Wrong account number or wrong password! Please type again !");
                     continue;
@@ -30,6 +32,7 @@ public class Command_User_Interface {
                     System.out.println("You have no authority! Please check again your action !");
                     continue;
                 }
+                System.out.println("Success. Loading Manager interface");
                 System.out.println("Please give the new account number for employee !");
                 String newAccountNumber = keyIn.nextLine();
                 System.out.println("Please give the new password for employee !");
