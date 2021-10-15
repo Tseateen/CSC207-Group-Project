@@ -64,9 +64,7 @@ public class Verifier {
      * @return true iff user have enough authority level to modified other user account. Otherwise, return false.
      */
     public boolean verifyAuthority(String account, String password) {
-        // TODO: I think we need to use this.verifyAccountExist(account,password) instead of
-        //  verifyAccountExist(account,password) for convention.
-        if (verifyForLogin(account,password)) {
+        if (this.verifyForLogin(account,password)) {
             return managerAccount.getEmployeeMap().get(employeeMap.get(account)).getLevel() < 1;
         }
         return false;
