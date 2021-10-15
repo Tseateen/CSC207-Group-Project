@@ -30,6 +30,10 @@ public class Command_User_Interface {
                     System.out.println("You have no authority! Please check again your action !");
                     continue;
                 }
+                System.out.println("Please give the new account number for employee !");
+                String newAccountNumber = keyIn.nextLine();
+                System.out.println("Please give the new password for employee !");
+                String newPassword = keyIn.nextLine();
                 System.out.println("Please give the new name of employee !");
                 String name = keyIn.nextLine();
                 System.out.println("Please give the phone number of employee !");
@@ -46,11 +50,17 @@ public class Command_User_Interface {
                 int wage = keyIn.nextInt();
                 System.out.println("Please give the Authority Level of employee !");
                 int level = keyIn.nextInt();
-                adminSystem.createUser(accountNumber, passwordNumber, name, phone,
+                adminSystem.createUser(newAccountNumber, newPassword, name, phone,
                         address,status,department,position,wage,level);
                 System.out.println("Success to build the new employee");
+                break;
             } else if (action.equals("L")) {
+                if(!adminSystem.verifyForLogin(accountNumber, passwordNumber)){
+                    System.out.println("Wrong account number or wrong password! Please type again !");
+                    continue;
+                }
                 System.out.println("Success, Loading Employee interface");
+                break;
             } else {
                 System.out.println("Wrong Action please type again !" + "\n"
                         + "If you want to exit this system, then please type E" + "\n"

@@ -80,7 +80,7 @@ public class AccountManager {
      * @param level Given the authority level of this user.
      * @return Userable object iff creates user successful. Otherwise, return null.
      */
-    // TODO: return object 屬於不安全操作。建議return null 變throw custom exception，然後在admin system 使用 try-catch module
+
     public Object createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
                                String department, String position, int wage, int level){
         total_number++;
@@ -108,7 +108,7 @@ public class AccountManager {
      * @param id an unique identity for a Employee.
      * @return Employee object iff delete employee successfully. Otherwise, return null
      */
-    // TODO: 同create object. 我們是否不該 return object?
+
     public Object deleteEmployee(String id) {
         for (Userable i : employeeMap.keySet()) {
             // TODO: I don't think this if condition is correct.

@@ -37,8 +37,6 @@ public class Verifier {
     public void RmAccount(Userable user) {
         employeeMap.remove(user.getAccount());
     }
-
-    // TODO: 这里要不要把验证账号存在和验证账号密码的步骤分开？用于后面的创建账号之类的
     /**
      * @param account Given the account number.
      * @param password Given the password.
@@ -59,8 +57,6 @@ public class Verifier {
     public boolean verifyExist(String account) {
         return employeeMap.containsKey(account);
     }
-
-    // TODO: 这里是不是只用账号去判定会好一些，在登陆之后用账号判定 <---- Andy: I agree with this idea.
     /**
      *
      * @param account Given a user account number.
