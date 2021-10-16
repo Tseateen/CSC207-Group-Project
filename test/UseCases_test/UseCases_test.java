@@ -1,3 +1,5 @@
+package UseCases_test;
+
 import Entity.Userable;
 import Uses_Cases.AccountManager;
 import Uses_Cases.Verifier;
