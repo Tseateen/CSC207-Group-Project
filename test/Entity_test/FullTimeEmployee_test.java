@@ -19,19 +19,26 @@ public class FullTimeEmployee_test {
     }
 
     @Test(timeout = 100)
-    public void testFull_time_employee_1(){
+    public void testDepartment(){
         assertEquals(Full_time_employee_1.getDepartment(), "IT");
-        assertEquals(Full_time_employee_1.getPosition(), "Manager");
-        assertEquals(Full_time_employee_1.getWage(), 10000);
-        assertEquals(Full_time_employee_1.getLevel(), 0);
+        assertEquals(Full_time_employee_2.getDepartment(), "HR");
     }
 
     @Test(timeout = 100)
-    public void testFull_time_employee_2() {
-        assertEquals(Full_time_employee_2.getDepartment(), "HR");
+    public void testPosition() {
+        assertEquals(Full_time_employee_1.getPosition(), "Manager");
         assertEquals(Full_time_employee_2.getPosition(), "");
-        assertEquals(Full_time_employee_2.getWage(), 5000);
-        assertEquals(Full_time_employee_2.getLevel(), 1);
     }
 
+    @Test(timeout = 100)
+    public void testWage(){
+        assertEquals(Full_time_employee_1.getWage(), 10000);
+        assertEquals(Full_time_employee_2.getWage(), 5000);
+    }
+
+    @Test(timeout = 100)
+    public void testLevel(){
+        assertEquals(Full_time_employee_1.getLevel(), 0);
+        assertEquals(Full_time_employee_2.getLevel(), 1);
+    }
 }
