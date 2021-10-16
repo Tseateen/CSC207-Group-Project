@@ -143,7 +143,7 @@ public class User implements Userable{
     }
 
     /**
-     * @ Citation: The following code is based on the Java Note(Chapter 2 Monster.java) example in GitHub
+     * @ Citation: The following code is based on the Java Note(Chapter 2 Monster.java) example on GitHub (URL: https://github.com/CSC207-UofT/207-course-notes/blob/master/code/Monster.java)
      * @param obj The object needs to compare with this user.
      * @return This method will return true iff the obj have the same Class type and id as this user.
      */
