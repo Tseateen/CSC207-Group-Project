@@ -1,4 +1,4 @@
-package Uses_Cases;
+package UsesCases;
 
 import Entity.*;
 import java.util.*;

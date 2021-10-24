@@ -1,17 +1,17 @@
 package Framework;
 
-import Interface_Adapter.Admin_System;
+import InterfaceAdapter.AdminSystem;
 
 import java.util.Scanner;
 
-public class Command_User_Interface {
+public class CommandUserInterface {
 
     /* Currently, we assume there exists an Admin, which account number is 1 and password 0.
      * Only Admin can use action "M" for creating new employee. Other people will be refused for option "M".
      */
     public static void main(String[] args) {
         Scanner keyIn = new Scanner(System.in);
-        Admin_System adminSystem = new Admin_System();
+        AdminSystem adminSystem = new AdminSystem();
         while(true) {
             System.out.println("Please type your account: ");
             String accountNumber = keyIn.nextLine();

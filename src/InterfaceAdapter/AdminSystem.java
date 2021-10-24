@@ -1,11 +1,11 @@
-package Interface_Adapter;
+package InterfaceAdapter;
 
-import Uses_Cases.AccountManager;
-import Uses_Cases.PayManager;
-import Uses_Cases.Verifier;
+import UsesCases.AccountManager;
+import UsesCases.PayManager;
+import UsesCases.Verifier;
 
 
-public class Admin_System {
+public class AdminSystem {
 
     // === Instance Variables ===
 
@@ -18,7 +18,7 @@ public class Admin_System {
     /**
      *  Construct the admin system. This system can let admin manager employee by Uses Cases.
      */
-    public Admin_System(){
+    public AdminSystem(){
         this.managerAccount = new AccountManager();
         this.managerVerifier = new Verifier(managerAccount);
         this.mangerPay = new PayManager();
