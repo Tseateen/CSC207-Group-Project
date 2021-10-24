@@ -1,82 +1,32 @@
 package Entity;
 
-public abstract class Work {
-    private final String name;
-    private final String id;
-    private final String create_time;
-    private String start_time;
-    private String end_time;
-    private final int level;
-    private String state;
-    private String describe;
-    private String requirement;
+public interface Work {
 
+    public abstract String getName();
 
-    public Work(String name, String id, String create_time, String end_time, int level,
-                String describe, String requirement){
-        this.name = name;
-        this.id = id;
-        this.create_time= create_time;
-        this.end_time = end_time;
-        this.level = level;
-        this.state = "Undo";
-        this.describe = describe;
-        this.requirement = requirement;
-    }
+    public abstract String getId();
 
-    public String getName(){
-        return this.name;
-    }
+    public abstract int getLevel();
 
-    public String getId(){
-        return this.id;
-    }
+    public abstract String getCreate_time();
 
-    public int getLevel() {
-        return level;
-    }
+    public abstract String getEnd_time();
 
-    public String getCreate_time() {
-        return create_time;
-    }
+    public abstract String getState();
 
-    public String getEnd_time() {
-        return end_time;
-    }
+    public abstract void setState(String state);
 
-    public String getState() {
-        return state;
-    }
+    public abstract void Extend(String end_time);
 
-    public void setState(String state) {
-        this.state = state;
-    }
+    public abstract void setStart_time(String start_time);
 
-    public void Extend(String end_time) {
-        this.end_time = end_time;
-    }
+    public abstract String getStart_time();
 
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
-    }
+    public abstract void setDescribe(String information);
 
-    public String getStart_time() {
-        return start_time;
-    }
+    public abstract String getDescribe();
 
-    public void setDescribe(String information) {
-        this.describe = information;
-    }
+    public abstract void setRequirement(String requirement);
 
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setRequirement(String requirement) {
-        this.requirement = requirement;
-    }
-
-    public String getRequirement() {
-        return requirement;
-    }
+    public abstract String getRequirement();
 }
