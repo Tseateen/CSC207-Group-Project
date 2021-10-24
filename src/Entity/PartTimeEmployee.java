@@ -52,7 +52,4 @@ public class PartTimeEmployee extends Employee{
         this.schedule = schedule;
     }
 
-    public String toString() {
-        return  " Part time worker of" + this.getDepartment() + this.getLevel() + "level.";
-    }
 }

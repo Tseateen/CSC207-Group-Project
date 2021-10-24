@@ -163,14 +163,4 @@ public class User implements Userable{
         return (this.id.equals(other.id));
     }
 
-    /**
-     *
-     * @return This method will return the string representation of this user. For instance, My identity is 1, and my
-     * name is Andy.
-     */
-    @Override
-    public String toString(){
-        String identity = String.valueOf(this.id);
-        return "My identity is " + identity + ", and my name is " + this.name;
-    }
 }
