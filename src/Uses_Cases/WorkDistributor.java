@@ -4,9 +4,11 @@ import Entity.*;
 import java.util.*;
 public class WorkDistributor {
 
-    private Map<Work, Group> workMap;
+    private Map<Group, Work> workMap;
 
-    public void createGroup(Userable leader, Userable[] members, String project){
+    public void createGroup(Userable leader, Userable[] members, Work project){
         Group newGroup = new Group(leader, members, project);
     }
+
+
 }
