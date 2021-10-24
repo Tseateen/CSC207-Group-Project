@@ -109,13 +109,4 @@ public class FullTimeEmployee extends Employee {
         return state;
     }
 
-    /**
-     *
-     * @return the string representation of this FullTimeEmployee. For instance,
-     * "Manager of IT with the authority level 0"
-     */
-    @Override
-    public String toString() {
-        return " " + this.getPosition() + " of " + this.getDepartment() +  " with authority level " + this.getLevel() ;
-    }
 }

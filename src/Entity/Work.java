@@ -1,28 +1,16 @@
 package Entity;
 
-public class Work {
+public abstract class Work {
+    private String name;
+    private String id;
+    private String start_time;
+    private String end_time;
+    private Journal journal;
+    private int level;
+    private String state;
+    private String describe;
 
-    private String information;
-    private String requirement;
-
-    public Work(String information, String requirement){
-        this.information = information;
-        this.requirement = requirement;
-    }
-
-    public void setInformation(String information) {
-        this.information = information;
-    }
-
-    public String getInformation() {
-        return information;
-    }
-
-    public void setRequirement(String requirement) {
-        this.requirement = requirement;
-    }
-
-    public String getRequirement() {
-        return requirement;
+    public Work() {
+        // Todo
     }
 }

@@ -99,12 +99,4 @@ public abstract class Employee{
         this.level = level;
     }
 
-    /**
-     *
-     * @return a string representation of this employee. For instance, "This is an employee in the department of IT."
-     */
-    @Override
-    public String toString(){
-        return "This is an employee in the department of " + this.department;
-    };
 }
