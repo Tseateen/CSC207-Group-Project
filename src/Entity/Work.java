@@ -20,7 +20,7 @@ public abstract class Work {
         this.end_time = end_time;
         this.level = level;
         this.state = "Undo";
-        this.journal = Journal();
+        this.journal = new Journal();
         this.describe = describe;
         this.requirement = requirement;
     }
