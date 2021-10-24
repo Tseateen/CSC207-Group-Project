@@ -11,17 +11,18 @@ public abstract class Work {
     private String describe;
     private String requirement;
 
-    public Work(String name, String id, String start_time, String end_time,
-                String describe, String requirement, int level) {
+
+    public Work(String name, String id, String start_time, String end_time, int level,
+                String describe, String requirement){
         this.name = name;
         this.id = id;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.state = "Unstarted";
+        this.level = level;
+        this.state = "Undo";
         this.journal = Journal();
         this.describe = describe;
         this.requirement = requirement;
-        this.level = level;
     }
 
     public void setDescribe(String information) {
@@ -38,4 +39,5 @@ public abstract class Work {
 
     public String getRequirement() {
         return requirement;
+    }
 }
