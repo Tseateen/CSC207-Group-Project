@@ -3,9 +3,9 @@ package Entity;
 public class Group{
     private Userable leader;
     private Userable[] members;
-    private String project;
+    private Work project;
 
-    public Group (Userable leader, Userable[] members, String project){
+    public Group (Userable leader, Userable[] members, Work project){
         this.leader = leader;
         this.members = members;
         this.project = project;
@@ -27,11 +27,11 @@ public class Group{
         return members;
     }
 
-    public void setProject(String project) {
+    public void setProject(Work project) {
         this.project = project;
     }
 
-    public String getProject() {
+    public Work getProject() {
         return project;
     }
 }
