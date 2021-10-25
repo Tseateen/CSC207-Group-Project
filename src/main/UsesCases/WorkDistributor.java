@@ -1,6 +1,6 @@
-package UsesCases;
+package main.UsesCases;
 
-import Entity.*;
+import main.Entity.*;
 import java.util.*;
 public class WorkDistributor {
 

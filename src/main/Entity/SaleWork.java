@@ -1,6 +1,6 @@
-package Entity;
+package main.Entity;
 
-public class ITWork implements Work {
+public class SaleWork implements Work{
     private final String name;
     private final String id;
     private final String create_time;
@@ -11,7 +11,7 @@ public class ITWork implements Work {
     private String describe;
     private String requirement;
 
-    public ITWork(String name, String id, String create_time, int level) {
+    public SaleWork(String name, String id, String create_time, int level) {
         this.name = name;
         this.id = id;
         this.create_time = create_time;

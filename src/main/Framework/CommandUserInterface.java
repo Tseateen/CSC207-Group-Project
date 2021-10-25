@@ -1,6 +1,7 @@
-package Framework;
+package main.Framework;
 
 import InterfaceAdapter.AdminSystem;
+import main.InterfaceAdapter.AdminSystem;
 
 import java.util.Scanner;
 
