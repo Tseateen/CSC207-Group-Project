@@ -1,4 +1,4 @@
-package test.UseCases_test;
+package test.UseCasesTest;
 
 import main.Entity.Userable;
 import main.UsesCases.AccountManager;
