@@ -1,4 +1,4 @@
-package Entity;
+package main.Entity;
 
 import java.util.HashMap;
 public class PartTimeEmployee extends Employee{

@@ -1,4 +1,4 @@
-package Entity;
+package main.Entity;
 
 import java.time.LocalTime;
 import java.util.HashMap;
