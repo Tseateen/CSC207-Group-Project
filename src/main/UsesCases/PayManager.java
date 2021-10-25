@@ -1,3 +1,3 @@
-package UsesCases;
+package main.UsesCases;
 public class PayManager {
 }

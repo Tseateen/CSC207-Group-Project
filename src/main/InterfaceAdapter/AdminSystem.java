@@ -1,8 +1,8 @@
-package InterfaceAdapter;
+package main.InterfaceAdapter;
 
-import UsesCases.AccountManager;
-import UsesCases.PayManager;
-import UsesCases.Verifier;
+import main.UsesCases.AccountManager;
+import main.UsesCases.PayManager;
+import main.UsesCases.Verifier;
 
 
 public class AdminSystem {

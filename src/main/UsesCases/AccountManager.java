@@ -1,5 +1,5 @@
-package UsesCases;
-import Entity.*;
+package main.UsesCases;
+import main.Entity.*;
 
 import java.util.HashMap;
 import java.util.Map;

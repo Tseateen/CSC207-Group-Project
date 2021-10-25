@@ -1,8 +1,8 @@
-package UseCases_test;
+package test.UseCases_test;
 
-import Entity.Userable;
-import UsesCases.AccountManager;
-import UsesCases.Verifier;
+import main.Entity.Userable;
+import main.UsesCases.AccountManager;
+import main.UsesCases.Verifier;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package Entity;
+package main.Entity;
 
 public class WorkFactory {
 

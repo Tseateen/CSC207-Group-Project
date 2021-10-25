@@ -1,4 +1,4 @@
-package Entity;
+package main.Entity;
 
 public class SaleWork implements Work{
     private final String name;

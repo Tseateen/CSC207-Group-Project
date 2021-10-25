@@ -1,6 +1,6 @@
-package UsesCases;
+package main.UsesCases;
 
-import Entity.Userable;
+import main.Entity.Userable;
 
 import java.util.HashMap;
 import java.util.Map;
