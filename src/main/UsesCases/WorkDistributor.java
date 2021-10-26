@@ -6,8 +6,9 @@ public class WorkDistributor {
 
     private Map<Group, Work> workMap;
 
-    public void createGroup(Userable leader, Userable[] members, Work project){
-        Group newGroup = new Group(leader, members, project);
+    public void createWork(String workType, String name, String id, String createTime, int level){
+        WorkFactory WF = new WorkFactory();
+        Work w = WF.createWork(workType, name, id, createTime, level);
     }
 
 
