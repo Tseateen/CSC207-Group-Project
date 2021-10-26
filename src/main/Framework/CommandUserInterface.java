@@ -1,5 +1,6 @@
 package main.Framework;
 
+
 import main.InterfaceAdapter.AdminSystem;
 
 import java.util.Scanner;
