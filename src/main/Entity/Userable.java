@@ -13,6 +13,7 @@ public interface Userable {
     public abstract void setAccount(String account);
     public abstract String getPassword();
     public abstract void setPassword(String password);
+    public abstract boolean comparePassword(String password);
     public abstract String getPhone();
     public abstract void setPhone(String phone);
     public abstract String getAddress();
