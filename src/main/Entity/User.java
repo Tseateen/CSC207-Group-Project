@@ -108,6 +108,16 @@ public class User implements Userable{
 
     /**
      *
+     * @param password The password that we want to compare
+     * @return This method will return if the input password matches the password of the user.
+     */
+    @Override
+    public boolean comparePassword(String password){
+        return this.password.equals(password);
+    }
+
+    /**
+     *
      * @return This method will return the phone number of this user.
      */
     @Override
