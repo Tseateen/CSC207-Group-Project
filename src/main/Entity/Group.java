@@ -82,6 +82,7 @@ public class Group implements Iterable<Userable> {
     }
 
     /**
+     * This method add a new member to the group.
      *
      * @param member The member who is going to be added to the group.
      * @return This method will return true iff the member is successfully added to the group.
@@ -94,6 +95,7 @@ public class Group implements Iterable<Userable> {
     }
 
     /**
+     * This method remove a member from the group.
      *
      * @param member The member who is going to be removed from the group.
      * @return This method will return true iff the member is successfully removed from the group.
