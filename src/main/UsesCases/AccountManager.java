@@ -12,18 +12,18 @@ public class AccountManager {
 
     // The map of user and employee. i.e. key = Userable Object, item = Employee Object
     // TODO: should it be final?
-    private static Map<Userable, Employee> employeeMap;
+    private Map<Userable, Employee> employeeMap;
     // total_number is a counter for assigning unique identity.
-    private static int total_number = 0;
+    private int total_number = 0;
     // TODO: should we make this as static variable ?
     // totalEmployee can record the current total number of employee.
-    private static int totalEmployee = 0;
+    private int totalEmployee = 0;
     // TODO: should we make this as static variable ?
     // totalPart_time can record the current total number of part-time employee.
-    private static int totalPart_time = 0;
+    private int totalPart_time = 0;
     // TODO: should we make this as static variable ?
     // totalFull_time can record the current total number of full-time employee.
-    private static int totalFull_time = 0;
+    private int totalFull_time = 0;
 
     /* === Representation Invariants ===
      * the number for both totalPart_time and totalFull_time should always greater or equal to 0, but the sum of both
