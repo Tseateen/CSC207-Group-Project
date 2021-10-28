@@ -37,6 +37,7 @@ public class PayManager {
     public boolean payWage(Map<Employee, Integer> wageMap){
 
         //TODO implement this method
+        return true;
     }
 
     /**
@@ -57,6 +58,7 @@ public class PayManager {
      */
     private boolean payWorkBonus(Map<Employee, Integer> workBonusMap){
         //TODO implement this method
+        return true;
     }
 
     /**
@@ -76,6 +78,7 @@ public class PayManager {
      */
     private boolean payAnnualBonus(Map<Employee, Integer> annualBonusMap){
         //TODO implement this method
+        return true;
     }
 
 }
