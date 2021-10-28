@@ -4,17 +4,13 @@ import main.UsesCases.*;
 public class LoginSystem {
 
     private final Loginable loginable;
-    public LoginSystem(Loginable loginable){
-        this.loginable = loginable;
+    public LoginSystem(){
+        this.loginable = new LoginManager();
     }
 
-    public String runLogin(String username, String password){
-        boolean match = loginable.logIn(username,password);
-        if (match){
-            return "Log in success";
-        }else{
-            return "Log in failure";
-        }
+    public boolean runLogin(String username, String password){
+        return this.loginable.logIn(username,password);
+
     }
 
 
