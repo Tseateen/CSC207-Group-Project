@@ -18,6 +18,10 @@ public class QuestionUI {
                 case "M":
                     System.out.println("Please give the new account number for employee !");
                     String newusername = keyIn.nextLine();
+                    while (adminSystem.verifyAccountExist(newusername)) {
+                        System.out.println("Account number exist, please give a new account number !");
+                        newusername = keyIn.nextLine();
+                    }
                     System.out.println("Please give the new password for employee !");
                     String newPassword = keyIn.nextLine();
                     System.out.println("Please give the new name of employee !");

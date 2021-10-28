@@ -5,7 +5,7 @@ import main.Entity.*;
 import java.io.Serializable;
 import java.util.*;
 public class LoginList implements Serializable {
-    private final Map<String, Userable> users = new HashMap<>();
+    private final static Map<String, Userable> users = new HashMap<>();
 
     public void addUser(Userable user){
         users.put(user.getAccount(), user);

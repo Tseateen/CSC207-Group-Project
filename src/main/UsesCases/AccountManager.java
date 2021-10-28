@@ -12,18 +12,18 @@ public class AccountManager {
 
     // The map of user and employee. i.e. key = Userable Object, item = Employee Object
     // TODO: should it be final?
-    private Map<Userable, Employee> employeeMap;
+    private static Map<Userable, Employee> employeeMap;
     // total_number is a counter for assigning unique identity.
-    private int total_number = 0;
+    private static int total_number = 0;
     // TODO: should we make this as static variable ?
     // totalEmployee can record the current total number of employee.
-    private int totalEmployee = 0;
+    private static int totalEmployee = 0;
     // TODO: should we make this as static variable ?
     // totalPart_time can record the current total number of part-time employee.
-    private int totalPart_time = 0;
+    private static int totalPart_time = 0;
     // TODO: should we make this as static variable ?
     // totalFull_time can record the current total number of full-time employee.
-    private int totalFull_time = 0;
+    private static int totalFull_time = 0;
 
     /* === Representation Invariants ===
      * the number for both totalPart_time and totalFull_time should always greater or equal to 0, but the sum of both
@@ -39,7 +39,7 @@ public class AccountManager {
      * TODO: we may use DB and GATEWAY to assign the first admin.
      */
     public AccountManager(){
-        this.employeeMap = new HashMap<Userable, Employee>();
+        employeeMap = new HashMap<Userable, Employee>();
         createEmployee("1", "0", "Admin", "", "", "F",
                 "HR", "Admin", 0, 0);
     }
@@ -49,16 +49,16 @@ public class AccountManager {
      *
      */
     public AccountManager(HashMap<Userable, Employee> list) {
-        this.employeeMap = list;
-        this.totalEmployee = employeeMap.size();
-        this.totalFull_time = CountFullTime((HashMap) employeeMap);
-        this.totalPart_time = totalEmployee - totalFull_time;
-        this.total_number = employeeMap.size();
+        employeeMap = list;
+        totalEmployee = employeeMap.size();
+        totalFull_time = CountFullTime(employeeMap);
+        totalPart_time = totalEmployee - totalFull_time;
+        total_number = employeeMap.size();
     }
 
     // === Regular methods ===
 
-    private int CountFullTime(HashMap<Userable, Employee> list) {
+    private int CountFullTime(Map<Userable, Employee> list) {
         int num = 0;
         for (Userable i : list.keySet()) {
             if (i instanceof FullTimeEmployee) { num++;}
@@ -111,7 +111,6 @@ public class AccountManager {
 
     public Object deleteEmployee(String id) {
         for (Userable i : employeeMap.keySet()) {
-            // TODO: I don't think this if condition is correct.
             if (Objects.equals(((User) i).getID(), id)) {
                 Employee j = employeeMap.remove(i);
                 if (j instanceof PartTimeEmployee) {
@@ -153,7 +152,7 @@ public class AccountManager {
      * @return a map that key = Userable object and its items = Employee object.
      */
     public Map<Userable, Employee> getEmployeeMap(){
-        return this.employeeMap;
+        return employeeMap;
     }
 
     /**
