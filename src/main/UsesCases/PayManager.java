@@ -16,6 +16,7 @@ public class PayManager {
      * Construct the PayManager.
      */
     public PayManager() {
+        // TODO: the employeeMap is read from txt file.
         this.employeeMap = new HashMap<Userable, Employee>();
     }
 
