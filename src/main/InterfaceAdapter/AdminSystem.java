@@ -47,6 +47,9 @@ public class AdminSystem {
         return managerVerifier.verifyAuthority(accountNumber, password);
     }
 
+    public boolean verifyAccountExist(String accountNumber) {
+        return managerVerifier.verifyExist(accountNumber);
+    }
 
     /**
      *  This is method that can let admin create a new user.

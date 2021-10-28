@@ -65,12 +65,15 @@ Implemented following classes:
 
 ## What to Do Next
 
-**Yide Ma** will implement the **AuthorityManager** use case, which is about the word based on the authority, and implemented with Verifier. 
-**Chieh-An Chang** will improve **Command_User_Interface** and **Admin_System**.
-**Xuelan (Lily) Li** will implement **Work** and **Group** entities. **Work** contains the related information in one piece of job, like contents of the job, working object, etc. **Group** records the related information of a project group, like group leader, group member and the part that each person in charge of; collaborated with Userable.
-**Luke Kuo** will implement **WorkDistributor**, which is the use case, about a new project distribution and the formation of a group. It will collaborate with **Work** and **Group**, and **WorkManager**.
-**Kyle Chen** will implement **PayManager** use case, which is about wage/salaries payable based on the completion of one’s job, information of the employee, and other KPI. The salary/wage payable information will also be recorded.
-**Cathy Pei** will implement **AccountChanger** and **WorkManager**, as use cases. **AccountChanger** is to change the basic information of a given account (ex. password, phone number, etc.) **WorkManager** is to organize all the projects, including the completion of one project, the person that is in charge of, etc.
+- **Yide Ma** will implement the **AuthorityManager** use case, which is about the word based on the authority, and implemented with Verifier. 
+- **Chieh-An Chang** will improve **Command_User_Interface** and **Admin_System**.
+- **Xuelan (Lily) Li** will implement **Work** and **Group** entities. 
+  - **Work** contains the related information in one piece of job, like contents of the job, working object, etc. 
+  - **Group** records the related information of a project group, like group leader, group member and the part that each person in charge of; collaborated with Userable.
+- **Luke Kuo** will implement **WorkDistributor**, which is the use case, about a new project distribution and the formation of a group. It will collaborate with **Work** and **Group**, and **WorkManager**.
+- **Kyle Chen** will implement **PayManager** use case, which is about wage/salaries payable based on the completion of one’s job, information of the employee, and other KPI. The salary/wage payable information will also be recorded.
+- **Cathy Pei** will implement **AccountChanger** and **WorkManager**, as use cases. 
+  - **AccountChanger** is to change the basic information of a given account (ex. password, phone number, etc.) **WorkManager** is to organize all the projects, including the completion of one project, the person that is in charge of, etc.
 
 
 ## What Has Worked Well So Far

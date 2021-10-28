@@ -14,6 +14,7 @@ HRM System is an application designed for information technology industries that
 
     - ***Full-time workers***: These employees may belong to different sectors and have different jobs. Their authority levels vary according to their position at company's hierarchy. The variety of positions and job titles of the employees may support future functions in work distribution.
 
+
 - **User**: To save the general information of an employee. It is used along with the employee entity.
 
 - **Work**: To save basic information about a project and work requirements.
