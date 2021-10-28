@@ -1,6 +1,6 @@
-package Entity_test;
+package test.EntityTest;
 
-import Entity.FullTimeEmployee;
+import main.Entity.FullTimeEmployee;
 import org.junit.Before;
 import org.junit.Test;
 
