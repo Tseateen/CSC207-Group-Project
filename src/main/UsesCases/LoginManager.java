@@ -5,8 +5,8 @@ import java.util.*;
 public class LoginManager implements Loginable{
     private final LoginList users;
 
-    public LoginManager(LoginList users){
-        this.users = users;
+    public LoginManager(){
+        this.users = new LoginList();
     }
 
     public boolean logIn(String username, String password){
