@@ -7,7 +7,6 @@ public class GroupManager {
     private LinkedList<Group> GroupMap;
     private int totalGroup = 0;
 
-
     public GroupManager(){
         this.GroupMap = new LinkedList<Group>();
     }
