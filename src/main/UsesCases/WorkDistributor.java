@@ -2,36 +2,31 @@ package main.UsesCases;
 
 import main.Entity.*;
 import java.util.*;
-public class WorkDistributor implements WorkManager{
+public class WorkDistributor{
 
-    private HashMap<Group, Work> workMap;
+    //private HashMap<Group, Work> workMap;
+    private Work w;
 
     public WorkDistributor(){
-        this.workMap = new HashMap<Group, Work>();
+        this.w = w;
     }
 
-    // TODO: implement this method
-    @Override
-    public void createWork(String workType, String name, String id, String createTime, int level){
-        WorkFactory WF = new WorkFactory();
-        Work w = WF.createWork(workType, name, id, createTime, level);
+    private boolean verifyWork(Work w){
+        if (w.getState().equals("Pending"))
+        return false;
+        else return true;
     }
 
-    // TODO: implement this method
-    @Override
-    public void deleteWork() {
+    //Todo: implement this method
 
+    public Group assignWork(GroupManager gm, Userable leader, Userable[] members, Work w){
+        if (verifyWork(w))
+            return null;
+        w.setState("In Progress");
+        gm.createGroup(leader, members, w.getId());
+        return new Group(leader, members, w.getId());
     }
-    // TODO: implement this method
-    @Override
-    public void extendWork(Work project) {
 
-    }
-
-    // TODO: Do we really need this?
-    public void assignWork(Work project, Group group){
-        group.setProject(project);
-    }
 
 
 }
