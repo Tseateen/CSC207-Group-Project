@@ -5,15 +5,15 @@ import java.util.*;
 import main.InterfaceAdapter.*;
 
 public class AuthorityUI {
-    private final Array[] authority;
+    private String[] authority;
 
-    public AuthorityUI (Array[] authority) {
+    public AuthorityUI (String[] authority) {
         this.authority = authority;
     }
 
-    public static void run() {
+    public void run() {
         Scanner keyIn = new Scanner(System.in);
-        SelfAccountUI self = new SelfAccountUI();
+        SelfAccountUI self = new SelfAccountUI(this.authority[0]);
         WorkAuthorityUI work = new WorkAuthorityUI(this.authority);
         boolean noExit = true;
         while(noExit) {
