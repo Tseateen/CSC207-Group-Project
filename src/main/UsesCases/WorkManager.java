@@ -1,12 +1,23 @@
 package main.UsesCases;
 
+import main.Entity.Group;
 import main.Entity.Work;
+import main.Entity.WorkFactory;
 
-public interface WorkManager {
-    public abstract void createWork(String workType, String name, String id, String createTime, int level);
+public class WorkManager {
+    public void createWork(String workType, String name, String id, String createTime, int level){
+        WorkFactory WF = new WorkFactory();
+        Work w = WF.createWork(workType, name, id, createTime, level);
+    }
 
-    public abstract void deleteWork();
+    // TODO: implement this method
+    public void deleteWork(String workid) {
 
-    public abstract void extendWork(Work project);
+    }
+
+    // TODO: implement this method
+    public void extendWork(String workid) {
+
+    }
 
 }

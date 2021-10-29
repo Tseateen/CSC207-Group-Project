@@ -34,13 +34,13 @@ public class GroupManager {
      *
      * @param leader the leader of the group that is going to be created.
      * @param members the members of the group that is going to be created.
-     * @param GroupId The id of the group that is going to be created.
+     * @param WorkId The id of the work that is going to be created.
      * @return true iff the group is created successfully.
      */
-    public boolean createGroup(Userable leader, Userable[] members, int GroupId){
+    public boolean createGroup(Userable leader, Userable[] members, String WorkId){
         // TODO: this method need modification
         totalGroup++;
-        Group newGroup = new Group(leader, members, null, GroupId);
+        Group newGroup = new Group(leader, members, WorkId);
         GroupList.add(newGroup);
         return true;
 
