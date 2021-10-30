@@ -1,6 +1,8 @@
 package main.Entity;
 
-public abstract class Employee{
+import java.io.Serializable;
+
+public abstract class Employee implements Serializable {
 
     // === Instance Variables ===
 
