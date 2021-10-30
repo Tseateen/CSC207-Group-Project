@@ -40,9 +40,9 @@ public class FileReadWrite implements ReadWrite{
         InputStream file = new FileInputStream("/Data/UserEmployeeData");
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
-        AccountManager userList = (AccountManager) input.readObject();
+        AccountManager userEmployeeList = (AccountManager) input.readObject();
         input.close();
-        return userList;
+        return userEmployeeList;
     }
 
 
