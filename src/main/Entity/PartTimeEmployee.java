@@ -1,7 +1,8 @@
 package main.Entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
-public class PartTimeEmployee extends Employee{
+public class PartTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 
     // TODO: Should we implement this with key=week(i.e. Monday), value= time segment by string.

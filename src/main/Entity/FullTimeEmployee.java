@@ -1,6 +1,8 @@
 package main.Entity;
 
-public class FullTimeEmployee extends Employee {
+import java.io.Serializable;
+
+public class FullTimeEmployee extends Employee implements Serializable {
 
     // === Instance Variables ===
 

@@ -1,6 +1,8 @@
 package main.Entity;
 
-public interface Userable {
+import java.io.Serializable;
+
+public interface Userable extends Serializable {
     /**
      * An interface of User class, for reducing dependency purpose.
      *
