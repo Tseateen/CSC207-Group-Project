@@ -1,19 +1,19 @@
 package test.UseCasesTest;
 
 import main.Entity.Userable;
-import main.UsesCases.AccountManager;
+import main.UsesCases.AccountList;
 import main.UsesCases.Verifier;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 public class UseCases_test {
-    AccountManager AM;
+    AccountList AM;
     Verifier VA;
 
     @Before
     public void setUp() throws Exception {
-        AM = new AccountManager();
+        AM = new AccountList();
         VA = new Verifier(AM);
     }
 

@@ -6,50 +6,60 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
-public class WorkAuthorityUI {
-    private String department;
-    private String level;
-    private String account;
+public class WorkManagerUI {
 
-    public WorkAuthorityUI(String[] authority) {
-        account = authority[0];
-        department = authority[1];
-        level = authority[2];
+    private final String username;
+    private final HomePage homePage;
+    private final FacadeSys facadeSys;
+
+    public WorkManagerUI(String username, HomePage homePage, FacadeSys facadeSys) {
+        this.username = username;
+        this.homePage = homePage;
+        this.facadeSys = facadeSys;
     }
 
     public void run() {
+        /*
         HashMap<String, String> selfWork = WorkSystem.selfWorkCheck(account);
         // Todo: need to be implement in WorkSystem return a hash<work id, work name>
-        for (String i: selfWork.keySet()) {
+        for (String i : selfWork.keySet()) {
             System.out.println(i + " " + selfWork.get(i));
         }
-        System.out.println("If you want to check your own" +
-                " work's imfor, tap CK; if you want to creat a work, tap CR; if you" +
-                " want to distribute a work, tap D; Exit tap E");
-        // Todo: 这里我想的情况还不够多，但基本上所有情况都可以套self 和 work UI的模版，如果有什么其他构思请补充
+         */
         Scanner keyIn = new Scanner(System.in);
         boolean noExit = true;
-        while(noExit) {
+        while (noExit) {
+            System.out.println(
+                            "i) Check your own work's information, type 1; " + "\n" +
+                            "ii) Creat a work, type 2; " + "\n" +
+                            "iii) Distribute a work, type 3; " + "\n" +
+                            "iv) Back to main page, type 4");
             String action = keyIn.nextLine();
-
-            switch (action.toUpperCase()) {
-                case "CK":
-                    workCheck(selfWork.keySet());
-                    break;
-                case "CR":
-                    workCreat();
-                    break;
-                case "D":
-                    workDistribute();
-                case "E":
-                    noExit = false;
-                    break;
-                default:
-                    System.out.println("Please typing as required;");
-                    break;
-            }
+            switch (action) {
+                    case "1":
+                        System.out.println(action);
+                        facadeSys.checkWorkInfo();
+                        break;
+                    case "2":
+                        facadeSys.createWork();
+                        break;
+                    case "3":
+                        facadeSys.distributeWork();
+                        break;
+                    case "4":
+                        noExit = false;
+                        break;
+                    default:
+                        System.out.println("Wrong action, please type again");
+                        break;
+                }
         }
     }
+}
+
+
+
+    /*
 
     private void workCheck(Set i) {
         boolean noExit = true;
@@ -62,7 +72,7 @@ public class WorkAuthorityUI {
                 noExit = false;
             }else if (i.contains(action)){
                 System.out.println(WorkSystem.checkWork(action));
-                // Todo: need to be implemented in WorkSystem, used to return a work imfor, 或许可以加一些其他功能，用id当索引
+                // Todo: need to be implemented in WorkSystem, used to return a work infor, 或许可以加一些其他功能，用id当索引
             }else {
                 System.out.println("Id may wrong, or its not your work. Please tap again");
             }
@@ -79,3 +89,5 @@ public class WorkAuthorityUI {
         // Todo：然后，这个的核心来了，用户可以对还未开始的工作进行分配！！！
     }
 }
+/
+     */

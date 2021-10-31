@@ -14,13 +14,13 @@ public class Verifier {
     // This is the employee map. Key = Userable object. Item = Employee Object
     private Map<String, Userable> employeeMap;
     // This is the variable store the AccountManager type Object.
-    private AccountManager managerAccount;
+    private AccountList managerAccount;
 
     /**
      * Construct a Verifier, giving them the given mangerAccount object.
      * @param managerAccount Given the AccountManger object to manger account.
      */
-    public Verifier(AccountManager managerAccount){
+    public Verifier(AccountList managerAccount){
         this.managerAccount = managerAccount;
         employeeMap =new HashMap<String, Userable>();
         for (Userable i : managerAccount.getEmployeeMap().keySet()) {
