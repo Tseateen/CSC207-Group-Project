@@ -5,44 +5,31 @@ import main.Entity.Userable;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FileReadWrite implements ReadWrite{
 
+
     @Override
-    public void writeUserToFile(LoginList userList) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/UserAccountData");
+    public void writeUserEmployeeToFile(Map<Userable,Employee> employeeMap) throws IOException{
+        OutputStream file = new FileOutputStream("/Data/UserEmployeeData.ser");
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(userList);
+        output.writeObject(employeeMap);
         output.close();
     }
 
     @Override
-    public void writeUserEmployeeToFile(AccountManager am) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/UserEmployeeData");
-        OutputStream buffer = new BufferedOutputStream(file);
-        ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(am);
-        output.close();
-    }
-    @Override
-    public LoginList readUserFromFile() throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream("/Data/UserAccountData");
-        InputStream buffer = new BufferedInputStream(file);
+    public Map<Userable,Employee> readUserEmployeeFromFile() throws IOException, ClassNotFoundException{
+        Map<Userable,Employee> employeeMap = new HashMap<Userable, Employee>();
+        File file = new File("/Data/UserEmployeeData.ser");
+        file.createNewFile();
+        InputStream FIS = new FileInputStream(file);
+        InputStream buffer = new BufferedInputStream(FIS);
         ObjectInput input = new ObjectInputStream(buffer);
-        LoginList userList = (LoginList) input.readObject();
+        employeeMap = (Map<Userable, Employee>) input.readObject();
         input.close();
-        return userList;
-    }
-
-    @Override
-    public AccountManager readUserEmployeeFromFile() throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream("/Data/UserEmployeeData");
-        InputStream buffer = new BufferedInputStream(file);
-        ObjectInput input = new ObjectInputStream(buffer);
-        AccountManager userEmployeeList = (AccountManager) input.readObject();
-        input.close();
-        return userEmployeeList;
+        return employeeMap;
     }
 
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class AccountManager {
+public class AccountList {
 
     // === Instance Variables ===
 
@@ -38,8 +38,8 @@ public class AccountManager {
      * In this constructor, it will give a first admin for initial purpose.
      * TODO: we may use DB and GATEWAY to assign the first admin.
      */
-    public AccountManager(){
-        employeeMap = new HashMap<Userable, Employee>();
+    public AccountList(){
+        this.employeeMap = new HashMap<Userable, Employee>();
         createEmployee("1", "0", "Admin", "", "", "F",
                 "HR", "Admin", 0, 0);
     }
@@ -48,9 +48,9 @@ public class AccountManager {
      * Overload constructor for accounts other than the initial admin account (which is the first constructor).
      *
      */
-    public AccountManager(HashMap<Userable, Employee> list) {
-        employeeMap = list;
-        totalEmployee = employeeMap.size();
+    public AccountList(HashMap<Userable, Employee> list) {
+        this.employeeMap = list;
+        totalEmployee = this.employeeMap.size();
         totalFull_time = CountFullTime(employeeMap);
         totalPart_time = totalEmployee - totalFull_time;
         total_number = employeeMap.size();
@@ -90,7 +90,7 @@ public class AccountManager {
             newEmployee = new PartTimeEmployee(department, wage, level);
             totalPart_time++;
             totalEmployee++;
-            employeeMap.put(newUser,newEmployee);
+            this.employeeMap.put(newUser,newEmployee);
             return newUser;
         }
         else if (status.equals("F")) {
