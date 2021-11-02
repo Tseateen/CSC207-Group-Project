@@ -6,6 +6,8 @@ public abstract class Employee implements Serializable {
 
     // === Instance Variables ===
 
+    private final String id;
+
     // The department of this employee
     private String department;
     // The minimum wage of this employee
@@ -25,11 +27,13 @@ public abstract class Employee implements Serializable {
      * Construct an Employee, giving them the given department,
      * wage, and level.
      *
+     * @param id
      * @param department Department for this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
      */
-    public Employee(String department, int wage, int level){
+    public Employee(String id, String department, int wage, int level){
+        this.id = id;
         this.department = department;
         this.wage = wage;
         this.level = level;
@@ -99,6 +103,10 @@ public abstract class Employee implements Serializable {
      */
     public void setLevel(int level){
         this.level = level;
+    }
+
+    public String getId(){
+        return this.id;
     }
 
 }

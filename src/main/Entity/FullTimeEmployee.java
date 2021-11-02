@@ -28,9 +28,10 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * @param position The position of this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
+     * @param id
      */
-    public FullTimeEmployee(String department, String position, int wage, int level) {
-        super(department, wage, level);
+    public FullTimeEmployee(String department, String position, int wage, int level, String id) {
+        super(id, department, wage, level);
         this.position = position;
         this.totalVacationWithSalary = 0;
         this.vacationUsed = 0;
@@ -42,8 +43,8 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
      */
-    public FullTimeEmployee(String department, int wage, int level) {
-        super(department, wage, level);
+    public FullTimeEmployee(String department, int wage, int level, String id) {
+        super(id, department, wage, level);
         this.position = "";
         this.totalVacationWithSalary = 0;
         this.vacationUsed = 0;

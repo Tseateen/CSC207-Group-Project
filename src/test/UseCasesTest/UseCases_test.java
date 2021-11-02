@@ -32,7 +32,7 @@ public class UseCases_test {
         assertEquals(AM.getTotalFull_time(), 1);
         assertEquals(AM.getTotalPart_time(), 0);
         Object c = AM.createEmployee("2", "0", "A", "", "", "P",
-                "Design", "", 0, 0);
+                "Design", "", 0, 0, "1");
         assertTrue(c instanceof Userable);
         assertEquals(AM.getTotalEmployee(), 2);
         assertEquals(AM.getTotalFull_time(), 1);
