@@ -14,9 +14,10 @@ public class PartTimeEmployee extends Employee implements Serializable {
      * @param department Department for this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
+     * @param id
      */
-    public PartTimeEmployee(String department, int wage, int level) {
-        super(department, wage, level);
+    public PartTimeEmployee(String department, int wage, int level, String id) {
+        super(id, department, wage, level);
     }
 
     /**
@@ -28,8 +29,8 @@ public class PartTimeEmployee extends Employee implements Serializable {
      * @param level The authority level fore this employee.
      * @param schedule The schedule of this PartTime employee.
      */
-    public PartTimeEmployee(String department, int wage, int level, HashMap<String, String[]> schedule) {
-        super(department, wage, level);
+    public PartTimeEmployee(String department, int wage, int level,String id, HashMap<String, String[]> schedule) {
+        super(id, department, wage, level);
         this.schedule = schedule;
     }
 

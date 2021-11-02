@@ -41,7 +41,7 @@ public class AccountList {
     public AccountList(){
         this.employeeMap = new HashMap<Userable, Employee>();
         createEmployee("1", "0", "Admin", "", "", "F",
-                "HR", "Admin", 0, 0);
+                "HR", "Admin", 0, 0, "0");
     }
 
     /**
@@ -82,19 +82,19 @@ public class AccountList {
      */
 
     public Object createEmployee(String accountNumber, String password, String name, String phone, String address, String status,
-                               String department, String position, int wage, int level){
+                                 String department, String position, int wage, int level, String id){
         total_number++;
         Userable newUser = new User(accountNumber, password, name, phone, address, String.valueOf(total_number));
         Employee newEmployee;
         if(status.equals("P")) {
-            newEmployee = new PartTimeEmployee(department, wage, level);
+            newEmployee = new PartTimeEmployee(department, wage, level, id);
             totalPart_time++;
             totalEmployee++;
             this.employeeMap.put(newUser,newEmployee);
             return newUser;
         }
         else if (status.equals("F")) {
-            newEmployee = new FullTimeEmployee(department, position, wage, level);
+            newEmployee = new FullTimeEmployee(department, position, wage, level, id);
             totalFull_time++;
             totalEmployee++;
             employeeMap.put(newUser,newEmployee);
