@@ -9,8 +9,8 @@ public class User implements Userable, Serializable {
 
     // The unique id for this user.
     private final String id;
-    // The account number for this user.
-    private String account;
+    // The username number for this user.
+    private String username;
     // The password for this user.
     private String password;
     // The name of this user.
@@ -26,17 +26,17 @@ public class User implements Userable, Serializable {
      */
 
     /**
-     * Construct a User, giving them the given account number, password, name, phone number, address and unique id.
-     * @param accountNumber Account number for this user.
+     * Construct a User, giving them the given username number, password, name, phone number, address and unique id.
+     * @param usernameNumber username number for this user.
      * @param password Password for this user.
      * @param name Name for this user.
      * @param phone Phone number for this user.
      * @param address Address for this user.
      * @param id Unique identity for this user.
      */
-    public User(String accountNumber,String password, String name, String phone, String address, String id){
+    public User(String usernameNumber,String password, String name, String phone, String address, String id){
         this.id = id;
-        this.account = accountNumber;
+        this.username = usernameNumber;
         this.password = password;
         this.name = name;
         this.phone = phone;
@@ -74,20 +74,20 @@ public class User implements Userable, Serializable {
 
     /**
      *
-     * @return This method will return the account number for this user.
+     * @return This method will return the username number for this user.
      */
     @Override
-    public String getAccount() {
-        return this.account;
+    public String getUsername() {
+        return this.username;
     }
 
     /**
      *
-     * @param account The new account number for this user
+     * @param username The new username number for this user
      */
     @Override
-    public void setAccount(String account) {
-        this.account = account;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
