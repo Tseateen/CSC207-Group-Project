@@ -55,5 +55,4 @@ public class User_test {
         U1.setAddress("001 Mississauga Road");
         assertEquals(U1.getAddress(), "001 Mississauga Road");
     }
-
 }
