@@ -18,6 +18,7 @@ public class PartTimeEmployee extends Employee implements Serializable {
      */
     public PartTimeEmployee(String department, int wage, int level, String id) {
         super(id, department, wage, level);
+        this.schedule = new HashMap<String, String[]>();
     }
 
     /**
