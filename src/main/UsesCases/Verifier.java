@@ -60,14 +60,12 @@ public class Verifier {
     /**
      *
      * @param account Given a user account number.
-     * @param password Given a user password number.
+     * @param level level need to compare with
      * @return true iff user have enough authority level to modified other user account. Otherwise, return false.
      */
-    public boolean verifyAuthority(String account, String password) {
-        if (this.verifyForLogin(account,password)) {
-            return managerAccount.getEmployeeMap().get(employeeMap.get(account)).getLevel() < 1;
-        }
-        return false;
+    public boolean verifyAuthority(String account,  int level) {
+        return managerAccount.getEmployeeMap().get(employeeMap.get(account)).getLevel() < level;
+
     }
 
     /**
