@@ -1,14 +1,23 @@
 package main.UsesCases;
 
 import main.Entity.*;
+
+import java.util.HashMap;
+
 public class AccountInfoManager {
 
     private Userable user;
     private FullTimeEmployee fullTimeEmployee;
+    private PartTimeEmployee partTimeEmployee;
 
     public AccountInfoManager(Userable user, FullTimeEmployee fullTimeEmployee){
         this.user= user;
         this.fullTimeEmployee = fullTimeEmployee;
+    }
+
+    public AccountInfoManager(Userable user, PartTimeEmployee partTimeEmployee){
+        this.user = user;
+        this.partTimeEmployee = partTimeEmployee;
     }
 
     public String getNameFromUser(){
@@ -55,5 +64,28 @@ public class AccountInfoManager {
     }
     public String getStatus(){
         return this.fullTimeEmployee.getState();
+    }
+    public HashMap<String, String[]> getSchedule(){
+        return this.partTimeEmployee.getSchedule();
+    }
+
+    public void setNameForUser(String name){
+        this.user.setName(name);
+    }
+
+    public void setUsernameForUser(String username){
+        this.user.setUsername(username);
+    }
+
+    public void setPasswordForUser(String password){
+        this.user.setPassword(password);
+    }
+
+    public void setPhoneForUser(String phone){
+        this.user.setPhone(phone);
+    }
+
+    public void setAddressForUser(String address){
+        this.user.setAddress(address);
     }
 }
