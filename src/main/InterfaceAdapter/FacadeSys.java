@@ -7,36 +7,24 @@ public class FacadeSys {
 
     // === Instance Variables ===
 
-    // TODO: Need to provide some statements for these variable below.
-    // TODO: Should we make following variable as final variable?
-    private final AccountList managerAccountList;
+    // === DataFile ===
+    private final DataGateway fileGateway;
     private final LoginList loginList;
     private final EmployeeList employeeList;
-    private final PayManager mangerPay;
-    private final AccountInfoManager changeAccountInfo;
-    private final Verifier managerVerifier;
-    private final AuthorityManager managerAuthority;
-    private final WorkDistributor distributeWork;
-    private final GroupManager managerGroup;
-    private final WorkManager managerWork;
-    private final DataGateway fileGateway;
-    private String IdCounter;
+    // === AccountFacade ===
+    private final AccountFacade accountFacade;
+    // === WorkFacade ===
+    private final WorkFacade workFacade;
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
      */
     public FacadeSys() {
-        this.managerAccountList = new AccountList();
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
-        this.mangerPay = new PayManager();
-        this.changeAccountInfo = new AccountInfoManager();
-        this.managerVerifier = new Verifier(this.managerAccountList);
-        this.managerAuthority = new AuthorityManager();
-        this.distributeWork = new WorkDistributor();
-        this.managerGroup = new GroupManager();
-        this.managerWork = new WorkManager();
-        this.fileGateway = new DataGateway(loginList, employeeList);
+        this.fileGateway = new DataGateway(this.loginList, this.employeeList);
+        this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
+        this.workFacade = new WorkFacade();
     }
 
     // === System methods ===
@@ -44,7 +32,7 @@ public class FacadeSys {
     public boolean systemStart(String accountNumber, String password) {
         this.fileGateway.ReadInputFileToLoginList();
         this.fileGateway.ReadInputFileToEmployeeList();
-        return this.managerVerifier.verifyForLogin(accountNumber, password);
+        return this.accountFacade.VerifyForThisLogin(accountNumber, password);
     }
 
     public void systemEnd() {
