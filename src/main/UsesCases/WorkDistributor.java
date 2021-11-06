@@ -7,10 +7,18 @@ public class WorkDistributor{
     //private HashMap<Group, Work> workMap;
     private Work w;
 
+    /**
+     * Construct the WorkDistributor.
+     */
     public WorkDistributor(){
         this.w = w;
     }
 
+    /**
+     * Verify if the work has started (a group is working on it)
+     * @param w the work that is going to be verified.
+     * @return true iff the work has started, false iff the work is still pending to be started.
+     */
     private boolean verifyWork(Work w){
         if (w.getState().equals("Pending"))
         return false;
@@ -19,6 +27,14 @@ public class WorkDistributor{
 
     //Todo: implement this method
 
+    /**
+     * Assign the work to a group (the group is constructed by the GroupManager).
+     * @param gm the GroupManager that is used to create the group.
+     * @param leader the leader of the group.
+     * @param members the members of the group.
+     * @param w the work that is going to be assigned to the group.
+     * @return the Group object which represent the group that is assigned to the given work.
+     */
     public Group assignWork(GroupManager gm, Userable leader, Userable[] members, Work w){
         if (verifyWork(w))
             return null;
