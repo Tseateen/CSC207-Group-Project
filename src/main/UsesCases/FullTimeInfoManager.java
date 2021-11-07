@@ -4,7 +4,7 @@ import main.Entity.*;
 
 import java.util.HashMap;
 
-public class FullTimeInfoManager implements AccountInfoInterface {
+public class FullTimeInfoManager{
 
     private Userable user;
     private FullTimeEmployee fullTimeEmployee;

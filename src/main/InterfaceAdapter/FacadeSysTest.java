@@ -129,6 +129,15 @@ public class FacadeSysTest<T> {
     }
 
 
+    public void KPIgiver() {
+        /**
+         * Todo: This part is used by leader to give kpi to their subordinates
+         * However, Im not really sure about who can give this kpi, user's leader or group's leader?
+         * When you implement this method pls think about it.
+         */
+    }
+
+
     public void WorkUpdate() {
         /** Todo: This one is designed for employee to report their work progress
          *  we need to record their message to Journal. And if the work finished,
@@ -179,6 +188,11 @@ public class FacadeSysTest<T> {
         // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
     }
 
-
+    public void SalaryCheck() {
+        /**
+         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
+         * salary, work days, vacation used, reward, and kpi. Hr worker need to comfirm all those info
+         */
+    }
 }
 
