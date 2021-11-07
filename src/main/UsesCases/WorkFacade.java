@@ -1,4 +1,4 @@
 package main.UsesCases;
 
-public class FacadeWork {
+public class WorkFacade {
 }
