@@ -69,6 +69,10 @@ public class FacadeSysTest<T> {
         System.out.println("You only can check your work here.\n" +
                 "If you want check your work detail, please type its id\n ");
         VisitStep("check");
+        /** new
+         * Todo: If this user is any work's leader, show it out differently.
+         */
+
     }
 
 
@@ -100,15 +104,26 @@ public class FacadeSysTest<T> {
         }
     }
 
+    public void CreatLeader() {
+        /**
+         * Todo: Give a leader to a non-leader lower level work.
+         * 1. Show all non-leader works which is in same department and lower level
+         * 2. Let them choose the work based on work id
+         * 3.Ask him did he need to know about employees information who can be invoked be him
+         *   This part may be implemented by calling AllWorker below.
+         * 4. Let them choose group leader
+         */
+    }
+
 
     public void distributeWork() {
         System.out.println(workFacade.AllWork()); // All work: show works that level lower than them
         /** Todo: How to distribute works?
-         * 1. Show all works that this user can see based on their level and department
-         * 2. Let them choose the work based on work id
+         * 1. Show all works that this user lead
+         * 2. Let them choose the work based on work id (they only can choose work that they lead)
          * 3. Ask him did he need to know about employees information who can be invoked be him
          *    This part may be implemented by calling AllWorker below.
-         * 4. Let them choose group member
+         * 4. Let them choose group members
          */
 
     }
@@ -117,7 +132,8 @@ public class FacadeSysTest<T> {
     public void WorkUpdate() {
         /** Todo: This one is designed for employee to report their work progress
          *  we need to record their message to Journal. And if the work finished,
-         *  need to change work's statues to 'Finished'. There may be some more steps needed.
+         *  only leader!!! can to change work's statues to 'Finished'. There may be some more steps needed.
+         *  also, if the user is this work's leader, they can choose to extend due date
          */
     }
 
@@ -162,5 +178,7 @@ public class FacadeSysTest<T> {
     public void UserWorkInfoChange() {
         // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
     }
+
+
 }
 
