@@ -42,7 +42,14 @@ public class User implements Userable, Serializable {
         this.phone = phone;
         this.address = address;
     }
-
+    public User(){
+        this.id = "";
+        this.username = "";
+        this.password = "";
+        this.name = "";
+        this.phone = "";
+        this.address = ";";
+    }
     // === Regular methods ===
 
     /**

@@ -35,6 +35,9 @@ public class PartTimeEmployee extends Employee implements Serializable {
         this.schedule = schedule;
     }
 
+    public PartTimeEmployee(){
+        super();
+    }
     // === Regular methods ===
 
     /**

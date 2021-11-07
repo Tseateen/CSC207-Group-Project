@@ -40,6 +40,14 @@ public abstract class Employee implements Serializable {
         this.attendance = 0;
     }
 
+    public Employee(){
+        this.id = "";
+        this.department = "";
+        this.wage = 0;
+        this.level = 0;
+        this.attendance = 0;
+    }
+
     // === Regular methods ===
 
     /**
