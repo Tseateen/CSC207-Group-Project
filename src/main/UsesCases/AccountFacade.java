@@ -1,12 +1,11 @@
 package main.UsesCases;
 
-import main.Entity.Employee;
-import main.Entity.FullTimeEmployee;
-import main.Entity.PartTimeEmployee;
-import main.Entity.Userable;
+import main.Entity.*;
+import java.util.HashMap;
 
 public class AccountFacade {
 
+    private final String username;
     private final LoginList loginList;
     private final EmployeeList employeeList;
     private final PayManager managerPay;
@@ -15,36 +14,71 @@ public class AccountFacade {
     private final Verifier managerVerifier;
     private static int idCounter = 0;
 
-    public AccountFacade(LoginList loginList, EmployeeList employeeList) {
+    public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
+        this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
         this.managerPay = new PayManager();
-        this.fullTimeInfoManager = new FullTimeInfoManager();
-        this.partTimeInfoManager = new PartTimeInfoManager();
+        this.fullTimeInfoManager = new FullTimeInfoManager(findUserHelper(), (FullTimeEmployee) findFullTimeEmployeeHelper());
+        this.partTimeInfoManager = new PartTimeInfoManager(findUserHelper(), (PartTimeEmployee) findPartTimeEmployeeHelper());
         this.managerVerifier = new Verifier(this.loginList);
     }
 
-    public String getPartTimeEmployeeInfo(Userable user, PartTimeEmployee partTimeEmployee, String option){
-        switch(option){
-            case "1":
-                this.partTimeInfoManager
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-            case "7":
-            case "8":
-            case "9":
-            case "10":
-            case "11":
-        }
-    }
-    public boolean VerifyForThisLogin(String account, String password){
-        return this.managerVerifier.verifyForLogin(account, password);
+    public String getPartTimeEmployeeInfo(String option) {
+        return switch (option) {
+            case "1" -> this.partTimeInfoManager.getNameFromUser();
+            case "2" -> this.partTimeInfoManager.getIDFromUser();
+            case "3" -> this.partTimeInfoManager.getUsernameFromUser();
+            case "4" -> this.partTimeInfoManager.getPasswordFromUser();
+            case "5" -> this.partTimeInfoManager.getPhoneFromUser();
+            case "6" -> this.partTimeInfoManager.getAddressFromUser();
+            case "7" -> this.partTimeInfoManager.getIDFromEmployee();
+            case "8" -> this.partTimeInfoManager.getDepartmentFromEmployee();
+            default -> "No such option, Please choose again!";
+        };
     }
 
-    public void CreateNewAccount(String accountNumber, String password, String name, String phone, String address){
+    public int getPartTimeEmployeInfoInt(String option){
+        return switch (option){
+            case "9" -> this.partTimeInfoManager.getWageFromEmployee();
+            case "10" -> this.partTimeInfoManager.getLevelFromEmployee();
+            default -> 0;
+        };
+    }
+
+    public HashMap<String, String[]> getSchdulefromPartTimeEmployee(){
+        return this.partTimeInfoManager.getScheduleFromEmployee();
+    }
+
+    public String getFullTimeEmployeeInfo(String option){
+        return switch (option) {
+            case "1" -> this.fullTimeInfoManager.getNameFromUser();
+            case "2" -> this.fullTimeInfoManager.getIDFromUser();
+            case "3" -> this.fullTimeInfoManager.getUsernameFromUser();
+            case "4" -> this.fullTimeInfoManager.getPasswordFromUser();
+            case "5" -> this.fullTimeInfoManager.getPhoneFromUser();
+            case "6" -> this.fullTimeInfoManager.getAddressFromUser();
+            case "7" -> this.fullTimeInfoManager.getIDFromEmployee();
+            case "8" -> this.fullTimeInfoManager.getDepartmentFromEmployee();
+            case "9" -> this.fullTimeInfoManager.getPosition();
+            case "10" -> this.fullTimeInfoManager.getStatus();
+            default -> "No such option, Please choose again!";
+        };
+    }
+
+    public int getFullTimeEmployeeInfoInt(String option){
+        return switch (option){
+            case "11" -> this.fullTimeInfoManager.getTotalVacationWithSalary();
+            case "12" -> this.fullTimeInfoManager.getVacationUsed();
+            default -> 0;
+        };
+    }
+
+    public boolean VerifyForThisLogin() {
+        return this.managerVerifier.verifyForLogin(this.username);
+    }
+
+    public void CreateNewAccount(String accountNumber, String password, String name, String phone, String address) {
         this.loginList.addUser(accountNumber, password, name, phone, address, String.valueOf(idCounter));
         idCounter += 1;
     }
@@ -56,5 +90,35 @@ public class AccountFacade {
         return employee.getWage();
     }
 
+    public Userable findUserHelper() {
+        Userable correctUser = new User();
+        for (Userable user : this.loginList) {
+            if (user.getUsername().equals(this.username)) {
+                correctUser = user;
+            }
+        }
+        return correctUser;
+    }
 
+    public Employee findPartTimeEmployeeHelper(){
+        Userable correctUser = findUserHelper();
+        Employee correctEmployee = new PartTimeEmployee();
+        for(Employee partTimeEmployee: this.employeeList){
+            if (partTimeEmployee.getID().equals(correctUser.getID())){
+                correctEmployee = partTimeEmployee;
+            }
+        }
+        return correctEmployee;
+    }
+
+    public Employee findFullTimeEmployeeHelper(){
+        Userable correctUser = findUserHelper();
+        Employee correctEmployee = new FullTimeEmployee();
+        for(Employee fullTimeEmployee: this.employeeList){
+            if (fullTimeEmployee.getID().equals(correctUser.getID())){
+                correctEmployee = fullTimeEmployee;
+            }
+        }
+        return correctEmployee;
+    }
 }
