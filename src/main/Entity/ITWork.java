@@ -48,7 +48,7 @@ public class ITWork implements Work {
      * @return This method will return the ID of this ITWork.
      */
     @Override
-    public String getId() {
+    public String getID() {
         return this.id;
     }
 

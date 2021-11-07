@@ -28,7 +28,7 @@ public class EmployeeList implements Iterable<Employee>{
         int index = -1;
 
         for(int i = 0; i < this.getSize(); i ++){
-            if(this.EmployeeList.get(i).getId().equals(id)){
+            if(this.EmployeeList.get(i).getID().equals(id)){
                 index = i;
             }
         }

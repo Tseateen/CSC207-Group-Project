@@ -105,7 +105,7 @@ public abstract class Employee implements Serializable {
         this.level = level;
     }
 
-    public String getId(){
+    public String getID(){
         return this.id;
     }
 
