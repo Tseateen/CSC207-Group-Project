@@ -51,24 +51,18 @@ public class PartTimeInfoManager {
     public void setNameForUser(String name){
         this.user.setName(name);
     }
-
     public void setUsernameForUser(String username){
         this.user.setUsername(username);
     }
-
     public void setPasswordForUser(String password){
         this.user.setPassword(password);
     }
-
     public void setPhoneForUser(String phone){
         this.user.setPhone(phone);
     }
-
-
     public void setAddressForUser(String address){
         this.user.setAddress(address);
     }
-
     public void setAttendenceForEmployee(){
         this.partTimeEmployee.setAttendance();
     }
