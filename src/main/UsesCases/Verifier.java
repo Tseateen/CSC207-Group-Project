@@ -24,18 +24,22 @@ public class Verifier {
         this.managerAccount = managerAccount;
         employeeMap =new HashMap<String, Userable>();
         for (Userable i : managerAccount.getEmployeeMap().keySet()) {
-            employeeMap.put(i.getAccount(), i);
+            employeeMap.put(i.getUsername(), i);
         }
+    }
+
+    public Map<String, Userable> getEmployeeMap(){
+        return this.employeeMap;
     }
 
     // TODO: I don't think AddAccount should put in this uses cases.
     public void AddAccount(Userable user) {
-        employeeMap.put(user.getAccount(), user);
+        employeeMap.put(user.getUsername(), user);
     }
 
     // TODO: I don't think RemoveAccount should put in this uses cases.
     public void RmAccount(Userable user) {
-        employeeMap.remove(user.getAccount());
+        employeeMap.remove(user.getUsername());
     }
     /**
      * @param account Given the account number.

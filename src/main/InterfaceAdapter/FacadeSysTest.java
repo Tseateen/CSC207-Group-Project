@@ -39,12 +39,12 @@ public class FacadeSysTest<T> {
     }
 
     // === Personal UI Method ===
-    public void personalInfo(){
-        System.out.println(accountFacade.UserInfo());
+    public void personalInfo(String account){
+        System.out.println(accountFacade.UserInfo(account));
     }
 
-    public void checkSalary() {
-        System.out.println(accountFacade.UserSalary());
+    public void checkSalary(String account) {
+        System.out.println(accountFacade.UserSalary(account));
     }
 
     public void setPersonalInfo() {
