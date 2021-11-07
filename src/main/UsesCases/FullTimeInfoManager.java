@@ -4,20 +4,14 @@ import main.Entity.*;
 
 import java.util.HashMap;
 
-public class AccountInfoManager {
+public class FullTimeInfoManager implements AccountInfoInterface {
 
     private Userable user;
     private FullTimeEmployee fullTimeEmployee;
-    private PartTimeEmployee partTimeEmployee;
 
-    public AccountInfoManager(Userable user, FullTimeEmployee fullTimeEmployee){
+    public FullTimeInfoManager(Userable user, FullTimeEmployee fullTimeEmployee){
         this.user= user;
         this.fullTimeEmployee = fullTimeEmployee;
-    }
-
-    public AccountInfoManager(Userable user, PartTimeEmployee partTimeEmployee){
-        this.user = user;
-        this.partTimeEmployee = partTimeEmployee;
     }
 
     public String getNameFromUser(){
@@ -65,9 +59,6 @@ public class AccountInfoManager {
     public String getStatus(){
         return this.fullTimeEmployee.getState();
     }
-    public HashMap<String, String[]> getSchedule(){
-        return this.partTimeEmployee.getSchedule();
-    }
 
     public void setNameForUser(String name){
         this.user.setName(name);
@@ -86,8 +77,32 @@ public class AccountInfoManager {
     }
 
 
-
     public void setAddressForUser(String address){
         this.user.setAddress(address);
+    }
+
+    public void setAttendenceForEmployee(){
+        this.fullTimeEmployee.setAttendance();
+    }
+    public void setWageForEmployee(int wage){
+        this.fullTimeEmployee.setWage(wage);
+    }
+    public void setDepartmentForEmployee(String department){
+        this.fullTimeEmployee.setDepartment(department);
+    }
+    public void setLevelForEmployee(int level){
+        this.fullTimeEmployee.setLevel(level);
+    }
+    public void setPositionForEmployee(String position){
+        this.fullTimeEmployee.setPosition(position);
+    }
+    public void setStateForEmployee(String status){
+        this.fullTimeEmployee.setState(status);
+    }
+    public void setTotalVacationWithSalaryForEmployee(int totalVacation){
+        this.fullTimeEmployee.setTotalVacationWithSalary(totalVacation);
+    }
+    public void setVacationUsedForEmployee(int VacationUsed){
+        this.fullTimeEmployee.setVacationUsed(VacationUsed);
     }
 }
