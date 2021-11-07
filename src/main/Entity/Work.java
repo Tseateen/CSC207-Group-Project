@@ -1,10 +1,9 @@
 package main.Entity;
 
 public interface Work {
-
     public abstract String getName();
 
-    public abstract String getId();
+    public abstract String getID();
 
     public abstract int getLevel();
 

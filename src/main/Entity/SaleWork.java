@@ -48,7 +48,7 @@ public class SaleWork implements Work{
      * @return This method will return the ID of this SaleWork.
      */
     @Override
-    public String getId() {
+    public String getID() {
         return this.id;
     }
 
