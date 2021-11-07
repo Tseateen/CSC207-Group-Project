@@ -101,6 +101,8 @@ public class FullTimeInfoManager_test {
     public void testGetLevelFromEmployee(){
         assertEquals(FTE1.getLevelFromEmployee(), 1);
         assertEquals(FTE2.getLevelFromEmployee(), 5);
+        FTE1.setLevelForEmployee(2);
+        assertEquals(FTE1.getLevelFromEmployee(), 2);
     }
 
 
@@ -108,24 +110,32 @@ public class FullTimeInfoManager_test {
     public void testGetTotalVacationWithSalary(){
         assertEquals(FTE1.getTotalVacationWithSalary(), 0);
         assertEquals(FTE2.getTotalVacationWithSalary(), 0);
+        FTE1.setTotalVacationWithSalaryForEmployee(15);
+        assertEquals(FTE1.getTotalVacationWithSalary(), 15);
     }
 
     @Test(timeout = 100)
     public void testGetVacationUsed(){
         assertEquals(FTE1.getVacationUsed(), 0);
         assertEquals(FTE2.getVacationUsed(), 0);
+        FTE1.setVacationUsedForEmployee(5);
+        assertEquals(FTE1.getVacationUsed(), 5);
     }
 
     @Test(timeout = 100)
     public void testGetPosition(){
         assertEquals(FTE1.getPosition(), "Manager");
         assertEquals(FTE2.getPosition(), "");
+        FTE1.setPositionForEmployee("");
+        assertEquals(FTE1.getPosition(), "");
     }
 
     @Test(timeout = 100)
     public void testGetStatus(){
         assertEquals(FTE1.getStatus(), "pending");
         assertEquals(FTE2.getStatus(), "pending");
+        FTE1.setStateForEmployee("In Progress");
+        assertEquals(FTE1.getStatus(), "In Progress");
     }
 
 }
