@@ -78,11 +78,12 @@ public class AccountFacade {
         return this.managerVerifier.verifyForLogin(this.username);
     }
 
-    public void CreateNewAccount(String accountNumber, String password, String name, String phone, String address) {
+    public void CreateNewAccount(String option, String accountNumber, String password, String name, String phone,
+                                 String address,String department, int wage, String position,  int level, String status, String id) {
         this.loginList.addUser(accountNumber, password, name, phone, address, String.valueOf(idCounter));
+        this.employeeList.addEmployee(address, wage, position, level, status, id);
         idCounter += 1;
-    }
-
+        }
 
     public int UserSalary(String account) {
         Userable user = managerVerifier.getEmployeeMap().get(account);
