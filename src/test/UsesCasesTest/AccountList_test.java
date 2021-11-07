@@ -1,6 +1,5 @@
 package test.UsesCasesTest;
 
-import main.UsesCases.AccountList;
 import main.Entity.Userable;
 import main.Entity.User;
 
