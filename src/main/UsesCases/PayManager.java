@@ -82,4 +82,7 @@ public class PayManager {
         return true;
     }
 
+    public Map<Userable, Employee> getEmployeeMap() {
+        return employeeMap;
+    }
 }
