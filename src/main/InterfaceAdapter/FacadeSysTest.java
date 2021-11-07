@@ -10,29 +10,41 @@ import java.util.Set;
 
 
 public class FacadeSysTest<T> {
-    private final FacadeUse facade_use;
+    private final DataGateway fileGateway;
+    private final LoginList loginList;
+    private final EmployeeList employeeList;
+    // === AccountFacade ===
+    private final AccountFacade accountFacade;
+    // === WorkFacade ===
+    private final WorkFacade workFacade;
 
     public FacadeSysTest() {
-        facade_use = new FacadeUse();
+        this.loginList = new LoginList();
+        this.employeeList = new EmployeeList();
+        this.fileGateway = new DataGateway(this.loginList, this.employeeList);
+        this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
+        this.workFacade = new WorkFacade();
     }
 
     // === System methods ===
 
     public boolean systemStart(String accountNumber, String password) {
-        return facade_use.start(accountNumber, password);
+        this.fileGateway.ReadInputFileToLoginList();
+        this.fileGateway.ReadInputFileToEmployeeList();
+        return this.accountFacade.VerifyForThisLogin(accountNumber, password);
     }
 
     public void systemEnd() {
-        facade_use.end();
+        this.fileGateway.WriteOutputFile();
     }
 
     // === Personal UI Method ===
     public void personalInfo(){
-        System.out.println(facade_use.UserInfo());
+        System.out.println(accountFacade.UserInfo());
     }
 
     public void checkSalary() {
-        System.out.println(facade_use.UserSalary());
+        System.out.println(accountFacade.UserSalary());
     }
 
     public void setPersonalInfo() {
@@ -43,13 +55,17 @@ public class FacadeSysTest<T> {
                             "iii) Change password, type 3; " + "\n" +
                             "iv) Back to main page, type other");
         String action = keyIn.nextLine();
-        System.out.println(facade_use.AccountChange(action));
+        System.out.println(accountFacade.AccountChange(action));
     }
 
-    // === Work UI Method ===
+    public void vacationRequire() {
+        // Todo: Used to get vacation
+    }
+
+    // ==================== Work UI Method ==============
 
     public void checkWorkInfo() {
-        System.out.println(facade_use.SelfWork());
+        System.out.println(workFacade.SelfWork(accountFacade.user()));
         System.out.println("You only can check your work here.\n" +
                 "If you want check your work detail, please type its id\n ");
         VisitStep("check");
@@ -70,15 +86,15 @@ public class FacadeSysTest<T> {
         Scanner keyIn = new Scanner(System.in);
         System.out.println();// Todo: 写一句话说输入文件所需的格式，用空格隔开。
         String action = keyIn.nextLine();
-        System.out.println(facade_use.workCreat(action));
+        System.out.println(workFacade.workCreat(action));
     }
 
 
     private boolean levelVerifier(String level) {
         try {
-            if (level.length() != 1) {return false}
+            if (level.length() != 1) {return false;}
             int a = Integer.parseInt(level);
-            return a > facade_use.user_level();
+            return a > accountFacade.user_level();
         } catch (NumberFormatException e) {
             return false;
         }
@@ -86,10 +102,24 @@ public class FacadeSysTest<T> {
 
 
     public void distributeWork() {
-        System.out.println(facade_use.AllWork());
-        // Todo:如何去分配工作？
+        System.out.println(workFacade.AllWork()); // All work: show works that level lower than them
+        /** Todo: How to distribute works?
+         * 1. Show all works that this user can see based on their level and department
+         * 2. Let them choose the work based on work id
+         * 3. Ask him did he need to know about employees information who can be invoked be him
+         *    This part may be implemented by calling AllWorker below.
+         * 4. Let them choose group member
+         */
+
     }
 
+
+    public void WorkUpdate() {
+        /** Todo: This one is designed for employee to report their work progress
+         *  we need to record their message to Journal. And if the work finished,
+         *  need to change work's statues to 'Finished'. There may be some more steps needed.
+         */
+    }
 
     private void VisitStep(String method) {
         Scanner keyIn = new Scanner(System.in);
@@ -100,9 +130,36 @@ public class FacadeSysTest<T> {
             if ("E".equals(action)) {
                 noExit = false;
             } else {
-                if (method.equals("check")) {System.out.println(facade_use.WorkDetail(action));}
+                if (method.equals("check")) {System.out.println(workFacade.WorkDetail(action));}
                 if (method.equals("creat")) {Creator(action);}
             }
         }
+    }
+
+    // Here are some method used to show other user information, may used in hr workers or work distribute
+
+    public void AllWorkers() {
+        /** Todo: Show all workers whose authority level are lower than this user and department are same
+         *  with this user.
+         *  Id need to be shown, because user need to tap id to choose user, but what else infom we need?
+         *  Ex. name, level...
+         */
+    }
+
+    public void UserCreator() {
+        // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
+        // Todo: or we may need to default new user's level as 9.
+        // This part may use Creator
+    }
+
+    public void UserDelete() {
+        /**
+         * Todo: Used to delete a user, can't delete user who has higher level.
+         * We may need to use memento for delete User
+         */
+    }
+
+    public void UserWorkInfoChange() {
+        // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
     }
 }
