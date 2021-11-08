@@ -74,15 +74,118 @@ public class AccountFacade {
         };
     }
 
+    public void setPartTimeInfoManager(String option, String response){
+        switch (option){
+            case "1":
+                this.partTimeInfoManager.setNameForUser(response);
+            case "2":
+                this.partTimeInfoManager.setPasswordForUser(response);
+            case "3":
+                this.partTimeInfoManager.setPhoneForUser(response);
+            case "4":
+                this.partTimeInfoManager.setAddressForUser(response);
+            case "5":
+                this.partTimeInfoManager.setDepartmentForEmployee(response);
+            case "6":
+                this.partTimeInfoManager.setAttendenceForEmployee();
+            case "7":
+                int intWage;
+                try {
+                    intWage = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intWage = 0;
+                }
+                this.fullTimeInfoManager.setWageForEmployee(intWage);
+            case "8":
+                int intLevel;
+                try {
+                    intLevel = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intLevel = 0;
+                }
+                this.fullTimeInfoManager.setLevelForEmployee(intLevel);
+        }
+    }
+
+    public void setSchedule(HashMap<String, String[]> schedule){
+        this.partTimeInfoManager.setScheduleForEmployee(schedule);
+    }
+    public void setFullTimeInfoManager(String option, String response){
+        switch (option){
+            case "1":
+                this.fullTimeInfoManager.setNameForUser(response);
+            case "2":
+                this.fullTimeInfoManager.setPasswordForUser(response);
+            case "3":
+                this.fullTimeInfoManager.setPhoneForUser(response);
+            case "4":
+                this.fullTimeInfoManager.setAddressForUser(response);
+            case "5":
+                this.fullTimeInfoManager.setDepartmentForEmployee(response);
+            case "6":
+                this.fullTimeInfoManager.setAttendenceForEmployee();
+            case "7":
+                int intWage;
+                try {
+                    intWage = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intWage = 0;
+                }
+                this.fullTimeInfoManager.setWageForEmployee(intWage);
+            case "8":
+                int intLevel;
+                try {
+                    intLevel = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intLevel = 0;
+                }
+                this.fullTimeInfoManager.setLevelForEmployee(intLevel);
+            case "9":
+                this.fullTimeInfoManager.setPositionForEmployee(response);
+            case "10":
+                this.fullTimeInfoManager.setStateForEmployee(response);
+            case "11":
+                int intTotalVacation;
+                try {
+                    intTotalVacation = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intTotalVacation = 0;
+                }
+                this.fullTimeInfoManager.setTotalVacationWithSalaryForEmployee(intTotalVacation);
+            case "12":
+                int intVacationUsed;
+                try {
+                    intVacationUsed = Integer.parseInt(response);
+                }
+                catch (NumberFormatException e)
+                {
+                    intVacationUsed = 0;
+                }
+                this.fullTimeInfoManager.setVacationUsedForEmployee(intVacationUsed);
+        }
+    }
+
+
     public boolean VerifyForThisLogin() {
         return this.managerVerifier.verifyForLogin(this.username);
     }
 
-    public void CreateNewAccount(String accountNumber, String password, String name, String phone, String address) {
+    public void CreateNewAccount(String option, String accountNumber, String password, String name, String phone,
+                                 String address,String department, int wage, String position,  int level, String status, String id) {
         this.loginList.addUser(accountNumber, password, name, phone, address, String.valueOf(idCounter));
+        this.employeeList.addEmployee(address, wage, position, level, status, id);
         idCounter += 1;
-    }
-
+        }
 
     public int UserSalary(String account) {
         Userable user = managerVerifier.getEmployeeMap().get(account);
