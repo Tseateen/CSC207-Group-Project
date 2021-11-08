@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Group implements Iterable<Userable> {
+    private Userable leader;
     private List<Userable> groupMembers = new ArrayList<>();
     private String workid;
 
@@ -15,14 +16,9 @@ public class Group implements Iterable<Userable> {
      *
      * @param workid The work ID of the work this group is working on.
      * @param leader The leader of this group.
-     * @param members Members of this group.
      */
-    public Group(Userable leader, Userable[] members, String workid){
-        // Index 0 will always be the leader
-        groupMembers.add(leader);
-        for(Userable userable: members){
-            groupMembers.add(userable);
-        }
+    public Group(Userable leader, String workid){
+        this.leader = leader;
         this.workid = workid;
     }
 
@@ -45,12 +41,13 @@ public class Group implements Iterable<Userable> {
         }
     }
 
+
     /**
      *
      * @return This method will return the leader of this group.
      */
     public Userable getLeader(){
-        return groupMembers.get(0);
+        return leader;
     }
 
 

@@ -17,8 +17,8 @@ public class GroupList implements Iterable<Group> {
         this.GroupList = new ArrayList<Group>();
     }
 
-    public void addGroup(Userable leader, Userable[] members, String workid){
-        Group group = new Group(leader, members, workid);
+    public void addGroup(Userable leader, String workID){
+        Group group = new Group(leader, workID);
         GroupList.add(group);
     }
 

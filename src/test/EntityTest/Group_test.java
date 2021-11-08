@@ -28,7 +28,7 @@ public class Group_test {
                 "300 Yonge Street", "003");
         Userable[] m1 = {p2, p3};
         // Group constructor
-        G1 = new Group(p1, m1, "w123");
+        G1 = new Group(p1, "w123");
     }
 
 

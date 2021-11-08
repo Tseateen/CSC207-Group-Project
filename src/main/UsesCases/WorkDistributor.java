@@ -39,8 +39,8 @@ public class WorkDistributor{
         if (verifyWork(w))
             return null;
         w.setState("In Progress");
-        gm.createGroup(leader, members, w.getId());
-        return new Group(leader, members, w.getId());
+        gm.createGroup(leader, w.getID());
+        return new Group(leader, w.getID());
     }
 
 
