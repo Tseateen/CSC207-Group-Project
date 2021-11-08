@@ -58,9 +58,11 @@ public class FacadeSys {
             System.out.println(presentInfo);
         }else{
             ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
+            int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-                    + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8);
+                    + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
+                    +"\n Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
             System.out.println(presentInfo);
         }
     }
