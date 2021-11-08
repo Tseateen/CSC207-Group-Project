@@ -393,7 +393,7 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void SalaryCheck(String level, Userable user) {
+    public void SingleSalaryCheck(String level, Userable user) {
         // Todo: reward and kpi is not implemented yet
         /**
          * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
@@ -438,6 +438,12 @@ public class FacadeSysTest<T> {
                 }
             }
         }
+    }public void SalaryCheck(String level, Userable) {
+        // Todo: reward and kpi is not implemented yet
+        /**
+         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
+         * salary, work days, vacation used, reward, and kpi. Hr worker need to comfirm all those info
+         */
     }
 }
 
