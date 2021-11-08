@@ -16,12 +16,16 @@ public class WorkList implements Iterable<Work>{
     }
 
     public void addWork(String workType, String name, String id, String createTime, int level){
+        WorkFactory workFactory = new WorkFactory();
         if (workType.equalsIgnoreCase("IT")){
-            Work work = new ITWork(name, id, createTime, level);
-            WorkList.add(work);
+            //下列這 decoupling 同時有多態產生。他其實是一個worker 但我把他的coupling全部斷開了。
+            // 完全斷掉work type 調用 -> 0耦合
+            WorkList.add(workFactory.createWork(workType,name,id,createTime,level));
         } else if (workType.equalsIgnoreCase("Sale")){
+            // Depend on interface -> low coupling
             Work work = new SaleWork(name, id, createTime, level);
             WorkList.add(work);
+            // 給一個強耦合例子: SaleWorker saleWorker = new SaleWork(name, id, createTime, level)
         }
     }
 
