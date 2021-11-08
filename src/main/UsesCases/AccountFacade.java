@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.*;
-import java.util.HashMap;
+import java.util.*;
 
 public class AccountFacade {
 
@@ -24,6 +24,22 @@ public class AccountFacade {
         this.managerVerifier = new Verifier(this.loginList);
     }
 
+    // return all the info at the same time (馬哥的idea)
+    public ArrayList<String> partTimeEmployeeInfo(){
+        ArrayList<String> info = new ArrayList<>();
+        info.add(this.partTimeInfoManager.getNameFromUser());
+        info.add(this.partTimeInfoManager.getIDFromUser());
+        info.add(this.partTimeInfoManager.getUsernameFromUser());
+        info.add(this.partTimeInfoManager.getPasswordFromUser());
+        info.add(this.partTimeInfoManager.getPhoneFromUser());
+        info.add(this.partTimeInfoManager.getAddressFromUser());
+        info.add(this.partTimeInfoManager.getDepartmentFromEmployee());
+        return info;
+    }
+
+
+
+    // return one info at a time
     public String getPartTimeEmployeeInfo(String option) {
         switch (option) {
             case "1":
@@ -39,13 +55,16 @@ public class AccountFacade {
             case "6":
                 return this.partTimeInfoManager.getAddressFromUser();
             case "7":
-                return this.partTimeInfoManager.getIDFromEmployee();
-            case "8":
                 return this.partTimeInfoManager.getDepartmentFromEmployee();
             default :
                 return "No such option, Please choose again!";
         }
     }
+
+    public HashMap<String, String[]> getSchdulefromPartTimeEmployee(){
+        return this.partTimeInfoManager.getScheduleFromEmployee();
+    }
+
 
     public int getPartTimeEmployeInfoInt(String option){
         switch (option){
@@ -58,10 +77,29 @@ public class AccountFacade {
         }
     }
 
-    public HashMap<String, String[]> getSchdulefromPartTimeEmployee(){
-        return this.partTimeInfoManager.getScheduleFromEmployee();
+    // return all the info at the same time (馬哥的idea)
+    public ArrayList<String> FullTimeEmployeeInfo(){
+        ArrayList<String> info = new ArrayList<>();
+        info.add(this.fullTimeInfoManager.getNameFromUser());
+        info.add(this.fullTimeInfoManager.getIDFromUser());
+        info.add(this.fullTimeInfoManager.getUsernameFromUser());
+        info.add(this.fullTimeInfoManager.getPasswordFromUser());
+        info.add(this.fullTimeInfoManager.getPhoneFromUser());
+        info.add(this.fullTimeInfoManager.getAddressFromUser());
+        info.add(this.fullTimeInfoManager.getDepartmentFromEmployee());
+        info.add(this.fullTimeInfoManager.getPosition());
+        info.add(this.fullTimeInfoManager.getStatus());
+        return info;
     }
 
+    public int[] getFullTimeEmployeeInfoInt(){
+        int[] intValue =  new int[2];
+        intValue[0] = this.fullTimeInfoManager.getTotalVacationWithSalary();
+        intValue[1] = this.fullTimeInfoManager.getVacationUsed();
+        return intValue;
+    }
+
+    // return one info at a time
     public String getFullTimeEmployeeInfo(String option){
         switch (option) {
             case "1":
@@ -77,12 +115,10 @@ public class AccountFacade {
             case "6":
                 return this.fullTimeInfoManager.getAddressFromUser();
             case "7":
-                return this.fullTimeInfoManager.getIDFromEmployee();
-            case "8":
                 return this.fullTimeInfoManager.getDepartmentFromEmployee();
-            case "9":
+            case "8":
                 return this.fullTimeInfoManager.getPosition();
-            case "10":
+            case "9":
                 return this.fullTimeInfoManager.getStatus();
             default:
                 return "No such option, Please choose again!";
@@ -91,16 +127,16 @@ public class AccountFacade {
 
     public int getFullTimeEmployeeInfoInt(String option){
         switch (option){
-            case "11":
+            case "10":
                 return this.fullTimeInfoManager.getTotalVacationWithSalary();
-            case "12":
+            case "11":
                 return this.fullTimeInfoManager.getVacationUsed();
             default:
                 return 0;
         }
     }
 
-    public void setPartTimeInfoManager(String option, String response){
+    public void setPartTimeBasicInfo(String option, String response){
         switch (option){
             case "1":
                 this.partTimeInfoManager.setNameForUser(response);
@@ -111,10 +147,15 @@ public class AccountFacade {
             case "4":
                 this.partTimeInfoManager.setAddressForUser(response);
             case "5":
-                this.partTimeInfoManager.setDepartmentForEmployee(response);
-            case "6":
                 this.partTimeInfoManager.setAttendenceForEmployee();
-            case "7":
+        }
+    }
+
+    public void setPartTimeAdvancedInfo(String option, String response){
+        switch (option){
+            case "1":
+                this.partTimeInfoManager.setDepartmentForEmployee(response);
+            case "2":
                 int intWage;
                 try {
                     intWage = Integer.parseInt(response);
@@ -123,8 +164,8 @@ public class AccountFacade {
                 {
                     intWage = 0;
                 }
-                this.fullTimeInfoManager.setWageForEmployee(intWage);
-            case "8":
+                this.partTimeInfoManager.setWageForEmployee(intWage);
+            case "3":
                 int intLevel;
                 try {
                     intLevel = Integer.parseInt(response);
@@ -133,14 +174,14 @@ public class AccountFacade {
                 {
                     intLevel = 0;
                 }
-                this.fullTimeInfoManager.setLevelForEmployee(intLevel);
+                this.partTimeInfoManager.setLevelForEmployee(intLevel);
         }
     }
 
     public void setSchedule(HashMap<String, String[]> schedule){
         this.partTimeInfoManager.setScheduleForEmployee(schedule);
     }
-    public void setFullTimeInfoManager(String option, String response){
+    public void setFullTimeBasicInfo(String option, String response){
         switch (option){
             case "1":
                 this.fullTimeInfoManager.setNameForUser(response);
@@ -151,10 +192,16 @@ public class AccountFacade {
             case "4":
                 this.fullTimeInfoManager.setAddressForUser(response);
             case "5":
-                this.fullTimeInfoManager.setDepartmentForEmployee(response);
-            case "6":
                 this.fullTimeInfoManager.setAttendenceForEmployee();
-            case "7":
+
+        }
+    }
+
+    public void setFullTimeAdvancedInfo(String option, String response){
+        switch (option){
+            case "1":
+                this.fullTimeInfoManager.setDepartmentForEmployee(response);
+            case "2":
                 int intWage;
                 try {
                     intWage = Integer.parseInt(response);
@@ -164,7 +211,7 @@ public class AccountFacade {
                     intWage = 0;
                 }
                 this.fullTimeInfoManager.setWageForEmployee(intWage);
-            case "8":
+            case "3":
                 int intLevel;
                 try {
                     intLevel = Integer.parseInt(response);
@@ -174,11 +221,11 @@ public class AccountFacade {
                     intLevel = 0;
                 }
                 this.fullTimeInfoManager.setLevelForEmployee(intLevel);
-            case "9":
+            case "4":
                 this.fullTimeInfoManager.setPositionForEmployee(response);
-            case "10":
+            case "5":
                 this.fullTimeInfoManager.setStateForEmployee(response);
-            case "11":
+            case "6":
                 int intTotalVacation;
                 try {
                     intTotalVacation = Integer.parseInt(response);
@@ -188,7 +235,7 @@ public class AccountFacade {
                     intTotalVacation = 0;
                 }
                 this.fullTimeInfoManager.setTotalVacationWithSalaryForEmployee(intTotalVacation);
-            case "12":
+            case "7":
                 int intVacationUsed;
                 try {
                     intVacationUsed = Integer.parseInt(response);
@@ -202,9 +249,6 @@ public class AccountFacade {
     }
 
 
-    public boolean VerifyForThisLogin() {
-        return this.managerVerifier.verifyForLogin(this.username);
-    }
 
     public void CreateNewAccount(String option, String accountNumber, String password, String name, String phone,
                                  String address,String department, int wage, String position,  int level, String status, String id) {

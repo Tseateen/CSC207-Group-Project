@@ -31,7 +31,7 @@ public class PartTimeInfoManager {
         return this.user.getAddress();
     }
     public String getIDFromEmployee(){
-        return this.partTimeEmployee.getId();
+        return this.partTimeEmployee.getID();
     }
     public String getDepartmentFromEmployee(){
         return this.partTimeEmployee.getDepartment();
@@ -50,9 +50,6 @@ public class PartTimeInfoManager {
     }
     public void setNameForUser(String name){
         this.user.setName(name);
-    }
-    public void setUsernameForUser(String username){
-        this.user.setUsername(username);
     }
     public void setPasswordForUser(String password){
         this.user.setPassword(password);
