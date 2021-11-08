@@ -25,25 +25,37 @@ public class AccountFacade {
     }
 
     public String getPartTimeEmployeeInfo(String option) {
-        return switch (option) {
-            case "1" -> this.partTimeInfoManager.getNameFromUser();
-            case "2" -> this.partTimeInfoManager.getIDFromUser();
-            case "3" -> this.partTimeInfoManager.getUsernameFromUser();
-            case "4" -> this.partTimeInfoManager.getPasswordFromUser();
-            case "5" -> this.partTimeInfoManager.getPhoneFromUser();
-            case "6" -> this.partTimeInfoManager.getAddressFromUser();
-            case "7" -> this.partTimeInfoManager.getIDFromEmployee();
-            case "8" -> this.partTimeInfoManager.getDepartmentFromEmployee();
-            default -> "No such option, Please choose again!";
-        };
+        switch (option) {
+            case "1":
+                return this.partTimeInfoManager.getNameFromUser();
+            case "2":
+                return this.partTimeInfoManager.getIDFromUser();
+            case "3":
+                return this.partTimeInfoManager.getUsernameFromUser();
+            case "4":
+                return this.partTimeInfoManager.getPasswordFromUser();
+            case "5":
+                return this.partTimeInfoManager.getPhoneFromUser();
+            case "6":
+                return this.partTimeInfoManager.getAddressFromUser();
+            case "7":
+                return this.partTimeInfoManager.getIDFromEmployee();
+            case "8":
+                return this.partTimeInfoManager.getDepartmentFromEmployee();
+            default :
+                return "No such option, Please choose again!";
+        }
     }
 
     public int getPartTimeEmployeInfoInt(String option){
-        return switch (option){
-            case "9" -> this.partTimeInfoManager.getWageFromEmployee();
-            case "10" -> this.partTimeInfoManager.getLevelFromEmployee();
-            default -> 0;
-        };
+        switch (option){
+            case "9":
+                return this.partTimeInfoManager.getWageFromEmployee();
+            case "10":
+                return this.partTimeInfoManager.getLevelFromEmployee();
+            default:
+                return 0;
+        }
     }
 
     public HashMap<String, String[]> getSchdulefromPartTimeEmployee(){
@@ -51,27 +63,41 @@ public class AccountFacade {
     }
 
     public String getFullTimeEmployeeInfo(String option){
-        return switch (option) {
-            case "1" -> this.fullTimeInfoManager.getNameFromUser();
-            case "2" -> this.fullTimeInfoManager.getIDFromUser();
-            case "3" -> this.fullTimeInfoManager.getUsernameFromUser();
-            case "4" -> this.fullTimeInfoManager.getPasswordFromUser();
-            case "5" -> this.fullTimeInfoManager.getPhoneFromUser();
-            case "6" -> this.fullTimeInfoManager.getAddressFromUser();
-            case "7" -> this.fullTimeInfoManager.getIDFromEmployee();
-            case "8" -> this.fullTimeInfoManager.getDepartmentFromEmployee();
-            case "9" -> this.fullTimeInfoManager.getPosition();
-            case "10" -> this.fullTimeInfoManager.getStatus();
-            default -> "No such option, Please choose again!";
-        };
+        switch (option) {
+            case "1":
+                return this.fullTimeInfoManager.getNameFromUser();
+            case "2":
+                return this.fullTimeInfoManager.getIDFromUser();
+            case "3":
+                return this.fullTimeInfoManager.getUsernameFromUser();
+            case "4":
+                return this.fullTimeInfoManager.getPasswordFromUser();
+            case "5":
+                return this.fullTimeInfoManager.getPhoneFromUser();
+            case "6":
+                return this.fullTimeInfoManager.getAddressFromUser();
+            case "7":
+                return this.fullTimeInfoManager.getIDFromEmployee();
+            case "8":
+                return this.fullTimeInfoManager.getDepartmentFromEmployee();
+            case "9":
+                return this.fullTimeInfoManager.getPosition();
+            case "10":
+                return this.fullTimeInfoManager.getStatus();
+            default:
+                return "No such option, Please choose again!";
+        }
     }
 
     public int getFullTimeEmployeeInfoInt(String option){
-        return switch (option){
-            case "11" -> this.fullTimeInfoManager.getTotalVacationWithSalary();
-            case "12" -> this.fullTimeInfoManager.getVacationUsed();
-            default -> 0;
-        };
+        switch (option){
+            case "11":
+                return this.fullTimeInfoManager.getTotalVacationWithSalary();
+            case "12":
+                return this.fullTimeInfoManager.getVacationUsed();
+            default:
+                return 0;
+        }
     }
 
     public void setPartTimeInfoManager(String option, String response){
