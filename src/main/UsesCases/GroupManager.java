@@ -17,7 +17,7 @@ public class GroupManager {
     }
 
     public void changeLeader(Group group, Userable user) {
-        // Todo
+        group.setLeader(user);
     }
 
 }
