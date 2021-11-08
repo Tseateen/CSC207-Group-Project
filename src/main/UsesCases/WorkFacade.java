@@ -63,6 +63,7 @@ public class WorkFacade {
         return "Work ID: " + work.getID() + "\n" +
                 "Work Name: " + work.getName() + "\n" +
                 "Work State " + work.getState() + "\n" +
+                "Work Department " + work.getDepartment() + "\n" +
                 "Work Description " + work.getDescribe() + "\n" +
                 "Work Requirement: " + work.getRequirement() + "\n" +
                 "Work Level: " + work.getLevel() + "\n" +
@@ -95,8 +96,7 @@ public class WorkFacade {
         String depart = employee.getDepartment();
         for (Work w: this.worklist){
             if (w.getLevel() > employee.getLevel()) {
-                if ((w instanceof ITWork && employee.getDepartment().equals("IT")) ||
-                        w instanceof SaleWork && employee.getDepartment().equals("Sale")){
+                if (w.getDepartment().equals(employee.getDepartment())){
                     ListOfWork.add(w);
                 }
             }

@@ -1,6 +1,9 @@
 package main.InterfaceAdapter;
 
+import main.Entity.Employee;
+import main.Entity.Group;
 import main.Entity.Userable;
+import main.Entity.Work;
 import main.UsesCases.*;
 import main.UsesCases.AccountFacade;
 
@@ -13,6 +16,9 @@ public class FacadeSysTest<T> {
     private final DataGateway fileGateway;
     private final LoginList loginList;
     private final EmployeeList employeeList;
+    private final WorkList workList;
+    private final GroupList groupList;
+
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
@@ -21,6 +27,9 @@ public class FacadeSysTest<T> {
     public FacadeSysTest() {
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
+        this.workList = new WorkList();
+        this.groupList = new GroupList();
+
         this.fileGateway = new DataGateway(this.loginList, this.employeeList);
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
         this.workFacade = new WorkFacade();
@@ -105,8 +114,6 @@ public class FacadeSysTest<T> {
         /** new
          * Todo: If this user is any work's leader, show it out differently.
          */
-
-
     }
 
 
@@ -122,7 +129,7 @@ public class FacadeSysTest<T> {
             return;
         }
         Scanner keyIn = new Scanner(System.in);
-        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("workType name id createTime level")，用空格隔开。
+        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("workType name id level")，用空格隔开。
 
         String action = keyIn.nextLine();
         System.out.println(workFacade.workCreate(action));
@@ -139,15 +146,51 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void CreateLeader() {
+    public void CreateLeader(Userable user) {
         /**
          * Todo: Give a leader to a non-leader lower level work.
          * 1. Show all non-leader works which is in same department and lower level
          * 2. Let them choose the work based on work id
-         * 3.Ask him did he need to know about employees information who can be invoked be him
+         * 3. Ask him did he need to know about employees information who can be involed be him
          *   This part may be implemented by calling AllWorker below.
          * 4. Let them choose group leader
          */
+
+        Employee employee = null;
+        ArrayList<Work> ListOfWork = new ArrayList<>();
+        for (Employee e: this.employeeList){
+            if (user.getID().equals(e.getID()));
+            employee = e;
+            break;}
+
+        for (Work work: this.workList){
+            boolean leader = false;
+            for (Group group: this.groupList){
+                if (work.getID().equals(group.getWorkid())){
+                    leader = true;
+                    break;
+                }
+            }
+            if (!leader && employee.getLevel() < work.getLevel() &&
+                    employee.getDepartment().equals(work.getDepartment())){
+                ListOfWork.add(work);
+            }
+        }
+        Scanner keyIn = new Scanner(System.in);
+        System.out.println("Following are the work that you can do:");
+        for (Work w: ListOfWork){
+            System.out.println(workFacade.WorkDetail(w.getID()));
+        }
+        System.out.println("Enter the workid you want to work on:");
+
+        String workid = keyIn.nextLine();
+
+        System.out.println("Following are the employees information you can work with");
+
+    }
+
+
+
     }
 
 
@@ -160,6 +203,7 @@ public class FacadeSysTest<T> {
          *    This part may be implemented by calling AllWorker below.
          * 4. Let them choose group members
          */
+
 
     }
 
@@ -198,12 +242,19 @@ public class FacadeSysTest<T> {
 
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
-    public void AllWorkers() {
+    public ArrayList<String> AllWorkers(Userable user) {
         /** Todo: Show all workers whose authority level are lower than this user and department are same
          *  with this user.
          *  Id need to be shown, because user need to tap id to choose user, but what else infom we need?
          *  Ex. name, level...
          */
+        Employee employee = null;
+        ArrayList<Employee> ListOfEmployee = new ArrayList<>();
+        for (Employee e: this.employeeList){
+            if (user.getID().equals(e.getID()));
+            employee = e;
+            break;}
+
     }
 
     public void UserCreator(String level) {
