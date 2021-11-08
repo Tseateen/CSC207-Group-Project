@@ -79,6 +79,10 @@ public class Group implements Iterable<Userable> {
         }return membersList;
     }
 
+    public String getWorkid() {
+        return workid;
+    }
+
     /**
      * This method add a new member to the group.
      *

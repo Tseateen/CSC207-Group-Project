@@ -11,9 +11,11 @@ public class EmployeeList implements Iterable<Employee>{
 
     private final List<Employee> EmployeeList;
 
+  
     public EmployeeList(){
         this.EmployeeList = new ArrayList<Employee>();
     }
+  
 
     public void addEmployee(String department, int wage, String position,  int level, String status, String id) {
         if (status.equals("F")) {
@@ -25,11 +27,12 @@ public class EmployeeList implements Iterable<Employee>{
         }
     }
 
+  
     public boolean deleteEmployee(String id) {
         int index = -1;
-
         for(int i = 0; i < EmployeeList.size(); i ++) {
             if(this.EmployeeList.get(i).getId().equals(id)){
+
                 index = i;
             }
         }
@@ -40,10 +43,12 @@ public class EmployeeList implements Iterable<Employee>{
             return true;
         }
     }
+  
 
     public int getSize(){
         return EmployeeList.size();
     }
+  
 
     public void readInput(Employee employee){
         this.EmployeeList.add(employee);
@@ -55,6 +60,7 @@ public class EmployeeList implements Iterable<Employee>{
         return new EmployeeListIterator();
     }
 
+  
     public class EmployeeListIterator implements Iterator<Employee>{
 
         private int curr_index = 0;
@@ -76,6 +82,7 @@ public class EmployeeList implements Iterable<Employee>{
             curr_index ++;
             return employee;
         }
+      
 
         public void add(Employee employee){
             EmployeeList.add(employee);

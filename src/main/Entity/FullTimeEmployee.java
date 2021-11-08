@@ -37,6 +37,10 @@ public class FullTimeEmployee extends Employee implements Serializable {
         this.vacationUsed = 0;
     }
 
+    public FullTimeEmployee(){
+        super();
+    }
+
     /**
      * This is the overload constructor. It also constructs a FullTimeEmployee
      * @param department Department for this employee.
