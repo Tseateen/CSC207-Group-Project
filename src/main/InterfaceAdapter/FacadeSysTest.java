@@ -394,10 +394,9 @@ public class FacadeSysTest<T> {
     }
 
     public void SingleSalaryCheck(String level, Userable user) {
-        // Todo: reward and kpi is not implemented yet
         /**
-         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
-         * salary, work days, vacation used, reward, and kpi. Hr worker need to comfirm all those info
+         *
+         * shows salary, work days, vacation used, reward, and kpi for given user. Hr worker need to comfirm all those info
          */
         if (!levelVerifier(level)) {
             System.out.println("Authority level verifier fail, please try again.");
@@ -417,7 +416,7 @@ public class FacadeSysTest<T> {
                     System.out.println("The vacation used by this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
                 }else {
                     System.out.println("No such option, please choose again");
-                    SalaryCheck(level, user);
+                    SingleSalaryCheck(level, user);
                 }
             }
         }if(Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")) {
@@ -434,7 +433,7 @@ public class FacadeSysTest<T> {
                     System.out.println("The vacation used by this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
                 } else {
                     System.out.println("No such option, please choose again");
-                    SalaryCheck(level, user);
+                    SingleSalaryCheck(level, user);
                 }
             }
         }
