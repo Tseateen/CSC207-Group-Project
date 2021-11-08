@@ -23,6 +23,7 @@ public class FacadeSysTest<T> {
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacade workFacade;
+    private GroupManager groupManager;
 
     public FacadeSysTest() {
         this.loginList = new LoginList();
@@ -33,6 +34,7 @@ public class FacadeSysTest<T> {
         this.fileGateway = new DataGateway(this.loginList, this.employeeList);
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
         this.workFacade = new WorkFacade();
+        this.groupManager = new GroupManager();
     }
 
     // === System methods ===
@@ -48,30 +50,32 @@ public class FacadeSysTest<T> {
     }
 
     // === Personal UI Method ===
-    public void partTimePersonalInfo(){
+    public void partTimePersonalInfo() {
         ArrayList<String> info = accountFacade.partTimeEmployeeInfo();
         String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
+                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " + info.get(5)
                 + "\n Department: " + info.get(6);
         System.out.println(presentInfo);
     }
 
-    public void fullTimePersonalInfo(){
+    public void fullTimePersonalInfo() {
         ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
         String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-                + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8);
+                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " + info.get(5)
+                + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " + info.get(8);
         System.out.println(presentInfo);
     }
+
     public void checkPartTimeSalary() {
         String presentWage = String.valueOf(accountFacade.partTimeSalary());
         System.out.println(presentWage);
     }
 
-    public void checkFullTimeSalary(){
+    public void checkFullTimeSalary() {
         String presentWage = String.valueOf(accountFacade.fullTimeSalary());
         System.out.println(presentWage);
     }
+
     public void setPartTimePersonalInfo() {
         Scanner keyIn = new Scanner(System.in);
         System.out.println("i) Change your name, please type 1; " + "\n" +
@@ -86,7 +90,7 @@ public class FacadeSysTest<T> {
         System.out.println("Set personal info success!");
     }
 
-    public void setFullTimePersonalInfo(){
+    public void setFullTimePersonalInfo() {
         Scanner keyIn = new Scanner(System.in);
         System.out.println("i) Change your name, please type 1; " + "\n" +
                 "ii) Change your password, please type 2; " + "\n" +
@@ -129,7 +133,7 @@ public class FacadeSysTest<T> {
             return;
         }
         Scanner keyIn = new Scanner(System.in);
-        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("workType name id level")，用空格隔开。
+        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("name id department level")，用空格隔开。
 
         String action = keyIn.nextLine();
         System.out.println(workFacade.workCreate(action));
@@ -138,7 +142,9 @@ public class FacadeSysTest<T> {
 
     private boolean levelVerifier(String level) {
         try {
-            if (level.length() != 1) {return false;}
+            if (level.length() != 1) {
+                return false;
+            }
             int a = Integer.parseInt(level);
             return a > accountFacade.user_level();
         } catch (NumberFormatException e) {
@@ -146,9 +152,9 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void CreateLeader(Userable user) {
+    public void CreateLeader() {
         /**
-         * Todo: Give a leader to a non-leader lower level work.
+         * Todo: Write Exception.
          * 1. Show all non-leader works which is in same department and lower level
          * 2. Let them choose the work based on work id
          * 3. Ask him did he need to know about employees information who can be involed be him
@@ -158,44 +164,52 @@ public class FacadeSysTest<T> {
 
         Employee employee = null;
         ArrayList<Work> ListOfWork = new ArrayList<>();
-        for (Employee e: this.employeeList){
-            if (user.getID().equals(e.getID()));
+        for (Employee e : this.employeeList) {
+            if (accountFacade.user().getID().equals(e.getID())) ;
             employee = e;
-            break;}
+            break;
+        }
 
-        for (Work work: this.workList){
+        for (Work work : this.workList) {
             boolean leader = false;
-            for (Group group: this.groupList){
-                if (work.getID().equals(group.getWorkid())){
+            for (Group group : this.groupList) {
+                if (work.getID().equals(group.getWorkid())) {
                     leader = true;
                     break;
                 }
             }
             if (!leader && employee.getLevel() < work.getLevel() &&
-                    employee.getDepartment().equals(work.getDepartment())){
+                    employee.getDepartment().equals(work.getDepartment())) {
                 ListOfWork.add(work);
             }
         }
         Scanner keyIn = new Scanner(System.in);
         System.out.println("Following are the work that you can do:");
-        for (Work w: ListOfWork){
+        for (Work w : ListOfWork) {
             System.out.println(workFacade.WorkDetail(w.getID()));
         }
         System.out.println("Enter the workid you want to work on:");
 
         String workid = keyIn.nextLine();
 
-        System.out.println("Following are the employees information you can work with");
+        System.out.println("Following are the employees information you can assign as the leader");
+        System.out.println(workFacade.AllWorkers(accountFacade.user()));
+        System.out.println("Enter the employee ID for the group leader (You can choose yourself)");
+        String leaderid = keyIn.nextLine();
 
-    }
+        for (Userable u : this.loginList) {
+            if (u.getID().equals(leaderid)) {
+                this.groupList.addGroup(u, workid);
+                break;
+            }
+        }
+
+}
 
 
 
-    }
-
-
-    public void distributeWork(Userable user) {
-        System.out.println(workFacade.AllWork(user)); // All work: show works that level lower than them
+    public void distributeWork() {
+        System.out.println(accountFacade.user()); // All work: show works that level lower than them
         /** Todo: How to distribute works?
          * 1. Show all works that this user lead
          * 2. Let them choose the work based on work id (they only can choose work that they lead)
@@ -203,8 +217,56 @@ public class FacadeSysTest<T> {
          *    This part may be implemented by calling AllWorker below.
          * 4. Let them choose group members
          */
+        List<String> groupids = new ArrayList<String>();
+
+        for (Group group: this.groupList){
+            if (group.getLeader().equals(accountFacade.user())){
+                groupids.add(group.getWorkid());
+            }
+        }
+
+        List<String> workid = new ArrayList<String>();
+
+        for (String gid: groupids){
+            for (Work w: this.workList){
+                if (w.getID().equals(gid)){
+                    workid.add(w.getID());
+                    break;
+                }
+            }
+        }
+        Scanner keyIn = new Scanner(System.in);
+        System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
+                "want to choose members");
+        for (String w : workid) {
+            System.out.println(w);
+        }
+        String wid = keyIn.nextLine();
+        System.out.println("Following are the employees information you can assign as members");
+        System.out.println(workFacade.AllWorkers(accountFacade.user()));
+        System.out.println("Enter the employee ID for the group members, split by a space");
+        String employeeid = keyIn.nextLine();
 
 
+
+        List<Userable> members = new ArrayList<>();
+        String[] parts;
+        parts = employeeid.split(" ");
+        for (String eid: parts) {
+            for (Userable u: this.loginList){
+                if (u.getID().equals(eid)){
+                    members.add(u);
+                    break;
+                }
+            }
+        }
+
+        for (Group g: this.groupList){
+            if (g.getWorkid().equals(wid)){
+                this.groupManager.addMembers(members, g);
+                break;
+            }
+        }
     }
 
 
@@ -242,20 +304,6 @@ public class FacadeSysTest<T> {
 
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
-    public ArrayList<String> AllWorkers(Userable user) {
-        /** Todo: Show all workers whose authority level are lower than this user and department are same
-         *  with this user.
-         *  Id need to be shown, because user need to tap id to choose user, but what else infom we need?
-         *  Ex. name, level...
-         */
-        Employee employee = null;
-        ArrayList<Employee> ListOfEmployee = new ArrayList<>();
-        for (Employee e: this.employeeList){
-            if (user.getID().equals(e.getID()));
-            employee = e;
-            break;}
-
-    }
 
     public void UserCreator(String level) {
         // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
