@@ -33,7 +33,16 @@ public class PersonalManagerUI {
                         facadeSys.checkSalary();
                         break;
                     case "3":
-                        facadeSys.setPersonalInfo();
+                        System.out.println("i) Change your name, please type 1; " + "\n" +
+                                "ii) Change your password, please type 2; " + "\n" +
+                                "iii) Change your phone number, please type 3; " + "\n" +
+                                "iv) Change your address, please type 4" + "\n" +
+                                "v) Change you attendence, please type 5");
+                        String option = keyIn.nextLine();
+                        System.out.println("Please type the value you want to change:");
+                        String response = keyIn.nextLine();
+                        facadeSys.setPersonalInfo(option,response);
+                        System.out.println("Set personal info success!");
                         break;
                     case "4":
                         noExit = false;
