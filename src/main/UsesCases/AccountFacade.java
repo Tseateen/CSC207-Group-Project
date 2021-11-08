@@ -257,10 +257,12 @@ public class AccountFacade {
         idCounter += 1;
         }
 
-    public int UserSalary(String account) {
-        Userable user = managerVerifier.getEmployeeMap().get(account);
-        Employee employee = managerPay.getEmployeeMap().get(user);
-        return employee.getWage();
+    public int PartTimeSalary(String account) {
+        return this.partTimeInfoManager.getWageFromEmployee();
+    }
+
+    public int FullTimeSalary(){
+        return this.fullTimeInfoManager.getWageFromEmployee();
     }
 
     public Userable findUserHelper() {
