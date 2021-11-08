@@ -297,4 +297,19 @@ public class AccountFacade {
         }
         return correctEmployee;
     }
+
+    public String employeeType(){
+        Userable correctUser = findUserHelper();
+        String typeEmployee = "N/A";
+        for(Employee employee: this.employeeList){
+            if (employee.getID().equals(correctUser.getID())){
+                if (employee instanceof PartTimeEmployee) {
+                    typeEmployee = "PartTimeEmployee";
+                }else{
+                    typeEmployee = "FullTimeEmployee";
+                }
+            }
+        }
+        return typeEmployee;
+    }
 }
