@@ -31,7 +31,7 @@ public class EmployeeList implements Iterable<Employee>{
     public boolean deleteEmployee(String id) {
         int index = -1;
         for(int i = 0; i < EmployeeList.size(); i ++) {
-            if(this.EmployeeList.get(i).getId().equals(id)){
+            if(this.EmployeeList.get(i).getID().equals(id)){
 
                 index = i;
             }
