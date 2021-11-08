@@ -1,5 +1,6 @@
 package main.InterfaceAdapter;
 
+import main.Entity.Userable;
 import main.UsesCases.*;
 
 import java.util.Scanner;
@@ -73,12 +74,13 @@ public class FacadeSysTest<T> {
          * Todo: If this user is any work's leader, show it out differently.
          */
 
+
     }
 
 
     public void createWork() {
-        System.out.println("Please entry work's level which you want to creat.");
-        VisitStep("creat");
+        System.out.println("Please entry work's level which you want to create.");
+        VisitStep("create");
     }
 
 
@@ -88,9 +90,10 @@ public class FacadeSysTest<T> {
             return;
         }
         Scanner keyIn = new Scanner(System.in);
-        System.out.println();// Todo: 写一句话说输入文件所需的格式，用空格隔开。
+        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("workType name id createTime level")，用空格隔开。
+
         String action = keyIn.nextLine();
-        System.out.println(workFacade.workCreat(action));
+        System.out.println(workFacade.workCreate(action));
     }
 
 
@@ -104,7 +107,7 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void CreatLeader() {
+    public void CreateLeader() {
         /**
          * Todo: Give a leader to a non-leader lower level work.
          * 1. Show all non-leader works which is in same department and lower level
@@ -116,8 +119,8 @@ public class FacadeSysTest<T> {
     }
 
 
-    public void distributeWork() {
-        System.out.println(workFacade.AllWork()); // All work: show works that level lower than them
+    public void distributeWork(Userable user) {
+        System.out.println(workFacade.AllWork(user)); // All work: show works that level lower than them
         /** Todo: How to distribute works?
          * 1. Show all works that this user lead
          * 2. Let them choose the work based on work id (they only can choose work that they lead)
@@ -156,7 +159,7 @@ public class FacadeSysTest<T> {
                 noExit = false;
             } else {
                 if (method.equals("check")) {System.out.println(workFacade.WorkDetail(action));}
-                if (method.equals("creat")) {Creator(action);}
+                if (method.equals("create")) {Creator(action);}
             }
         }
     }
