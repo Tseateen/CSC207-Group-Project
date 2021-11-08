@@ -371,13 +371,8 @@ public class FacadeSysTest<T> {
         if (!levelVerifier(level)) {
             System.out.println("Authority level verifier fail, please try again.");
             return;
-        }Employee employee = null;
-        ArrayList<Employee> ListOfEmployee = new ArrayList<>();
-        for (Employee e: this.employeeList){
-            if (user.getID().equals(e.getID()));
-            employee = e;
-            break;}
-        if(accountFacade.employeeType() == "FullTimeEmployee"){
+        }
+        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
             System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
             System.out.println("1: Department, 2: Wage, 3: Level, 4: Position, 5: State, 6: Total Vacation, 7: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
@@ -386,7 +381,7 @@ public class FacadeSysTest<T> {
             String response = keyIn.nextLine();
             accountFacade.setFullTimeAdvancedInfo(option, response);
             System.out.println("The information is successfully updated");
-        }if(accountFacade.employeeType() == "PartTimeEmployee"){
+        }if(Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")){
             System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
             System.out.println("1: Department, 2: Wage, 3: Level");
             Scanner keyIn = new Scanner(System.in);
@@ -398,11 +393,52 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void SalaryCheck() {
+    public void SalaryCheck(String level, Userable user) {
+        // Todo: reward and kpi is not implemented yet
         /**
          * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
          * salary, work days, vacation used, reward, and kpi. Hr worker need to comfirm all those info
          */
+        if (!levelVerifier(level)) {
+            System.out.println("Authority level verifier fail, please try again.");
+            return;
+        }
+        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
+            System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
+            System.out.println("1: Wage, 10: Total Vacation with Salary, 11: Vacation Used");
+            Scanner keyIn = new Scanner(System.in);
+            String option = keyIn.nextLine();
+            if(Objects.equals(option, "1")){
+                System.out.println("The wage of this employee is "+ accountFacade.fullTimeSalary());
+            }else{
+                if(Objects.equals(option, "10")) {
+                    System.out.println("The total vacation with salary of this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
+                }else if(Objects.equals(option, "11")){
+                    System.out.println("The vacation used by this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
+                }else {
+                    System.out.println("No such option, please choose again");
+                    SalaryCheck(level, user);
+                }
+            }
+        }if(Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")) {
+            System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
+            System.out.println("1: Wage, 9: Total Vacation with Salary, 10: Vacation Used");
+            Scanner keyIn = new Scanner(System.in);
+            String option = keyIn.nextLine();
+            if (Objects.equals(option, "1")) {
+                System.out.println("The wage of this employee is " + accountFacade.partTimeSalary());
+            } else {
+                if (Objects.equals(option, "9")) {
+                    System.out.println("The total vacation with salary of this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
+                } else if (Objects.equals(option, "10")) {
+                    System.out.println("The vacation used by this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
+                } else {
+                    System.out.println("No such option, please choose again");
+                    SalaryCheck(level, user);
+                }
+            }
+        }
     }
 }
+
 

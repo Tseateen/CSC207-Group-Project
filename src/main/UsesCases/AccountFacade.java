@@ -312,4 +312,17 @@ public class AccountFacade {
         }
         return typeEmployee;
     }
+    public String employeeTypeByID(Userable user){
+        String typeEmployee = new String();
+        for(Employee employee: this.employeeList){
+            if (employee.getID().equals(user.getID())){
+                if (employee instanceof PartTimeEmployee) {
+                    typeEmployee = "PartTimeEmployee";
+                }else{
+                    typeEmployee = "FullTimeEmployee";
+                }
+            }
+        }
+        return typeEmployee;
+    }
 }
