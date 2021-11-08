@@ -26,5 +26,6 @@ public class Verifier_test {
     @Test
     public void testVerifyForLogin(){
         assertTrue(VV.verifyForLogin("111", "123456"));
+        assertFalse(VV.verifyForLogin("111", "666666"));
     }
 }
