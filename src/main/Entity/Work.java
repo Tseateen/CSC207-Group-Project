@@ -10,7 +10,7 @@ public class Work{
     private Date start_time;
     private Date end_time;
     private final int level;
-    private String department;
+    private final String department;
     private String state;
     private String describe;
     private String requirement;
