@@ -138,6 +138,12 @@ public class FacadeSys {
 //        System.out.println("Set personal info success!");
 //    }
 
+    public void checkVacation() {
+        int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
+        String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
+        System.out.println(vacationInfo);
+    }
+
 
 
     // === Work UI Method ===
