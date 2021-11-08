@@ -14,6 +14,7 @@ public class LoginList_test {
         LL = new LoginList();
 
     }
+
     @Test
     public void testAddUser(){
         LL.addUser("111", "123456", "Lily", "4203456789",
