@@ -33,7 +33,7 @@ public class FullTimeInfoManager{
         return this.user.getAddress();
     }
     public String getIDFromEmployee(){
-        return this.fullTimeEmployee.getId();
+        return this.fullTimeEmployee.getID();
     }
     public String getDepartmentFromEmployee(){
         return this.fullTimeEmployee.getDepartment();
