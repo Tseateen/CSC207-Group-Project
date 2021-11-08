@@ -1,19 +1,20 @@
 package main.Entity;
 
-import java.util.Date;
 import java.util.Calendar;
+import java.sql.Timestamp;
 
 public class Work{
     private final String name;
     private final String id;
-    private final Date create_time;
-    private Date start_time;
-    private Date end_time;
+    private final String create_time;
+    private String start_time;
+    private String end_time;
     private final int level;
     private final String department;
-    private String state;
+    private String state; // Pending, InProgress, Finished, Expired
     private String describe;
     private String requirement;
+    private String isGroup = "0";
 
     /* === Representation Invariants ===
      * create_time should always be before or be the same as the start_time
@@ -36,12 +37,14 @@ public class Work{
         this.level = level;
         this.state = "Pending";
         this.department = department;
-        Calendar current=Calendar.getInstance();
-        this.create_time = current.getTime();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+
+        this.create_time = String.valueOf(now.getTime());
         this.start_time = null;
         Calendar calendar=Calendar.getInstance();
-        calendar.set(3000, Calendar.DECEMBER, 31,0,0,0);
-        this.end_time =calendar.getTime();
+        calendar.set(2099, Calendar.DECEMBER, 31,0,0,0);
+        Timestamp end = new Timestamp(calendar.getTimeInMillis());
+        this.end_time =String.valueOf(end.getTime());
     }
 
     /**
@@ -73,21 +76,13 @@ public class Work{
      * @return This method will return the time that this Work is being created.
      */
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return this.create_time;
     }
 
     // String Need to be the form of "YYYY/MM/DD HH:mm:ss"
     public void setEnd_time(String time) {
-        int year = Integer.parseInt(time.substring(0, 4));
-        int month = Integer.parseInt(time.substring(5, 7)) -1;
-        int date = Integer.parseInt(time.substring(8, 10));
-        int hour = Integer.parseInt(time.substring(11, 13));
-        int minute = Integer.parseInt(time.substring(14, 16));
-        int second = Integer.parseInt(time.substring(17, 19));
-        Calendar end_time = Calendar.getInstance();
-        end_time.set(year, month, date,hour, minute, second);
-        this.end_time = end_time.getTime();
+        this.end_time = time;
     }
 
 
@@ -96,7 +91,7 @@ public class Work{
      * @return This method will return the estimated end time of this Work.
      */
 
-    public Date getEnd_time() {
+    public String getEnd_time() {
         return this.end_time;
     }
 
@@ -127,15 +122,6 @@ public class Work{
         this.state = state;
     }
 
-    // Todo: Implement this method.
-    /**
-     *
-     * @param day Given the extended day needed for this Work.
-     */
-
-    public void Extend(int day) {
-
-    }
 
     /**
      *
@@ -143,22 +129,14 @@ public class Work{
      */
     // String Need to be the form of "YYYY/MM/DD HH:mm:ss"
     public void setStart_time(String time) {
-        int year = Integer.parseInt(time.substring(0, 4));
-        int month = Integer.parseInt(time.substring(5, 7)) -1;
-        int date = Integer.parseInt(time.substring(8, 10));
-        int hour = Integer.parseInt(time.substring(11, 13));
-        int minute = Integer.parseInt(time.substring(14, 16));
-        int second = Integer.parseInt(time.substring(17, 19));
-        Calendar start_time = Calendar.getInstance();
-        start_time.set(year, month, date, hour, minute, second);
-        this.start_time = start_time.getTime();
+        this.start_time = time;
     }
 
     /**
      *
      * @return This method will return the start time of this Work.
      */
-    public Date getStart_time() {
+    public String getStart_time() {
         return this.start_time;
     }
 
@@ -192,6 +170,22 @@ public class Work{
      */
     public String getRequirement() {
         return this.requirement;
+    }
+
+    /**
+     *
+     * @return Return a sign to show there is a group for this work or not; 0 means non, 1 means yes
+     */
+    public String getSign() {
+        return this.isGroup;
+    }
+
+    /**
+     *
+     * @param sign Give a sign to mark this work has group or not.
+     */
+    public void setSign(String sign) {
+        this.isGroup = sign;
     }
 }
 

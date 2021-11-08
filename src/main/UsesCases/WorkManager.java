@@ -16,14 +16,31 @@ public class WorkManager {
      */
     public void extendWork(Work work, String extend_date) {
         String due = work.getEnd_time();
-        due = String.valueOf(Integer.parseInt(due) + Integer.parseInt(extend_date));
-        work.Extend(due);
+        due = String.valueOf(Integer.valueOf(due) + Integer.valueOf(extend_date));
+        work.setEnd_time(due);
     }
 
-    public void autoChangeStatue(Work work, String new_statue) {
+    public void changeState(Work work, String new_statue) {
         work.setState(new_statue);
     }
 
-    // Todo: How to auto change statue when a work expire? maybe add a static method in Work??
+    public void autoChangeState(Work work) {
+        String statue = work.getState();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        long due = Integer.valueOf(work.getEnd_time());
+        if (statue.equals("Finished")) {
+            return;
+        }
+        if (now.getTime() > due) {
+            work.setState("Expired");
+            return;
+        }
+        if (work.getSign().equals("1")) {
+            work.setState("InProgress");
+            return;
+        }
+        work.setState("Pending");
+
+    }
 
 }

@@ -4,23 +4,13 @@ import main.Entity.*;
 import java.util.*;
 public class WorkDistributor{
 
-    //private HashMap<Group, Work> workMap;
-    private Work w;
-
-    /**
-     * Construct the WorkDistributor.
-     */
-    public WorkDistributor(){
-        this.w = w;
-    }
-
     /**
      * Verify if the work has started (a group is working on it)
-     * @param w the work that is going to be verified.
+     * @param work the work that is going to be verified.
      * @return true iff the work has started, false iff the work is still pending to be started.
      */
-    private boolean verifyWork(Work w){
-        if (w.getState().equals("Pending"))
+    private boolean verifyWork(Work work){
+        if (work.getState().equals("Pending"))
         return false;
         else return true;
     }
