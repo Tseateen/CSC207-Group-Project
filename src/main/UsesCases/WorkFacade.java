@@ -6,29 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkFacade {
-    WorkList worklist;
-    EmployeeList employeelist;
-    GroupList grouplist;
-    WorkManager workmanager;
+    WorkList workList;
+    EmployeeList employeeList;
+    GroupList groupList;
+    WorkManager workManager;
+    GroupManager groupManager;
 
 
-    public WorkFacade(WorkList worklist, EmployeeList employeelist, GroupList grouplist, WorkManager workmanager){
-        this.worklist = worklist;
-        this.employeelist = employeelist;
-        this.grouplist = grouplist;
-        this.workmanager = workmanager;
+    public WorkFacade(WorkList workList, EmployeeList employeeList, GroupList groupList, WorkManager workManager, GroupManager groupManager){
+        this.workList = workList;
+        this.employeeList = employeeList;
+        this.groupList = groupList;
+        this.workManager = workManager;
+        this.groupManager = groupManager;
     }
 
     public List<Work> SelfWork(Userable user) {
         Employee employee = null;
         ArrayList<Work> ListOfWork = null;
-        for (Employee e: this.employeelist){
+        for (Employee e: this.employeeList){
             if (user.getID().equals(e.getID()));
             employee = e;
             break;
         }
-        for (Work w: this.worklist){
-            for (Group g: this.grouplist){
+        for (Work w: this.workList){
+            for (Group g: this.groupList){
                 boolean s = false;
                 for (Userable u: g.getMembers()){
                     if (u.equals(user)){
@@ -48,13 +50,13 @@ public class WorkFacade {
     public String WorkDetail(String workid) {
         Work work = null;
         Group group = null;
-        for (Work w: this.worklist){
+        for (Work w: this.workList){
             if (workid.equals(w.getID())){
                 work = w;
                 break;
             }
         }
-        for (Group g: this.grouplist){
+        for (Group g: this.groupList){
             if (work.getID().equals(g.getWorkid())){
                 group = g;
                 break;
@@ -76,25 +78,25 @@ public class WorkFacade {
     }
 
 
-        //"workType name id createTime level"
+        //"name id department level"
     public String workCreate(String action) {
-        String[] parts = new String[5];
+        String[] parts;
         parts = action.split(" ");
-        this.workmanager.createWork(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4]));
-        return "Work Create success. WorkID is: " + parts[2];
+        this.workManager.createWork(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
+        return "Work Create success. WorkID is: " + parts[1];
     }
 
 
     public List<Work> AllWork(Userable user) {
         Employee employee = null;
         ArrayList<Work> ListOfWork = null;
-        for (Employee e: this.employeelist){
+        for (Employee e: this.employeeList){
             user.getID();
             employee = e;
             break;
             }
         String depart = employee.getDepartment();
-        for (Work w: this.worklist){
+        for (Work w: this.workList){
             if (w.getLevel() > employee.getLevel()) {
                 if (w.getDepartment().equals(employee.getDepartment())){
                     ListOfWork.add(w);
@@ -103,4 +105,26 @@ public class WorkFacade {
         }
         return ListOfWork;
     }
+
+    public ArrayList<String> AllWorkers(Userable user) {
+        /**
+         *  Id need to be shown, because user need to tap id to choose user, but what else infom we need?
+         *  Ex. name, level...
+         */
+        Employee employee = null;
+        ArrayList<String> ListOfEmployee = new ArrayList<>();
+        for (Employee e : this.employeeList) {
+            if (user.getID().equals(e.getID())) ;
+            employee = e;
+            break;
+        }
+        for (Employee e : this.employeeList) {
+            if (employee.getLevel() < e.getLevel() && employee.getDepartment().equals(e.getDepartment())) {
+                ListOfEmployee.add(e.getID() + "( level " + e.getLevel() + ")");
+            }
+        }
+        return ListOfEmployee;
+    }
+
+
 }
