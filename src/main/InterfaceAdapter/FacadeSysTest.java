@@ -346,7 +346,7 @@ public class FacadeSysTest<T> {
         String status = keyIn.nextLine();
         System.out.println();
 
-        AccountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position, userlevel, status);
+        accountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position, userlevel, status);
         System.out.println("The user is successfully created");
         System.out.println("The user info is shown below");
         System.out.println("username: "+ username +" password: "+ password +" name: "+ name +" phone: "+ phone +" address: "
@@ -366,8 +366,36 @@ public class FacadeSysTest<T> {
 
     }
 
-    public void UserWorkInfoChange() {
+    public void UserWorkInfoChange(String level, Userable user) {
         // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
+        if (!levelVerifier(level)) {
+            System.out.println("Authority level verifier fail, please try again.");
+            return;
+        }Employee employee = null;
+        ArrayList<Employee> ListOfEmployee = new ArrayList<>();
+        for (Employee e: this.employeeList){
+            if (user.getID().equals(e.getID()));
+            employee = e;
+            break;}
+        if(accountFacade.employeeType() == "FullTimeEmployee"){
+            System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
+            System.out.println("1: Department, 2: Wage, 3: Level, 4: Position, 5: State, 6: Total Vacation, 7: Vacation Used");
+            Scanner keyIn = new Scanner(System.in);
+            String option = keyIn.nextLine();
+            System.out.println("Please enter the new info");
+            String response = keyIn.nextLine();
+            accountFacade.setFullTimeAdvancedInfo(option, response);
+            System.out.println("The information is successfully updated");
+        }if(accountFacade.employeeType() == "PartTimeEmployee"){
+            System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
+            System.out.println("1: Department, 2: Wage, 3: Level");
+            Scanner keyIn = new Scanner(System.in);
+            String option = keyIn.nextLine();
+            System.out.println("Please enter the new info");
+            String response = keyIn.nextLine();
+            accountFacade.setPartTimeAdvancedInfo(option, response);
+            System.out.println("The information is successfully updated");
+        }
     }
 
     public void SalaryCheck() {
