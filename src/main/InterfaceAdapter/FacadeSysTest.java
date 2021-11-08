@@ -299,14 +299,23 @@ public class FacadeSysTest<T> {
         System.out.println();
 
         AccountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position, userlevel, status);
-
+        System.out.println("The user is successfully created");
+        System.out.println("The user info is shown below");
+        System.out.println("username: "+ username +" password: "+ password +" name: "+ name +" phone: "+ phone +" address: "
+        + address +" department: " + department +" wage: "+ wage +" position: "+ position +" level: "+ userlevel +" status: "
+        + status);
     }
 
-    public void UserDelete() {
+    public void UserDelete(String level) {
         /**
          * Todo: Used to delete a user, can't delete user who has higher level.
          * We may need to use memento for delete User
          */
+        if (!levelVerifier(level)) {
+            System.out.println("Authority level verifier fail, please try again.");
+            return;
+        }
+
     }
 
     public void UserWorkInfoChange() {

@@ -61,12 +61,12 @@ public class AccountFacade {
         }
     }
 
-    public HashMap<String, String[]> getSchdulefromPartTimeEmployee(){
+    public HashMap<String, String[]> getSchedulefromPartTimeEmployee(){
         return this.partTimeInfoManager.getScheduleFromEmployee();
     }
 
 
-    public int getPartTimeEmployeInfoInt(String option){
+    public int getPartTimeEmployeeInfoInt(String option){
         switch (option){
             case "9":
                 return this.partTimeInfoManager.getWageFromEmployee();
