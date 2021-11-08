@@ -11,8 +11,6 @@ public class EmployeeList_test {
 
     @Before
     public void Setup(){
-        Employee fte1 = new FullTimeEmployee("HR", "Manager", 10000, 1, "8888");
-        Employee fte2 = new FullTimeEmployee("IT", 2500, 5, "9999");
         EL = new EmployeeList();
     }
 
