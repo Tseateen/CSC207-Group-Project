@@ -250,10 +250,11 @@ public class AccountFacade {
 
 
 
-    public void CreateNewAccount(String option, String accountNumber, String password, String name, String phone,
-                                 String address,String department, int wage, String position,  int level, String status, String id) {
-        this.loginList.addUser(accountNumber, password, name, phone, address, String.valueOf(idCounter));
-        this.employeeList.addEmployee(address, wage, position, level, status, id);
+    public void CreateNewAccount(String username, String password, String name, String phone,
+                                        String address, String department, int wage, String position, int level, String status) {
+        String id = String.valueOf(idCounter);
+        this.loginList.addUser(username, password, name, phone, address, id);
+        this.employeeList.addEmployee(department, wage, position, level, status, id);
         idCounter += 1;
         }
 

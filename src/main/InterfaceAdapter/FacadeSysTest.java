@@ -2,6 +2,7 @@ package main.InterfaceAdapter;
 
 import main.Entity.Userable;
 import main.UsesCases.*;
+import main.UsesCases.AccountFacade;
 
 import java.util.Scanner;
 
@@ -174,10 +175,49 @@ public class FacadeSysTest<T> {
          */
     }
 
-    public void UserCreator() {
+    public void UserCreator(String level) {
         // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
         // Todo: or we may need to default new user's level as 9.
+        // Todo: to verify the type of user input and make sure the type match the parameters of CreateNewAccount
         // This part may use Creator
+        if (!levelVerifier(level)) {
+            System.out.println("Authority level verifier fail, please try again.");
+            return;
+        }
+        System.out.println("Please assigned the username to this new account");
+        Scanner keyIn = new Scanner(System.in);
+        String username = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please assigned the password to this new account");
+        String password = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please enter the name of this new user");
+        String name = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please enter the phone number of this new user");
+        String phone = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please enter the address of this user");
+        String address = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please enter the department this user belongs to");
+        String department = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please enter the initial monthly wage of this user");
+        int wage = Integer.parseInt(keyIn.nextLine());
+        System.out.println();
+        System.out.println("Please enter the work position of this user");
+        String position = keyIn.nextLine();
+        System.out.println();
+        System.out.println("Please assigned this user an authority level");
+        int userlevel = Integer.parseInt(keyIn.nextLine());
+        System.out.println();
+        System.out.println("Please enter the status of this user (Full-time: F, Part-time: P)");
+        String status = keyIn.nextLine();
+        System.out.println();
+
+        AccountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position, userlevel, status);
+
     }
 
     public void UserDelete() {
