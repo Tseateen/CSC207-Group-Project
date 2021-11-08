@@ -15,24 +15,25 @@ public class EmployeeList implements Iterable<Employee>{
         this.EmployeeList = new ArrayList<Employee>();
     }
 
-    public void addEmployee(String department, int wage, String position,  int level, String status, String id){
-        if(status.equals("F")) {
+    public void addEmployee(String department, int wage, String position,  int level, String status, String id) {
+        if (status.equals("F")) {
             Employee employee = new FullTimeEmployee(department, position, wage, level, id);
-        }else if(status.equals("P") && position.equals("N")){
+        } else if (status.equals("P") && position.equals("N")) {
             Employee employee = new PartTimeEmployee(department, wage, level, id);
-        }
+            EmployeeList.add(employee);
 
+        }
     }
 
-    public boolean deleteEmployee(String id){
+    public boolean deleteEmployee(String id) {
         int index = -1;
 
-        for(int i = 0; i < this.getSize(); i ++){
+        for(int i = 0; i < EmployeeList.size(); i ++) {
             if(this.EmployeeList.get(i).getId().equals(id)){
                 index = i;
             }
         }
-        if(index == -1){
+        if(index == -1) {
             return false;
         }else{
             this.EmployeeList.remove(this.EmployeeList.get(index));
