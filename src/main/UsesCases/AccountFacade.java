@@ -258,11 +258,11 @@ public class AccountFacade {
         idCounter += 1;
         }
 
-    public int PartTimeSalary(String account) {
+    public int partTimeSalary() {
         return this.partTimeInfoManager.getWageFromEmployee();
     }
 
-    public int FullTimeSalary(){
+    public int fullTimeSalary(){
         return this.fullTimeInfoManager.getWageFromEmployee();
     }
 
