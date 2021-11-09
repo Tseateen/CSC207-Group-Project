@@ -11,16 +11,39 @@ import java.util.NoSuchElementException;
 
 public class GroupList implements Iterable<Group> {
 
+    // === Instance Variables ===
+
     private final List<Group> GroupList;
 
+    /* === Representation Invariants ===
+     * The GroupList can store projects created but no leaders.
+     *
+     */
     public GroupList(){
         this.GroupList = new ArrayList<Group>();
     }
 
+
+    /**
+     * This method will add a new group information into the GroupList.
+     *
+     * @param leader the leader of the group.
+     * @param workID the workID of the group, which is unique and linked to the work.
+     *
+     */
     public void addGroup(Userable leader, String workID){
         Group group = new Group(leader, workID);
         GroupList.add(group);
     }
+
+
+    /**
+     * This method will delete the existing group information from the GroupList.
+     *
+     * @param id the id of the Group.
+     * @return whether the Group has been successfully deleted.
+     *
+     */
 
     public boolean deleteUser(String id){
         int index = -1;
@@ -38,13 +61,28 @@ public class GroupList implements Iterable<Group> {
         }
     }
 
+
+    /**
+     * This method will get the size of the GroupList, i.e. the total number of the existing groups from the GroupList.
+     *
+     * @return the total number of the existing groups.
+     *
+     */
     public int getSize(){
         return GroupList.size();
     }
 
+
+    /**
+     * This method will read the input for the interface and call the add method to add a new group.
+     *
+     * @param group the group information of the Group.
+     *
+     */
     public void readInput(Group group) {
         this.GroupList.add(group);
     }
+
 
     // === Iterator Design Pattern ===
     @Override
@@ -75,6 +113,13 @@ public class GroupList implements Iterable<Group> {
             return group;
         }
 
+
+        /**
+         * This method will add a new group.
+         *
+         * @param group the information of the Group.
+         *
+         */
         public void add(Group group){
             GroupList.add(group);
         }
