@@ -25,6 +25,8 @@ public class FacadeSysTest<T> {
     private final WorkFacade workFacade;
     private GroupManager groupManager;
 
+    private final String employeeType;
+
     public FacadeSysTest() {
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
@@ -35,6 +37,7 @@ public class FacadeSysTest<T> {
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
         this.workFacade = new WorkFacade();
         this.groupManager = new GroupManager();
+        this.employeeType = this.accountFacade.employeeType();
     }
 
     // === System methods ===
@@ -146,7 +149,7 @@ public class FacadeSysTest<T> {
                 return false;
             }
             int a = Integer.parseInt(level);
-            return a > accountFacade.user_level();
+            return a > accountFacade.user_Level(this.employeeType);
         } catch (NumberFormatException e) {
             return false;
         }

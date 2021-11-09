@@ -248,6 +248,21 @@ public class AccountFacade {
         }
     }
 
+    public int getPartTimeLevel(){
+        return this.partTimeInfoManager.getLevelFromEmployee();
+    }
+
+    public int getFillTimeLevel(){
+        return this.fullTimeInfoManager.getLevelFromEmployee();
+    }
+
+    public int user_Level(String employeeType){
+        if (employeeType.equals("PartTimeEmployee")){
+            return this.partTimeInfoManager.getLevelFromEmployee();
+        }else{
+            return this.fullTimeInfoManager.getLevelFromEmployee();
+        }
+    }
 
 
     public void CreateNewAccount(String username, String password, String name, String phone,
