@@ -4,12 +4,12 @@ import java.time.LocalTime;
 import java.util.HashMap;
 
 public class Journal {
-    private final HashMap<LocalTime, HashMap<Userable, String>> journals;
+    private final HashMap<String, HashMap<Userable, String>> journals;
     private final String id;
 
     public Journal(String id){
         this.id = id;
-        journals = new HashMap<LocalTime, HashMap<Userable, String>>();
+        journals = new HashMap<String, HashMap<Userable, String>>();
     }
 
     public void AddJournal(Userable user, String doc) {

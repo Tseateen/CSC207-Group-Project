@@ -18,10 +18,12 @@ public class WorkManager {
         String due = work.getEnd_time();
         due = String.valueOf(Integer.valueOf(due) + Integer.valueOf(extend_date));
         work.setEnd_time(due);
+        autoChangeState(work);
     }
 
     public void changeState(Work work, String new_statue) {
         work.setState(new_statue);
+        autoChangeState(work);
     }
 
     public void autoChangeState(Work work) {

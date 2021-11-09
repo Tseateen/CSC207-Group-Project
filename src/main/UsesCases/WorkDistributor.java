@@ -33,6 +33,4 @@ public class WorkDistributor{
         return new Group(leader, w.getID());
     }
 
-
-
 }
