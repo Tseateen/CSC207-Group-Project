@@ -16,7 +16,7 @@ public class GroupList implements Iterable<Group> {
     private final List<Group> GroupList;
 
     /* === Representation Invariants ===
-     * The GroupList can store projects created but no leaders.
+     * The GroupList can store projects created with leaders.
      *
      */
     public GroupList(){
