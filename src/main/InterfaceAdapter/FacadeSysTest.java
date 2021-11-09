@@ -7,6 +7,7 @@ import main.Entity.Work;
 import main.UsesCases.*;
 import main.UsesCases.AccountFacade;
 
+import java.net.UnknownServiceException;
 import java.util.*;
 
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class FacadeSysTest<T> {
     private final EmployeeList employeeList;
     private final WorkList workList;
     private final GroupList groupList;
+    private final JournalList journalList;
 
     // === AccountFacade ===
     private final AccountFacade accountFacade;
@@ -32,6 +34,7 @@ public class FacadeSysTest<T> {
         this.employeeList = new EmployeeList();
         this.workList = new WorkList();
         this.groupList = new GroupList();
+        this.journalList = new JournalList();
 
         this.fileGateway = new DataGateway(this.loginList, this.employeeList);
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList);
@@ -155,7 +158,7 @@ public class FacadeSysTest<T> {
         }
     }
 
-    public void CreateLeader() {
+    public void CreateLeader(Userable user) {
         /**
          * Todo: Write Exception.
          * 1. Show all non-leader works which is in same department and lower level
@@ -175,15 +178,11 @@ public class FacadeSysTest<T> {
 
         for (Work work : this.workList) {
             boolean leader = false;
-            for (Group group : this.groupList) {
-                if (work.getID().equals(group.getWorkid())) {
-                    leader = true;
-                    break;
-                }
-            }
-            if (!leader && employee.getLevel() < work.getLevel() &&
+
+            if (work.getSign().equals("0") && employee.getLevel() < work.getLevel() &&
                     employee.getDepartment().equals(work.getDepartment())) {
                 ListOfWork.add(work);
+                work.setSign("1");
             }
         }
         Scanner keyIn = new Scanner(System.in);
@@ -196,7 +195,7 @@ public class FacadeSysTest<T> {
         String workid = keyIn.nextLine();
 
         System.out.println("Following are the employees information you can assign as the leader");
-        System.out.println(workFacade.AllWorkers(accountFacade.user()));
+        System.out.println(workFacade.AllWorkers(user));
         System.out.println("Enter the employee ID for the group leader (You can choose yourself)");
         String leaderid = keyIn.nextLine();
 
@@ -206,14 +205,11 @@ public class FacadeSysTest<T> {
                 break;
             }
         }
-
 }
 
-
-
-    public void distributeWork() {
+    public void distributeWork(Userable user) {
         System.out.println(accountFacade.user()); // All work: show works that level lower than them
-        /** Todo: How to distribute works?
+        /** Todo: Write Exception.
          * 1. Show all works that this user lead
          * 2. Let them choose the work based on work id (they only can choose work that they lead)
          * 3. Ask him did he need to know about employees information who can be invoked be him
@@ -246,11 +242,9 @@ public class FacadeSysTest<T> {
         }
         String wid = keyIn.nextLine();
         System.out.println("Following are the employees information you can assign as members");
-        System.out.println(workFacade.AllWorkers(accountFacade.user()));
+        System.out.println(workFacade.AllWorkers(user));
         System.out.println("Enter the employee ID for the group members, split by a space");
         String employeeid = keyIn.nextLine();
-
-
 
         List<Userable> members = new ArrayList<>();
         String[] parts;
@@ -273,12 +267,42 @@ public class FacadeSysTest<T> {
     }
 
 
-    public void KPIgiver() {
+    public void KPIgiver(Userable user) {
         /**
-         * Todo: This part is used by leader to give kpi to their subordinates
-         * However, Im not really sure about who can give this kpi, user's leader or group's leader?
-         * When you implement this method pls think about it.
+         * (Update: I use group leader to assign KPI)
          */
+        Scanner keyIn = new Scanner(System.in);
+        System.out.println("Enter the work ID where you want to give KPI to your members:");
+        String wid = keyIn.nextLine();
+        Group group = null;
+        Work work = null;
+        for (Work w: this.workList){
+            if (w.getID().equals(wid)){
+                work = w;
+                break;
+            }
+        }
+        for (Group g: this.groupList){
+            if (g.getWorkid().equals(wid)){
+                group = g;
+                break;
+            }
+        }
+        if (!(group.getLeader().equals(user))){
+            System.out.println("You are not the leader of this work");
+        }
+        System.out.println("You can now begin assign KPI to each member");
+        for (Userable member: group.getMembers()){
+            System.out.println("Enter the KPI for member" + member.getID());
+            String kpi = keyIn.nextLine();
+            for (Employee e: this.employeeList){
+                if (e.getID().equals(member.getID())){
+                    e.setKpi(work, Integer.valueOf(kpi));
+                }
+            }
+        }
+        System.out.println("You have successfully assign KPI to every member");
+
     }
 
 
@@ -359,13 +383,32 @@ public class FacadeSysTest<T> {
 
     public void UserDelete(String level) {
         /**
-         * Todo: Used to delete a user, can't delete user who has higher level.
          * We may need to use memento for delete User
          */
         if (!levelVerifier(level)) {
             System.out.println("Authority level verifier fail, please try again.");
             return;
         }
+
+        System.out.println("Please enter the id of the user you want to delete");
+        Scanner keyIn = new Scanner(System.in);
+        String username = keyIn.nextLine();
+        Employee employee = null;
+        for (Employee e: this.employeeList){
+            if (e.getID().equals(username)){
+                employee = e;
+                break;
+            }
+            if (e.getLevel() < Integer.parseInt(level)){
+                System.out.println("You cannot delete this employee, please try again.");
+                return;
+            }
+            employeeList.deleteEmployee(username);
+            loginList.deleteUser(username);
+            System.out.println("The user has successfully deleted.");
+
+        }
+
 
     }
 
@@ -440,7 +483,7 @@ public class FacadeSysTest<T> {
                 }
             }
         }
-    }public void SalaryCheck(String level, Userable) {
+    }public void SalaryCheck(String level, Userable user) {
         // Todo: reward and kpi is not implemented yet
         /**
          * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'

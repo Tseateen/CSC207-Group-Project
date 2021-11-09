@@ -1,6 +1,7 @@
 package main.Entity;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public abstract class Employee implements Serializable {
 
@@ -16,6 +17,8 @@ public abstract class Employee implements Serializable {
     private int attendance;
     // The authority level of this employee
     private int level;
+    // The KPI HashMap of this employee
+    private HashMap<Work, Integer> kpi;
 
     /* === Representation Invariants ===
      * The authority level for any employee should always equal or greater than 0. i.e. level = 0,1,2,3,...
@@ -38,6 +41,7 @@ public abstract class Employee implements Serializable {
         this.wage = wage;
         this.level = level;
         this.attendance = 0;
+        this.kpi = new HashMap<Work, Integer>();
     }
 
     public Employee(){
@@ -115,6 +119,14 @@ public abstract class Employee implements Serializable {
 
     public String getID(){
         return this.id;
+    }
+
+    public void setKpi(Work work, Integer kpi){
+        this.kpi.put(work, kpi);
+    }
+
+    public HashMap<Work, Integer> getKpi(){
+        return this.kpi;
     }
 
 }
