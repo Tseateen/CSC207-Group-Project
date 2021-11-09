@@ -6,6 +6,7 @@ import java.util.*;
 public class AccountFacade {
 
     private final String username;
+    private final Userable user;
     private final LoginList loginList;
     private final EmployeeList employeeList;
     private final PayManager managerPay;
@@ -17,6 +18,7 @@ public class AccountFacade {
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
+        this.user = this.findUserHelper();
         this.loginList = loginList;
         this.employeeList = employeeList;
         this.managerPay = new PayManager();
@@ -288,6 +290,22 @@ public class AccountFacade {
         }
     }
 
+    private boolean levelVerifier(String level) {
+        try {
+            if (level.length() != 1) {
+                return false;
+            }
+            int a = Integer.parseInt(level);
+            if (employeeType.equals("PartTimeEmployee")){
+                return a > this.partTimeInfoManager.getLevelFromEmployee();
+            }else{
+                return a > this.fullTimeInfoManager.getLevelFromEmployee();
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
     public void CreateNewAccount(String username, String password, String name, String phone,
                                         String address, String department, int wage, String position, int level, String status) {
@@ -316,10 +334,9 @@ public class AccountFacade {
     }
 
     public Employee findPartTimeEmployeeHelper(){
-        Userable correctUser = findUserHelper();
         Employee correctEmployee = new PartTimeEmployee();
         for(Employee partTimeEmployee: this.employeeList){
-            if (partTimeEmployee.getID().equals(correctUser.getID())){
+            if (partTimeEmployee.getID().equals(this.user.getID())){
                 correctEmployee = partTimeEmployee;
             }
         }
@@ -327,10 +344,9 @@ public class AccountFacade {
     }
 
     public Employee findFullTimeEmployeeHelper(){
-        Userable correctUser = findUserHelper();
         Employee correctEmployee = new FullTimeEmployee();
         for(Employee fullTimeEmployee: this.employeeList){
-            if (fullTimeEmployee.getID().equals(correctUser.getID())){
+            if (fullTimeEmployee.getID().equals(this.user.getID())){
                 correctEmployee = fullTimeEmployee;
             }
         }
@@ -338,10 +354,9 @@ public class AccountFacade {
     }
 
     public String employeeType(){
-        Userable correctUser = findUserHelper();
         String typeEmployee = "N/A";
         for(Employee employee: this.employeeList){
-            if (employee.getID().equals(correctUser.getID())){
+            if (employee.getID().equals(this.user.getID())){
                 if (employee instanceof PartTimeEmployee) {
                     typeEmployee = "PartTimeEmployee";
                 }else{
@@ -351,6 +366,10 @@ public class AccountFacade {
         }
         return typeEmployee;
     }
+
+
+
+
     public String employeeTypeByID(Userable user){
         String typeEmployee = new String();
         for(Employee employee: this.employeeList){
