@@ -158,22 +158,22 @@ public class AccountFacade {
 //            default:
 //                return 0;
 //        }
-    }
-
-//    public void setPartTimeBasicInfo(String option, String response){
-//        switch (option){
-//            case "1":
-//                this.partTimeInfoManager.setNameForUser(response);
-//            case "2":
-//                this.partTimeInfoManager.setPasswordForUser(response);
-//            case "3":
-//                this.partTimeInfoManager.setPhoneForUser(response);
-//            case "4":
-//                this.partTimeInfoManager.setAddressForUser(response);
-//            case "5":
-//                this.partTimeInfoManager.setAttendenceForEmployee();
-//        }
 //    }
+
+    public void setPartTimeBasicInfo(String option, String response){
+        switch (option){
+            case "1":
+                this.partTimeInfoManager.setNameForUser(response);
+            case "2":
+                this.partTimeInfoManager.setPasswordForUser(response);
+            case "3":
+                this.partTimeInfoManager.setPhoneForUser(response);
+            case "4":
+                this.partTimeInfoManager.setAddressForUser(response);
+            case "5":
+                this.partTimeInfoManager.setAttendenceForEmployee();
+        }
+    }
 
     public void setPartTimeAdvancedInfo(String option, String response){
         switch (option){
