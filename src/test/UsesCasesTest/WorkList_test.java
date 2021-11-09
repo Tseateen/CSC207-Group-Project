@@ -11,7 +11,7 @@ public class WorkList_test {
 
     @Before
     public void Setup(){
-        WorkList WL = new WorkList();
+        WL = new WorkList();
 
     }
 
@@ -27,4 +27,11 @@ public class WorkList_test {
             }
         }
     }
+
+
+    @Test
+    public void testGetSize(){
+        assertEquals(WL.getSize(), 1);
+    }
+
 }
