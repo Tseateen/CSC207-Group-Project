@@ -32,6 +32,7 @@ public class FacadeSys {
     private final WorkFacade workFacade;
     private GroupManager groupManager;
     private final String employeeType;
+    private WorkManager workManager;
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
@@ -42,16 +43,14 @@ public class FacadeSys {
         this.verifier = new Verifier(this.loginList);
         this.fileGateway = new DataGateway(this.loginList, this.employeeList);
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,username);
-        this.workFacade = new WorkFacade();
-        this.employeeType = this.accountFacade.employeeType();
-
-        this.groupManager = new GroupManager();
-
         this.workList = new WorkList();
+        this.groupManager = new GroupManager();
         this.groupList = new GroupList();
         this.journalList = new JournalList();
+        this.workManager = new WorkManager();
 
-
+        this.workFacade = new WorkFacade(this.workList, this.employeeList, this.groupList, this.workManager, this.groupManager);
+        this.employeeType = this.accountFacade.employeeType();
     }
 
     // === System methods ===
@@ -167,7 +166,7 @@ public class FacadeSys {
     // ==================== Work UI Method ==============
 
     public void checkWorkInfo() {
-        System.out.println(workFacade.SelfWork(accountFacade.user()));
+        System.out.println(workFacade.SelfWork(accountFacade.findUserHelper()));
         System.out.println("You only can check your work here.\n" +
                 "If you want check your work detail, please type its id\n ");
         VisitStep("check");
@@ -209,7 +208,7 @@ public class FacadeSys {
     }
 
 
-    public void CreateLeader(Userable user) {
+    public void CreateLeader() {
         /**
          * Todo: Write Exception.
          * 1. Show all non-leader works which is in same department and lower level
@@ -222,7 +221,7 @@ public class FacadeSys {
         Employee employee = null;
         ArrayList<Work> ListOfWork = new ArrayList<>();
         for (Employee e : this.employeeList) {
-            if (user.getID().equals(e.getID())) ;
+            if (accountFacade.findUserHelper().getID().equals(e.getID())) ;
             employee = e;
             break;
         }
@@ -246,7 +245,7 @@ public class FacadeSys {
         String workid = keyIn.nextLine();
 
         System.out.println("Following are the employees information you can assign as the leader");
-        System.out.println(workFacade.AllWorkers(user));
+        System.out.println(workFacade.AllWorkers(accountFacade.findUserHelper()));
         System.out.println("Enter the employee ID for the group leader (You can only choose between yourself and one of the employees shown above)");
         String leaderid = keyIn.nextLine();
 
@@ -261,8 +260,8 @@ public class FacadeSys {
     }
 
 
-    public void distributeWork(Userable user) {
-        System.out.println(accountFacade.user()); // All work: show works that level lower than them
+    public void distributeWork() {
+        System.out.println(accountFacade.findUserHelper()); // All work: show works that level lower than them
         /** Todo: Write Exception.
          * 1. Show all works that this user lead
          * 2. Let them choose the work based on work id (they only can choose work that they lead)
@@ -273,7 +272,7 @@ public class FacadeSys {
         List<String> groupids = new ArrayList<String>();
 
         for (Group group: this.groupList){
-            if (group.getLeader().equals(user)){
+            if (group.getLeader().equals(accountFacade.findUserHelper())){
                 groupids.add(group.getWorkid());
             }
         }
@@ -296,7 +295,7 @@ public class FacadeSys {
         }
         String wid = keyIn.nextLine();
         System.out.println("Following are the employees information you can assign as members");
-        System.out.println(workFacade.AllWorkers(user));
+        System.out.println(workFacade.AllWorkers(accountFacade.findUserHelper()));
         System.out.println("Enter the employee ID for the group members, split by a space");
         String employeeid = keyIn.nextLine();
 
@@ -321,7 +320,7 @@ public class FacadeSys {
     }
 
 
-    public void KPIgiver(Userable user) {
+    public void KPIgiver() {
         /**
          * * Todo: Write Exception.
          * (Update: I use group leader to assign KPI)
@@ -343,7 +342,7 @@ public class FacadeSys {
                 break;
             }
         }
-        if (!(group.getLeader().equals(user))){
+        if (!(group.getLeader().equals(accountFacade.findUserHelper()))){
             System.out.println("You are not the leader of this work");
         }
         System.out.println("You can now begin assign KPI to each member");
@@ -466,13 +465,13 @@ public class FacadeSys {
     }
 
 
-    public void UserWorkInfoChange(String level, Userable user) {
+    public void UserWorkInfoChange(String level) {
         // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
         if (!levelVerifier(level)) {
             System.out.println("Authority level verifier fail, please try again.");
             return;
         }
-        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
+        if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "FullTimeEmployee")){
             System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
             System.out.println("1: Department, 2: Wage, 3: Level, 4: Position, 5: State, 6: Total Vacation, 7: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
@@ -481,7 +480,7 @@ public class FacadeSys {
             String response = keyIn.nextLine();
             accountFacade.setFullTimeAdvancedInfo(option, response);
             System.out.println("The information is successfully updated");
-        }if(Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")){
+        }if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "PartTimeEmployee")){
             System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
             System.out.println("1: Department, 2: Wage, 3: Level");
             Scanner keyIn = new Scanner(System.in);
@@ -494,7 +493,7 @@ public class FacadeSys {
     }
 
 
-    public void SingleSalaryCheck(String level, Userable user) {
+    public void SingleSalaryCheck(String level) {
         /**
          *
          * shows salary, work days, vacation used, reward, and kpi for given user. Hr worker need to comfirm all those info
@@ -503,7 +502,7 @@ public class FacadeSys {
             System.out.println("Authority level verifier fail, please try again.");
             return;
         }
-        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
+        if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "FullTimeEmployee")){
             System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
             System.out.println("1: Wage, 10: Total Vacation with Salary, 11: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
@@ -517,10 +516,10 @@ public class FacadeSys {
                     System.out.println("The vacation used by this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
                 }else {
                     System.out.println("No such option, please choose again");
-                    SingleSalaryCheck(level, user);
+                    SingleSalaryCheck(level);
                 }
             }
-        }if(Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")) {
+        }if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "PartTimeEmployee")) {
             System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
             System.out.println("1: Wage, 9: Total Vacation with Salary, 10: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
@@ -534,14 +533,14 @@ public class FacadeSys {
                     System.out.println("The vacation used by this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
                 } else {
                     System.out.println("No such option, please choose again");
-                    SingleSalaryCheck(level, user);
+                    SingleSalaryCheck(level);
                 }
             }
         }
     }
 
 
-    public void SalaryCheck(String level, Userable user) {
+    public void SalaryCheck(String level) {
         // Todo: reward and kpi is not implemented yet
         /**
          * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'

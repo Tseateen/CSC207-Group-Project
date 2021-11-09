@@ -82,7 +82,7 @@ public class WorkFacade {
     public String workCreate(String action) {
         String[] parts;
         parts = action.split(" ");
-        this.workManager.createWork(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
+        this.workList.addWork(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
         return "Work Create success. WorkID is: " + parts[1];
     }
 
