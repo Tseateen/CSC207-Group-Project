@@ -24,11 +24,7 @@ public class AccountFacade {
 
         this.managerVerifier = new Verifier(this.loginList);
         this.employeeType = employeeType();
-        if (this.employeeType.equals("PartTimeEmployee")){
-            this.employee = findPartTimeEmployeeHelper();
-        }else{
-            this.employee = findFullTimeEmployeeHelper();
-        }
+        this.employee = findEmployeeHelper();
     }
 
     public String getEmployeeType(){
@@ -299,7 +295,7 @@ public class AccountFacade {
         }
     }
 
-    private boolean levelVerifier(String level) {
+    public boolean levelVerifier(String level) {
         try {
             if (level.length() != 1) {
                 return false;
@@ -340,25 +336,34 @@ public class AccountFacade {
         return correctUser;
     }
 
-    private PartTimeEmployee findPartTimeEmployeeHelper(){
-        Employee correctEmployee = new PartTimeEmployee();
-        for(Employee partTimeEmployee: this.employeeList){
-            if (partTimeEmployee.getID().equals(this.user.getID())){
-                correctEmployee = partTimeEmployee;
+    private Employee findEmployeeHelper(){
+        for(Employee employee: this.employeeList){
+            if (employee.getID().equals(this.user.getID())){
+                return employee;
             }
         }
-        return (PartTimeEmployee) correctEmployee;
+        return null;
     }
 
-    private FullTimeEmployee findFullTimeEmployeeHelper(){
-        Employee correctEmployee = new FullTimeEmployee();
-        for(Employee fullTimeEmployee: this.employeeList){
-            if (fullTimeEmployee.getID().equals(this.user.getID())){
-                correctEmployee = fullTimeEmployee;
-            }
-        }
-        return (FullTimeEmployee) correctEmployee;
-    }
+//    private PartTimeEmployee findPartTimeEmployeeHelper(){
+//        Employee correctEmployee = new PartTimeEmployee();
+//        for(Employee partTimeEmployee: this.employeeList){
+//            if (partTimeEmployee.getID().equals(this.user.getID())){
+//                correctEmployee = partTimeEmployee;
+//            }
+//        }
+//        return (PartTimeEmployee) correctEmployee;
+//    }
+
+//    private FullTimeEmployee findFullTimeEmployeeHelper(){
+//        Employee correctEmployee = new FullTimeEmployee();
+//        for(Employee fullTimeEmployee: this.employeeList){
+//            if (fullTimeEmployee.getID().equals(this.user.getID())){
+//                correctEmployee = fullTimeEmployee;
+//            }
+//        }
+//        return (FullTimeEmployee) correctEmployee;
+//    }
 
     public String employeeType(){
         String typeEmployee = "N/A";
