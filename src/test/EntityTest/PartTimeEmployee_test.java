@@ -53,8 +53,8 @@ public class PartTimeEmployee_test {
 
     @Test(timeout = 100)
     public void testId() {
-        assertEquals(Part_time_employee_1.getId(), "124");
-        assertEquals(Part_time_employee_2.getId(), "123");
+        assertEquals(Part_time_employee_1.getID(), "124");
+        assertEquals(Part_time_employee_2.getID(), "123");
     }
 
     @Test(timeout = 100)
