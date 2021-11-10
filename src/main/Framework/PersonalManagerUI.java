@@ -4,77 +4,46 @@ import main.InterfaceAdapter.*;
 import java.util.Scanner;
 
 public class PersonalManagerUI {
-    private final String username;
-    private final HomePage homePage;
+
     private final FacadeSys facadeSys;
 
-    public PersonalManagerUI(String username, HomePage homePage, FacadeSys facadeSys) {
-        this.username = username;
-        this.homePage = homePage;
+    public PersonalManagerUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
     public void run() {
         Scanner keyIn = new Scanner(System.in);
+
+        setPersonalInfoUI changePersonInfo = new setPersonalInfoUI(this.facadeSys);
         boolean noExit = true;
+
         while (noExit) {
-            System.out.println(noExit);
             System.out.println(
-                            "i) Check your personal Info, type 1 " + "\n" +
+                    "i) Check your personal Info, type 1 " + "\n" +
                             "ii) Check personal Salary, type 2 " + "\n" +
-                            "iii) Change personal Information, 3 " + "\n" +
+                            "iii) Change personal Information, type 3 " + "\n" +
                             "iv) Back to main page, type 4" + "\n");
             String action = keyIn.nextLine();
             switch (action) {
-                    case "1":
-                        facadeSys.personalInfo();
-                        break;
-                    case "2":
-                        facadeSys.checkSalary();
-                        break;
-                    case "3":
-                        System.out.println("i) Change your name, please type 1; " + "\n" +
-                                "ii) Change your password, please type 2; " + "\n" +
-                                "iii) Change your phone number, please type 3; " + "\n" +
-                                "iv) Change your address, please type 4" + "\n" +
-                                "v) Change you attendence, please type 5");
-                        String option = keyIn.nextLine();
-                        System.out.println("Please type the value you want to change:");
-                        String response = keyIn.nextLine();
-                        facadeSys.setPersonalInfo(option,response);
-                        System.out.println("Set personal info success!");
-                        break;
-                    case "4":
-                        noExit = false;
-                        System.out.println(noExit);
-                        break;
-                    default:
-                        System.out.println("Wrong action, please type again.");
-                        break;
+                case "1":
+                    facadeSys.personalInfo();
+                    break;
+                case "2":
+                    facadeSys.checkSalary();
+                    break;
+                case "3":
+                    changePersonInfo.run();
+                    break;
+                case "4":
+                    noExit = false;
+                    break;
+                default:
+                    System.out.println("Wrong action, please type again.");
+                    break;
 
             }
 
         }
     }
-}
-
-
-/*
-    private void Salary(AccountSystem AccountImfor) {
-        String salary_unit = "Month";
-        if (AccountImfor.typ() == "E") {salary_unit = "Hour";}
-        System.out.println("Salary:" + AccountImfor.Sal() + " per " + salary_unit);
-    }
-
-    private void Detail(AccountSystem AccountImfor) {
-        // Todo: print some base imfor
-    }
-
-
-
-    private void Changer(AccountSystem AccountImfor) {
-        // Todo: implement some things to changer account imfor
-    }
 
 }
- */

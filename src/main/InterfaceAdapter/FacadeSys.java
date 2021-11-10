@@ -70,15 +70,15 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public void personalInfo(){
-        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
-            ArrayList<String> info = this.accountFacade.employeeInfo();
+        if (this.employeeType.equals("PartTimeEmployee")){
+            ArrayList<String> info = accountFacade.partTimeEmployeeInfo();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6);
             System.out.println(presentInfo);
         }else{
-            ArrayList<String> info = this.accountFacade.employeeInfo();
-            int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
+            ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
+            int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
@@ -87,79 +87,27 @@ public class FacadeSys {
         }
     }
 
-//    public void partTimePersonalInfo(){
-//        ArrayList<String> info = accountFacade.partTimeEmployeeInfo();
-//        String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-//                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-//                + "\n Department: " + info.get(6);
-//        System.out.println(presentInfo);
-//    }
-
-//    public void fullTimePersonalInfo(){
-//        ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
-//        String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-//                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-//                + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8);
-//        System.out.println(presentInfo);
-//    }
-
     public void checkSalary(){
-        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
-            String presentWage = String.valueOf(this.accountFacade.checkSalary());
+        if (this.employeeType.equals("PartTimeEmployee")){
+            String presentWage = String.valueOf(accountFacade.partTimeSalary());
             System.out.println(presentWage);
         }else{
-            String presentWage = String.valueOf(this.accountFacade.checkSalary());
+            String presentWage = String.valueOf(accountFacade.fullTimeSalary());
             System.out.println(presentWage);
         }
     }
-//    public void checkPartTimeSalary() {
-//        String presentWage = String.valueOf(accountFacade.partTimeSalary());
-//        System.out.println(presentWage);
-//    }
-
-//    public void checkFullTimeSalary(){
-//        String presentWage = String.valueOf(accountFacade.fullTimeSalary());
-//        System.out.println(presentWage);
-//    }
 
     public void setPersonalInfo(String option, String response){
-        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
-            this.accountFacade.setPartTimeBasicInfo(option, response);
+        if (this.employeeType.equals("PartTimeEmployee")){
+            accountFacade.setPartTimeBasicInfo(option, response);
         }else{
-            this.accountFacade.setFullTimeBasicInfo(option, response);
+            accountFacade.setFullTimeBasicInfo(option, response);
         }
     }
 
-//    public void setPartTimePersonalInfo() {
-//        Scanner keyIn = new Scanner(System.in);
-//        System.out.println("i) Change your name, please type 1; " + "\n" +
-//                "ii) Change your password, please type 2; " + "\n" +
-//                "iii) Change your phone number, please type 3; " + "\n" +
-//                "iv) Change your address, please type 4" + "\n" +
-//                "v) Change you attendence, please type 5");
-//        String option = keyIn.nextLine();
-//        System.out.println("Please type the value you want to change:");
-//        String response = keyIn.nextLine();
-//        accountFacade.setPartTimeBasicInfo(option, response);
-//        System.out.println("Set personal info success!");
-//    }
-
-//    public void setFullTimePersonalInfo(){
-//        Scanner keyIn = new Scanner(System.in);
-//        System.out.println("i) Change your name, please type 1; " + "\n" +
-//                "ii) Change your password, please type 2; " + "\n" +
-//                "iii) Change your phone number, please type 3; " + "\n" +
-//                "iv) Change your address, please type 4" + "\n" +
-//                "v) Change you attendence, please type 5");
-//        String option = keyIn.nextLine();
-//        System.out.println("Please type the value you want to change:");
-//        String response = keyIn.nextLine();
-//        accountFacade.setFullTimeBasicInfo(option, response);
-//        System.out.println("Set personal info success!");
-//    }
 
     public void checkVacation() {
-        int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
+        int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
         String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
         System.out.println(vacationInfo);
     }
@@ -169,14 +117,13 @@ public class FacadeSys {
     // ==================== Work UI Method ==============
 
     public void checkWorkInfo() {
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                System.out.println(workFacade.SelfWork(u));
-                break;
-            }
-        }
-        System.out.println("You only can check your work here.\n" +
-                "If you want check your work detail, please type its id\n ");
+
+    }
+
+    public void checkWorkInfo(boolean showDetail) {
+        // TODO : Presenter
+        System.out.println(workFacade.SelfWork(this.loginList, username));
+
         VisitStep("check");
         /** new
          * Todo: If this user is any work's leader, show it out differently.
@@ -184,10 +131,26 @@ public class FacadeSys {
     }
 
 
+    private void VisitStep(String method) {
+        Scanner keyIn = new Scanner(System.in);
+        System.out.println("Type E to exit.");
+        boolean noExit = true;
+        while (noExit) {
+            String action = keyIn.nextLine();
+            if ("E".equals(action)) {
+                noExit = false;
+            } else {
+                if (method.equals("check")) {System.out.println(workFacade.WorkDetail(action));}
+                if (method.equals("create")) {Creator(action);}
+            }
+        }
+    }
+
     public void createWork() {
         System.out.println("Please enter work's level which you want to create.");
         VisitStep("create");
     }
+
 
 
     private void Creator(String level) {
@@ -293,42 +256,42 @@ public class FacadeSys {
         }catch (Exception e){
             System.out.println("Error occurred in FacadeSys.createLeader");
         }
+    }
+
+    public String findLeadWork() {
+        List<String> groupids = new ArrayList<String>();
+
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                self = u;
+                break;
+            }
         }
 
-     public String findLeadWork() {
-         List<String> groupids = new ArrayList<String>();
+        for (Group group: this.groupList){
+            if (group.getLeader().equals(self)){
+                groupids.add(group.getWorkid());
+            }
+        }
 
-         Userable self = null;
-         for (Userable u: this.loginList){
-             if (u.getUsername().equals(this.username)){
-                 self = u;
-                 break;
-             }
-         }
+        List<String> workid = new ArrayList<String>();
 
-         for (Group group: this.groupList){
-             if (group.getLeader().equals(self)){
-                 groupids.add(group.getWorkid());
-             }
-         }
-
-         List<String> workid = new ArrayList<String>();
-
-         for (String gid: groupids){
-             for (Workable w: this.workList){
-                 if (w.getID().equals(gid)){
-                     workid.add(w.getID());
-                     break;
-                 }
-             }
-         }
-         System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
-                 "want to choose members");
-         for (String w : workid) {
-             return w;
-         }
-         return null;
-     }
+        for (String gid: groupids){
+            for (Workable w: this.workList){
+                if (w.getID().equals(gid)){
+                    workid.add(w.getID());
+                    break;
+                }
+            }
+        }
+        System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
+                "want to choose members");
+        for (String w : workid) {
+            return w;
+        }
+        return null;
+    }
 
 
     public void distributeWork(String employeeid, String wid) {
@@ -426,9 +389,9 @@ public class FacadeSys {
             if (e.getID().equals(eid)){
                 e.setKpi(work, Integer.valueOf(kpi));
                 break;
-                }
             }
         }
+    }
 
     public void WorkUpdate() {
         /** Todo: This one is designed for employee to report their work progress
@@ -438,21 +401,6 @@ public class FacadeSys {
          */
     }
 
-
-    private void VisitStep(String method) {
-        Scanner keyIn = new Scanner(System.in);
-        System.out.println("Type E to exit.");
-        boolean noExit = true;
-        while (noExit) {
-            String action = keyIn.nextLine();
-            if ("E".equals(action)) {
-                noExit = false;
-            } else {
-                if (method.equals("check")) {System.out.println(workFacade.WorkDetail(action));}
-                if (method.equals("create")) {Creator(action);}
-            }
-        }
-    }
 
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
@@ -559,19 +507,19 @@ public class FacadeSys {
             case "1": {
                 for (Employee e : validemployees) {
                     System.out.println(e.getID() + e.getWage());
-                 }
-             } case "2": {
-                 for(Employee e: validemployees){
-                     System.out.println(e.getID() + e.getAttendance());
-                 }
-             } case "3": {
-                 for(Employee e: validemployees){
-                     if(Objects.equals(accountFacade.employeeTypeByID(e.getID()),"PartTimeEmployee")){
-                         System.out.println("This is a Part time employee, who does not have vacation");
-                     }
-                     System.out.println(e.getID() + accountFacade.getFullTimeEmployeeInfoInt()[0]);
-                 }
-             } case "4":{
+                }
+            } case "2": {
+                for(Employee e: validemployees){
+                    System.out.println(e.getID() + e.getAttendance());
+                }
+            } case "3": {
+                for(Employee e: validemployees){
+                    if(Objects.equals(accountFacade.employeeTypeByID(e.getID()),"PartTimeEmployee")){
+                        System.out.println("This is a Part time employee, who does not have vacation");
+                    }
+                    System.out.println(e.getID() + accountFacade.getFullTimeEmployeeInfoInt()[0]);
+                }
+            } case "4":{
                 for(Employee e: validemployees) {
                     if (Objects.equals(accountFacade.employeeTypeByID(e.getID()), "PartTimeEmployee")) {
                         System.out.println("This is a Part time employee, who does not have vacation");
@@ -579,7 +527,7 @@ public class FacadeSys {
                     System.out.println(e.getID() + accountFacade.getFullTimeEmployeeInfoInt()[1]);
                 }
             }
-         }
+        }
 
 
     }

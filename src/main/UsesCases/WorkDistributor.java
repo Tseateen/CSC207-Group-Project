@@ -11,7 +11,7 @@ public class WorkDistributor{
      */
     private boolean verifyWork(Work work){
         if (work.getState().equals("Pending"))
-        return false;
+            return false;
         else return true;
     }
 

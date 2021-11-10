@@ -17,7 +17,7 @@ public class Main {
         FacadeSys facadeSys = new FacadeSys(username);
         boolean result = facadeSys.systemStart(username,password);
         if (result){
-            HomePage homePage = new HomePage(username, facadeSys);
+            HomePage homePage = new HomePage(facadeSys);
             homePage.run();
         }else{
             System.out.println("Account username doesn't exist or password does not match. Please type again!");
