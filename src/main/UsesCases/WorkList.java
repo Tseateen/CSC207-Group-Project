@@ -7,17 +7,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class WorkList implements Iterable<Work>{
+public class WorkList implements Iterable<Workable>{
 
-    private final List<Work> WorkList;
+    private final List<Workable> WorkList;
 
     public WorkList(){
-        this.WorkList = new ArrayList<Work>();
+        this.WorkList = new ArrayList<Workable>();
     }
 
     public void addWork(String name, String id, String department, int level){
-        WorkFactory workFactory = new WorkFactory();
-        WorkList.add(workFactory.createWork(name,id,department,level));
+        Workable work = new Work(name,id,department,level);
+        WorkList.add(work);
     }
 
     public boolean deleteWork(String id){
@@ -46,12 +46,12 @@ public class WorkList implements Iterable<Work>{
 
     // === Iterator Design Pattern ===
     @Override
-    public Iterator<Work> iterator() {
-        return new WorkList.WorkListIterator();
+    public Iterator<Workable> iterator() {
+        return new WorkListIterator();
     }
 
 
-    private class WorkListIterator implements Iterator<Work>{
+    private class WorkListIterator implements Iterator<Workable>{
 
         private int curr_index = 0;
 
@@ -61,8 +61,8 @@ public class WorkList implements Iterable<Work>{
         }
 
         @Override
-        public Work next() {
-            Work work;
+        public Workable next() {
+            Workable work;
 
             try {
                 work = WorkList.get(curr_index);

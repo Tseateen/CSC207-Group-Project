@@ -26,6 +26,7 @@ public class FacadeSys {
     private final WorkList workList;
     private final GroupList groupList;
     private final JournalList journalList;
+    private final String username;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
@@ -48,6 +49,7 @@ public class FacadeSys {
         this.groupList = new GroupList();
         this.journalList = new JournalList();
         this.workManager = new WorkManager();
+        this.username = username;
 
         this.workFacade = new WorkFacade(this.workList, this.employeeList, this.groupList, this.workManager, this.groupManager);
         this.employeeType = this.accountFacade.employeeType();
@@ -166,7 +168,12 @@ public class FacadeSys {
     // ==================== Work UI Method ==============
 
     public void checkWorkInfo() {
-        System.out.println(workFacade.SelfWork(accountFacade.findUserHelper()));
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                System.out.println(workFacade.SelfWork(u));
+                break;
+            }
+        }
         System.out.println("You only can check your work here.\n" +
                 "If you want check your work detail, please type its id\n ");
         VisitStep("check");
@@ -201,27 +208,24 @@ public class FacadeSys {
                 return false;
             }
             int a = Integer.parseInt(level);
-            return a > accountFacade.user_Level(this.employeeType);
+            return a > accountFacade.user_Level();
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-
-    public void CreateLeader() {
-        /**
-         * Todo: Write Exception.
-         * 1. Show all non-leader works which is in same department and lower level
-         * 2. Let them choose the work based on work id
-         * 3. Ask him did he need to know about employees information who can be involed be him
-         *   This part may be implemented by calling AllWorker below.
-         * 4. Let them choose group leader
-         */
-
+    public String findWork() {
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                self = u;
+                break;
+            }
+        }
         Employee employee = null;
         ArrayList<Work> ListOfWork = new ArrayList<>();
         for (Employee e : this.employeeList) {
-            if (accountFacade.findUserHelper().getID().equals(e.getID())) ;
+            if (self.getID().equals(e.getID())) ;
             employee = e;
             break;
         }
@@ -232,36 +236,95 @@ public class FacadeSys {
             if (work.getSign().equals("0") && employee.getLevel() < work.getLevel() &&
                     employee.getDepartment().equals(work.getDepartment())) {
                 ListOfWork.add(work);
-                work.setSign("1");
             }
         }
-        Scanner keyIn = new Scanner(System.in);
         System.out.println("Following are the work that you can do:");
         for (Work w : ListOfWork) {
-            System.out.println(workFacade.WorkDetail(w.getID()));
+            return workFacade.WorkDetail(w.getID());
         }
-        System.out.println("Enter the workid you want to work on:");
-
-        String workid = keyIn.nextLine();
-
-        System.out.println("Following are the employees information you can assign as the leader");
-        System.out.println(workFacade.AllWorkers(accountFacade.findUserHelper()));
-        System.out.println("Enter the employee ID for the group leader (You can only choose between yourself and one of the employees shown above)");
-        String leaderid = keyIn.nextLine();
-
-        for (Userable u : this.loginList) {
-            if (u.getID().equals(leaderid)) {
-                this.groupList.addGroup(u, workid);
-                break;
-            }
-        }
-        System.out.println("You have successfully chosen the leader");
-
+        return null;
     }
 
 
-    public void distributeWork() {
-        System.out.println(accountFacade.findUserHelper()); // All work: show works that level lower than them
+    public ArrayList<String> findAllWorkers(){
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                System.out.println(workFacade.SelfWork(u));
+                break;
+            }
+        }
+        return workFacade.AllWorkers(self);
+    }
+
+
+    public void createLeader(String workid, String leaderid) {
+        /**
+         * Todo: Write Exception.
+         * 1. Show all non-leader works which is in same department and lower level
+         * 2. Let them choose the work based on work id
+         * 3. Ask him did he need to know about employees information who can be involved be him
+         *   This part may be implemented by calling AllWorker below.
+         * 4. Let them choose group leader
+         */
+
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                self = u;
+                break;
+            }
+        }
+
+        if (!((findAllWorkers().contains(leaderid)) || leaderid.equals(self.getID()))) {
+            System.out.println("You can only choose between yourself and one of the employees shown above");
+            return;
+        }
+            for (Userable u : this.loginList) {
+                if (u.getID().equals(leaderid)) {
+                    this.groupList.addGroup(u, workid);
+                    break;
+                }
+            }
+        }
+
+     public String findLeadWork() {
+         List<String> groupids = new ArrayList<String>();
+
+         Userable self = null;
+         for (Userable u: this.loginList){
+             if (u.getUsername().equals(this.username)){
+                 self = u;
+                 break;
+             }
+         }
+
+         for (Group group: this.groupList){
+             if (group.getLeader().equals(self)){
+                 groupids.add(group.getWorkid());
+             }
+         }
+
+         List<String> workid = new ArrayList<String>();
+
+         for (String gid: groupids){
+             for (Work w: this.workList){
+                 if (w.getID().equals(gid)){
+                     workid.add(w.getID());
+                     break;
+                 }
+             }
+         }
+         System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
+                 "want to choose members");
+         for (String w : workid) {
+             return w;
+         }
+         return null;
+     }
+
+
+    public void distributeWork(String employeeid, String wid) {
         /** Todo: Write Exception.
          * 1. Show all works that this user lead
          * 2. Let them choose the work based on work id (they only can choose work that they lead)
@@ -269,48 +332,22 @@ public class FacadeSys {
          *    This part may be implemented by calling AllWorker below.
          * 4. Let them choose group members
          */
-        List<String> groupids = new ArrayList<String>();
-
-        for (Group group: this.groupList){
-            if (group.getLeader().equals(accountFacade.findUserHelper())){
-                groupids.add(group.getWorkid());
-            }
-        }
-
-        List<String> workid = new ArrayList<String>();
-
-        for (String gid: groupids){
-            for (Work w: this.workList){
-                if (w.getID().equals(gid)){
-                    workid.add(w.getID());
-                    break;
-                }
-            }
-        }
-        Scanner keyIn = new Scanner(System.in);
-        System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
-                "want to choose members");
-        for (String w : workid) {
-            System.out.println(w);
-        }
-        String wid = keyIn.nextLine();
-        System.out.println("Following are the employees information you can assign as members");
-        System.out.println(workFacade.AllWorkers(accountFacade.findUserHelper()));
-        System.out.println("Enter the employee ID for the group members, split by a space");
-        String employeeid = keyIn.nextLine();
 
         List<Userable> members = new ArrayList<>();
         String[] parts;
         parts = employeeid.split(" ");
         for (String eid: parts) {
             for (Userable u: this.loginList){
+                if (!((findAllWorkers().contains(u.getID())))) {
+                    System.out.println("You can only choose the employees shown above");
+                    return;
+                }
                 if (u.getID().equals(eid)){
                     members.add(u);
                     break;
                 }
             }
         }
-
         for (Group g: this.groupList){
             if (g.getWorkid().equals(wid)){
                 this.groupManager.addMembers(members, g);
@@ -320,45 +357,60 @@ public class FacadeSys {
     }
 
 
-    public void KPIgiver() {
+    public Group findWorkKpi(String woid) {
         /**
          * * Todo: Write Exception.
-         * (Update: I use group leader to assign KPI)
+         * (Update: Group leader to assign KPI)
          */
-        Scanner keyIn = new Scanner(System.in);
-        System.out.println("Enter the work ID where you want to give KPI to your members:");
-        String wid = keyIn.nextLine();
+
         Group group = null;
         Work work = null;
         for (Work w: this.workList){
-            if (w.getID().equals(wid)){
+            if (w.getID().equals(woid)){
                 work = w;
                 break;
             }
         }
         for (Group g: this.groupList){
-            if (g.getWorkid().equals(wid)){
+            if (g.getWorkid().equals(woid)){
                 group = g;
                 break;
             }
         }
-        if (!(group.getLeader().equals(accountFacade.findUserHelper()))){
-            System.out.println("You are not the leader of this work");
-        }
-        System.out.println("You can now begin assign KPI to each member");
-        for (Userable member: group.getMembers()){
-            System.out.println("Enter the KPI for member" + member.getID());
-            String kpi = keyIn.nextLine();
-            for (Employee e: this.employeeList){
-                if (e.getID().equals(member.getID())){
-                    e.setKpi(work, Integer.valueOf(kpi));
-                }
+
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                self = u;
+                break;
             }
         }
-        System.out.println("You have successfully assign KPI to every member");
+
+        if (!(group.getLeader().equals(self))){
+            System.out.println("You are not the leader of this work");
+            return; //write exception
+        }
+
+        System.out.println("You can now begin assign KPI to each member");
+        return group;
 
     }
 
+    public void giveKpi(String woid, String eid, String kpi){
+        Work work = null;
+        for (Work w: this.workList){
+            if (w.getID().equals(woid)){
+                work = w;
+                break;
+            }
+        }
+        for (Employee e: this.employeeList){
+            if (e.getID().equals(eid)){
+                e.setKpi(work, Integer.valueOf(kpi));
+                break;
+                }
+            }
+        }
 
     public void WorkUpdate() {
         /** Todo: This one is designed for employee to report their work progress
@@ -367,6 +419,7 @@ public class FacadeSys {
          *  also, if the user is this work's leader, they can choose to extend due date
          */
     }
+
 
     private void VisitStep(String method) {
         Scanner keyIn = new Scanner(System.in);
@@ -386,48 +439,24 @@ public class FacadeSys {
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
 
-    public void UserCreator(String level) {
-        // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
-        // Todo: or we may need to default new user's level as 9.
-        // Todo: to verify the type of user input and make sure the type match the parameters of CreateNewAccount
+    public void UserCreator(String username, String password, String name, String phone, String address,
+                            String department, int wage, String position, int userlevel, String status) {t
         // This part may use Creator
-        if (!levelVerifier(level)) {
-            System.out.println("Authority level verifier fail, please try again.");
+
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(this.username)){
+                self = u;
+                break;
+            }
+        }
+
+        accountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position,
+                userlevel, status);
+        if (!(levelVerifier(Integer.toString(userlevel)))){// Need to be in UI?
+            System.out.println("You cannot create a user that has a higher level than you.");
             return;
         }
-        System.out.println("Please assigned the username to this new account");
-        Scanner keyIn = new Scanner(System.in);
-        String username = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please assigned the password to this new account");
-        String password = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please enter the name of this new user");
-        String name = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please enter the phone number of this new user");
-        String phone = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please enter the address of this user");
-        String address = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please enter the department this user belongs to");
-        String department = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please enter the initial monthly wage of this user");
-        int wage = Integer.parseInt(keyIn.nextLine());
-        System.out.println();
-        System.out.println("Please enter the work position of this user");
-        String position = keyIn.nextLine();
-        System.out.println();
-        System.out.println("Please assigned this user an authority level");
-        int userlevel = Integer.parseInt(keyIn.nextLine());
-        System.out.println();
-        System.out.println("Please enter the status of this user (Full-time: F, Part-time: P)");
-        String status = keyIn.nextLine();
-        System.out.println();
-
-        accountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position, userlevel, status);
         System.out.println("The user is successfully created");
         System.out.println("The user info is shown below");
         System.out.println("username: "+ username +" password: "+ password +" name: "+ name +" phone: "+ phone +" address: "
@@ -436,73 +465,75 @@ public class FacadeSys {
     }
 
 
-    public void UserDelete(String level) {
+    public void UserDelete(String uid) {
         /**
          * We may need to use memento for delete User
          */
-        if (!levelVerifier(level)) {
-            System.out.println("Authority level verifier fail, please try again.");
-            return;
-        }
 
-        System.out.println("Please enter the id of the user you want to delete");
-        Scanner keyIn = new Scanner(System.in);
-        String username = keyIn.nextLine();
         Employee employee = null;
         for (Employee e: this.employeeList){
-            if (e.getID().equals(username)){
+            if (e.getID().equals(uid)){
                 employee = e;
                 break;
             }
-            if (e.getLevel() < Integer.parseInt(level)){
+            if (!(levelVerifier(Integer.toString(e.getLevel())))){// Need to be in UI?
                 System.out.println("You cannot delete this employee, please try again.");
                 return;
             }
-            employeeList.deleteEmployee(username);
-            loginList.deleteUser(username);
+            employeeList.deleteEmployee(uid);
+            loginList.deleteUser(uid);
             System.out.println("The user has successfully deleted.");
         }
     }
 
 
-    public void UserWorkInfoChange(String level) {
-        // Todo: Used to change a worker's level, department, position, salary, vacation; can't ...
-        if (!levelVerifier(level)) {
-            System.out.println("Authority level verifier fail, please try again.");
-            return;
-        }
-        if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "FullTimeEmployee")){
-            System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
-            System.out.println("1: Department, 2: Wage, 3: Level, 4: Position, 5: State, 6: Total Vacation, 7: Vacation Used");
-            Scanner keyIn = new Scanner(System.in);
-            String option = keyIn.nextLine();
-            System.out.println("Please enter the new info");
-            String response = keyIn.nextLine();
-            accountFacade.setFullTimeAdvancedInfo(option, response);
-            System.out.println("The information is successfully updated");
-        }if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "PartTimeEmployee")){
-            System.out.println("Please choose the information that you want to change for this user (Type the corresponding number):");
-            System.out.println("1: Department, 2: Wage, 3: Level");
-            Scanner keyIn = new Scanner(System.in);
-            String option = keyIn.nextLine();
-            System.out.println("Please enter the new info");
-            String response = keyIn.nextLine();
-            accountFacade.setPartTimeAdvancedInfo(option, response);
-            System.out.println("The information is successfully updated");
+    public void UserWorkInfoChange(String userid, String option, String info) {
+        //Todo: write Exception
+
+        Employee employee = null;
+        Userable user = null;
+
+        for (Employee e : this.employeeList) {
+            if (e.getID().equals(userid)) {
+                employee = e;
+                break;
+            }
+
+            for (Userable u : this.loginList) {
+                if (u.getID().equals(userid)) {
+                    user = u;
+                    break;
+                }
+
+                if (!(levelVerifier(Integer.toString(e.getLevel())))) {// Need to be in UI?
+                    System.out.println("You cannot change info to this employee, please try again.");
+                    return;
+                }
+
+                if (Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")) {
+                    accountFacade.setFullTimeAdvancedInfo(option, info);
+                    System.out.println("The information is successfully updated");
+                }
+
+                if (Objects.equals(accountFacade.employeeTypeByID(user), "PartTimeEmployee")) {
+                    if ((!Objects.equals(option, "1")) && (!Objects.equals(option, "2")) && (!Objects.equals(option, "3"))) {
+                        System.out.println("Part Time Employee does not have these infos");
+                    }
+                    return;
+                }
+                accountFacade.setPartTimeAdvancedInfo(option, info);
+                System.out.println("The information is successfully updated");
+            }
         }
     }
 
-
-    public void SingleSalaryCheck(String level) {
-        /**
+    public void SingleSalaryCheck() {
+        /** Todo: Modify this method.
          *
          * shows salary, work days, vacation used, reward, and kpi for given user. Hr worker need to comfirm all those info
          */
-        if (!levelVerifier(level)) {
-            System.out.println("Authority level verifier fail, please try again.");
-            return;
-        }
-        if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "FullTimeEmployee")){
+
+        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
             System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
             System.out.println("1: Wage, 10: Total Vacation with Salary, 11: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
@@ -516,7 +547,6 @@ public class FacadeSys {
                     System.out.println("The vacation used by this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
                 }else {
                     System.out.println("No such option, please choose again");
-                    SingleSalaryCheck(level);
                 }
             }
         }if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "PartTimeEmployee")) {
@@ -533,7 +563,6 @@ public class FacadeSys {
                     System.out.println("The vacation used by this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
                 } else {
                     System.out.println("No such option, please choose again");
-                    SingleSalaryCheck(level);
                 }
             }
         }
