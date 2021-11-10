@@ -70,15 +70,15 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public void personalInfo(){
-        if (this.employeeType.equals("PartTimeEmployee")){
-            ArrayList<String> info = accountFacade.partTimeEmployeeInfo();
+        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
+            ArrayList<String> info = this.accountFacade.employeeInfo();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6);
             System.out.println(presentInfo);
         }else{
-            ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
-            int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
+            ArrayList<String> info = this.accountFacade.employeeInfo();
+            int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
@@ -104,11 +104,11 @@ public class FacadeSys {
 //    }
 
     public void checkSalary(){
-        if (this.employeeType.equals("PartTimeEmployee")){
-            String presentWage = String.valueOf(accountFacade.partTimeSalary());
+        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
+            String presentWage = String.valueOf(this.accountFacade.checkSalary());
             System.out.println(presentWage);
         }else{
-            String presentWage = String.valueOf(accountFacade.fullTimeSalary());
+            String presentWage = String.valueOf(this.accountFacade.checkSalary());
             System.out.println(presentWage);
         }
     }
@@ -123,10 +123,10 @@ public class FacadeSys {
 //    }
 
     public void setPersonalInfo(String option, String response){
-        if (this.employeeType.equals("PartTimeEmployee")){
-            accountFacade.setPartTimeBasicInfo(option, response);
+        if (this.accountFacade.employeeType().equals("PartTimeEmployee")){
+            this.accountFacade.setPartTimeBasicInfo(option, response);
         }else{
-            accountFacade.setFullTimeBasicInfo(option, response);
+            this.accountFacade.setFullTimeBasicInfo(option, response);
         }
     }
 
@@ -159,7 +159,7 @@ public class FacadeSys {
 //    }
 
     public void checkVacation() {
-        int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
+        int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
         String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
         System.out.println(vacationInfo);
     }
