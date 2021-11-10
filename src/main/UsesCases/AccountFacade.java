@@ -386,10 +386,10 @@ public class AccountFacade {
 
 
 
-    public String employeeTypeByID(Userable user){
+    public String employeeTypeByID(String id){
         String typeEmployee = new String();
         for(Employee employee: this.employeeList){
-            if (employee.getID().equals(user.getID())){
+            if (employee.getID().equals(id)){
                 if (employee instanceof PartTimeEmployee) {
                     typeEmployee = "PartTimeEmployee";
                 }else{
@@ -398,5 +398,18 @@ public class AccountFacade {
             }
         }
         return typeEmployee;
+    }
+
+
+    public List<Employee> lowerLevelEmployee(String id){
+        /**
+         * return a list of employee who is lower level than the employee with given id
+         */
+        List<Employee> validemployees = new ArrayList<>();
+        for(Employee employee: this.employeeList){
+            if(levelVerifier(String.valueOf(employee.getLevel()))){
+                validemployees.add(employee);
+            }
+        }return validemployees;
     }
 }
