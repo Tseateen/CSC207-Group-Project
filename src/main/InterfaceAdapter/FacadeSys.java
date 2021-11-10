@@ -52,7 +52,7 @@ public class FacadeSys {
         this.workManager = new WorkManager();
         this.username = username;
 
-        this.workFacade = new WorkFacade(this.workList, this.employeeList, this.groupList, this.workManager, this.groupManager);
+        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.workManager, this.groupManager);
         this.employeeType = this.accountFacade.employeeType();
     }
 
@@ -377,20 +377,8 @@ public class FacadeSys {
         return group;
     }
 
-    public void giveKpi(String woid, String eid, String kpi){
-        Work work = null;
-        for (Workable w: this.workList){
-            if (w.getID().equals(woid)){
-                work = (Work) w;
-                break;
-            }
-        }
-        for (Employee e: this.employeeList){
-            if (e.getID().equals(eid)){
-                e.setKpi(work, Integer.valueOf(kpi));
-                break;
-            }
-        }
+    public void giveKpi(String workID, String employeeID, String kpi){
+        this.workFacade.setKpi(workID, employeeID, kpi);
     }
 
     public void WorkUpdate() {
