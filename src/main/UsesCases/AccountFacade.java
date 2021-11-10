@@ -27,9 +27,14 @@ public class AccountFacade {
         this.employee = findEmployeeHelper();
     }
 
+    /**
+     * Getter method for the type of the employee
+     * @return a String that contains the type of the employee
+     */
     public String getEmployeeType(){
         return this.employeeType;
     }
+
 
     // return all the info at the same time (馬哥的idea)
     public ArrayList<String> partTimeEmployeeInfo(){
@@ -44,6 +49,10 @@ public class AccountFacade {
         return info;
     }
 
+    /**
+     * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
+     * @return The ArrayList that contains the basic informaiton of an employee
+     */
     public ArrayList<String> employeeInfo(){
         ArrayList<String> info = new ArrayList<>();
         if (this.employeeType.equals("PartTimeEmployee")){
@@ -91,6 +100,10 @@ public class AccountFacade {
 //        }
 //    }
 
+    /**
+     * Get the schedule of a part time employee
+     * @return A HashMap that contains the schedule of a part time employee
+     */
     public HashMap<String, String[]> getSchedulefromPartTimeEmployee(){
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         return employee.getSchedule();
@@ -123,6 +136,10 @@ public class AccountFacade {
 //        return info;
 //    }
 
+    /**
+     * Get the integer information of a full time employee such as total vacation with salary and vacation used
+     * @return An int array that contains the integer information of a full time employee
+     */
     public int[] getFullTimeEmployeeInfoInt(){
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
         int[] intValue =  new int[2];
@@ -168,6 +185,11 @@ public class AccountFacade {
 //        }
 //    }
 
+    /**
+     * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
+     * @param option The option that the client want to set
+     * @param response The value that the client want to set
+     */
     public void setPartTimeBasicInfo(String option, String response){
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         switch (option){
@@ -184,6 +206,11 @@ public class AccountFacade {
         }
     }
 
+    /**
+     * Set the advanced information of a part time employee includes department, wage, and authority  level
+     * @param option The option that the client want to set
+     * @param response The value that the client want to set
+     */
     public void setPartTimeAdvancedInfo(String option, String response){
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         switch (option){
@@ -212,10 +239,20 @@ public class AccountFacade {
         }
     }
 
+    /**
+     * Set teh schedule for a part time employee
+     * @param schedule The new/updated schedule for a part time employee
+     */
     public void setSchedule(HashMap<String, String[]> schedule){
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         employee.setSchedule(schedule);
     }
+
+    /**
+     * Set the basic information of a full time employee includes name, password, phone number, address, and attendance
+     * @param option The option that the client want to set
+     * @param response The value that the client want to set
+     */
     public void setFullTimeBasicInfo(String option, String response){
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
         switch (option){
@@ -233,6 +270,11 @@ public class AccountFacade {
         }
     }
 
+    /**
+     * Set the advanced information of a full time employee includes department, wage, authority  level, position, total vacation, and vacation used
+     * @param option The option that the client want to set
+     * @param response The value that the client want to set
+     */
     public void setFullTimeAdvancedInfo(String option, String response){
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
         switch (option){
@@ -285,6 +327,10 @@ public class AccountFacade {
         }
     }
 
+    /**
+     * Get the authority level of an employee
+     * @return An int represent the authority level of an employee
+     */
     public int user_Level(){
         if (employeeType.equals("PartTimeEmployee")){
             PartTimeEmployee employee = (PartTimeEmployee) this.employee;
@@ -295,6 +341,11 @@ public class AccountFacade {
         }
     }
 
+    /**
+     * Verify if the authority level of an employee is lower than the specific authority level
+     * @param level The specific authority level that the client want to check
+     * @return boolean represent if the specific authority level is higher than the employee's authority level
+     */
     public boolean levelVerifier(String level) {
         try {
             if (level.length() != 1) {
@@ -307,7 +358,11 @@ public class AccountFacade {
         }
     }
 
-
+    /**
+     * Create a new account for an employee include the user information and employee information
+     * @param userinfo The String array that contains the user information and employee information
+     * @return boolean that indicates if the new account is been created
+     */
     public boolean CreateNewAccount(String[] userinfo) {
         try{String id = String.valueOf(idCounter);
         this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
@@ -320,16 +375,25 @@ public class AccountFacade {
         return true;
         }
 
+    /**
+     * Check the salary of an employee
+     * @return An int that represent the salary/wage of an employee
+     */
     public int checkSalary() {
         if (this.employeeType.equals("PartTimeEmployee")) {
             PartTimeEmployee employee = (PartTimeEmployee) this.employee;
             return employee.getWage();
         } else {
+            FullTimeEmployee employee = (FullTimeEmployee) this.employee;
             return employee.getWage();
         }
     }
 
 
+    /**
+     * A helper function that find the correct user based on the username
+     * @return a Userable that represent the target user
+     */
     private Userable findUserHelper() {
         Userable correctUser = new User();
         for (Userable user : this.loginList) {
@@ -340,6 +404,10 @@ public class AccountFacade {
         return correctUser;
     }
 
+    /**
+     * A helper function that find the correct employee based on the user by comparing the ID
+     * @return a Employee that represent the target employee
+     */
     private Employee findEmployeeHelper(){
         for(Employee employee: this.employeeList){
             if (employee.getID().equals(this.user.getID())){
@@ -369,6 +437,10 @@ public class AccountFacade {
 //        return (FullTimeEmployee) correctEmployee;
 //    }
 
+    /**
+     * check if the employee is part time employee or full time employee
+     * @return The String that represent either part time employee or full time employee
+     */
     public String employeeType(){
         String typeEmployee = "N/A";
         for(Employee employee: this.employeeList){
@@ -385,7 +457,11 @@ public class AccountFacade {
 
 
 
-
+    /**
+     *check the employee type by ID
+     * @param user the target user
+     * @return The String that represent either part time employee or full time employee
+     */
     public String employeeTypeByID(String id){
         String typeEmployee = new String();
         for(Employee employee: this.employeeList){
