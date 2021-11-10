@@ -4,7 +4,7 @@ import java.util.*;
 
 public class GroupManager {
 
-    public void addMembers(Userable[] list, Group group){
+    public void addMembers(List<Userable> list, Group group){
         for(Userable userable: list){
             group.addMember(userable);
         }
