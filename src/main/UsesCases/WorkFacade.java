@@ -127,5 +127,20 @@ public class WorkFacade {
         return ListOfEmployee;
     }
 
+    public void giveKpi(String workID, String employeeID, String kpi){
+        Work work = null;
+        for (Workable w: this.workList){
+            if (w.getID().equals(workID)){
+                work = (Work) w;
+                break;
+            }
+        }
+        for (Employee e: this.employeeList){
+            if (e.getID().equals(employeeID)){
+                e.setKpi(work, Integer.valueOf(kpi));
+                break;
+            }
+        }
+    }
 
 }
