@@ -2,6 +2,7 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
+import java.io.IOException;
 import java.util.*;
 
 public class HomePage {
@@ -13,7 +14,7 @@ public class HomePage {
         this.facadeSys = facadeSys;
     }
 
-    public void run() {
+    public void run() throws IOException,ClassNotFoundException {
         Scanner keyIn = new Scanner(System.in);
         PersonalManagerUI personal = new PersonalManagerUI(username, this, facadeSys);
         WorkManagerUI work = new WorkManagerUI(username, this, facadeSys);
