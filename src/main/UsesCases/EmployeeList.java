@@ -14,8 +14,9 @@ public class EmployeeList implements Iterable<Employee>{
     private final List<Employee> EmployeeList;
 
     /* === Representation Invariants ===
-     * The EmployeeList should have at least one Employee inside one company having the top authority level, which is 1.
+     * The EmployeeList should have at least one Employee inside one company having the top authority level, which is 0.
      */
+
     public EmployeeList(){
         this.EmployeeList = new ArrayList<Employee>();
     }
