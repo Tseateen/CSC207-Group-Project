@@ -199,7 +199,7 @@ public class FacadeSys {
     }
 
 
-    private boolean levelVerifier(String level) {
+    public boolean levelVerifier(String level) {
         try {
             if (level.length() != 1) {
                 return false;
@@ -356,7 +356,7 @@ public class FacadeSys {
 
     public Group findWorkKpi(String woid) {
         /**
-         * * Todo: Write Exception. Modify this method.
+         * * Todo: Write Exception & Modify this method.
          * (Update: Group leader to assign KPI)
          */
 
@@ -436,51 +436,34 @@ public class FacadeSys {
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
 
-    public void UserCreator(String username, String password, String name, String phone, String address,
-                            String department, int wage, String position, int userlevel, String status) {
+    public boolean UserCreator(String info) {
+        // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
+        // Todo: or we may need to default new user's level as 9.
+        // Todo: to verify the type of user input and make sure the type match the parameters of CreateNewAccount
         // This part may use Creator
 
-        Userable self = null;
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                self = u;
-                break;
-            }
-        }
-
-        accountFacade.CreateNewAccount(username, password, name, phone, address, department, wage, position,
-                userlevel, status);
-        if (!(levelVerifier(Integer.toString(userlevel)))){// Need to be in UI?
-            System.out.println("You cannot create a user that has a higher level than you.");
-            return;
-        }
-        System.out.println("The user is successfully created");
-        System.out.println("The user info is shown below");
-        System.out.println("username: "+ username +" password: "+ password +" name: "+ name +" phone: "+ phone +" address: "
-                + address +" department: " + department +" wage: "+ wage +" position: "+ position +" level: "+ userlevel +" status: "
-                + status);
+        String[] user_info = info.split("");
+        accountFacade.CreateNewAccount(user_info[0], user_info[1], user_info[2], user_info[3], user_info[4],
+                user_info[5], Integer.parseInt(user_info[6]), user_info[7], Integer.parseInt(user_info[8]), user_info[9]);
+        return true;
     }
 
 
-    public void UserDelete(String uid) {
+
+    public boolean UserDelete(String uid) {
         /**
          * We may need to use memento for delete User
+         *  This part we assume we already checked level in UI (Todo)
+         * Todo: Implement userExist in AccountFacade which used to check user exist or not by their id
+         * Todo: Implement getLevel in AccountFacade which used to get user level by their id
          */
 
-        Employee employee = null;
-        for (Employee e: this.employeeList){
-            if (e.getID().equals(uid)){
-                employee = e;
-                break;
-            }
-            if (!(levelVerifier(Integer.toString(e.getLevel())))){// Need to be in UI?
-                System.out.println("You cannot delete this employee, please try again.");
-                return;
-            }
+        if (this.accountFacade.userExist(uid) && levelVerifier(String.valueOf(this.accountFacade.getLevel(uid)))) {
             employeeList.deleteEmployee(uid);
             loginList.deleteUser(uid);
-            System.out.println("The user has successfully deleted.");
+            return true;
         }
+        return false;
     }
 
 
@@ -524,45 +507,20 @@ public class FacadeSys {
         }
     }
 
-    public void SingleSalaryCheck() {
-        /** Todo: Modify this method.
-         *
-         * shows salary, work days, vacation used, reward, and kpi for given user. Hr worker need to comfirm all those info
+    public String[] SingleSalaryCheck(String id) {
+        /**
+         * shows all info of a user except password.
          */
-
-        if(Objects.equals(accountFacade.employeeTypeByID(user), "FullTimeEmployee")){
-            System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
-            System.out.println("1: Wage, 10: Total Vacation with Salary, 11: Vacation Used");
-            Scanner keyIn = new Scanner(System.in);
-            String option = keyIn.nextLine();
-            if(Objects.equals(option, "1")){
-                System.out.println("The wage of this employee is "+ accountFacade.fullTimeSalary());
-            }else{
-                if(Objects.equals(option, "10")) {
-                    System.out.println("The total vacation with salary of this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
-                }else if(Objects.equals(option, "11")){
-                    System.out.println("The vacation used by this employee is "+ accountFacade.getFullTimeEmployeeInfoInt(option));
-                }else {
-                    System.out.println("No such option, please choose again");
-                }
-            }
-        }if(Objects.equals(accountFacade.employeeTypeByID(user, "PartTimeEmployee"))) {
-            System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
-            System.out.println("1: Wage, 9: Total Vacation with Salary, 10: Vacation Used");
-            Scanner keyIn = new Scanner(System.in);
-            String option = keyIn.nextLine();
-            if (Objects.equals(option, "1")) {
-                System.out.println("The wage of this employee is " + accountFacade.partTimeSalary());
-            } else {
-                if (Objects.equals(option, "9")) {
-                    System.out.println("The total vacation with salary of this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
-                } else if (Objects.equals(option, "10")) {
-                    System.out.println("The vacation used by this employee is " + accountFacade.getPartTimeEmployeeInfoInt(option));
-                } else {
-                    System.out.println("No such option, please choose again");
-                }
-            }
+        if (!accountFacade.userExist(id)) {
+            return null;
         }
+        if (accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id)))) {
+            return null;
+        }
+        if (!accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id) - 1))) {
+            return null;
+        }
+        return accountFacade.getAllInfo(id);
     }
 
 
