@@ -89,32 +89,25 @@ public class WorkManagerUI {
                         System.out.println("You have successfully assign KPI to every member");
                         break;
                     case "6":
-                        System.out.println("Please assigned the username to this new account");
-                        String username = keyIn.nextLine();
-                        System.out.println("Please assigned the password to this new account");
-                        String password = keyIn.nextLine();
-                        System.out.println("Please enter the name of this new user");
-                        String name = keyIn.nextLine();
-                        System.out.println("Please enter the phone number of this new user");
-                        String phone = keyIn.nextLine();
-                        System.out.println("Please enter the address of this user");
-                        String address = keyIn.nextLine();
-                        System.out.println("Please enter the department this user belongs to");
-                        String department = keyIn.nextLine();
-                        System.out.println("Please enter the initial monthly wage of this user");
-                        int wage = Integer.parseInt(keyIn.nextLine());
-                        System.out.println("Please enter the work position of this user");
-                        String position = keyIn.nextLine();
-                        System.out.println("Please assigned this user an authority level");
-                        int userlevel = Integer.parseInt(keyIn.nextLine());
-                        System.out.println("Please enter the status of this user (Full-time: F, Part-time: P)");
-                        String status = keyIn.nextLine();
-                        facadeSys.UserCreator(username, password, name, phone, address, department, wage, position, userlevel, status);
+                        System.out.println("Please assign the username, password, name, phone, " +
+                                "address, department, wage, position, level, status (Split by a space) ");
+                        String info = keyIn.nextLine();
+                        String[] user_info = info.split("");
+                        if (!facadeSys.levelVerifier(user_info[8])) {
+                            System.out.println("You cannot create this user.");
+                            break;
+                        };
+                        facadeSys.UserCreator(info);
                         break;
                     case "7":
                         System.out.println("Please enter the id of the user you want to delete");
                         String uid = keyIn.nextLine();
-                        facadeSys.UserDelete(uid);
+                        if (facadeSys.UserDelete(uid)){
+                            System.out.println("The user has successfully deleted.");
+                        }
+                        else {
+                            System.out.println("You cannot delete this employee, please try again.");
+                        }
                         break;
                     case "8":
                         System.out.println("Please enter the User ID that you want to change information to:");
@@ -128,8 +121,8 @@ public class WorkManagerUI {
                                 "vii) Change the user's Vacation Used (only apply to Full Time Employee), please type 7"  + "\n");
                         String option = keyIn.nextLine();
                         System.out.println("Please enter the new info");
-                        String info = keyIn.nextLine();
-                        facadeSys.UserWorkInfoChange(userid, option, info);
+                        String inf = keyIn.nextLine();
+                        facadeSys.UserWorkInfoChange(userid, option, inf);
                         break;
                     case "x":
                         noExit = false;
