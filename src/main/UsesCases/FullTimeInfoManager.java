@@ -2,8 +2,6 @@ package main.UsesCases;
 
 import main.Entity.*;
 
-import java.util.HashMap;
-
 public class FullTimeInfoManager{
 
     // === Instance Variables ===
@@ -24,7 +22,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the name of the user.
+     * This method will get the name from the user.
      * @return the name of the user.
      *
      */
@@ -34,7 +32,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the ID of the user.
+     * This method will get the ID from the user.
      * @return the ID of the user.
      *
      */
@@ -44,7 +42,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the Username of the user.
+     * This method will get the Username from the user.
      * @return the Username of the user.
      *
      */
@@ -54,7 +52,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the Password of the user.
+     * This method will get the Password from the user.
      * @return the Password of the user.
      *
      */
@@ -64,7 +62,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the phone numbers of the user.
+     * This method will get the phone numbers from the user.
      * @return the phone numbers of the user.
      *
      */
@@ -74,7 +72,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the address of the user.
+     * This method will get the address from the user.
      * @return the address of the user.
      *
      */
@@ -84,7 +82,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the ID of the Employee.
+     * This method will get the ID from the Employee.
      * @return the ID of the Employee.
      *
      */
@@ -94,7 +92,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the department of the Employee.
+     * This method will get the department from the Employee.
      * @return the department of the Employee.
      *
      */
@@ -104,7 +102,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the wage of the Employee.
+     * This method will get the wage from the Employee.
      * @return the wage of the Employee.
      *
      */
@@ -114,7 +112,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the attendance information of the Employee.
+     * This method will get the attendance information from the Employee.
      * @return the attendance information of the Employee.
      *
      */
@@ -124,7 +122,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the level of the Employee.
+     * This method will get the level from the Employee.
      * @return the level of the Employee.
      *
      */
@@ -134,7 +132,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the total vocation with salary of the full-time Employee.
+     * This method will get the total vocation with salary from the full-time Employee.
      * @return the total vocation with salary of the full-time Employee.
      *
      */
@@ -144,7 +142,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the vocation used of the full-time Employee.
+     * This method will get the vocation used from the full-time Employee.
      * @return the vocation used of the full-time Employee.
      *
      */
@@ -154,7 +152,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the position of the full-time Employee, like "manager" or none.
+     * This method will get the position from the full-time Employee, like "manager" or none.
      * @return the position of the full-time Employee.
      *
      */
@@ -164,7 +162,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will get the status of the full-time Employee.
+     * This method will get the status from the full-time Employee.
      * @return the status of the full-time Employee.
      *
      */
@@ -174,7 +172,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the official name of the user.
+     * This method will set the official name for the user.
      *
      */
     public void setNameForUser(String name){
@@ -183,7 +181,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the Username of the user.
+     * This method will set the Username for the user.
      *
      */
     public void setUsernameForUser(String username){
@@ -192,7 +190,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the password of the user.
+     * This method will set the password for the user.
      *
      */
     public void setPasswordForUser(String password){
@@ -201,7 +199,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the phone numbers of the user.
+     * This method will set the phone numbers for the user.
      *
      */
     public void setPhoneForUser(String phone){
@@ -210,7 +208,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the address of the User.
+     * This method will set the address for the User.
      *
      */
     public void setAddressForUser(String address){
@@ -219,7 +217,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the attendance of the full-time Employee.
+     * This method will set the attendance for the full-time Employee.
      *
      */
     public void setAttendanceForEmployee(){
@@ -228,7 +226,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the wage of the full-time Employee.
+     * This method will set the wage for the full-time Employee.
      *
      */
     public void setWageForEmployee(int wage){
@@ -237,7 +235,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the department of the full-time Employee.
+     * This method will set the department for the full-time Employee.
      *
      */
     public void setDepartmentForEmployee(String department){
@@ -246,7 +244,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the level of the full-time Employee.
+     * This method will set the level for the full-time Employee.
      *
      */
     public void setLevelForEmployee(int level){
@@ -255,7 +253,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the position of the full-time Employee.
+     * This method will set the position for the full-time Employee.
      *
      */
     public void setPositionForEmployee(String position){
@@ -264,7 +262,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the state of the full-time Employee.
+     * This method will set the state for the full-time Employee.
      *
      */
     public void setStateForEmployee(String status){
@@ -273,7 +271,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the total vocation with salary of the full-time Employee.
+     * This method will set the total vocation with salary for the full-time Employee.
      *
      */
     public void setTotalVacationWithSalaryForEmployee(int totalVacation){
@@ -282,7 +280,7 @@ public class FullTimeInfoManager{
 
 
     /**
-     * This method will set the vocation used of the full-time Employee.
+     * This method will set the vocation used for the full-time Employee.
      *
      */
     public void setVacationUsedForEmployee(int VacationUsed){
