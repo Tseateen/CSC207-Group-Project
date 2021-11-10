@@ -3,6 +3,7 @@ package main.InterfaceAdapter;
 import main.Entity.*;
 import main.UsesCases.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
@@ -60,7 +61,7 @@ public class FacadeSys {
         return this.verifier.verifyForLogin(username, password);
     }
 
-    public void systemEnd() {
+    public void systemEnd() throws IOException, ClassNotFoundException {
         this.fileGateway.WriteOutputFile();
     }
 

@@ -43,7 +43,9 @@ public class DataGateway {
 
     }
 
-    public void WriteOutputFile(){
+    public void WriteOutputFile() throws IOException, ClassNotFoundException{
+        this.fileManager.writeUserToFile(loginList);
+        this.fileManager.writeUserEmployeeToFile(employeeList);
         System.out.println("Done for writing");
     }
 }
