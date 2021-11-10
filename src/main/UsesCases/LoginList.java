@@ -37,6 +37,15 @@ public class LoginList implements Iterable<Userable> {
         }
     }
 
+    public Userable getUser(String username){
+        for(Userable user: this.UserList){
+            if(user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
     public int getSize(){
         return UserList.size();
     }
