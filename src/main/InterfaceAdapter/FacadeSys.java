@@ -443,8 +443,7 @@ public class FacadeSys {
         // This part may use Creator
 
         String[] user_info = info.split("");
-        accountFacade.CreateNewAccount(user_info);
-        return true;
+        return this.accountFacade.CreateNewAccount(user_info);
     }
 
 
