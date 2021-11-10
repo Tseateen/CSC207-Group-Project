@@ -29,7 +29,7 @@ public class WorkFacade {
             employee = e;
             break;
         }
-        for (Work w: this.workList){
+        for (Workable w: this.workList){
             for (Group g: this.groupList){
                 boolean s = false;
                 for (Userable u: g.getMembers()){
@@ -39,7 +39,7 @@ public class WorkFacade {
                     }
                 }
                 if (w.getID().equals(g.getWorkid()) && (g.getLeader().equals(employee) || s)){
-                    ListOfWork.add(w);
+                    ListOfWork.add((Work) w);
                 }
             }
         }
@@ -50,9 +50,9 @@ public class WorkFacade {
     public String WorkDetail(String workid) {
         Work work = null;
         Group group = null;
-        for (Work w: this.workList){
+        for (Workable w: this.workList){
             if (workid.equals(w.getID())){
-                work = w;
+                work = (Work) w;
                 break;
             }
         }
@@ -96,10 +96,10 @@ public class WorkFacade {
             break;
             }
         String depart = employee.getDepartment();
-        for (Work w: this.workList){
+        for (Workable w: this.workList){
             if (w.getLevel() > employee.getLevel()) {
                 if (w.getDepartment().equals(employee.getDepartment())){
-                    ListOfWork.add(w);
+                    ListOfWork.add((Work) w);
                 }
             }
         }

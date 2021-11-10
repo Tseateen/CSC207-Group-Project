@@ -1,9 +1,6 @@
 package main.InterfaceAdapter;
 
-import main.Entity.Employee;
-import main.Entity.Group;
-import main.Entity.Userable;
-import main.Entity.Work;
+import main.Entity.*;
 import main.UsesCases.*;
 
 import java.util.ArrayList;
@@ -230,12 +227,12 @@ public class FacadeSys {
             break;
         }
 
-        for (Work work : this.workList) {
+        for (Workable work : this.workList) {
             boolean leader = false;
 
             if (work.getSign().equals("0") && employee.getLevel() < work.getLevel() &&
                     employee.getDepartment().equals(work.getDepartment())) {
-                ListOfWork.add(work);
+                ListOfWork.add((Work) work);
             }
         }
         System.out.println("Following are the work that you can do:");
@@ -308,7 +305,7 @@ public class FacadeSys {
          List<String> workid = new ArrayList<String>();
 
          for (String gid: groupids){
-             for (Work w: this.workList){
+             for (Workable w: this.workList){
                  if (w.getID().equals(gid)){
                      workid.add(w.getID());
                      break;
@@ -359,15 +356,15 @@ public class FacadeSys {
 
     public Group findWorkKpi(String woid) {
         /**
-         * * Todo: Write Exception.
+         * * Todo: Write Exception. Modify this method.
          * (Update: Group leader to assign KPI)
          */
 
         Group group = null;
         Work work = null;
-        for (Work w: this.workList){
+        for (Workable w: this.workList){
             if (w.getID().equals(woid)){
-                work = w;
+                work = (Work) w;
                 break;
             }
         }
@@ -398,9 +395,9 @@ public class FacadeSys {
 
     public void giveKpi(String woid, String eid, String kpi){
         Work work = null;
-        for (Work w: this.workList){
+        for (Workable w: this.workList){
             if (w.getID().equals(woid)){
-                work = w;
+                work = (Work) w;
                 break;
             }
         }
@@ -440,7 +437,7 @@ public class FacadeSys {
 
 
     public void UserCreator(String username, String password, String name, String phone, String address,
-                            String department, int wage, String position, int userlevel, String status) {t
+                            String department, int wage, String position, int userlevel, String status) {
         // This part may use Creator
 
         Userable self = null;
@@ -549,7 +546,7 @@ public class FacadeSys {
                     System.out.println("No such option, please choose again");
                 }
             }
-        }if(Objects.equals(accountFacade.employeeTypeByID(accountFacade.findUserHelper()), "PartTimeEmployee")) {
+        }if(Objects.equals(accountFacade.employeeTypeByID(user, "PartTimeEmployee"))) {
             System.out.println("Please choose the information you want to check about this employee: (Type the corresponding number)");
             System.out.println("1: Wage, 9: Total Vacation with Salary, 10: Vacation Used");
             Scanner keyIn = new Scanner(System.in);
