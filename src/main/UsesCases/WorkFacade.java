@@ -120,7 +120,7 @@ public class WorkFacade {
         }
         for (Employee e : this.employeeList) {
             if (employee.getLevel() < e.getLevel() && employee.getDepartment().equals(e.getDepartment())) {
-                ListOfEmployee.add(e.getID() + "( level " + e.getLevel() + ")");
+                ListOfEmployee.add(e.getID() );
             }
         }
         return ListOfEmployee;

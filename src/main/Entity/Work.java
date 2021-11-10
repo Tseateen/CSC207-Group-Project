@@ -3,7 +3,7 @@ package main.Entity;
 import java.util.Calendar;
 import java.sql.Timestamp;
 
-public class Work{
+public class Work implements Workable{
     private final String name;
     private final String id;
     private final String create_time;
@@ -51,6 +51,7 @@ public class Work{
      *
      * @return This method will return the name of this Work.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -59,6 +60,7 @@ public class Work{
      *
      * @return This method will return the ID of this Work.
      */
+    @Override
     public String getID() {
         return this.id;
     }
@@ -67,6 +69,7 @@ public class Work{
      *
      * @return This method will return the level of this Work.
      */
+    @Override
     public int getLevel() {
         return this.level;
     }
@@ -75,7 +78,7 @@ public class Work{
      *
      * @return This method will return the time that this Work is being created.
      */
-
+    @Override
     public String getCreate_time() {
         return this.create_time;
     }
@@ -90,7 +93,7 @@ public class Work{
      *
      * @return This method will return the estimated end time of this Work.
      */
-
+    @Override
     public String getEnd_time() {
         return this.end_time;
     }
@@ -100,6 +103,7 @@ public class Work{
      *
      * @return This method will return the department responsible for the Work.
      */
+    @Override
     public String getDepartment() {
         return this.department;
     }
@@ -117,7 +121,7 @@ public class Work{
      *
      * @param state Given the new state of this Work.
      */
-
+    @Override
     public void setState(String state) {
         this.state = state;
     }
@@ -127,6 +131,7 @@ public class Work{
      *
      * @param time Given the start time of this Work.
      */
+    @Override
     // String Need to be the form of "YYYY/MM/DD HH:mm:ss"
     public void setStart_time(String time) {
         this.start_time = time;
@@ -136,6 +141,7 @@ public class Work{
      *
      * @return This method will return the start time of this Work.
      */
+    @Override
     public String getStart_time() {
         return this.start_time;
     }
@@ -144,6 +150,7 @@ public class Work{
      *
      * @param information Given the information of this Work.
      */
+    @Override
     public void setDescribe(String information) {
         this.describe = information;
     }
@@ -152,6 +159,7 @@ public class Work{
      *
      * @return This method will return the information of this Work.
      */
+    @Override
     public String getDescribe() {
         return this.describe;
     }
@@ -160,6 +168,7 @@ public class Work{
      *
      * @param requirement Given the requirement of this Work.
      */
+    @Override
     public void setRequirement(String requirement) {
         this.requirement = requirement;
     }
@@ -168,6 +177,7 @@ public class Work{
      *
      * @return This method will return the requirement of this Work.
      */
+    @Override
     public String getRequirement() {
         return this.requirement;
     }
@@ -176,6 +186,7 @@ public class Work{
      *
      * @return Return a sign to show there is a group for this work or not; 0 means non, 1 means yes
      */
+    @Override
     public String getSign() {
         return this.isGroup;
     }
@@ -184,6 +195,7 @@ public class Work{
      *
      * @param sign Give a sign to mark this work has group or not.
      */
+    @Override
     public void setSign(String sign) {
         this.isGroup = sign;
     }
