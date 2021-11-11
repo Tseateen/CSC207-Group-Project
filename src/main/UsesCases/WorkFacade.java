@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkFacade {
-    WorkList workList;
-    LoginList loginList;
-    EmployeeList employeeList;
-    GroupList groupList;
-    WorkManager workManager;
-    GroupManager groupManager;
+    private final WorkList workList;
+    private final LoginList loginList;
+    private final EmployeeList employeeList;
+    private final GroupList groupList;
+    private final WorkManager workManager;
+    private final GroupManager groupManager;
 
 
     public WorkFacade(WorkList workList, LoginList loginList, EmployeeList employeeList, GroupList groupList, WorkManager workManager, GroupManager groupManager){

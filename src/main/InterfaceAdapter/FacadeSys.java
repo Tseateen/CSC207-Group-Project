@@ -144,7 +144,7 @@ public class FacadeSys {
     }
 
     public ArrayList<String> findAllWorkers(){
-        return workFacade.AllWorkers(this.accountFacade);
+        return this.workFacade.AllWorkers(this.accountFacade);
     }
 
 
