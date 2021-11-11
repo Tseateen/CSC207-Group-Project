@@ -110,11 +110,11 @@ public class FacadeSys {
         String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
         System.out.println(vacationInfo);
     }
+    // ==================================================
 
+    // ================== Work UI Method ================
 
-
-    // ==================== Work UI Method ==============
-
+    // Check Person Work Information.
     public void checkWorkInfo() {
         // TODO : Presenter
         System.out.println(this.workFacade.SelfWork(username));
@@ -126,23 +126,7 @@ public class FacadeSys {
         System.out.println(this.workFacade.WorkDetail(ID));
     }
 
-/*
-    private void VisitStep(String method) {
-        Scanner keyIn = new Scanner(System.in);
-        System.out.println("Type E to exit.");
-        boolean noExit = true;
-        while (noExit) {
-            String action = keyIn.nextLine();
-            if ("E".equals(action)) {
-                noExit = false;
-            } else {
-                if (method.equals("create")) {Creator(action);}
-            }
-        }
-    }
-
- */
-
+    // Creating new Work
     public boolean createWork(String name, String ID, String Department, String level) {
         boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
         if (validLevelGiven){
@@ -152,83 +136,17 @@ public class FacadeSys {
         return validLevelGiven;
     }
 
-    public String findWork() {
-        Userable self = null;
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                self = u;
-                break;
-            }
-        }
-        Employee employee = null;
-        ArrayList<Work> ListOfWork = new ArrayList<>();
-        for (Employee e : this.employeeList) {
-            if (self.getID().equals(e.getID())) ;
-            employee = e;
-            break;
-        }
-
-        for (Workable work : this.workList) {
-            boolean leader = false;
-
-            if (work.getSign().equals("0") && employee.getLevel() < work.getLevel() &&
-                    employee.getDepartment().equals(work.getDepartment())) {
-                ListOfWork.add((Work) work);
-            }
-        }
-        System.out.println("Following are the work that you can do:");
-        for (Work w : ListOfWork) {
-            return workFacade.WorkDetail(w.getID());
-        }
-        return null;
+    public List<String> findCurrentUserWork() {
+        return this.workFacade.AssignableWorkList(this.accountFacade);
     }
 
     public ArrayList<String> findAllWorkers(){
-        Userable self = null;
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                System.out.println(workFacade.SelfWork(u));
-                break;
-            }
-        }
-        return workFacade.AllWorkers(self);
+        return workFacade.AllWorkers(this.accountFacade);
     }
 
 
-    public void createLeader(String workid, String leaderid) {
-        /**
-         *
-         * 1. Show all non-leader works which is in same department and lower level
-         * 2. Let them choose the work based on work id
-         * 3. Ask him did he need to know about employees information who can be involved be him
-         *   This part may be implemented by calling AllWorker below.
-         * 4. Let them choose group leader
-         */
-
-        Userable self = null;
-        try {
-            for (Userable u : this.loginList) {
-                if (u.getUsername().equals(this.username)) {
-                    self = u;
-                    break;
-                }
-            }
-
-            if (!((findAllWorkers().contains(leaderid)) || leaderid.equals(self.getID()))) {
-                System.out.println("You can only choose between yourself and one of the employees shown above");
-                return;
-            }
-            for (Userable u : this.loginList) {
-                if (u.getID().equals(leaderid)) {
-                    this.groupList.addGroup(u, workid);
-                    break;
-                }
-            }
-        }catch (NullPointerException e){
-            System.out.println("NullPointerException occurred in FacadeSys.createLeader");
-        }catch (Exception e){
-            System.out.println("Error occurred in FacadeSys.createLeader");
-        }
+    public boolean AssignALeaderToWork(String WorkID, String LeaderID) {
+        return this.workFacade.CreateNewGroup(WorkID,LeaderID);
     }
 
     public String findLeadWorkList() {
@@ -423,7 +341,6 @@ public class FacadeSys {
                 }
             }
         }
-
-
     }
+    // ==================================================
 }

@@ -404,7 +404,7 @@ public class AccountFacade {
      * A helper function that find the correct employee based on the user by comparing the ID
      * @return a Employee that represent the target employee
      */
-    private Employee findEmployeeHelper(){
+    public Employee findEmployeeHelper(){
         for(Employee employee: this.employeeList){
             if (employee.getID().equals(this.user.getID())){
                 return employee;

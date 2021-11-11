@@ -107,24 +107,22 @@ public class WorkFacade {
         return ListOfWork;
     }
 
-    public ArrayList<String> AllWorkers(Userable user) {
+    public ArrayList<String> AllWorkers(AccountFacade accountFacade) {
         /**
          *  Id need to be shown, because user need to tap id to choose user, but what else infom we need?
          *  Ex. name, level...
          */
-        Employee employee = null;
-        ArrayList<String> ListOfEmployee = new ArrayList<>();
-        for (Employee e : this.employeeList) {
-            if (user.getID().equals(e.getID())) ;
-            employee = e;
-            break;
-        }
-        for (Employee e : this.employeeList) {
-            if (employee.getLevel() < e.getLevel() && employee.getDepartment().equals(e.getDepartment())) {
-                ListOfEmployee.add(e.getID() );
+        Employee CurrentEmployee = accountFacade.findEmployeeHelper();
+        ArrayList<String> ListOfEmployeeInfo = new ArrayList<>();
+
+        for (Employee eachEmployee : this.employeeList) {
+            // TODO: 小於等於 還就小於
+            if ((CurrentEmployee.getLevel() < eachEmployee.getLevel()) &&
+                    CurrentEmployee.getDepartment().equals(eachEmployee.getDepartment())) {
+                ListOfEmployeeInfo.add(eachEmployee.getID());
             }
         }
-        return ListOfEmployee;
+        return ListOfEmployeeInfo;
     }
 
     public List<String> findLeadWork(String username) {
@@ -222,4 +220,33 @@ public class WorkFacade {
         }
     }
 
+    public List<String> AssignableWorkList(AccountFacade accountFacade){
+        Employee employee = accountFacade.findEmployeeHelper();
+        List<Workable> ListOfWork = new ArrayList<>();
+        List<String> ListOfWorkID = new ArrayList<>();
+        for (Workable work : this.workList) {
+            boolean leader = false;
+
+            if (work.getSign().equals("0") &&
+                    (employee.getLevel() < work.getLevel()) &&
+                    employee.getDepartment().equals(work.getDepartment())) {
+                ListOfWork.add(work);
+            }
+        }
+        for (Workable work : ListOfWork) {
+            ListOfWorkID.add(work.getID() + ": " + work.getName());
+        }
+        return ListOfWorkID;
+    }
+
+    public boolean CreateNewGroup(String workID, String LeaderID){
+
+        for(Userable user: this.loginList){
+            if(user.getID().equals(LeaderID)){
+                this.groupList.addGroup(user,workID);
+                return true;
+            }
+        }
+        return false;
+    }
 }
