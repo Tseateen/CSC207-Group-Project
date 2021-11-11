@@ -58,7 +58,7 @@ public class WorkManagerUI {
                 case "4":
                     System.out.println("Following are the work IDs of the work which are lead by you: choose " +
                             "the work ID where you want to choose members");
-                    facadeSys.findLeadWork();
+                    System.out.println(facadeSys.findLeadWorkList());
                     String wid = keyIn.nextLine();
                     System.out.println("Following are the employees information you can assign as members");
                     facadeSys.findAllWorkers();
@@ -70,8 +70,14 @@ public class WorkManagerUI {
                 case "5":
                     System.out.println("Following are the work IDs of the work which are lead by you: Enter the " +
                             "work ID where you want to give KPI to your members:");
-                    facadeSys.findLeadWork(); // Should the work status be finished?
+                    System.out.println(facadeSys.findLeadWorkList()); // Should the work status be finished?
                     String woid = keyIn.nextLine();
+                    if (this.facadeSys.checkLeaderResult(woid)){
+                        System.out.println("You can now begin assign KPI to each member");
+                    }else{
+                        System.out.println("You are not the leader of this work!");
+                        break;
+                    }
                     for (Userable member: facadeSys.findWorkKpi(woid).getMembers()){
                         System.out.println("Enter the KPI for member" + member.getID());
                         String kpi = keyIn.nextLine();

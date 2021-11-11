@@ -258,39 +258,12 @@ public class FacadeSys {
         }
     }
 
-    public String findLeadWork() {
-        List<String> groupids = new ArrayList<String>();
-
-        Userable self = null;
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                self = u;
-                break;
-            }
+    public String findLeadWorkList() {
+        String presentWorkList = "";
+        for (String workID : this.workFacade.findLeadWork(this.username)){
+            presentWorkList = workID + "\n";
         }
-
-        for (Group group: this.groupList){
-            if (group.getLeader().equals(self)){
-                groupids.add(group.getWorkid());
-            }
-        }
-
-        List<String> workid = new ArrayList<String>();
-
-        for (String gid: groupids){
-            for (Workable w: this.workList){
-                if (w.getID().equals(gid)){
-                    workid.add(w.getID());
-                    break;
-                }
-            }
-        }
-        System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
-                "want to choose members");
-        for (String w : workid) {
-            return w;
-        }
-        return null;
+        return presentWorkList;
     }
 
 
@@ -330,6 +303,9 @@ public class FacadeSys {
         }
     }
 
+    public boolean checkLeaderResult(String workID){
+        return this.workFacade.checkLeader(workID,this.username);
+    }
 
     public Group findWorkKpi(String woid) {
         /**
