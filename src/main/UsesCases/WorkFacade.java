@@ -7,22 +7,24 @@ import java.util.List;
 
 public class WorkFacade {
     WorkList workList;
+    LoginList loginList;
     EmployeeList employeeList;
     GroupList groupList;
     WorkManager workManager;
     GroupManager groupManager;
 
 
-    public WorkFacade(WorkList workList, EmployeeList employeeList, GroupList groupList, WorkManager workManager, GroupManager groupManager){
+    public WorkFacade(WorkList workList, LoginList loginList, EmployeeList employeeList, GroupList groupList, WorkManager workManager, GroupManager groupManager){
         this.workList = workList;
+        this.loginList = loginList;
         this.employeeList = employeeList;
         this.groupList = groupList;
         this.workManager = workManager;
         this.groupManager = groupManager;
     }
 
-    public List<Work> SelfWork(LoginList loginList, String username) {
-        Userable user = loginList.getUser(username);
+    public List<Work> SelfWork(String username) {
+        Userable user = this.loginList.getUser(username);
         Employee employee = null;
         ArrayList<Work> ListOfWork = null;
         for (Employee e: this.employeeList){
@@ -80,11 +82,9 @@ public class WorkFacade {
 
 
     //"name id department level"
-    public String workCreate(String action) {
-        String[] parts;
-        parts = action.split(" ");
-        this.workList.addWork(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
-        return "Work Create success. WorkID is: " + parts[1];
+    public String workCreate(String name, String ID, String Department, String level) {
+        this.workList.addWork(name, ID, Department, Integer.parseInt(level));
+        return "Work Create success. WorkID is: " + ID;
     }
 
 
@@ -127,5 +127,66 @@ public class WorkFacade {
         return ListOfEmployee;
     }
 
+    public Group findWorkKpi(LoginList loginList, String WorkID) {
+        /**
+         * * Todo: Write Exception & Modify this method.
+         * Todo: still don't know the relationship between work and kpi?
+         * (Update: Group leader to assign KPI)
+         */
+        Group group = null;
+        Work work = null;
+        try {
+            for (Workable w : this.workList) {
+                if (w.getID().equals(WorkID)) {
+                    work = (Work) w;
+                    break;
+                }
+            }
+            for (Group g : this.groupList) {
+                if (g.getWorkid().equals(WorkID)) {
+                    group = g;
+                    break;
+                }
+            }
+
+            Userable self = null;
+            for (Userable u : this.loginList) {
+                if (u.getUsername().equals(this.username)) {
+                    self = u;
+                    break;
+                }
+            }
+
+            if (!(group.getLeader().equals(self))) {
+                System.out.println("You are not the leader of this work");
+                return null;
+            }
+
+            System.out.println("You can now begin assign KPI to each member");
+            return group;
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException in FacadeSys.findWorkKpi");
+        } catch (Exception e) {
+            System.out.println("Error occurred in FacadeSys.findWorkKpi");
+        }
+
+        return group;
+    }
+
+    public void setKpi(String workID, String employeeID, String kpi){
+        Work work = null;
+        for (Workable w: this.workList){
+            if (w.getID().equals(workID)){
+                work = (Work) w;
+                break;
+            }
+        }
+        for (Employee e: this.employeeList){
+            if (e.getID().equals(employeeID)){
+                e.setKpi(work, Integer.valueOf(kpi));
+                break;
+            }
+        }
+    }
 
 }

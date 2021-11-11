@@ -20,6 +20,7 @@ public class WorkManagerUI {
         Scanner keyIn = new Scanner(System.in);
 
         WorkInfoUI workInfoUI = new WorkInfoUI(this.facadeSys);
+        CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
 
         boolean noExit = true;
         while (noExit) {
@@ -37,9 +38,11 @@ public class WorkManagerUI {
             switch (action) {
                 case "1":
                     workInfoUI.run();
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "2":
-                    facadeSys.createWork();
+                    createWorkUI.run();
+
                     break;
                 case "3":
                     System.out.println("Following are the work that you can do:");

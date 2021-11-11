@@ -4,7 +4,6 @@ import main.Entity.*;
 import main.UsesCases.*;
 
 
-import java.security.Principal;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -32,9 +31,9 @@ public class FacadeSys {
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacade workFacade;
-    private GroupManager groupManager;
+    private final GroupManager groupManager;
     private final String employeeType;
-    private WorkManager workManager;
+    private final WorkManager workManager;
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
@@ -52,7 +51,7 @@ public class FacadeSys {
         this.workManager = new WorkManager();
         this.username = username;
 
-        this.workFacade = new WorkFacade(this.workList, this.employeeList, this.groupList, this.workManager, this.groupManager);
+        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.workManager, this.groupManager);
         this.employeeType = this.accountFacade.employeeType();
     }
 
@@ -89,10 +88,10 @@ public class FacadeSys {
 
     public void checkSalary(){
         if (this.employeeType.equals("PartTimeEmployee")){
-            String presentWage = String.valueOf(accountFacade.partTimeSalary());
+            String presentWage = String.valueOf(accountFacade.checkSalary());
             System.out.println(presentWage);
         }else{
-            String presentWage = String.valueOf(accountFacade.fullTimeSalary());
+            String presentWage = String.valueOf(accountFacade.checkSalary());
             System.out.println(presentWage);
         }
     }
@@ -117,20 +116,17 @@ public class FacadeSys {
     // ==================== Work UI Method ==============
 
     public void checkWorkInfo() {
-
-    }
-
-    public void checkWorkInfo(boolean showDetail) {
         // TODO : Presenter
-        System.out.println(workFacade.SelfWork(this.loginList, username));
-
-        VisitStep("check");
-        /** new
-         * Todo: If this user is any work's leader, show it out differently.
-         */
+        System.out.println(this.workFacade.SelfWork(username));
     }
 
+    // Overload
+    public void checkWorkInfo(String ID) {
+        // TODO : Presenter
+        System.out.println(this.workFacade.WorkDetail(ID));
+    }
 
+/*
     private void VisitStep(String method) {
         Scanner keyIn = new Scanner(System.in);
         System.out.println("Type E to exit.");
@@ -140,42 +136,20 @@ public class FacadeSys {
             if ("E".equals(action)) {
                 noExit = false;
             } else {
-                if (method.equals("check")) {System.out.println(workFacade.WorkDetail(action));}
                 if (method.equals("create")) {Creator(action);}
             }
         }
     }
 
-    public void createWork() {
-        System.out.println("Please enter work's level which you want to create.");
-        VisitStep("create");
-    }
+ */
 
-
-
-    private void Creator(String level) {
-        if (!levelVerifier(level)) {
-            System.out.println("Work level verifier fail, please try again.");
-            return;
+    public boolean createWork(String name, String ID, String Department, String level) {
+        boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
+        if (validLevelGiven){
+            // TODO: Presenter : Print WorkID
+            String WorkID = this.workFacade.workCreate(name, ID, Department, level);
         }
-        Scanner keyIn = new Scanner(System.in);
-        System.out.println();// Todo: 写一句话说输入文件所需的格式 ("name id department level")，用空格隔开。
-
-        String action = keyIn.nextLine();
-        System.out.println(workFacade.workCreate(action));
-    }
-
-
-    public boolean levelVerifier(String level) {
-        try {
-            if (level.length() != 1) {
-                return false;
-            }
-            int a = Integer.parseInt(level);
-            return a > accountFacade.user_Level();
-        } catch (NumberFormatException e) {
-            return false;
-        }
+        return validLevelGiven;
     }
 
     public String findWork() {
@@ -208,7 +182,6 @@ public class FacadeSys {
         }
         return null;
     }
-
 
     public ArrayList<String> findAllWorkers(){
         Userable self = null;
