@@ -114,7 +114,7 @@ public class FacadeSys {
 
     // ================== Work UI Method ================
 
-    // Check Person Work Information.
+    // Case 1: Check Person Work Information.
     public void checkWorkInfo() {
         // TODO : Presenter
         System.out.println(this.workFacade.SelfWork(username));
@@ -125,8 +125,9 @@ public class FacadeSys {
         // TODO : Presenter
         System.out.println(this.workFacade.WorkDetail(ID));
     }
+    // ==================================
 
-    // Creating new Work
+    // Case 2: Creating new Work
     public boolean createWork(String name, String ID, String Department, String level) {
         boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
         if (validLevelGiven){
@@ -135,7 +136,9 @@ public class FacadeSys {
         }
         return validLevelGiven;
     }
+    // ==================================
 
+    // Case 3: Start a work with assigning leader
     public List<String> findCurrentUserWork() {
         return this.workFacade.AssignableWorkList(this.accountFacade);
     }
@@ -148,6 +151,7 @@ public class FacadeSys {
     public boolean AssignALeaderToWork(String WorkID, String LeaderID) {
         return this.workFacade.CreateNewGroup(WorkID,LeaderID);
     }
+    // ==================================
 
     public String findLeadWorkList() {
         String presentWorkList = "";
@@ -193,18 +197,21 @@ public class FacadeSys {
             System.out.println("Error occurred in FacadeSys.distributeWork");
         }
     }
+    // ==================================
 
+    // Case 5: Assign KPI
     public boolean checkLeaderResult(String workID){
         return this.workFacade.checkLeader(workID,this.username);
     }
 
-    public List<String> findWorkKpiMemberList(String woid) {
-        return this.workFacade.findWorkKpiMember(woid);
+    public List<String> findWorkKpiMemberList(String WorkID) {
+        return this.workFacade.findWorkKpiMember(WorkID);
     }
 
     public void giveKpi(String workID, String employeeID, String kpi){
         this.workFacade.setKpi(workID, employeeID, kpi);
     }
+    // ==================================
 
     public void WorkUpdate() {
         /** Todo: This one is designed for employee to report their work progress
