@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Group implements Iterable<Userable> {
-    private Userable leader;
+    private final Userable leader;
     private List<Userable> groupMembers = new ArrayList<>();
     private String workid;
 
@@ -27,16 +27,16 @@ public class Group implements Iterable<Userable> {
      * @param leader This method set a new leader for the group.
      */
     public void setLeader(Userable leader){
-        if (groupMembers.contains(leader)){
-            int leaderIndex = groupMembers.indexOf(leader);
-            Userable previousLeader = groupMembers.get(0);
-            groupMembers.set(0, leader);
-            groupMembers.set(leaderIndex, previousLeader);
+        if (this.groupMembers.contains(leader)){
+            int leaderIndex = this.groupMembers.indexOf(leader);
+            Userable previousLeader = this.groupMembers.get(0);
+            this.groupMembers.set(0, leader);
+            this.groupMembers.set(leaderIndex, previousLeader);
         }
         else{
-            Userable previousLeader = groupMembers.get(0);
-            groupMembers.set(0, leader);
-            groupMembers.add(previousLeader);
+            Userable previousLeader = this.groupMembers.get(0);
+            this.groupMembers.set(0, leader);
+            this.groupMembers.add(previousLeader);
 
         }
     }
@@ -47,7 +47,7 @@ public class Group implements Iterable<Userable> {
      * @return This method will return the leader of this group.
      */
     public Userable getLeader(){
-        return leader;
+        return this.leader;
     }
 
 
@@ -58,11 +58,11 @@ public class Group implements Iterable<Userable> {
     //leader does not change, all the members are replaced
     public void setMembers(Userable[] members) {
         List<Userable> newGroupMemebers = new ArrayList<>();
-        newGroupMemebers.add(groupMembers.get(0));
+        newGroupMemebers.add(this.groupMembers.get(0));
         for(Userable member: members){
             newGroupMemebers.add(member);
         }
-        groupMembers = newGroupMemebers;
+        this.groupMembers = newGroupMemebers;
     }
 
     /**
@@ -70,14 +70,14 @@ public class Group implements Iterable<Userable> {
      * @return This method will return the members of this group.
      */
     public Userable[] getMembers() {
-        Userable[] membersList = new Userable[groupMembers.size()-1];
-        for(int i = 0; i < groupMembers.size()-1; i++){
-            membersList[i] = groupMembers.get(i+1);
+        Userable[] membersList = new Userable[this.groupMembers.size()-1];
+        for(int i = 0; i < this.groupMembers.size()-1; i++){
+            membersList[i] = this.groupMembers.get(i+1);
         }return membersList;
     }
 
     public String getWorkid() {
-        return workid;
+        return this.workid;
     }
 
     /**
@@ -87,8 +87,8 @@ public class Group implements Iterable<Userable> {
      * @return This method will return true iff the member is successfully added to the group.
      */
     public boolean addMember(Userable member) {
-        if (!groupMembers.contains(member)) {
-            groupMembers.add(member);
+        if (!this.groupMembers.contains(member)) {
+            this.groupMembers.add(member);
             return true;
         }return false;
     }
@@ -100,9 +100,9 @@ public class Group implements Iterable<Userable> {
      * @return This method will return true iff the member is successfully removed from the group.
      */
     public boolean deleteMember(Userable member){
-        if (!groupMembers.contains(member)){
+        if (!this.groupMembers.contains(member)){
             return false;
-        }groupMembers.remove(member);
+        }this.groupMembers.remove(member);
         return true;
     }
 
@@ -111,7 +111,7 @@ public class Group implements Iterable<Userable> {
      * @param workid This method set a new project for the group to work on.
      */
     public void setProject(String workid) {
-        this.workid = workid;
+        this.this.workid = workid;
     }
 
     /**
@@ -119,7 +119,7 @@ public class Group implements Iterable<Userable> {
      * @return This method will return the project which this group is working on.
      */
     public String getProject() {
-        return workid;
+        return this.workid;
     }
 
 
