@@ -1,12 +1,8 @@
 package main.Framework;
 
-import main.Entity.Employee;
-import main.Entity.Userable;
 import main.InterfaceAdapter.*;
 
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 
 public class WorkManagerUI {
 
@@ -21,19 +17,20 @@ public class WorkManagerUI {
 
         WorkInfoUI workInfoUI = new WorkInfoUI(this.facadeSys);
         CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
-
+        PrepareForWorkUI prepareForWork = new PrepareForWorkUI(this.facadeSys);
+        KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
         boolean noExit = true;
         while (noExit) {
             System.out.println(
                     "i) Check your own work's information, type 1; " + "\n" +
                             "ii) Create a work, type 2; " + "\n" +
-                            "iii) Create a leader, type 3; " + "\n" +
+                            "iii) Start a work with assigning leader, type 3; " + "\n" +
                             "iv) Distribute a work, type 4; " + "\n" +
                             "v) Assign KPI to members, type 5; "  + "\n" +
                             "vi) Create a user, type 6; "  + "\n" +
                             "vii) Delete a user, type 7; "  + "\n" +
                             "viii) Change a user's information, type 8; "  + "\n" +
-                            "xx) Back to main page, type x");
+                            "xx) Back to main page, type E");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":
@@ -42,21 +39,13 @@ public class WorkManagerUI {
                     break;
                 case "2":
                     createWorkUI.run();
-
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "3":
-                    System.out.println("Following are the work that you can do:");
-                    // TODO: FindWork Method 太複雜
-                    facadeSys.findWork();
-                    System.out.println("Enter the workID you want to work on:");
-                    String workID = keyIn.nextLine();
-                    System.out.println("Following are the employees information you can assign as the leader");
-                    facadeSys.findAllWorkers();
-                    System.out.println("Enter the employee ID for the group leader (You can only choose " +
-                            "between yourself and one of the employees shown above)");
-                    String leaderID = keyIn.nextLine();
-                    facadeSys.createLeader(workID, leaderID);
-                    System.out.println("You have successfully chosen the leader");
+                    // TODO: 為什麼 create 完 work 才assign leader?會不會有Work 沒有Leader?
+                    // TODO: 剩一點點未完成
+                    prepareForWork.run();
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "4":
                     System.out.println("Following are the work IDs of the work which are lead by you: choose " +
@@ -71,24 +60,9 @@ public class WorkManagerUI {
                     System.out.println("You have successfully chosen the members");
                     break;
                 case "5":
-                    System.out.println("Following are the work IDs of the work which are lead by you: Enter the " +
-                            "work ID where you want to give KPI to your members:");
-                    System.out.println(facadeSys.findLeadWorkList()); // Should the work status be finished?
-                    String woid = keyIn.nextLine();
-                    if (this.facadeSys.checkLeaderResult(woid)){
-                        System.out.println("You can now begin assign KPI to each member");
-                        for (String member : this.facadeSys.findWorkKpiMemberList(woid)){
-                            System.out.println("Enter the KPI for member" + member);
-                            String kpi = keyIn.nextLine();
-                            this.facadeSys.giveKpi(woid, member, kpi);
-                        }
-                        System.out.println("You have successfully assignm KPI to every member");
-                        break;
-                    }else{
-                        System.out.println("You are not the leader of this work!");
-                        break;
-                    }
-
+                    kpiAssignUI.run();
+                    System.out.println("Successfully back to main WorkUI");
+                    break;
                 case "6":
                     System.out.println("Please assign the username, password, name, phone, " +
                             "address, department, wage, position, level, status (Split by a space) ");
@@ -125,7 +99,7 @@ public class WorkManagerUI {
                     String inf = keyIn.nextLine();
                     facadeSys.UserWorkInfoChange(userid, option, inf);
                     break;
-                case "x":
+                case "E":
                     noExit = false;
                     break;
                 default:
