@@ -462,7 +462,6 @@ public class AccountFacade {
         return typeEmployee;
     }
 
-
     /**
      * check the employee type by ID
      *
@@ -482,7 +481,6 @@ public class AccountFacade {
         }
         return typeEmployee;
     }
-
 
     public List<Employee> lowerLevelEmployee(String id) {
         /**
@@ -514,4 +512,82 @@ public class AccountFacade {
         }
         return null;
     }
+
+    public int getTotalVacationByID(String id) throws Exception {
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(id)) {
+                if (employee instanceof FullTimeEmployee) {
+                    return ((FullTimeEmployee) employee).getTotalVacationWithSalary();
+                }
+            }
+        }throw new Exception("Part time employee does not have vacation");
+    }
+
+    public int getVacationUsedByID(String id) throws Exception {
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(id)) {
+                if (employee instanceof FullTimeEmployee) {
+                    return ((FullTimeEmployee) employee).getVacationUsed();
+                }
+            }
+        }throw new Exception("Part time employee does not have vacation");
+    }
+
+    public List<String> lowerEmployeeSalaryCheck(String id) {
+        // Todo: reward and kpi is not implemented yet
+        // Todo: need further modification
+        /**
+         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
+         * salary, work days, vacation used, reward, and kpi. Hr worker need to confirm all those info
+         */
+        // 1: Salary, 2: attendance, 3: total vacation with salary, 4: used vacation
+        List<Employee> valid_employees;
+        valid_employees = lowerLevelEmployee(id);
+
+        List<String> employee_salary = new ArrayList<>();
+        for (Employee employee : valid_employees) {
+            employee_salary.add(employee.getID());
+            employee_salary.add(Objects.toString(employee.getWage()));
+        }
+        return employee_salary;
+    }
+
+    public List<String> lowerEmployeeAttendanceCheck(String id) {
+        List<Employee> valid_employees;
+        valid_employees = lowerLevelEmployee(id);
+        List<String> employee_attendance = new ArrayList<>();
+
+        for (Employee employee : valid_employees) {
+            employee_attendance.add(employee.getID());
+            employee_attendance.add(Objects.toString(employee.getAttendance()));
+        }
+        return employee_attendance;
+    }
+
+    public List<String> lowerEmployeeTotalVacationCheck(String id) throws Exception {
+        List<Employee> valid_employees;
+        valid_employees = lowerLevelEmployee(id);
+        List<String> employee_total_vacation = new ArrayList<>();
+
+        for (Employee employee : valid_employees) {
+            employee_total_vacation.add(employee.getID());
+            employee_total_vacation.add(Objects.toString(getTotalVacationByID(id)));
+        }
+        return employee_total_vacation;
+    }
+
+    public List<String> lowerEmployeeVacationUsedCheck(String id) throws Exception {
+        List<Employee> valid_employees;
+        valid_employees = lowerLevelEmployee(id);
+        List<String> employee_vacation_used = new ArrayList<>();
+
+        for (Employee employee : valid_employees) {
+            employee_vacation_used.add(employee.getID());
+            employee_vacation_used.add(Objects.toString(getVacationUsedByID(id)));
+
+        }
+        return employee_vacation_used;
+    }
 }
+
+
