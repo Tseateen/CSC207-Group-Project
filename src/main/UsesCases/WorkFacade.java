@@ -127,7 +127,55 @@ public class WorkFacade {
         return ListOfEmployee;
     }
 
-    public Group findWorkKpi(LoginList loginList, String WorkID) {
+    public List<String> findLeadWork(String username) {
+        List<String> groupids = new ArrayList<String>();
+
+        Userable self = null;
+        for (Userable u: this.loginList){
+            if (u.getUsername().equals(username)){
+                self = u;
+                break;
+            }
+        }
+
+        for (Group group: this.groupList){
+            if (group.getLeader().equals(self)){
+                groupids.add(group.getWorkid());
+            }
+        }
+
+        List<String> workid = new ArrayList<String>();
+
+        for (String gid: groupids){
+            for (Workable w: this.workList){
+                if (w.getID().equals(gid)){
+                    workid.add(w.getID());
+                    break;
+                }
+            }
+        }
+        return workid;
+    }
+
+    public boolean checkLeader (String workID, String username) throws NullPointerException{
+        Group group = null;
+        Work work = null;
+        for (Group g : this.groupList) {
+            if (g.getWorkid().equals(workID)) {
+                group = g;
+                break;
+            }
+        }
+        Userable self = new User();
+        for (Userable u : this.loginList) {
+            if (u.getUsername().equals(username)) {
+                self = u;
+                break;
+            }
+        }
+        return (group.getLeader().equals(self));
+    }
+    public Group findWorkKpi(String workID, String username) {
         /**
          * * Todo: Write Exception & Modify this method.
          * Todo: still don't know the relationship between work and kpi?
@@ -135,41 +183,18 @@ public class WorkFacade {
          */
         Group group = null;
         Work work = null;
-        try {
-            for (Workable w : this.workList) {
-                if (w.getID().equals(WorkID)) {
-                    work = (Work) w;
-                    break;
-                }
+        for (Workable w : this.workList) {
+            if (w.getID().equals(workID)) {
+                work = (Work) w;
+                break;
             }
-            for (Group g : this.groupList) {
-                if (g.getWorkid().equals(WorkID)) {
-                    group = g;
-                    break;
-                }
-            }
-
-            Userable self = null;
-            for (Userable u : this.loginList) {
-                if (u.getUsername().equals(this.username)) {
-                    self = u;
-                    break;
-                }
-            }
-
-            if (!(group.getLeader().equals(self))) {
-                System.out.println("You are not the leader of this work");
-                return null;
-            }
-
-            System.out.println("You can now begin assign KPI to each member");
-            return group;
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException in FacadeSys.findWorkKpi");
-        } catch (Exception e) {
-            System.out.println("Error occurred in FacadeSys.findWorkKpi");
         }
-
+        for (Group g : this.groupList) {
+            if (g.getWorkid().equals(workID)) {
+                group = g;
+                break;
+            }
+        }
         return group;
     }
 

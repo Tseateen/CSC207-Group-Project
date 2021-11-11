@@ -70,14 +70,14 @@ public class FacadeSys {
     // === Personal UI Method ===
     public void personalInfo(){
         if (this.employeeType.equals("PartTimeEmployee")){
-            ArrayList<String> info = accountFacade.partTimeEmployeeInfo();
+            ArrayList<String> info = this.accountFacade.employeeInfo();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6);
             System.out.println(presentInfo);
         }else{
-            ArrayList<String> info = accountFacade.FullTimeEmployeeInfo();
-            int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
+            ArrayList<String> info = this.accountFacade.employeeInfo();
+            int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
             String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
@@ -88,25 +88,25 @@ public class FacadeSys {
 
     public void checkSalary(){
         if (this.employeeType.equals("PartTimeEmployee")){
-            String presentWage = String.valueOf(accountFacade.checkSalary());
+            String presentWage = String.valueOf(this.accountFacade.checkSalary());
             System.out.println(presentWage);
         }else{
-            String presentWage = String.valueOf(accountFacade.checkSalary());
+            String presentWage = String.valueOf(this.accountFacade.checkSalary());
             System.out.println(presentWage);
         }
     }
 
     public void setPersonalInfo(String option, String response){
         if (this.employeeType.equals("PartTimeEmployee")){
-            accountFacade.setPartTimeBasicInfo(option, response);
+            this.accountFacade.setPartTimeBasicInfo(option, response);
         }else{
-            accountFacade.setFullTimeBasicInfo(option, response);
+            this.accountFacade.setFullTimeBasicInfo(option, response);
         }
     }
 
 
     public void checkVacation() {
-        int[] infoInt = accountFacade.getFullTimeEmployeeInfoInt();
+        int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
         String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
         System.out.println(vacationInfo);
     }
@@ -231,39 +231,12 @@ public class FacadeSys {
         }
     }
 
-    public String findLeadWork() {
-        List<String> groupids = new ArrayList<String>();
-
-        Userable self = null;
-        for (Userable u: this.loginList){
-            if (u.getUsername().equals(this.username)){
-                self = u;
-                break;
-            }
+    public String findLeadWorkList() {
+        String presentWorkList = "";
+        for (String workID : this.workFacade.findLeadWork(this.username)){
+            presentWorkList = workID + "\n";
         }
-
-        for (Group group: this.groupList){
-            if (group.getLeader().equals(self)){
-                groupids.add(group.getWorkid());
-            }
-        }
-
-        List<String> workid = new ArrayList<String>();
-
-        for (String gid: groupids){
-            for (Workable w: this.workList){
-                if (w.getID().equals(gid)){
-                    workid.add(w.getID());
-                    break;
-                }
-            }
-        }
-        System.out.println("Following are the work IDs of the work which are lead by you: choose the work ID where you " +
-                "want to choose members");
-        for (String w : workid) {
-            return w;
-        }
-        return null;
+        return presentWorkList;
     }
 
 
@@ -303,6 +276,9 @@ public class FacadeSys {
         }
     }
 
+    public boolean checkLeaderResult(String workID){
+        return this.workFacade.checkLeader(workID,this.username);
+    }
 
     public Group findWorkKpi(String woid) {
         /**
@@ -350,20 +326,8 @@ public class FacadeSys {
         return group;
     }
 
-    public void giveKpi(String woid, String eid, String kpi){
-        Work work = null;
-        for (Workable w: this.workList){
-            if (w.getID().equals(woid)){
-                work = (Work) w;
-                break;
-            }
-        }
-        for (Employee e: this.employeeList){
-            if (e.getID().equals(eid)){
-                e.setKpi(work, Integer.valueOf(kpi));
-                break;
-            }
-        }
+    public void giveKpi(String workID, String employeeID, String kpi){
+        this.workFacade.setKpi(workID, employeeID, kpi);
     }
 
     public void WorkUpdate() {
