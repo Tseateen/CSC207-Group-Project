@@ -311,7 +311,7 @@ public class FacadeSys {
     }
 
 
-    public void SalaryCheck(String id, String option) {
+    public List<String> checkLowerEmployeeSalary(String id, String option) throws Exception {
         // Todo: reward and kpi is not implemented yet
         // Todo: need further modification
         /**
@@ -319,31 +319,20 @@ public class FacadeSys {
          * salary, work days, vacation used, reward, and kpi. Hr worker need to confirm all those info
          */
         // 1: Salary, 2: attendance, 3: total vacation with salary, 4: used vacation
-        List<Employee> validemployees = new ArrayList<>();
-        validemployees = accountFacade.lowerLevelEmployee(id);
         switch (option) {
             case "1": {
-                for (Employee e : validemployees) {
-                    System.out.println(e.getID() + e.getWage());
-                }
-            } case "2": {
-                for(Employee e: validemployees){
-                    System.out.println(e.getID() + e.getAttendance());
-                }
-            } case "3": {
-                for(Employee e: validemployees){
-                    if(Objects.equals(accountFacade.employeeTypeByID(e.getID()),"PartTimeEmployee")){
-                        System.out.println("This is a Part time employee, who does not have vacation");
-                    }
-                    System.out.println(e.getID() + accountFacade.getFullTimeEmployeeInfoInt()[0]);
-                }
-            } case "4":{
-                for(Employee e: validemployees) {
-                    if (Objects.equals(accountFacade.employeeTypeByID(e.getID()), "PartTimeEmployee")) {
-                        System.out.println("This is a Part time employee, who does not have vacation");
-                    }
-                    System.out.println(e.getID() + accountFacade.getFullTimeEmployeeInfoInt()[1]);
-                }
+                return accountFacade.lowerEmployeeSalaryCheck(id);
+            }
+            case "2": {
+                return accountFacade.lowerEmployeeAttendanceCheck(id);
+            }
+            case "3": {
+                return accountFacade.lowerEmployeeTotalVacationCheck(id);
+            }
+            case "4": {
+                return accountFacade.lowerEmployeeVacationUsedCheck(id);
+            } default:{
+                throw new Exception("False input");
             }
         }
     }

@@ -2,6 +2,7 @@ package main.Framework;
 
 import main.InterfaceAdapter.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class WorkManagerUI {
@@ -12,7 +13,7 @@ public class WorkManagerUI {
         this.facadeSys = facadeSys;
     }
 
-    public void run() {
+    public void run() throws Exception {
         Scanner keyIn = new Scanner(System.in);
 
         WorkInfoUI workInfoUI = new WorkInfoUI(this.facadeSys);
@@ -33,7 +34,8 @@ public class WorkManagerUI {
                             "v) Assign KPI to members, type 5; "  + "\n" +
                             "vi) Create a user, type 6; "  + "\n" +
                             "vii) Delete a user, type 7; "  + "\n" +
-                            "viii) Change a user's information, type 8; "  + "\n" +
+                            "viii) Check all lower level employees' salary-related information, type 8" + "\n" +
+                            "ix) Change a user's information, type 9; "  + "\n" +
                             "xx) Back to main page, type E");
             String action = keyIn.nextLine();
             switch (action) {
@@ -76,6 +78,18 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "8":
+                    System.out.println("Please enter your ID");
+                    String id = keyIn.nextLine();
+                    System.out.println("i) Check lower level employees' salary, please type 1; " + "\n" +
+                            "ii) Check lower level employees' attendance, please type 2;" + "\n" +
+                            "iii) Check lower level employees' total vacation with salary, please type 3; " + "\n" +
+                            "iv) Check lower level employees' vacation used, please type 4; " + "\n");
+                    String check_option = keyIn.nextLine();
+                    List<String> result = facadeSys.checkLowerEmployeeSalary(id, check_option);
+                    for (String info: result){
+                        System.out.print(info + " ");
+                    }
+                case "9":
                     System.out.println("Please enter the User ID that you want to change information to:");
                     String userid = keyIn.nextLine();
                     System.out.println("i) Change the user's Department, please type 1; " + "\n" +
