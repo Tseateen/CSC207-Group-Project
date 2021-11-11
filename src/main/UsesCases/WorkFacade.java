@@ -82,11 +82,9 @@ public class WorkFacade {
 
 
     //"name id department level"
-    public String workCreate(String action) {
-        String[] parts;
-        parts = action.split(" ");
-        this.workList.addWork(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
-        return "Work Create success. WorkID is: " + parts[1];
+    public String workCreate(String name, String ID, String Department, String level) {
+        this.workList.addWork(name, ID, Department, Integer.parseInt(level));
+        return "Work Create success. WorkID is: " + ID;
     }
 
 

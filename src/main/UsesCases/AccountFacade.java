@@ -346,16 +346,12 @@ public class AccountFacade {
      * @param level The specific authority level that the client want to check
      * @return boolean represent if the specific authority level is higher than the employee's authority level
      */
-    public boolean levelVerifier(String level) {
-        try {
-            if (level.length() != 1) {
-                return false;
-            }
-            int a = Integer.parseInt(level);
-            return a > user_Level();
-        } catch (NumberFormatException e) {
+    public boolean ValidToCreateThisLevel(String level) {
+        if (level.length() != 1) {
             return false;
         }
+        int LevelWantToCreate = Integer.parseInt(level);
+        return LevelWantToCreate > this.user_Level();
     }
 
     /**
@@ -459,11 +455,11 @@ public class AccountFacade {
 
     /**
      *check the employee type by ID
-     * @param user the target user
+     * @param id the target id
      * @return The String that represent either part time employee or full time employee
      */
     public String employeeTypeByID(String id){
-        String typeEmployee = new String();
+        String typeEmployee = "";
         for(Employee employee: this.employeeList){
             if (employee.getID().equals(id)){
                 if (employee instanceof PartTimeEmployee) {
@@ -483,7 +479,7 @@ public class AccountFacade {
          */
         List<Employee> validemployees = new ArrayList<>();
         for(Employee employee: this.employeeList){
-            if(levelVerifier(String.valueOf(employee.getLevel()))){
+            if(ValidToCreateThisLevel(String.valueOf(employee.getLevel()))){
                 validemployees.add(employee);
             }
         }return validemployees;
