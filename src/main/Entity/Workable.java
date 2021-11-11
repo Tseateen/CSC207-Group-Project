@@ -4,7 +4,7 @@ import com.sun.source.doctree.SinceTree;
 
 import java.io.Serializable;
 
-public interface Workable {
+public interface Workable extends Serializable{
 
     public abstract String getName();
 

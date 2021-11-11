@@ -1,10 +1,11 @@
 package main.Entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Group implements Iterable<Userable> {
+public class Group implements Iterable<Userable>, Serializable {
     private final Userable leader;
     private List<Userable> groupMembers = new ArrayList<Userable>();
     private String workid;
