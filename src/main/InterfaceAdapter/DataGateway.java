@@ -23,6 +23,7 @@ public class DataGateway {
             System.out.println("Reading Employee File");
             this.fileManager.readUserFromFileTo(loginList);
         }catch (IOException e){
+            this.loginList.initialize();
             System.out.println("The file has been initialize");
         }catch (ClassNotFoundException e1){
             System.out.println("No such a class");
@@ -36,6 +37,7 @@ public class DataGateway {
             System.out.println("Reading Employee File");
             this.fileManager.readEmployeeFromFileTo(employeeList);
         }catch (IOException e){
+            this.employeeList.initialize();
             System.out.println("The file has been initialize");
         }catch (ClassNotFoundException e1){
             System.out.println("No such a class");

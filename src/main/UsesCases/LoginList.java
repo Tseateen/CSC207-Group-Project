@@ -18,9 +18,14 @@ public class LoginList implements Iterable<Userable> {
 
     public void addUser(String accountNumber, String password, String name, String phone, String address, String id){
         Userable user = new User(accountNumber, password, name, phone, address, id);
-        UserList.add(user);
+        this.UserList.add(user);
     }
 
+    public void initialize(){
+        //TODO: what's the highest level for admin?
+        Userable admin = new User("N/A", "N/A", "Admin", "N/A", "N/A", "0");
+        this.UserList.add(admin);
+    }
     public boolean deleteUser(String id){
         int index = -1;
 

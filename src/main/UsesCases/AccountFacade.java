@@ -12,7 +12,7 @@ public class AccountFacade {
     private final EmployeeList employeeList;
     private final PayManager managerPay;
     private final Verifier managerVerifier;
-    private static int idCounter = 0;
+    private static int idCounter = 1;
     private final String employeeType;
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {

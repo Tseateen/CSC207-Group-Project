@@ -38,9 +38,13 @@ public class EmployeeList implements Iterable<Employee>{
             Employee employee = new FullTimeEmployee(department, position, wage, level, id);
         } else if (status.equals("P") && position.equals("N")) {
             Employee employee = new PartTimeEmployee(department, wage, level, id);
-            EmployeeList.add(employee);
+            this.EmployeeList.add(employee);
 
         }
+    }
+    public void initialize(){
+        Employee admin = new FullTimeEmployee("N/A", "N/A",9, 0, "0");
+        this.EmployeeList.add(admin);
     }
 
 
@@ -73,7 +77,7 @@ public class EmployeeList implements Iterable<Employee>{
      * @return the int of the size of the EmployeeList.
      */
     public int getSize(){
-        return EmployeeList.size();
+        return this.EmployeeList.size();
     }
 
 
