@@ -77,18 +77,18 @@ public class WorkManagerUI {
                     String woid = keyIn.nextLine();
                     if (this.facadeSys.checkLeaderResult(woid)){
                         System.out.println("You can now begin assign KPI to each member");
+                        for (String member : this.facadeSys.findWorkKpiMemberList(woid)){
+                            System.out.println("Enter the KPI for member" + member);
+                            String kpi = keyIn.nextLine();
+                            this.facadeSys.giveKpi(woid, member, kpi);
+                        }
+                        System.out.println("You have successfully assignm KPI to every member");
+                        break;
                     }else{
                         System.out.println("You are not the leader of this work!");
                         break;
                     }
-                    for (Userable member: facadeSys.findWorkKpi(woid).getMembers()){
-                        System.out.println("Enter the KPI for member" + member.getID());
-                        String kpi = keyIn.nextLine();
-                        String eid = member.getID();
-                        facadeSys.giveKpi(woid, eid, kpi);
-                    }
-                    System.out.println("You have successfully assign KPI to every member");
-                    break;
+
                 case "6":
                     System.out.println("Please assign the username, password, name, phone, " +
                             "address, department, wage, position, level, status (Split by a space) ");

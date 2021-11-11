@@ -280,50 +280,8 @@ public class FacadeSys {
         return this.workFacade.checkLeader(workID,this.username);
     }
 
-    public Group findWorkKpi(String woid) {
-        /**
-         * * Todo: Write Exception & Modify this method.
-         * Todo: still don't know the relationship between work and kpi?
-         * (Update: Group leader to assign KPI)
-         */
-        Group group = null;
-        Work work = null;
-        try {
-            for (Workable w : this.workList) {
-                if (w.getID().equals(woid)) {
-                    work = (Work) w;
-                    break;
-                }
-            }
-            for (Group g : this.groupList) {
-                if (g.getWorkid().equals(woid)) {
-                    group = g;
-                    break;
-                }
-            }
-
-            Userable self = null;
-            for (Userable u : this.loginList) {
-                if (u.getUsername().equals(this.username)) {
-                    self = u;
-                    break;
-                }
-            }
-
-            if (!(group.getLeader().equals(self))) {
-                System.out.println("You are not the leader of this work");
-                return null;
-            }
-
-            System.out.println("You can now begin assign KPI to each member");
-            return group;
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException in FacadeSys.findWorkKpi");
-        } catch (Exception e) {
-            System.out.println("Error occurred in FacadeSys.findWorkKpi");
-        }
-
-        return group;
+    public List<String> findWorkKpiMemberList(String woid) {
+        return this.workFacade.findWorkKpiMember(woid);
     }
 
     public void giveKpi(String workID, String employeeID, String kpi){

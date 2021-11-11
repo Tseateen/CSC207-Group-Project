@@ -175,7 +175,7 @@ public class WorkFacade {
         }
         return (group.getLeader().equals(self));
     }
-    public Group findWorkKpi(String workID, String username) {
+    public List<String> findWorkKpiMember(String workID) {
         /**
          * * Todo: Write Exception & Modify this method.
          * Todo: still don't know the relationship between work and kpi?
@@ -195,7 +195,15 @@ public class WorkFacade {
                 break;
             }
         }
-        return group;
+        List<String> memberList = new ArrayList<String>();
+        try {
+            for (Userable member : group.getMembers()){
+                memberList.add(member.getID());
+            }
+            return memberList;
+        }catch(NullPointerException e){
+            return null;
+        }
     }
 
     public void setKpi(String workID, String employeeID, String kpi){
