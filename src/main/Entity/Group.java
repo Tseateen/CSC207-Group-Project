@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 public class Group implements Iterable<Userable> {
     private final Userable leader;
-    private List<Userable> groupMembers = new ArrayList<>();
+    private List<Userable> groupMembers = new ArrayList<Userable>();
     private String workid;
 
 
@@ -69,11 +69,8 @@ public class Group implements Iterable<Userable> {
      *
      * @return This method will return the members of this group.
      */
-    public Userable[] getMembers() {
-        Userable[] membersList = new Userable[this.groupMembers.size()-1];
-        for(int i = 0; i < this.groupMembers.size()-1; i++){
-            membersList[i] = this.groupMembers.get(i+1);
-        }return membersList;
+    public List<Userable> getMembers() {
+        return this.groupMembers;
     }
 
     public String getWorkid() {
