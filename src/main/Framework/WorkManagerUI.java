@@ -17,8 +17,12 @@ public class WorkManagerUI {
 
         WorkInfoUI workInfoUI = new WorkInfoUI(this.facadeSys);
         CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
+
         PrepareForWorkUI prepareForWork = new PrepareForWorkUI(this.facadeSys);
         KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
+        CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
+        DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
+
         boolean noExit = true;
         while (noExit) {
             System.out.println(
@@ -64,25 +68,12 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "6":
-                    System.out.println("Please assign the username, password, name, phone, " +
-                            "address, department, wage, position, level, status (Split by a space) ");
-                    String info = keyIn.nextLine();
-                    String[] user_info = info.split("");
-                    if (!facadeSys.levelVerifier(user_info[8])) {
-                        System.out.println("You cannot create this user.");
-                        break;
-                    };
-                    facadeSys.UserCreator(info);
+                    createUserUI.run();
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "7":
-                    System.out.println("Please enter the id of the user you want to delete");
-                    String uid = keyIn.nextLine();
-                    if (facadeSys.UserDelete(uid)){
-                        System.out.println("The user has successfully deleted.");
-                    }
-                    else {
-                        System.out.println("You cannot delete this employee, please try again.");
-                    }
+                    deleteUserUI.run();
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "8":
                     System.out.println("Please enter the User ID that you want to change information to:");

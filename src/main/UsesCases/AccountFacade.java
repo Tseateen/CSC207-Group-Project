@@ -29,15 +29,16 @@ public class AccountFacade {
 
     /**
      * Getter method for the type of the employee
+     *
      * @return a String that contains the type of the employee
      */
-    public String getEmployeeType(){
+    public String getEmployeeType() {
         return this.employeeType;
     }
 
 
     // return all the info at the same time (馬哥的idea)
-    public ArrayList<String> partTimeEmployeeInfo(){
+    public ArrayList<String> partTimeEmployeeInfo() {
         ArrayList<String> info = new ArrayList<>();
         info.add(this.user.getName());
         info.add(this.user.getID());
@@ -51,11 +52,12 @@ public class AccountFacade {
 
     /**
      * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
+     *
      * @return The ArrayList that contains the basic informaiton of an employee
      */
-    public ArrayList<String> employeeInfo(){
+    public ArrayList<String> employeeInfo() {
         ArrayList<String> info = new ArrayList<>();
-        if (this.employeeType.equals("PartTimeEmployee")){
+        if (this.employeeType.equals("PartTimeEmployee")) {
             info.add(this.user.getName());
             info.add(this.user.getID());
             info.add(this.user.getUsername());
@@ -63,7 +65,7 @@ public class AccountFacade {
             info.add(this.user.getPhone());
             info.add(this.user.getAddress());
             info.add(this.employee.getDepartment());
-        }else{
+        } else {
             FullTimeEmployee employee = (FullTimeEmployee) this.employee;
             info.add(this.user.getName());
             info.add(this.user.getID());
@@ -102,9 +104,10 @@ public class AccountFacade {
 
     /**
      * Get the schedule of a part time employee
+     *
      * @return A HashMap that contains the schedule of a part time employee
      */
-    public HashMap<String, String[]> getSchedulefromPartTimeEmployee(){
+    public HashMap<String, String[]> getSchedulefromPartTimeEmployee() {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         return employee.getSchedule();
     }
@@ -138,11 +141,12 @@ public class AccountFacade {
 
     /**
      * Get the integer information of a full time employee such as total vacation with salary and vacation used
+     *
      * @return An int array that contains the integer information of a full time employee
      */
-    public int[] getFullTimeEmployeeInfoInt(){
+    public int[] getFullTimeEmployeeInfoInt() {
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
-        int[] intValue =  new int[2];
+        int[] intValue = new int[2];
         intValue[0] = employee.getTotalVacationWithSalary();
         intValue[1] = employee.getVacationUsed();
         return intValue;
@@ -187,12 +191,13 @@ public class AccountFacade {
 
     /**
      * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
-     * @param option The option that the client want to set
+     *
+     * @param option   The option that the client want to set
      * @param response The value that the client want to set
      */
-    public void setPartTimeBasicInfo(String option, String response){
+    public void setPartTimeBasicInfo(String option, String response) {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
-        switch (option){
+        switch (option) {
             case "1":
                 this.user.setName(response);
             case "2":
@@ -208,21 +213,20 @@ public class AccountFacade {
 
     /**
      * Set the advanced information of a part time employee includes department, wage, and authority  level
-     * @param option The option that the client want to set
+     *
+     * @param option   The option that the client want to set
      * @param response The value that the client want to set
      */
-    public void setPartTimeAdvancedInfo(String option, String response){
+    public void setPartTimeAdvancedInfo(String option, String response) {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
-        switch (option){
+        switch (option) {
             case "1":
                 employee.setDepartment(response);
             case "2":
                 int intWage;
                 try {
                     intWage = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intWage = 0;
                 }
                 employee.setWage(intWage);
@@ -230,9 +234,7 @@ public class AccountFacade {
                 int intLevel;
                 try {
                     intLevel = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intLevel = 0;
                 }
                 employee.setLevel(intLevel);
@@ -241,21 +243,23 @@ public class AccountFacade {
 
     /**
      * Set teh schedule for a part time employee
+     *
      * @param schedule The new/updated schedule for a part time employee
      */
-    public void setSchedule(HashMap<String, String[]> schedule){
+    public void setSchedule(HashMap<String, String[]> schedule) {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         employee.setSchedule(schedule);
     }
 
     /**
      * Set the basic information of a full time employee includes name, password, phone number, address, and attendance
-     * @param option The option that the client want to set
+     *
+     * @param option   The option that the client want to set
      * @param response The value that the client want to set
      */
-    public void setFullTimeBasicInfo(String option, String response){
+    public void setFullTimeBasicInfo(String option, String response) {
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
-        switch (option){
+        switch (option) {
             case "1":
                 this.user.setName(response);
             case "2":
@@ -265,28 +269,27 @@ public class AccountFacade {
             case "4":
                 this.user.setAddress(response);
             case "5":
-               employee.setAttendance();
+                employee.setAttendance();
 
         }
     }
 
     /**
      * Set the advanced information of a full time employee includes department, wage, authority  level, position, total vacation, and vacation used
-     * @param option The option that the client want to set
+     *
+     * @param option   The option that the client want to set
      * @param response The value that the client want to set
      */
-    public void setFullTimeAdvancedInfo(String option, String response){
+    public void setFullTimeAdvancedInfo(String option, String response) {
         FullTimeEmployee employee = (FullTimeEmployee) this.employee;
-        switch (option){
+        switch (option) {
             case "1":
                 employee.setDepartment(response);
             case "2":
                 int intWage;
                 try {
                     intWage = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intWage = 0;
                 }
                 employee.setWage(intWage);
@@ -294,23 +297,19 @@ public class AccountFacade {
                 int intLevel;
                 try {
                     intLevel = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intLevel = 0;
                 }
                 employee.setLevel(intLevel);
             case "4":
                 employee.setPosition(response);
             case "5":
-               employee.setState(response);
+                employee.setState(response);
             case "6":
                 int intTotalVacation;
                 try {
                     intTotalVacation = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intTotalVacation = 0;
                 }
                 employee.setTotalVacationWithSalary(intTotalVacation);
@@ -318,9 +317,7 @@ public class AccountFacade {
                 int intVacationUsed;
                 try {
                     intVacationUsed = Integer.parseInt(response);
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     intVacationUsed = 0;
                 }
                 employee.setVacationUsed(intVacationUsed);
@@ -329,13 +326,14 @@ public class AccountFacade {
 
     /**
      * Get the authority level of an employee
+     *
      * @return An int represent the authority level of an employee
      */
-    public int user_Level(){
-        if (employeeType.equals("PartTimeEmployee")){
+    public int user_Level() {
+        if (employeeType.equals("PartTimeEmployee")) {
             PartTimeEmployee employee = (PartTimeEmployee) this.employee;
             return employee.getLevel();
-        }else{
+        } else {
             FullTimeEmployee employee = (FullTimeEmployee) this.employee;
             return employee.getLevel();
         }
@@ -343,6 +341,7 @@ public class AccountFacade {
 
     /**
      * Verify if the authority level of an employee is lower than the specific authority level
+     *
      * @param level The specific authority level that the client want to check
      * @return boolean represent if the specific authority level is higher than the employee's authority level
      */
@@ -356,23 +355,32 @@ public class AccountFacade {
 
     /**
      * Create a new account for an employee include the user information and employee information
+     *
      * @param userinfo The String array that contains the user information and employee information
      * @return boolean that indicates if the new account is been created
      */
     public boolean CreateNewAccount(String[] userinfo) {
-        try{String id = String.valueOf(idCounter);
-        this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
-        this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
-        idCounter += 1;}
-        catch (IndexOutOfBoundsException e){
+        try {
+            String id = String.valueOf(idCounter);
+            this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
+            this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
+            idCounter += 1;
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Unable to create account due to uncompleted information");
             return false;
         }
         return true;
-        }
+    }
+
+    public String DeleteAccount(String userid) {
+        this.loginList.deleteUser(userid);
+        this.employeeList.deleteEmployee(userid);
+        return userid;
+    }
 
     /**
      * Check the salary of an employee
+     *
      * @return An int that represent the salary/wage of an employee
      */
     public int checkSalary() {
@@ -388,6 +396,7 @@ public class AccountFacade {
 
     /**
      * A helper function that find the correct user based on the username
+     *
      * @return a Userable that represent the target user
      */
     private Userable findUserHelper() {
@@ -402,11 +411,12 @@ public class AccountFacade {
 
     /**
      * A helper function that find the correct employee based on the user by comparing the ID
+     *
      * @return a Employee that represent the target employee
      */
-    public Employee findEmployeeHelper(){
-        for(Employee employee: this.employeeList){
-            if (employee.getID().equals(this.user.getID())){
+    public Employee findEmployeeHelper() {
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(this.user.getID())) {
                 return employee;
             }
         }
@@ -435,36 +445,37 @@ public class AccountFacade {
 
     /**
      * check if the employee is part time employee or full time employee
+     *
      * @return The String that represent either part time employee or full time employee
      */
-    public String employeeType(){
+    public String employeeType() {
         String typeEmployee = "N/A";
-        for(Employee employee: this.employeeList){
-            if (employee.getID().equals(this.user.getID())){
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(this.user.getID())) {
                 if (employee instanceof PartTimeEmployee) {
                     typeEmployee = "PartTimeEmployee";
-                }else{
+                } else {
                     typeEmployee = "FullTimeEmployee";
                 }
             }
         }
         return typeEmployee;
     }
-
 
 
     /**
-     *check the employee type by ID
+     * check the employee type by ID
+     *
      * @param id the target id
      * @return The String that represent either part time employee or full time employee
      */
-    public String employeeTypeByID(String id){
+    public String employeeTypeByID(String id) {
         String typeEmployee = "";
-        for(Employee employee: this.employeeList){
-            if (employee.getID().equals(id)){
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(id)) {
                 if (employee instanceof PartTimeEmployee) {
                     typeEmployee = "PartTimeEmployee";
-                }else{
+                } else {
                     typeEmployee = "FullTimeEmployee";
                 }
             }
@@ -473,15 +484,34 @@ public class AccountFacade {
     }
 
 
-    public List<Employee> lowerLevelEmployee(String id){
+    public List<Employee> lowerLevelEmployee(String id) {
         /**
          * return a list of employee who is lower level than the employee with given id
          */
         List<Employee> validemployees = new ArrayList<>();
-        for(Employee employee: this.employeeList){
-            if(ValidToCreateThisLevel(String.valueOf(employee.getLevel()))){
+        for (Employee employee : this.employeeList) {
+            if (ValidToCreateThisLevel(String.valueOf(employee.getLevel()))) {
                 validemployees.add(employee);
             }
-        }return validemployees;
+        }
+        return validemployees;
+    }
+
+    public boolean userExists(String userid) {
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(userid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getLevel(String userid) {
+        for (Employee employee : this.employeeList){
+            if (employee.getID().equals(userid)){
+                return String.valueOf(employee.getLevel());
+            }
+        }
+        return null;
     }
 }
