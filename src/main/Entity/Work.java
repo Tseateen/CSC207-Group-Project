@@ -1,9 +1,10 @@
 package main.Entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.sql.Timestamp;
 
-public class Work implements Workable{
+public class Work implements Workable, Serializable {
     private final String name;
     private final String id;
     private final String create_time;
