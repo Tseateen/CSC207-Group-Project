@@ -23,7 +23,7 @@ public class DataGateway {
             System.out.println("Reading Employee File");
             this.fileManager.readUserFromFileTo(loginList);
         }catch (IOException e){
-            System.out.println("No such as file");
+            System.out.println("The file has been initialize");
         }catch (ClassNotFoundException e1){
             System.out.println("No such a class");
         }
@@ -36,16 +36,19 @@ public class DataGateway {
             System.out.println("Reading Employee File");
             this.fileManager.readEmployeeFromFileTo(employeeList);
         }catch (IOException e){
-            System.out.println("No such as file");
+            System.out.println("The file has been initialize");
         }catch (ClassNotFoundException e1){
             System.out.println("No such a class");
         }
 
     }
 
-    public void WriteOutputFile() throws IOException, ClassNotFoundException{
-        this.fileManager.writeUserToFile(loginList);
-        this.fileManager.writeUserEmployeeToFile(employeeList);
-        System.out.println("Done for writing");
+    public void WriteOutputFile(){
+        try {
+            this.fileManager.writeUserToFile(loginList);
+            this.fileManager.writeUserEmployeeToFile(employeeList);
+        }catch (IOException e){
+            System.out.println("The file has been initialize");
+        }
     }
 }
