@@ -225,32 +225,30 @@ public class FacadeSys {
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
 
-    public boolean UserCreator(String info) {
-        // Todo: this part is similar with workCreator, so new user's level shouldn't higher than creator
-        // Todo: or we may need to default new user's level as 9.
-        // Todo: to verify the type of user input and make sure the type match the parameters of CreateNewAccount
-        // This part may use Creator
-
-        String[] user_info = info.split("");
-        return this.accountFacade.CreateNewAccount(user_info);
+    public boolean createUser(String username, String password, String name, String phone, String address,
+                              String department, String wage, String position, String level, String status) {
+        boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
+        if (validLevelGiven){
+            String[] userinfo = {username, password, name, phone, address, department, wage, position, level, status};
+            this.accountFacade.CreateNewAccount(userinfo);
+        }
+        return validLevelGiven;
     }
 
 
-
-    public boolean UserDelete(String uid) {
+    public boolean deleteUser(String userid) {
         /**
          * We may need to use memento for delete User
          *  This part we assume we already checked level in UI (Todo)
          * Todo: Implement userExist in AccountFacade which used to check user exist or not by their id
          * Todo: Implement getLevel in AccountFacade which used to get user level by their id
          */
-
-        if (this.accountFacade.userExist(uid) && levelVerifier(String.valueOf(this.accountFacade.getLevel(uid)))) {
-            employeeList.deleteEmployee(uid);
-            loginList.deleteUser(uid);
-            return true;
+        boolean validLevelGiven = this.accountFacade.userExists(userid) &&
+                this.accountFacade.ValidToCreateThisLevel(this.accountFacade.getLevel(userid));
+        if (validLevelGiven) {
+            this.accountFacade.DeleteAccount(userid);
         }
-        return false;
+        return validLevelGiven;
     }
 
 
