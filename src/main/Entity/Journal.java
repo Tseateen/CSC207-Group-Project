@@ -1,28 +1,29 @@
 package main.Entity;
 
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.sql.Timestamp;
 
 public class Journal {
-    private final HashMap<String, HashMap<Userable, String>> journals;
+    private final HashMap<String, String[]> journals; // <Timestamp,<id, info>>
     private final String id;
 
     public Journal(String id){
         this.id = id;
-        journals = new HashMap<String, HashMap<Userable, String>>();
+        journals = new HashMap<String, String[]>();
     }
 
-    public void AddJournal(Userable user, String doc) {
-        HashMap<Userable, String> m = new HashMap<Userable, String>();
-        m.put(user, doc);
-        journals.put(LocalTime.now(), m);
+    public void AddJournal(String usr_id, String doc) {
+        String[] m = {usr_id, doc};
+        Timestamp cur_time = new Timestamp(System.currentTimeMillis());
+        journals.put(String.valueOf(cur_time.getTime()), m);
     }
 
     public String getId() {
         return this.id;
     }
 
-    public HashMap<LocalTime, HashMap<Userable, String>>  getJournal() {
+    public HashMap<String, String[]>  getJournal() {
         return journals;
     }
 }
