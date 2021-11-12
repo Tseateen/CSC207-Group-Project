@@ -321,16 +321,16 @@ public class FacadeSys {
         // 1: Salary, 2: attendance, 3: total vacation with salary, 4: used vacation
         switch (option) {
             case "1": {
-                return accountFacade.lowerEmployeeSalaryCheck(id);
+                return this.accountFacade.lowerEmployeeSalaryCheck(id);
             }
             case "2": {
-                return accountFacade.lowerEmployeeAttendanceCheck(id);
+                return this.accountFacade.lowerEmployeeAttendanceCheck(id);
             }
             case "3": {
-                return accountFacade.lowerEmployeeTotalVacationCheck(id);
+                return this.accountFacade.lowerEmployeeTotalVacationCheck(id);
             }
             case "4": {
-                return accountFacade.lowerEmployeeVacationUsedCheck(id);
+                return this.accountFacade.lowerEmployeeVacationUsedCheck(id);
             } default:{
                 throw new Exception("False input");
             }
