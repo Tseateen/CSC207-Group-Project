@@ -23,6 +23,7 @@ public class WorkManagerUI {
         KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
         CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
+        CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
 
         boolean noExit = true;
         while (noExit) {
@@ -78,17 +79,9 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "8":
-                    System.out.println("Please enter your ID");
-                    String id = keyIn.nextLine();
-                    System.out.println("i) Check lower level employees' salary, please type 1; " + "\n" +
-                            "ii) Check lower level employees' attendance, please type 2;" + "\n" +
-                            "iii) Check lower level employees' total vacation with salary, please type 3; " + "\n" +
-                            "iv) Check lower level employees' vacation used, please type 4; " + "\n");
-                    String check_option = keyIn.nextLine();
-                    List<String> result = facadeSys.checkLowerEmployeeSalary(id, check_option);
-                    for (String info: result){
-                        System.out.print(info + " ");
-                    }
+                    checkSalaryUI.run();
+                    System.out.println("Successfully back to main WorkUI");
+                    break;
                 case "9":
                     System.out.println("Please enter the User ID that you want to change information to:");
                     String userid = keyIn.nextLine();
