@@ -15,20 +15,29 @@ public class WorkManager {
      */
     public void extendWork(Work work, String extend_date) {
         String due = work.getEnd_time();
-        due = String.valueOf(Integer.valueOf(due) + Integer.valueOf(extend_date));
+        due = String.valueOf(Integer.parseInt(due) + Integer.parseInt(extend_date));
         work.setEnd_time(due);
         autoChangeState(work);
     }
 
+    /**
+     * Change a work's state
+     * @param work the work which is going to be changed.
+     * @param new_statue the state that the given work is going to be changed to.
+     */
     public void changeState(Work work, String new_statue) {
         work.setState(new_statue);
         autoChangeState(work);
     }
 
+    /**
+     * Change a work's state automatically as the time goes.
+     * @param work the work which is going to be changed.
+     */
     public void autoChangeState(Work work) {
         String statue = work.getState();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        long due = Integer.valueOf(work.getEnd_time());
+        long due = Integer.parseInt(work.getEnd_time());
         if (statue.equals("Finished")) {
             return;
         }

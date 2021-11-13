@@ -8,10 +8,17 @@ public class KPIAssignUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a KPIAssignUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public KPIAssignUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the KPIAssignUI
+     */
     public void run(){
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;

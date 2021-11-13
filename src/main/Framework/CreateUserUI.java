@@ -10,11 +10,18 @@ public class CreateUserUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a CreateUserUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public CreateUserUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
 
+    /**
+     * Run the CheckSalaryUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;

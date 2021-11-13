@@ -10,11 +10,18 @@ public class DeleteUserUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a DeleteUserUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public DeleteUserUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
 
+    /**
+     * Run the DeleteUserUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;
