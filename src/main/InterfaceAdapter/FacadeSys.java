@@ -32,7 +32,7 @@ public class FacadeSys {
     // === WorkFacade ===
     private final WorkFacade workFacade;
     private final GroupManager groupManager;
-    private final String employeeType;
+    private String employeeType;
     private final WorkManager workManager;
 
     /**
@@ -52,7 +52,6 @@ public class FacadeSys {
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
 
         this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.workManager, this.groupManager);
-        this.employeeType = this.accountFacade.getEmployeeType();
     }
 
 
@@ -62,6 +61,7 @@ public class FacadeSys {
     public boolean systemStart(String username, String password) {
         this.fileGateway.ReadInputFileToLoginList();
         this.fileGateway.ReadInputFileToEmployeeList();
+        this.employeeType = this.accountFacade.getEmployeeType();
         return this.verifier.verifyForLogin(username, password);
     }
 
@@ -71,6 +71,7 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public String personalInfo(){
+        System.out.println(this.employeeType);
         String presentInfo = "";
         if (this.employeeType.equals("PartTimeEmployee")){
             ArrayList<String> info = this.accountFacade.employeeInfo();

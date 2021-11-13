@@ -22,7 +22,7 @@ public class AccountFacade {
 
         this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
-        this.employeeType = employeeType();
+       this.employeeType = "";
         this.user = this.findUserHelper();
         this.employee = findEmployeeHelper();
     }
@@ -33,7 +33,8 @@ public class AccountFacade {
      * @return a String that contains the type of the employee
      */
     public String getEmployeeType() {
-        return this.employeeType;
+        System.out.println(this.findEmployeeTypeHelper());
+        return this.findEmployeeTypeHelper();
     }
 
 
@@ -58,23 +59,18 @@ public class AccountFacade {
     public ArrayList<String> employeeInfo() {
         ArrayList<String> info = new ArrayList<>();
         Userable user = this.findUserHelper();
-        if (this.employeeType.equals("PartTimeEmployee")) {
+        String employeeType = this.findEmployeeTypeHelper();
+        info.add(user.getName());
+        info.add(user.getID());
+        info.add(user.getUsername());
+        info.add(user.getPassword());
+        info.add(user.getPhone());
+        info.add(user.getAddress());
+        if (employeeType.equals("PartTimeEmployee")) {
             PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.findEmployeeHelper();
-            info.add(user.getName());
-            info.add(user.getID());
-            info.add(user.getUsername());
-            info.add(user.getPassword());
-            info.add(user.getPhone());
-            info.add(user.getAddress());
             info.add(partTimeEmployee.getDepartment());
         } else {
             FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.findEmployeeHelper();
-            info.add(user.getName());
-            info.add(user.getID());
-            info.add(user.getUsername());
-            info.add(user.getPassword());
-            info.add(user.getPhone());
-            info.add(user.getAddress());
             info.add(fullTimeEmployee.getDepartment());
             info.add(fullTimeEmployee.getPosition());
             info.add(fullTimeEmployee.getState());
@@ -198,18 +194,23 @@ public class AccountFacade {
      * @param response The value that the client want to set
      */
     public void setPartTimeBasicInfo(String option, String response) {
-        PartTimeEmployee employee = (PartTimeEmployee) this.employee;
+        PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
         switch (option) {
             case "1":
-                this.user.setName(response);
+                this.findUserHelper().setName(response);
+                break;
             case "2":
-                this.user.setPassword(response);
+                this.findUserHelper().setPassword(response);
+                break;
             case "3":
-                this.user.setPhone(response);
+                this.findUserHelper().setPhone(response);
+                break;
             case "4":
-                this.user.setAddress(response);
+                this.findUserHelper().setAddress(response);
+                break;
             case "5":
                 employee.setAttendance();
+                break;
         }
     }
 
@@ -386,11 +387,11 @@ public class AccountFacade {
      * @return An int that represent the salary/wage of an employee
      */
     public int checkSalary() {
-        if (this.employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee employee = (PartTimeEmployee) this.employee;
+        if (this.findEmployeeTypeHelper().equals("PartTimeEmployee")) {
+            PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
             return employee.getWage();
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.employee;
+            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
             return employee.getWage();
         }
     }
@@ -426,6 +427,7 @@ public class AccountFacade {
         return null;
     }
 
+
 //    private PartTimeEmployee findPartTimeEmployeeHelper(){
 //        Employee correctEmployee = new PartTimeEmployee();
 //        for(Employee partTimeEmployee: this.employeeList){
@@ -451,18 +453,19 @@ public class AccountFacade {
      *
      * @return The String that represent either part time employee or full time employee
      */
-    public String employeeType() {
-        String typeEmployee = "N/A";
-        for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(this.user.getID())) {
-                if (employee instanceof PartTimeEmployee) {
-                    typeEmployee = "PartTimeEmployee";
-                } else {
-                    typeEmployee = "FullTimeEmployee";
+    public String findEmployeeTypeHelper(){
+        String employeeType = "";
+       Userable user = findUserHelper();
+       for (Employee employee: this.employeeList){
+           if (employee.getID().equals(user.getID())){
+               if(employee instanceof PartTimeEmployee){
+                   employeeType = "PartTimeEmployee";
+               }else{
+                   employeeType = "FullTimeEmployee";
                 }
             }
         }
-        return typeEmployee;
+        return employeeType;
     }
 
     /**

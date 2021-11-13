@@ -52,8 +52,8 @@ public class DataGateway {
         try {
             this.fileManager.writeUserToFile(this.loginList);
             this.fileManager.writeUserEmployeeToFile(this.employeeList);
-            this.fileManager.writeGroupToFile(this.groupList);
             this.fileManager.writeWorkToFile(this.workList);
+            this.fileManager.writeGroupToFile(this.groupList);
         }catch (IOException e){
             System.out.println("The file has been initialize");
         }
