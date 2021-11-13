@@ -4,14 +4,21 @@ import main.InterfaceAdapter.FacadeSys;
 
 import java.util.Scanner;
 
-public class setPersonalInfoUI {
+public class SetPersonalInfoUI {
 
     private final FacadeSys facadeSys;
 
-    public setPersonalInfoUI(FacadeSys facadeSys) {
+    /**
+     * Construct a SetPersonalInfoUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
+    public SetPersonalInfoUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the SetPersonalInfoUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         boolean noExit = true;
