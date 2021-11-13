@@ -17,13 +17,13 @@ public class AccountFacade {
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
-        this.user = this.findUserHelper();
         this.loginList = loginList;
         this.employeeList = employeeList;
-        this.managerPay = new PayManager();
 
+        this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
         this.employeeType = employeeType();
+        this.user = this.findUserHelper();
         this.employee = findEmployeeHelper();
     }
 
@@ -57,23 +57,30 @@ public class AccountFacade {
      */
     public ArrayList<String> employeeInfo() {
         ArrayList<String> info = new ArrayList<>();
+        Userable user = new User();
+        for (Userable userInList : this.loginList) {
+            if (user.getUsername().equals(this.username)) {
+                user = userInList;
+            }
+        }
         if (this.employeeType.equals("PartTimeEmployee")) {
-            info.add(this.user.getName());
-            info.add(this.user.getID());
-            info.add(this.user.getUsername());
-            info.add(this.user.getPassword());
-            info.add(this.user.getPhone());
-            info.add(this.user.getAddress());
-            info.add(this.employee.getDepartment());
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.employee;
+            info.add(user.getName());
+            info.add(user.getID());
+            info.add(user.getUsername());
+            info.add(user.getPassword());
+            info.add(user.getPhone());
+            info.add(user.getAddress());
+            info.add(employee.getDepartment());
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.employee;
-            info.add(this.user.getName());
-            info.add(this.user.getID());
-            info.add(this.user.getUsername());
-            info.add(this.user.getPassword());
-            info.add(this.user.getPhone());
-            info.add(this.user.getAddress());
-            info.add(this.employee.getDepartment());
+            FullTimeEmployee employee = (FullTimeEmployee) this.employee();
+            info.add(user.getName());
+            info.add(user.getID());
+            info.add(user.getUsername());
+            info.add(user.getPassword());
+            info.add(user.getPhone());
+            info.add(user.getAddress());
+            info.add(employee.getDepartment());
             info.add(employee.getPosition());
             info.add(employee.getState());
         }
@@ -145,7 +152,7 @@ public class AccountFacade {
      * @return An int array that contains the integer information of a full time employee
      */
     public int[] getFullTimeEmployeeInfoInt() {
-        FullTimeEmployee employee = (FullTimeEmployee) this.employee;
+        FullTimeEmployee employee = (FullTimeEmployee) findEmployeeHelper();
         int[] intValue = new int[2];
         intValue[0] = employee.getTotalVacationWithSalary();
         intValue[1] = employee.getVacationUsed();
@@ -403,7 +410,7 @@ public class AccountFacade {
         Userable correctUser = new User();
         for (Userable user : this.loginList) {
             if (user.getUsername().equals(this.username)) {
-                correctUser = user;
+                return user;
             }
         }
         return correctUser;
@@ -415,8 +422,9 @@ public class AccountFacade {
      * @return a Employee that represent the target employee
      */
     public Employee findEmployeeHelper() {
+        Userable user = findUserHelper();
         for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(this.user.getID())) {
+            if (employee.getID().equals(user.getID())) {
                 return employee;
             }
         }

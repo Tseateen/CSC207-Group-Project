@@ -109,7 +109,7 @@ public class Group implements Iterable<Userable>, Serializable {
      * @param workid This method set a new project for the group to work on.
      */
     public void setProject(String workid) {
-        this.this.workid = workid;
+        this.workid = workid;
     }
 
     /**

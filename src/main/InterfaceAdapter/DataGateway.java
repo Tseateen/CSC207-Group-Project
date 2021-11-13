@@ -9,10 +9,13 @@ public class DataGateway {
     private final FileReadWrite fileManager;
     private final LoginList loginList;
     private final EmployeeList employeeList;
-
-    public DataGateway(LoginList loginList, EmployeeList employeeList){
+    private final GroupList groupList;
+    private final WorkList workList;
+    public DataGateway(LoginList loginList, EmployeeList employeeList, GroupList groupList, WorkList workList){
         this.loginList = loginList;
         this.employeeList = employeeList;
+        this.groupList = groupList;
+        this.workList = workList;
         this.fileManager = new FileReadWrite();
     }
 
@@ -20,8 +23,8 @@ public class DataGateway {
         // TODO: 寫入 AccountList
         // TODO: Double check the error
         try {
-            System.out.println("Reading Employee File");
-            this.fileManager.readUserFromFileTo(loginList);
+            System.out.println("Reading User File");
+            this.fileManager.readUserFromFileTo(this.loginList);
         }catch (IOException e){
             this.loginList.initialize();
             System.out.println("The file has been initialize");
@@ -35,7 +38,7 @@ public class DataGateway {
         // TODO: 寫入 EmployeeList
         try {
             System.out.println("Reading Employee File");
-            this.fileManager.readEmployeeFromFileTo(employeeList);
+            this.fileManager.readEmployeeFromFileTo(this.employeeList);
         }catch (IOException e){
             this.employeeList.initialize();
             System.out.println("The file has been initialize");
@@ -47,8 +50,10 @@ public class DataGateway {
 
     public void WriteOutputFile(){
         try {
-            this.fileManager.writeUserToFile(loginList);
-            this.fileManager.writeUserEmployeeToFile(employeeList);
+            this.fileManager.writeUserToFile(this.loginList);
+            this.fileManager.writeUserEmployeeToFile(this.employeeList);
+            this.fileManager.writeGroupToFile(this.groupList);
+            this.fileManager.writeWorkToFile(this.workList);
         }catch (IOException e){
             System.out.println("The file has been initialize");
         }
