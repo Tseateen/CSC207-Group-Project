@@ -45,7 +45,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
         }
     }
     public void initialize(){
-        Employee admin = new FullTimeEmployee("N/A", "N/A",9, 0, "0");
+        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
         this.EmployeeList.add(admin);
     }
 
