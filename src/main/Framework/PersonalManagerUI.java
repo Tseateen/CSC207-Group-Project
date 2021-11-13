@@ -26,10 +26,10 @@ public class PersonalManagerUI {
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":
-                    this.facadeSys.personalInfo();
+                    System.out.println(this.facadeSys.personalInfo());
                     break;
                 case "2":
-                    this.facadeSys.checkSalary();
+                    System.out.println(this.facadeSys.checkSalary());
                     break;
                 case "3":
                     changePersonInfo.run();

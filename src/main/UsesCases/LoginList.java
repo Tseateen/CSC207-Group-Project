@@ -3,12 +3,13 @@ package main.UsesCases;
 import main.Entity.User;
 import main.Entity.Userable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LoginList implements Iterable<Userable> {
+public class LoginList implements Iterable<Userable>, Serializable {
 
     private final List<Userable> UserList;
 

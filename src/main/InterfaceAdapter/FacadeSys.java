@@ -42,20 +42,22 @@ public class FacadeSys {
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
         this.verifier = new Verifier(this.loginList);
-        this.fileGateway = new DataGateway(this.loginList, this.employeeList);
-        this.accountFacade = new AccountFacade(this.loginList, this.employeeList,username);
         this.workList = new WorkList();
         this.groupManager = new GroupManager();
         this.groupList = new GroupList();
         this.journalList = new JournalList();
+        this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.workManager = new WorkManager();
         this.username = username;
+        this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
 
         this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.workManager, this.groupManager);
-        this.employeeType = this.accountFacade.employeeType();
+        this.employeeType = this.accountFacade.getEmployeeType();
     }
 
+
     // === System methods ===
+
 
     public boolean systemStart(String username, String password) {
         this.fileGateway.ReadInputFileToLoginList();
@@ -68,31 +70,32 @@ public class FacadeSys {
     }
 
     // === Personal UI Method ===
-    public void personalInfo(){
+    public String personalInfo(){
+        String presentInfo = "";
         if (this.employeeType.equals("PartTimeEmployee")){
             ArrayList<String> info = this.accountFacade.employeeInfo();
-            String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
+            presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6);
-            System.out.println(presentInfo);
+            return presentInfo;
         }else{
             ArrayList<String> info = this.accountFacade.employeeInfo();
             int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
-            String presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
+            presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                     + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                     + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
                     +"\n Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
-            System.out.println(presentInfo);
+            return presentInfo;
         }
     }
 
-    public void checkSalary(){
+    public String checkSalary(){
         if (this.employeeType.equals("PartTimeEmployee")){
             String presentWage = String.valueOf(this.accountFacade.checkSalary());
-            System.out.println(presentWage);
+            return presentWage;
         }else{
             String presentWage = String.valueOf(this.accountFacade.checkSalary());
-            System.out.println(presentWage);
+            return presentWage;
         }
     }
 
@@ -252,63 +255,63 @@ public class FacadeSys {
     }
 
 
-    public void UserWorkInfoChange(String userid, String option, String info) {
+//    public void UserWorkInfoChange(String userid, String option, String info) {
+//
+//        Employee employee = null;
+//        Userable user = null;
+//        try {
+//            for (Employee e : this.employeeList) {
+//                if (e.getID().equals(userid)) {
+//                    employee = e;
+//                    break;
+//                }
+//
+//                for (Userable u : this.loginList) {
+//                    if (u.getID().equals(userid)) {
+//                        user = u;
+//                        break;
+//                    }
+//
+//                    if (!(levelVerifier(Integer.toString(e.getLevel())))) {// Need to be in UI?
+//                        System.out.println("You cannot change info to this employee, please try again.");
+//                        return;
+//                    }
+//
+//                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "FullTimeEmployee")) {
+//                        accountFacade.setFullTimeAdvancedInfo(option, info);
+//                        System.out.println("The information is successfully updated");
+//                    }
+//
+//                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "PartTimeEmployee")) {
+//                        if ((!Objects.equals(option, "1")) && (!Objects.equals(option, "2")) && (!Objects.equals(option, "3"))) {
+//                            System.out.println("Part Time Employee does not have these infos");
+//                        }
+//                        return;
+//                    }
+//                    accountFacade.setPartTimeAdvancedInfo(option, info);
+//                    System.out.println("The information is successfully updated");
+//                }
+//            }
+//        }catch (Exception e){
+//            System.out.println("Error occurred in FacadeSys.UserWorkInfoChange");
+//        }
+//    }
 
-        Employee employee = null;
-        Userable user = null;
-        try {
-            for (Employee e : this.employeeList) {
-                if (e.getID().equals(userid)) {
-                    employee = e;
-                    break;
-                }
-
-                for (Userable u : this.loginList) {
-                    if (u.getID().equals(userid)) {
-                        user = u;
-                        break;
-                    }
-
-                    if (!(levelVerifier(Integer.toString(e.getLevel())))) {// Need to be in UI?
-                        System.out.println("You cannot change info to this employee, please try again.");
-                        return;
-                    }
-
-                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "FullTimeEmployee")) {
-                        accountFacade.setFullTimeAdvancedInfo(option, info);
-                        System.out.println("The information is successfully updated");
-                    }
-
-                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "PartTimeEmployee")) {
-                        if ((!Objects.equals(option, "1")) && (!Objects.equals(option, "2")) && (!Objects.equals(option, "3"))) {
-                            System.out.println("Part Time Employee does not have these infos");
-                        }
-                        return;
-                    }
-                    accountFacade.setPartTimeAdvancedInfo(option, info);
-                    System.out.println("The information is successfully updated");
-                }
-            }
-        }catch (Exception e){
-            System.out.println("Error occurred in FacadeSys.UserWorkInfoChange");
-        }
-    }
-
-    public String[] SingleSalaryCheck(String id) {
-        /**
-         * shows all info of a user except password.
-         */
-        if (!accountFacade.userExist(id)) {
-            return null;
-        }
-        if (accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id)))) {
-            return null;
-        }
-        if (!accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id) - 1))) {
-            return null;
-        }
-        return accountFacade.getAllInfo(id);
-    }
+//    public String[] SingleSalaryCheck(String id) {
+//        /**
+//         * shows all info of a user except password.
+//         */
+//        if (!accountFacade.userExist(id)) {
+//            return null;
+//        }
+//        if (accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id)))) {
+//            return null;
+//        }
+//        if (!accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id) - 1))) {
+//            return null;
+//        }
+//        return accountFacade.getAllInfo(id);
+//    }
 
 
     public List<String> checkLowerEmployeeSalary(String id, String option) throws Exception {
