@@ -11,7 +11,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public void writeUserToFile(LoginList userList) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/UserAccountData");
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(userList);
@@ -20,7 +21,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public void writeUserEmployeeToFile(EmployeeList employeeList) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/UserEmployeeData");
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(employeeList);
@@ -29,7 +31,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public void writeWorkToFile(WorkList workList) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/WorkData");
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/WorkData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(workList);
@@ -38,7 +41,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public void writeGroupToFile(GroupList groupList) throws IOException{
-        OutputStream file = new FileOutputStream("/Data/GroupData");
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/GroupData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(groupList);
@@ -46,7 +50,8 @@ public class FileReadWrite implements ReadWrite{
     }
     @Override
     public LoginList readUserFromFileTo(LoginList loginList) throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream("/Data/UserAccountData");
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserData.ser"));
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         LoginList UserFile = (LoginList) input.readObject();
@@ -59,7 +64,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public EmployeeList readEmployeeFromFileTo(EmployeeList employeeList) throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream("/Data/UserEmployeeData");
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         EmployeeList EmployeeFile = (EmployeeList) input.readObject();
@@ -71,7 +77,8 @@ public class FileReadWrite implements ReadWrite{
     }
     @Override
     public WorkList readWorkFromFileTo(WorkList workList) throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream("/Data/WorkData");
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/WorkData.ser"));
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         WorkList workFile = (WorkList) input.readObject();
@@ -84,7 +91,8 @@ public class FileReadWrite implements ReadWrite{
 
     @Override
     public GroupList readGroupFromFileTo(GroupList groupList) throws IOException, ClassNotFoundException{
-        InputStream file = new FileInputStream(("/Data/GroupData"));
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream((filePath.concat("/src/Data/GroupData.ser")));
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         GroupList groupFile = (GroupList) input.readObject();

@@ -2,12 +2,13 @@ package main.UsesCases;
 
 import main.Entity.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EmployeeList implements Iterable<Employee>{
+public class EmployeeList implements Iterable<Employee>, Serializable {
 
     // === Instance Variables ===
 
@@ -36,6 +37,7 @@ public class EmployeeList implements Iterable<Employee>{
     public void addEmployee(String department, int wage, String position,  int level, String status, String id) {
         if (status.equals("F")) {
             Employee employee = new FullTimeEmployee(department, position, wage, level, id);
+            this.EmployeeList.add(employee);
         } else if (status.equals("P") && position.equals("N")) {
             Employee employee = new PartTimeEmployee(department, wage, level, id);
             this.EmployeeList.add(employee);
