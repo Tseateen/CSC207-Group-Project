@@ -24,7 +24,7 @@ public class LoginList implements Iterable<Userable>, Serializable {
 
     public void initialize(){
         //TODO: what's the highest level for admin?
-        Userable admin = new User("N/A", "N/A", "Admin", "N/A", "N/A", "0");
+        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
         this.UserList.add(admin);
     }
     public boolean deleteUser(String id){

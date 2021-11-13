@@ -57,32 +57,27 @@ public class AccountFacade {
      */
     public ArrayList<String> employeeInfo() {
         ArrayList<String> info = new ArrayList<>();
-        Userable user = new User();
-        for (Userable userInList : this.loginList) {
-            if (user.getUsername().equals(this.username)) {
-                user = userInList;
-            }
-        }
+        Userable user = this.findUserHelper();
         if (this.employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.employee;
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.findEmployeeHelper();
             info.add(user.getName());
             info.add(user.getID());
             info.add(user.getUsername());
             info.add(user.getPassword());
             info.add(user.getPhone());
             info.add(user.getAddress());
-            info.add(employee.getDepartment());
+            info.add(partTimeEmployee.getDepartment());
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.employee();
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.findEmployeeHelper();
             info.add(user.getName());
             info.add(user.getID());
             info.add(user.getUsername());
             info.add(user.getPassword());
             info.add(user.getPhone());
             info.add(user.getAddress());
-            info.add(employee.getDepartment());
-            info.add(employee.getPosition());
-            info.add(employee.getState());
+            info.add(fullTimeEmployee.getDepartment());
+            info.add(fullTimeEmployee.getPosition());
+            info.add(fullTimeEmployee.getState());
         }
         return info;
     }
