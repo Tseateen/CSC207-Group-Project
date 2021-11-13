@@ -41,7 +41,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
         } else if (status.equals("P") && position.equals("N")) {
             Employee employee = new PartTimeEmployee(department, wage, level, id);
             this.EmployeeList.add(employee);
-
         }
     }
     public void initialize(){

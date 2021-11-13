@@ -2,12 +2,13 @@ package main.UsesCases;
 
 import main.Entity.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class WorkList implements Iterable<Workable>{
+public class WorkList implements Iterable<Workable>, Serializable {
 
     private final List<Workable> WorkList;
 
