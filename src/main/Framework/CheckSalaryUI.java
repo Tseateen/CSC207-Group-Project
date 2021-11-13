@@ -8,10 +8,17 @@ import java.util.Scanner;
 public class CheckSalaryUI {
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a CheckSalaryUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public CheckSalaryUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the CheckSalaryUI
+     */
     public void run() throws Exception {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;

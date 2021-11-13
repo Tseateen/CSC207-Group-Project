@@ -12,10 +12,17 @@ public class CreateWorkUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a CreateWorkUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public CreateWorkUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the CreateWorkUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;
