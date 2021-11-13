@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class Main {
 
+    /**
+     * Start the HR System
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         System.out.println("Welcome to the HR System!");
         Scanner keyIn = new Scanner(System.in);

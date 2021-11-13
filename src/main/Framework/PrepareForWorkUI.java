@@ -9,10 +9,17 @@ public class PrepareForWorkUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a PrepareForWorkUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public PrepareForWorkUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the PrepareForWorkUI
+     */
     public void run(){
         Scanner keyIn = new Scanner(System.in);
         System.out.println("Following are the work that you can do:");

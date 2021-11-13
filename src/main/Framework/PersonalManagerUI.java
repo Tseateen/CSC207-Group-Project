@@ -7,14 +7,21 @@ public class PersonalManagerUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a PersonalManagerUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public PersonalManagerUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the PersonalManagerUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
 
-        setPersonalInfoUI changePersonInfo = new setPersonalInfoUI(this.facadeSys);
+        SetPersonalInfoUI changePersonInfo = new SetPersonalInfoUI(this.facadeSys);
         boolean noExit = true;
 
         while (noExit) {

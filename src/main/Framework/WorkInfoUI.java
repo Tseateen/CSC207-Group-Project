@@ -8,10 +8,17 @@ public class WorkInfoUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a WorkIndoUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public WorkInfoUI(FacadeSys facadeSys){
         this.facadeSys = facadeSys;
     }
 
+    /**
+     * Run the WorkInfoUI
+     */
     public void run(){
         Scanner keyIn = new Scanner(System.in);
         System.out.println("=== Following is your work ===");
