@@ -161,6 +161,14 @@ public class FacadeTest {
         this.workFacade.extendWork( this.username,work_id, days);
     }
 
+    public boolean checkLeaderOf(String work_id) {
+        return this.workFacade.verifierLeader(this.username, work_id);
+    }
+
+    public boolean checkWorkExist(String work_id) {
+        return this.workFacade.workExist(work_id);
+    }
+
     //=============================
 
     public String[] showAllLowerUser() {
