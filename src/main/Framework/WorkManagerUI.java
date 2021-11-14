@@ -95,7 +95,7 @@ public class WorkManagerUI {
                     String option = keyIn.nextLine();
                     System.out.println("Please enter the new info");
                     String inf = keyIn.nextLine();
-                    facadeSys.UserWorkInfoChange(userid, option, inf);
+                   // facadeSys.UserWorkInfoChange(userid, option, inf);
                     break;
                 case "E":
                     noExit = false;
