@@ -2,6 +2,7 @@ package main.Entity;
 
 import java.io.Serializable;
 import java.util.HashMap;
+
 public class PartTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 

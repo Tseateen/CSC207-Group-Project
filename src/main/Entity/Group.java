@@ -5,38 +5,38 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Group implements Iterable<Userable>, Serializable {
-    private final Userable leader;
-    private List<Userable> groupMembers = new ArrayList<Userable>();
+public class Group implements Iterable<String>, Serializable {
+    private final String leader_id;
+    private List<String> groupMembers = new ArrayList<String>();
     private String workid;
 
 
     /**
-     * Construct a Group from the given leader,
+     * Construct a Group from the given leader_id,
      * members, and project.
      *
      * @param workid The work ID of the work this group is working on.
-     * @param leader The leader of this group.
+     * @param leader_id The leader_id of this group.
      */
-    public Group(Userable leader, String workid){
-        this.leader = leader;
+    public Group(String leader_id, String workid){
+        this.leader_id = leader_id;
         this.workid = workid;
     }
 
     /**
      *
-     * @param leader This method set a new leader for the group.
+     * @param leader_id This method set a new leader for the group.
      */
-    public void setLeader(Userable leader){
-        if (this.groupMembers.contains(leader)){
-            int leaderIndex = this.groupMembers.indexOf(leader);
-            Userable previousLeader = this.groupMembers.get(0);
-            this.groupMembers.set(0, leader);
+    public void setLeaderId(String leader_id){
+        if (this.groupMembers.contains(leader_id)){
+            int leaderIndex = this.groupMembers.indexOf(leader_id);
+            String previousLeader = this.groupMembers.get(0);
+            this.groupMembers.set(0, leader_id);
             this.groupMembers.set(leaderIndex, previousLeader);
         }
         else{
-            Userable previousLeader = this.groupMembers.get(0);
-            this.groupMembers.set(0, leader);
+            String previousLeader = this.groupMembers.get(0);
+            this.groupMembers.set(0, leader_id);
             this.groupMembers.add(previousLeader);
 
         }
@@ -47,8 +47,8 @@ public class Group implements Iterable<Userable>, Serializable {
      *
      * @return This method will return the leader of this group.
      */
-    public Userable getLeader(){
-        return this.leader;
+    public String getLeaderId(){
+        return this.leader_id;
     }
 
 
@@ -57,10 +57,10 @@ public class Group implements Iterable<Userable>, Serializable {
      * @param members This method set a new group of members for the group.
      */
     //leader does not change, all the members are replaced
-    public void setMembers(Userable[] members) {
-        List<Userable> newGroupMemebers = new ArrayList<>();
+    public void setMembers(String[] members) {
+        List<String> newGroupMemebers = new ArrayList<>();
         newGroupMemebers.add(this.groupMembers.get(0));
-        for(Userable member: members){
+        for(String member: members){
             newGroupMemebers.add(member);
         }
         this.groupMembers = newGroupMemebers;
@@ -70,7 +70,7 @@ public class Group implements Iterable<Userable>, Serializable {
      *
      * @return This method will return the members of this group.
      */
-    public List<Userable> getMembers() {
+    public List<String> getMembers() {
         return this.groupMembers;
     }
 
@@ -84,7 +84,7 @@ public class Group implements Iterable<Userable>, Serializable {
      * @param member The member who is going to be added to the group.
      * @return This method will return true iff the member is successfully added to the group.
      */
-    public boolean addMember(Userable member) {
+    public boolean addMember(String member) {
         if (!this.groupMembers.contains(member)) {
             this.groupMembers.add(member);
             return true;
@@ -97,7 +97,7 @@ public class Group implements Iterable<Userable>, Serializable {
      * @param member The member who is going to be removed from the group.
      * @return This method will return true iff the member is successfully removed from the group.
      */
-    public boolean deleteMember(Userable member){
+    public boolean deleteMember(String member){
         if (!this.groupMembers.contains(member)){
             return false;
         }this.groupMembers.remove(member);
@@ -127,14 +127,14 @@ public class Group implements Iterable<Userable>, Serializable {
      * @return an iterator for this group.
      */
     @Override
-    public Iterator<Userable> iterator() {
+    public Iterator<String> iterator() {
         return new GroupIterator();
     }
 
     /**
      * An Iterator for Group Userables.
      */
-    private class GroupIterator implements Iterator<Userable> {
+    private class GroupIterator implements Iterator<String> {
 
         /**
          * The index of the next Userable to return.
@@ -157,8 +157,8 @@ public class Group implements Iterable<Userable>, Serializable {
          * @return the next Userable.
          */
         @Override
-        public Userable next() {
-            Userable res;
+        public String next() {
+            String res;
 
             // List.get(i) throws an IndexOutBoundsException if
             // we call it with i >= groupMembers.size().
@@ -178,7 +178,7 @@ public class Group implements Iterable<Userable>, Serializable {
          */
         @Override
         public void remove() {
-            Userable member = groupMembers.get(current);
+            String member = groupMembers.get(current);
             deleteMember(member);
         }
 

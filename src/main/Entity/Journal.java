@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.sql.Timestamp;
 
+
 public class Journal {
     private final HashMap<String, String[]> journals; // <Timestamp,<id, info>>
     private final String id;

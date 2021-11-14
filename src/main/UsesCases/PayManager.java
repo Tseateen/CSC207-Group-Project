@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.Employee;
-import main.Entity.Userable;
+
 import main.Entity.Work;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class PayManager {
 
-    private Map<Userable, Employee> employeeMap;
+    private Map<String, Employee> employeeMap;
 
 
     /**
@@ -17,7 +17,7 @@ public class PayManager {
      */
     public PayManager() {
         // TODO: the employeeMap is read from txt file.
-        this.employeeMap = new HashMap<Userable, Employee>();
+        this.employeeMap = new HashMap<String, Employee>();
     }
 
     /**
@@ -25,7 +25,7 @@ public class PayManager {
      * @param employeeMap the HashMap that contains all the employees.
      * @return the HashMap that contains employees and their calculated wage respectively.
      */
-    private Map<Employee, Integer> calculateWage(Map<Userable, Employee> employeeMap ){
+    private Map<Employee, Integer> calculateWage(Map<String, Employee> employeeMap ){
         //TODO implement this method
         return null;
     }
@@ -47,7 +47,7 @@ public class PayManager {
      * @param project the project that the employee had completed
      * @return the Hashmap that contains employees and their calculated work bonus respectively.
      */
-    public Map<Employee, Integer> calculateWorkBonus(Map<Userable, Employee> employeeMap, Work project){
+    public Map<Employee, Integer> calculateWorkBonus(Map<String, Employee> employeeMap, Work project){
         //TODO implement this method
         return null;
     }
@@ -67,7 +67,7 @@ public class PayManager {
      * @param employeeMap the HashMap that contains all the employees.
      * @return the Hashmap that contains employees and their calculated annual bonus respectively.
      */
-    public Map<Employee, Integer> calculateAnnualBonus(Map<Userable, Employee> employeeMap){
+    public Map<Employee, Integer> calculateAnnualBonus(Map<String, Employee> employeeMap){
         //TODO implement this method
         return null;
     }
@@ -82,7 +82,7 @@ public class PayManager {
         return true;
     }
 
-    public Map<Userable, Employee> getEmployeeMap() {
+    public Map<String, Employee> getEmployeeMap() {
         return employeeMap;
     }
 }

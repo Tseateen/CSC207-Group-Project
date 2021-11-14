@@ -302,13 +302,13 @@ public class AccountFacade {
      */
     public String findEmployeeTypeHelper(){
         String employeeType = "";
-       Userable user = findUserHelper();
-       for (Employee employee: this.employeeList){
-           if (employee.getID().equals(user.getID())){
-               if(employee instanceof PartTimeEmployee){
-                   employeeType = "PartTimeEmployee";
-               }else{
-                   employeeType = "FullTimeEmployee";
+        Userable user = findUserHelper();
+        for (Employee employee: this.employeeList){
+            if (employee.getID().equals(user.getID())){
+                if(employee instanceof PartTimeEmployee){
+                    employeeType = "PartTimeEmployee";
+                }else{
+                    employeeType = "FullTimeEmployee";
                 }
             }
         }

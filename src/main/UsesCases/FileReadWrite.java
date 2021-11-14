@@ -1,11 +1,11 @@
 package main.UsesCases;
 
 import main.Entity.Employee;
-import main.Entity.Userable;
+
 import main.Entity.Work;
 import main.Entity.*;
 import java.io.*;
-import java.util.HashMap;
+
 
 public class FileReadWrite implements ReadWrite{
 

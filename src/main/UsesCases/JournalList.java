@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.Journal;
-import main.Entity.Userable;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;

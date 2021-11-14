@@ -1,5 +1,6 @@
 package test.UsesCasesTest;
 
+
 import main.UsesCases.PartTimeInfoManager;
 import main.Entity.*;
 import org.junit.Before;
@@ -13,9 +14,9 @@ public class PartTimeInfoManager_test {
 
     @Before
     public void Setup(){
-        Userable user1 = new User("1122", "123456", "Andy", "4377778880",
+        String user1 = new User("1122", "123456", "Andy", "4377778880",
                 "5 King St.", "1234");
-        Userable user2 = new User("999", "098765", "Kyle", "1234456789",
+        String user2 = new User("999", "098765", "Kyle", "1234456789",
                 "10 King St.", "66677");
 
         PartTimeEmployee pte1 = new PartTimeEmployee("HR", 8000, 2, "1234");
