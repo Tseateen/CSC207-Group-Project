@@ -13,7 +13,7 @@ public class HomePage {
         this.facadeSys = facadeSys;
     }
 
-    public void run() throws IOException,ClassNotFoundException {
+    public void run() throws Exception {
         Scanner keyIn = new Scanner(System.in);
         PersonalManagerUI personal = new PersonalManagerUI(facadeSys);
         WorkManagerUI work = new WorkManagerUI(facadeSys);

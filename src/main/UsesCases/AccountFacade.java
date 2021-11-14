@@ -12,14 +12,13 @@ public class AccountFacade {
     private final EmployeeList employeeList;
     private final PayManager managerPay;
     private final Verifier managerVerifier;
-    private static int idCounter = 1;
+    private int idCounter;
     private final String employeeType;
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
-
         this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
        this.employeeType = "";
@@ -37,19 +36,6 @@ public class AccountFacade {
         return this.findEmployeeTypeHelper();
     }
 
-
-    // return all the info at the same time (馬哥的idea)
-    public ArrayList<String> partTimeEmployeeInfo() {
-        ArrayList<String> info = new ArrayList<>();
-        info.add(this.user.getName());
-        info.add(this.user.getID());
-        info.add(this.user.getUsername());
-        info.add(this.user.getPassword());
-        info.add(this.user.getPhone());
-        info.add(this.user.getAddress());
-        info.add(this.employee.getDepartment());
-        return info;
-    }
 
     /**
      * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
@@ -78,27 +64,6 @@ public class AccountFacade {
         return info;
     }
 
-    // return one info at a time
-//    public String getPartTimeEmployeeInfo(String option) {
-//        switch (option) {
-//            case "1":
-//                return this.partTimeInfoManager.getNameFromUser();
-//            case "2":
-//                return this.partTimeInfoManager.getIDFromUser();
-//            case "3":
-//                return this.partTimeInfoManager.getUsernameFromUser();
-//            case "4":
-//                return this.partTimeInfoManager.getPasswordFromUser();
-//            case "5":
-//                return this.partTimeInfoManager.getPhoneFromUser();
-//            case "6":
-//                return this.partTimeInfoManager.getAddressFromUser();
-//            case "7":
-//                return this.partTimeInfoManager.getDepartmentFromEmployee();
-//            default :
-//                return "No such option, Please choose again!";
-//        }
-//    }
 
     /**
      * Get the schedule of a part time employee
@@ -111,31 +76,6 @@ public class AccountFacade {
     }
 
 
-//    public int getPartTimeEmployeeInfoInt(String option){
-//        switch (option){
-//            case "9":
-//                return this.partTimeInfoManager.getWageFromEmployee();
-//            case "10":
-//                return this.partTimeInfoManager.getLevelFromEmployee();
-//            default:
-//                return 0;
-//        }
-//    }
-
-    // return all the info at the same time (馬哥的idea)
-//    public ArrayList<String> FullTimeEmployeeInfo(){
-//        ArrayList<String> info = new ArrayList<>();
-//        info.add(this.fullTimeInfoManager.getNameFromUser());
-//        info.add(this.fullTimeInfoManager.getIDFromUser());
-//        info.add(this.fullTimeInfoManager.getUsernameFromUser());
-//        info.add(this.fullTimeInfoManager.getPasswordFromUser());
-//        info.add(this.fullTimeInfoManager.getPhoneFromUser());
-//        info.add(this.fullTimeInfoManager.getAddressFromUser());
-//        info.add(this.fullTimeInfoManager.getDepartmentFromEmployee());
-//        info.add(this.fullTimeInfoManager.getPosition());
-//        info.add(this.fullTimeInfoManager.getStatus());
-//        return info;
-//    }
 
     /**
      * Get the integer information of a full time employee such as total vacation with salary and vacation used
@@ -150,42 +90,6 @@ public class AccountFacade {
         return intValue;
     }
 
-    // return one info at a time
-//    public String getFullTimeEmployeeInfo(String option){
-//        switch (option) {
-//            case "1":
-//                return this.fullTimeInfoManager.getNameFromUser();
-//            case "2":
-//                return this.fullTimeInfoManager.getIDFromUser();
-//            case "3":
-//                return this.fullTimeInfoManager.getUsernameFromUser();
-//            case "4":
-//                return this.fullTimeInfoManager.getPasswordFromUser();
-//            case "5":
-//                return this.fullTimeInfoManager.getPhoneFromUser();
-//            case "6":
-//                return this.fullTimeInfoManager.getAddressFromUser();
-//            case "7":
-//                return this.fullTimeInfoManager.getDepartmentFromEmployee();
-//            case "8":
-//                return this.fullTimeInfoManager.getPosition();
-//            case "9":
-//                return this.fullTimeInfoManager.getStatus();
-//            default:
-//                return "No such option, Please choose again!";
-//        }
-//    }
-
-//    public int getFullTimeEmployeeInfoInt(String option){
-//        switch (option){
-//            case "10":
-//                return this.fullTimeInfoManager.getTotalVacationWithSalary();
-//            case "11":
-//                return this.fullTimeInfoManager.getVacationUsed();
-//            default:
-//                return 0;
-//        }
-//    }
 
     /**
      * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
@@ -372,6 +276,7 @@ public class AccountFacade {
      */
     public boolean CreateNewAccount(String[] userinfo) {
         try {
+            idCounter = this.loginList.getSize();
             String id = String.valueOf(idCounter);
             this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
             this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
@@ -435,26 +340,6 @@ public class AccountFacade {
         return null;
     }
 
-
-//    private PartTimeEmployee findPartTimeEmployeeHelper(){
-//        Employee correctEmployee = new PartTimeEmployee();
-//        for(Employee partTimeEmployee: this.employeeList){
-//            if (partTimeEmployee.getID().equals(this.user.getID())){
-//                correctEmployee = partTimeEmployee;
-//            }
-//        }
-//        return (PartTimeEmployee) correctEmployee;
-//    }
-
-//    private FullTimeEmployee findFullTimeEmployeeHelper(){
-//        Employee correctEmployee = new FullTimeEmployee();
-//        for(Employee fullTimeEmployee: this.employeeList){
-//            if (fullTimeEmployee.getID().equals(this.user.getID())){
-//                correctEmployee = fullTimeEmployee;
-//            }
-//        }
-//        return (FullTimeEmployee) correctEmployee;
-//    }
 
     /**
      * check if the employee is part time employee or full time employee
