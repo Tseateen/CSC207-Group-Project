@@ -16,8 +16,8 @@ public class WorkList implements Iterable<Workable>, Serializable {
         this.WorkList = new ArrayList<Workable>();
     }
 
-    public void addWork(String name, String id, String department, int level){
-        Workable work = new Work(name,id,department,level);
+    public void addWork(String name, String id, String department, String requirement, int level){
+        Workable work = new Work(name,id,department, requirement,level);
         WorkList.add(work);
     }
 

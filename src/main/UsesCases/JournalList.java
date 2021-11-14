@@ -37,6 +37,8 @@ public class JournalList implements Iterable<Journal> {
         }
     }
 
+    public Journal
+
     public int getSize(){
         return journalList.size();
     }

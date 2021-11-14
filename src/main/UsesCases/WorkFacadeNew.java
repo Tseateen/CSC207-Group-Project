@@ -116,6 +116,10 @@ public class WorkFacadeNew {
         return false;
     }
 
+    public void createWork(String user_id, ArrayList<String> info) {
+        this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)));
+    }
 
+    public void
 
 }
