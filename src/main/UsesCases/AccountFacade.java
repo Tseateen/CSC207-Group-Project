@@ -21,9 +21,9 @@ public class AccountFacade {
         this.employeeList = employeeList;
         this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
-       this.employeeType = "";
+        this.employeeType = "";
         this.user = this.findUserHelper();
-        this.employee = findEmployeeHelper();
+        this.employee = this.findEmployeeHelper();
     }
 
     /**
@@ -35,7 +35,6 @@ public class AccountFacade {
         System.out.println(this.findEmployeeTypeHelper());
         return this.findEmployeeTypeHelper();
     }
-
 
     /**
      * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
@@ -64,7 +63,6 @@ public class AccountFacade {
         return info;
     }
 
-
     /**
      * Get the schedule of a part time employee
      *
@@ -74,7 +72,6 @@ public class AccountFacade {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         return employee.getSchedule();
     }
-
 
     /**
      * Get the integer information of a full time employee such as total vacation with salary and vacation used
@@ -88,7 +85,6 @@ public class AccountFacade {
         intValue[1] = employee.getVacationUsed();
         return intValue;
     }
-
 
     /**
      * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
@@ -268,32 +264,6 @@ public class AccountFacade {
     }
 
     /**
-     * Create a new account for an employee include the user information and employee information
-     *
-     * @param userinfo The String array that contains the user information and employee information
-     * @return boolean that indicates if the new account is been created
-     */
-    public boolean CreateNewAccount(String[] userinfo) {
-        try {
-            idCounter = this.loginList.getSize();
-            String id = String.valueOf(idCounter);
-            this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
-            this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
-            idCounter += 1;
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Unable to create account due to uncompleted information");
-            return false;
-        }
-        return true;
-    }
-
-    public String DeleteAccount(String userid) {
-        this.loginList.deleteUser(userid);
-        this.employeeList.deleteEmployee(userid);
-        return userid;
-    }
-
-    /**
      * Check the salary of an employee
      *
      * @return An int that represent the salary/wage of an employee
@@ -380,19 +350,26 @@ public class AccountFacade {
         return typeEmployee;
     }
 
-    public List<Employee> lowerLevelEmployee(String id) {
-        /**
-         * return a list of employee who is lower level than the employee with given id
-         */
-        List<Employee> validemployees = new ArrayList<>();
-        for (Employee employee : this.employeeList) {
-            if (ValidToCreateThisLevel(String.valueOf(employee.getLevel()))) {
-                validemployees.add(employee);
-            }
+    // Case 6: FacadeSys.CreateEmployeeMethod
+    /**
+     * Create a new account for an employee include the user information and employee information
+     *
+     * @param userinfo The String array that contains the user information and employee information
+     */
+    public void CreateNewAccount(String[] userinfo) {
+        try {
+            idCounter = this.loginList.getSize();
+            String id = String.valueOf(idCounter);
+            this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
+            this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
+            idCounter += 1;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Unable to create account due to uncompleted information");
         }
-        return validemployees;
     }
+    // ==================================================
 
+    // Case 7: FacadeSys.DeleteEmployeeMethod
     public boolean userExists(String userid) {
         for (Employee employee : this.employeeList) {
             if (employee.getID().equals(userid)) {
@@ -411,29 +388,11 @@ public class AccountFacade {
         return null;
     }
 
-    public int getTotalVacationByID(String id){
-        for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(id)) {
-                if (employee instanceof FullTimeEmployee) {
-                    return ((FullTimeEmployee) employee).getTotalVacationWithSalary();
-                }
-            }
-            // TODO: throw new Exception("Part time employee does not have vacation");
-        }
-        return 0;
+    public void DeleteAccount(String userid) {
+        this.loginList.deleteUser(userid);
+        this.employeeList.deleteEmployee(userid);
     }
-
-    public int getVacationUsedByID(String id){
-        for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(id)) {
-                if (employee instanceof FullTimeEmployee) {
-                    return ((FullTimeEmployee) employee).getVacationUsed();
-                }
-            }
-            // TODO: throw new Exception("Part time employee does not have vacation");
-        }
-        return 0;
-    }
+    // ==================================================
 
     // Case 8: FacadeSys.LowerEmployeeCheck
     public List<String> lowerEmployeeCheck(String id, String Option) {
@@ -459,6 +418,43 @@ public class AccountFacade {
 
         }
         return employeeCheckList;
+    }
+
+    public List<Employee> lowerLevelEmployee(String id) {
+        /**
+         * return a list of employee who is lower level than the employee with given id
+         */
+        List<Employee> validemployees = new ArrayList<>();
+        for (Employee employee : this.employeeList) {
+            if (ValidToCreateThisLevel(String.valueOf(employee.getLevel()))) {
+                validemployees.add(employee);
+            }
+        }
+        return validemployees;
+    }
+
+    public int getTotalVacationByID(String id){
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(id)) {
+                if (employee instanceof FullTimeEmployee) {
+                    return ((FullTimeEmployee) employee).getTotalVacationWithSalary();
+                }
+            }
+            // TODO: throw new Exception("Part time employee does not have vacation");
+        }
+        return 0;
+    }
+
+    public int getVacationUsedByID(String id){
+        for (Employee employee : this.employeeList) {
+            if (employee.getID().equals(id)) {
+                if (employee instanceof FullTimeEmployee) {
+                    return ((FullTimeEmployee) employee).getVacationUsed();
+                }
+            }
+            // TODO: throw new Exception("Part time employee does not have vacation");
+        }
+        return 0;
     }
     // ==================================================
 }
