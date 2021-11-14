@@ -49,7 +49,7 @@ public class GroupList implements Iterable<Group> {
         int index = -1;
 
         for(int i = 0; i < this.getSize(); i ++){
-            if(this.GroupList.get(i).getWorkid().equals(id)){
+            if(this.GroupList.get(i).getWorkID().equals(id)){
                 index = i;
             }
         }

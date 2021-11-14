@@ -5,6 +5,8 @@ import main.Entity.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class GroupList_test {
@@ -24,10 +26,10 @@ public class GroupList_test {
     @Test(timeout = 100)
     public void testAddGroup() {
         GL.addGroup(user1, "2222");
-        for (Group e : GL) {
-            if (e.getWorkid().equals("2222")) {
-                Userable[] l = e.getMembers();
-                assertEquals(e.getLeader(), user1);
+        for (Group eachGroup : GL) {
+            if (eachGroup.getWorkID().equals("2222")) {
+                List<Userable> membersList = eachGroup.getMembers();
+                assertEquals(eachGroup.getLeader(), membersList.get(0));
             }
         }
     }
@@ -43,7 +45,7 @@ public class GroupList_test {
     public void testDeleteUser() {
         GL.deleteUser("2222");
         for (Group e : GL) {
-            assertNotEquals(e.getWorkid(), "2222");
+            assertNotEquals(e.getWorkID(), "2222");
         }
     }
 

@@ -7,7 +7,6 @@ import main.UsesCases.*;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.*;
 
 
@@ -17,7 +16,7 @@ import java.util.*;
 public class FacadeSys {
 
     // === Instance Variables ===
-
+    private String employeeType;
     // === DataFile ===
     private final DataGateway fileGateway;
     private final LoginList loginList;
@@ -31,9 +30,8 @@ public class FacadeSys {
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacade workFacade;
-    private final GroupManager groupManager;
-    private String employeeType;
-    private final WorkManager workManager;
+
+
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
@@ -43,15 +41,13 @@ public class FacadeSys {
         this.employeeList = new EmployeeList();
         this.verifier = new Verifier(this.loginList);
         this.workList = new WorkList();
-        this.groupManager = new GroupManager();
         this.groupList = new GroupList();
         this.journalList = new JournalList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
-        this.workManager = new WorkManager();
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
 
-        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.workManager, this.groupManager);
+        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList);
     }
 
 
@@ -92,11 +88,9 @@ public class FacadeSys {
 
     public String checkSalary(){
         if (this.employeeType.equals("PartTimeEmployee")){
-            String presentWage = String.valueOf(this.accountFacade.checkSalary());
-            return presentWage;
+            return String.valueOf(this.accountFacade.checkSalary());
         }else{
-            String presentWage = String.valueOf(this.accountFacade.checkSalary());
-            return presentWage;
+            return String.valueOf(this.accountFacade.checkSalary());
         }
     }
 
@@ -157,27 +151,17 @@ public class FacadeSys {
     }
     // ==================================
 
-    public String findLeadWorkList() {
-        String presentWorkList = "";
-        for (String workID : this.workFacade.findLeadWork(this.username)){
-            presentWorkList = workID + "\n";
-        }
-        return presentWorkList;
+    // Case 4: Distribute a work
+    public List<String> findLeadWorkList() {
+        return this.workFacade.findLeadWork(this.username);
     }
 
 
-    public void distributeWork(String employeeid, String wid) {
-        /**
-         * 1. Show all works that this user lead
-         * 2. Let them choose the work based on work id (they only can choose work that they lead)
-         * 3. Ask him did he need to know about employees information who can be invoked be him
-         *    This part may be implemented by calling AllWorker below.
-         * 4. Let them choose group members
-         */
+    public void distributeWork(String employeeID, String workID) {
 
         List<Userable> members = new ArrayList<>();
         String[] parts;
-        parts = employeeid.split(" ");
+        parts = employeeID.split(" ");
         try {
             for (String eid : parts) {
                 for (Userable u : this.loginList) {
@@ -192,8 +176,8 @@ public class FacadeSys {
                 }
             }
             for (Group g : this.groupList) {
-                if (g.getWorkid().equals(wid)) {
-                    this.groupManager.addMembers(members, g);
+                if (g.getWorkID().equals(workID)) {
+                    //this.groupManager.addMembers(members, g);
                     break;
                 }
             }
@@ -218,7 +202,7 @@ public class FacadeSys {
     // ==================================
 
     public void WorkUpdate() {
-        /** Todo: This one is designed for employee to report their work progress
+        /* Todo: This one is designed for employee to report their work progress
          *  we need to record their message to Journal. And if the work finished,
          *  only leader!!! can to change work's statues to 'Finished'. There may be some more steps needed.
          *  also, if the user is this work's leader, they can choose to extend due date
@@ -228,7 +212,7 @@ public class FacadeSys {
 
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
-
+    // Case 6: Create a user
     public boolean createUser(String username, String password, String name, String phone, String address,
                               String department, String wage, String position, String level, String status) {
         boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
@@ -238,15 +222,10 @@ public class FacadeSys {
         }
         return validLevelGiven;
     }
+    // ==================================
 
-
+    // Case 7: Delete a user
     public boolean deleteUser(String userid) {
-        /**
-         * We may need to use memento for delete User
-         *  This part we assume we already checked level in UI (Todo)
-         * Todo: Implement userExist in AccountFacade which used to check user exist or not by their id
-         * Todo: Implement getLevel in AccountFacade which used to get user level by their id
-         */
         boolean validLevelGiven = this.accountFacade.userExists(userid) &&
                 this.accountFacade.ValidToCreateThisLevel(this.accountFacade.getLevel(userid));
         if (validLevelGiven) {
@@ -254,7 +233,14 @@ public class FacadeSys {
         }
         return validLevelGiven;
     }
+    // ==================================
 
+    // Case 8: Check all lower level employees' salary-related information
+    public List<String> checkLowerEmployeeSalary(String id, String option) {
+        return this.accountFacade.lowerEmployeeCheck(id, option);
+        }
+    }
+    // ==================================================
 
 //    public void UserWorkInfoChange(String userid, String option, String info) {
 //
@@ -297,48 +283,3 @@ public class FacadeSys {
 //            System.out.println("Error occurred in FacadeSys.UserWorkInfoChange");
 //        }
 //    }
-
-//    public String[] SingleSalaryCheck(String id) {
-//        /**
-//         * shows all info of a user except password.
-//         */
-//        if (!accountFacade.userExist(id)) {
-//            return null;
-//        }
-//        if (accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id)))) {
-//            return null;
-//        }
-//        if (!accountFacade.getDepartment(id).equals("HR") && !levelVerifier(String.valueOf(accountFacade.getLevel(id) - 1))) {
-//            return null;
-//        }
-//        return accountFacade.getAllInfo(id);
-//    }
-
-
-    public List<String> checkLowerEmployeeSalary(String id, String option) throws Exception {
-        // Todo: reward and kpi is not implemented yet
-        // Todo: need further modification
-        /**
-         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
-         * salary, work days, vacation used, reward, and kpi. Hr worker need to confirm all those info
-         */
-        // 1: Salary, 2: attendance, 3: total vacation with salary, 4: used vacation
-        switch (option) {
-            case "1": {
-                return this.accountFacade.lowerEmployeeSalaryCheck(id);
-            }
-            case "2": {
-                return this.accountFacade.lowerEmployeeAttendanceCheck(id);
-            }
-            case "3": {
-                return this.accountFacade.lowerEmployeeTotalVacationCheck(id);
-            }
-            case "4": {
-                return this.accountFacade.lowerEmployeeVacationUsedCheck(id);
-            } default:{
-                throw new Exception("False input");
-            }
-        }
-    }
-    // ==================================================
-}

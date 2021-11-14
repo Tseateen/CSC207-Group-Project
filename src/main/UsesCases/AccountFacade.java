@@ -78,28 +78,6 @@ public class AccountFacade {
         return info;
     }
 
-    // return one info at a time
-//    public String getPartTimeEmployeeInfo(String option) {
-//        switch (option) {
-//            case "1":
-//                return this.partTimeInfoManager.getNameFromUser();
-//            case "2":
-//                return this.partTimeInfoManager.getIDFromUser();
-//            case "3":
-//                return this.partTimeInfoManager.getUsernameFromUser();
-//            case "4":
-//                return this.partTimeInfoManager.getPasswordFromUser();
-//            case "5":
-//                return this.partTimeInfoManager.getPhoneFromUser();
-//            case "6":
-//                return this.partTimeInfoManager.getAddressFromUser();
-//            case "7":
-//                return this.partTimeInfoManager.getDepartmentFromEmployee();
-//            default :
-//                return "No such option, Please choose again!";
-//        }
-//    }
-
     /**
      * Get the schedule of a part time employee
      *
@@ -109,33 +87,6 @@ public class AccountFacade {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         return employee.getSchedule();
     }
-
-
-//    public int getPartTimeEmployeeInfoInt(String option){
-//        switch (option){
-//            case "9":
-//                return this.partTimeInfoManager.getWageFromEmployee();
-//            case "10":
-//                return this.partTimeInfoManager.getLevelFromEmployee();
-//            default:
-//                return 0;
-//        }
-//    }
-
-    // return all the info at the same time (馬哥的idea)
-//    public ArrayList<String> FullTimeEmployeeInfo(){
-//        ArrayList<String> info = new ArrayList<>();
-//        info.add(this.fullTimeInfoManager.getNameFromUser());
-//        info.add(this.fullTimeInfoManager.getIDFromUser());
-//        info.add(this.fullTimeInfoManager.getUsernameFromUser());
-//        info.add(this.fullTimeInfoManager.getPasswordFromUser());
-//        info.add(this.fullTimeInfoManager.getPhoneFromUser());
-//        info.add(this.fullTimeInfoManager.getAddressFromUser());
-//        info.add(this.fullTimeInfoManager.getDepartmentFromEmployee());
-//        info.add(this.fullTimeInfoManager.getPosition());
-//        info.add(this.fullTimeInfoManager.getStatus());
-//        return info;
-//    }
 
     /**
      * Get the integer information of a full time employee such as total vacation with salary and vacation used
@@ -149,43 +100,6 @@ public class AccountFacade {
         intValue[1] = employee.getVacationUsed();
         return intValue;
     }
-
-    // return one info at a time
-//    public String getFullTimeEmployeeInfo(String option){
-//        switch (option) {
-//            case "1":
-//                return this.fullTimeInfoManager.getNameFromUser();
-//            case "2":
-//                return this.fullTimeInfoManager.getIDFromUser();
-//            case "3":
-//                return this.fullTimeInfoManager.getUsernameFromUser();
-//            case "4":
-//                return this.fullTimeInfoManager.getPasswordFromUser();
-//            case "5":
-//                return this.fullTimeInfoManager.getPhoneFromUser();
-//            case "6":
-//                return this.fullTimeInfoManager.getAddressFromUser();
-//            case "7":
-//                return this.fullTimeInfoManager.getDepartmentFromEmployee();
-//            case "8":
-//                return this.fullTimeInfoManager.getPosition();
-//            case "9":
-//                return this.fullTimeInfoManager.getStatus();
-//            default:
-//                return "No such option, Please choose again!";
-//        }
-//    }
-
-//    public int getFullTimeEmployeeInfoInt(String option){
-//        switch (option){
-//            case "10":
-//                return this.fullTimeInfoManager.getTotalVacationWithSalary();
-//            case "11":
-//                return this.fullTimeInfoManager.getVacationUsed();
-//            default:
-//                return 0;
-//        }
-//    }
 
     /**
      * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
@@ -436,26 +350,6 @@ public class AccountFacade {
     }
 
 
-//    private PartTimeEmployee findPartTimeEmployeeHelper(){
-//        Employee correctEmployee = new PartTimeEmployee();
-//        for(Employee partTimeEmployee: this.employeeList){
-//            if (partTimeEmployee.getID().equals(this.user.getID())){
-//                correctEmployee = partTimeEmployee;
-//            }
-//        }
-//        return (PartTimeEmployee) correctEmployee;
-//    }
-
-//    private FullTimeEmployee findFullTimeEmployeeHelper(){
-//        Employee correctEmployee = new FullTimeEmployee();
-//        for(Employee fullTimeEmployee: this.employeeList){
-//            if (fullTimeEmployee.getID().equals(this.user.getID())){
-//                correctEmployee = fullTimeEmployee;
-//            }
-//        }
-//        return (FullTimeEmployee) correctEmployee;
-//    }
-
     /**
      * check if the employee is part time employee or full time employee
      *
@@ -527,81 +421,54 @@ public class AccountFacade {
         return null;
     }
 
-    public int getTotalVacationByID(String id) throws Exception {
+    public int getTotalVacationByID(String id){
         for (Employee employee : this.employeeList) {
             if (employee.getID().equals(id)) {
                 if (employee instanceof FullTimeEmployee) {
                     return ((FullTimeEmployee) employee).getTotalVacationWithSalary();
                 }
             }
-        }throw new Exception("Part time employee does not have vacation");
+            // TODO: throw new Exception("Part time employee does not have vacation");
+        }
+        return 0;
     }
 
-    public int getVacationUsedByID(String id) throws Exception {
+    public int getVacationUsedByID(String id){
         for (Employee employee : this.employeeList) {
             if (employee.getID().equals(id)) {
                 if (employee instanceof FullTimeEmployee) {
                     return ((FullTimeEmployee) employee).getVacationUsed();
                 }
             }
-        }throw new Exception("Part time employee does not have vacation");
+            // TODO: throw new Exception("Part time employee does not have vacation");
+        }
+        return 0;
     }
 
-    public List<String> lowerEmployeeSalaryCheck(String id) {
-        // Todo: reward and kpi is not implemented yet
-        // Todo: need further modification
-        /**
-         * Todo: Show all(maybe some) other department same level workers' and lower level hr workers'
-         * salary, work days, vacation used, reward, and kpi. Hr worker need to confirm all those info
-         */
-        // 1: Salary, 2: attendance, 3: total vacation with salary, 4: used vacation
+    // Case 8: FacadeSys.LowerEmployeeCheck
+    public List<String> lowerEmployeeCheck(String id, String Option) {
         List<Employee> valid_employees;
         valid_employees = lowerLevelEmployee(id);
-
-        List<String> employee_salary = new ArrayList<>();
+        List<String> employeeCheckList = new ArrayList<>();
         for (Employee employee : valid_employees) {
-            employee_salary.add(employee.getID());
-            employee_salary.add(Objects.toString(employee.getWage()));
-        }
-        return employee_salary;
-    }
-
-    public List<String> lowerEmployeeAttendanceCheck(String id) {
-        List<Employee> valid_employees;
-        valid_employees = lowerLevelEmployee(id);
-        List<String> employee_attendance = new ArrayList<>();
-
-        for (Employee employee : valid_employees) {
-            employee_attendance.add(employee.getID());
-            employee_attendance.add(Objects.toString(employee.getAttendance()));
-        }
-        return employee_attendance;
-    }
-
-    public List<String> lowerEmployeeTotalVacationCheck(String id) throws Exception {
-        List<Employee> valid_employees;
-        valid_employees = lowerLevelEmployee(id);
-        List<String> employee_total_vacation = new ArrayList<>();
-
-        for (Employee employee : valid_employees) {
-            employee_total_vacation.add(employee.getID());
-            employee_total_vacation.add(Objects.toString(getTotalVacationByID(id)));
-        }
-        return employee_total_vacation;
-    }
-
-    public List<String> lowerEmployeeVacationUsedCheck(String id) throws Exception {
-        List<Employee> valid_employees;
-        valid_employees = lowerLevelEmployee(id);
-        List<String> employee_vacation_used = new ArrayList<>();
-
-        for (Employee employee : valid_employees) {
-            employee_vacation_used.add(employee.getID());
-            employee_vacation_used.add(Objects.toString(getVacationUsedByID(id)));
+            employeeCheckList.add(employee.getID());
+            switch (Option) {
+                case "1":
+                    employeeCheckList.add(Objects.toString(employee.getWage()));
+                    break;
+                case "2":
+                    employeeCheckList.add(Objects.toString(employee.getAttendance()));
+                    break;
+                case "3":
+                    employeeCheckList.add(Objects.toString(getTotalVacationByID(id)));
+                    break;
+                case "4":
+                    employeeCheckList.add(Objects.toString(getVacationUsedByID(id)));
+                    break;
+            }
 
         }
-        return employee_vacation_used;
+        return employeeCheckList;
     }
+    // ==================================================
 }
-
-

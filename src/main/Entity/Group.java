@@ -74,7 +74,7 @@ public class Group implements Iterable<Userable>, Serializable {
         return this.groupMembers;
     }
 
-    public String getWorkid() {
+    public String getWorkID() {
         return this.workid;
     }
 
