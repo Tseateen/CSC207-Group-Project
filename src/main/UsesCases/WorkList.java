@@ -45,6 +45,15 @@ public class WorkList implements Iterable<Workable>, Serializable {
         this.WorkList.add(work);
     }
 
+    public Workable getWork(String work_id) {
+        for (Workable w: this.WorkList) {
+            if (w.getID().equals(work_id)) {
+                return w;
+            }
+        }
+        return null;
+    }
+
     // === Iterator Design Pattern ===
     @Override
     public Iterator<Workable> iterator() {
