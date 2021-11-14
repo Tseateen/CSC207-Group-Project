@@ -59,6 +59,8 @@ public class FileReadWrite implements ReadWrite{
         for(Userable user: UserFile){
             loginList.readInput(user);
         }
+        String oldID = UserFile.getID();
+        loginList.readID(oldID);
         return UserFile;
     }
 

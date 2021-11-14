@@ -26,10 +26,12 @@ public class WorkFacade {
     public List<Work> SelfWork(String username) {
         Userable user = this.loginList.getUser(username);
         Employee employee = null;
-        ArrayList<Work> ListOfWork = null;
+        List<Work> ListOfWork = new ArrayList<>();
         for (Employee e: this.employeeList){
-            if (user.getID().equals(e.getID()));
-            employee = e;
+            if (user.getID().equals(e.getID())) {
+                employee = e;
+            }
+
             break;
         }
         for (Workable w: this.workList){
@@ -50,20 +52,26 @@ public class WorkFacade {
     }
 
 
-    public String WorkDetail(String workid) {
-        Work work = null;
+    public String WorkDetail(String workID) {
+        Workable work = null;
         Group group = null;
-        for (Workable w: this.workList){
-            if (workid.equals(w.getID())){
-                work = (Work) w;
+        for (Workable eachWork: this.workList){
+            if (workID.equals(eachWork.getID())){
+                work = eachWork;
                 break;
             }
         }
-        for (Group g: this.groupList){
-            if (work.getID().equals(g.getWorkID())){
-                group = g;
+        if (work == null){
+            return "Work ID Does Not Exist";
+        }
+        for (Group eachGroup: this.groupList){
+            if (work.getID().equals(eachGroup.getWorkID())){
+                group = eachGroup;
                 break;
             }
+        }
+        if(group == null){
+            return "Work has not been assign to a group";
         }
         return "Work ID: " + work.getID() + "\n" +
                 "Work Name: " + work.getName() + "\n" +
@@ -90,13 +98,15 @@ public class WorkFacade {
 
     public List<Work> AllWork(Userable user) {
         Employee employee = null;
-        ArrayList<Work> ListOfWork = null;
+        List<Work> ListOfWork = new ArrayList<>();
         for (Employee e: this.employeeList){
             user.getID();
             employee = e;
             break;
         }
-        String depart = employee.getDepartment();
+        if(employee == null){
+            return ListOfWork;
+        }
         for (Workable w: this.workList){
             if (w.getLevel() > employee.getLevel()) {
                 if (w.getDepartment().equals(employee.getDepartment())){
