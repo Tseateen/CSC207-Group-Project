@@ -13,13 +13,13 @@ public class WorkManagerUI {
         this.facadeSys = facadeSys;
     }
 
-    public void run() throws Exception {
+    public void run(){
         Scanner keyIn = new Scanner(System.in);
 
         WorkInfoUI workInfoUI = new WorkInfoUI(this.facadeSys);
         CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
-
         PrepareForWorkUI prepareForWork = new PrepareForWorkUI(this.facadeSys);
+        DistributeWorkUI distributeWork = new DistributeWorkUI(this.facadeSys);
         KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
         CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
@@ -55,16 +55,7 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "4":
-                    System.out.println("Following are the work IDs of the work which are lead by you: choose " +
-                            "the work ID where you want to choose members");
-                    System.out.println(facadeSys.findLeadWorkList());
-                    String wid = keyIn.nextLine();
-                    System.out.println("Following are the employees information you can assign as members");
-                    facadeSys.findAllWorkers();
-                    System.out.println("Enter the employee ID for the group members, split by a space");
-                    String employeeid = keyIn.nextLine();
-                    facadeSys.distributeWork(employeeid, wid);
-                    System.out.println("You have successfully chosen the members");
+                    distributeWork.run();
                     break;
                 case "5":
                     kpiAssignUI.run();
@@ -95,7 +86,7 @@ public class WorkManagerUI {
                     String option = keyIn.nextLine();
                     System.out.println("Please enter the new info");
                     String inf = keyIn.nextLine();
-                   // facadeSys.UserWorkInfoChange(userid, option, inf);
+                    //facadeSys.UserWorkInfoChange(userid, option, inf);
                     break;
                 case "E":
                     noExit = false;

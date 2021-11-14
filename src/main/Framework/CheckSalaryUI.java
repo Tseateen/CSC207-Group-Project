@@ -19,7 +19,7 @@ public class CheckSalaryUI {
     /**
      * Run the CheckSalaryUI
      */
-    public void run() throws Exception {
+    public void run(){
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;
         System.out.println("You can check the salary-related information about all " +

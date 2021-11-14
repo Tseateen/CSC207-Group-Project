@@ -14,13 +14,13 @@ public class WorkFacade {
     private final GroupManager groupManager;
 
 
-    public WorkFacade(WorkList workList, LoginList loginList, EmployeeList employeeList, GroupList groupList, WorkManager workManager, GroupManager groupManager){
+    public WorkFacade(WorkList workList, LoginList loginList, EmployeeList employeeList, GroupList groupList){
         this.workList = workList;
         this.loginList = loginList;
         this.employeeList = employeeList;
         this.groupList = groupList;
-        this.workManager = workManager;
-        this.groupManager = groupManager;
+        this.workManager = new WorkManager();
+        this.groupManager = new GroupManager();
     }
 
     public List<Work> SelfWork(String username) {
@@ -41,7 +41,7 @@ public class WorkFacade {
                         break;
                     }
                 }
-                if (w.getID().equals(g.getWorkid()) && (g.getLeader().equals(employee) || s)){
+                if (w.getID().equals(g.getWorkID()) && (g.getLeader().equals(employee) || s)){
                     ListOfWork.add((Work) w);
                 }
             }
@@ -60,7 +60,7 @@ public class WorkFacade {
             }
         }
         for (Group g: this.groupList){
-            if (work.getID().equals(g.getWorkid())){
+            if (work.getID().equals(g.getWorkID())){
                 group = g;
                 break;
             }
@@ -138,7 +138,7 @@ public class WorkFacade {
 
         for (Group group: this.groupList){
             if (group.getLeader().equals(self)){
-                groupids.add(group.getWorkid());
+                groupids.add(group.getWorkID());
             }
         }
 
@@ -159,7 +159,7 @@ public class WorkFacade {
         Group group = null;
         Work work = null;
         for (Group g : this.groupList) {
-            if (g.getWorkid().equals(workID)) {
+            if (g.getWorkID().equals(workID)) {
                 group = g;
                 break;
             }
@@ -188,7 +188,7 @@ public class WorkFacade {
             }
         }
         for (Group g : this.groupList) {
-            if (g.getWorkid().equals(workID)) {
+            if (g.getWorkID().equals(workID)) {
                 group = g;
                 break;
             }

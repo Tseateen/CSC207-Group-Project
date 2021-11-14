@@ -19,7 +19,7 @@ public class WorkList_test {
     @Test
     public void testAddWork(){
         WL.addWork("Project 1", "1111", "IT", 2);
-        for (Work w: WL){
+        for (Workable w: WL){
             if (w.getID().equals("1111")){
                 assertEquals(w.getName(), "Project 1");
                 assertEquals(w.getLevel(), 2);
