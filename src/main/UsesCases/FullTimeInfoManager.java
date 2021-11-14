@@ -6,8 +6,8 @@ public class FullTimeInfoManager{
 
     // === Instance Variables ===
 
-    private Userable user;
-    private FullTimeEmployee fullTimeEmployee;
+    private final Userable user;
+    private final FullTimeEmployee fullTimeEmployee;
 
     /* === Representation Invariants ===
      * The ID of the Employee and User is unique.

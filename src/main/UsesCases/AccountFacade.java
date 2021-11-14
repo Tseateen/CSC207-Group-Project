@@ -250,20 +250,6 @@ public class AccountFacade {
     }
 
     /**
-     * Verify if the authority level of an employee is lower than the specific authority level
-     *
-     * @param level The specific authority level that the client want to check
-     * @return boolean represent if the specific authority level is higher than the employee's authority level
-     */
-    public boolean ValidToCreateThisLevel(String level) {
-        if (level.length() != 1) {
-            return false;
-        }
-        int LevelWantToCreate = Integer.parseInt(level);
-        return LevelWantToCreate > this.user_Level();
-    }
-
-    /**
      * Check the salary of an employee
      *
      * @return An int that represent the salary/wage of an employee
@@ -348,6 +334,22 @@ public class AccountFacade {
             }
         }
         return typeEmployee;
+    }
+
+    // ================ WorkAreaRequiredFunction =====================
+
+    /**
+     * Verify if the authority level of an employee is lower than the specific authority level
+     *
+     * @param level The specific authority level that the client want to check
+     * @return boolean represent if the specific authority level is higher than the employee's authority level
+     */
+    public boolean ValidToCreateThisLevel(String level) {
+        if (level.length() != 1) {
+            return false;
+        }
+        int LevelWantToCreate = Integer.parseInt(level);
+        return LevelWantToCreate > this.user_Level();
     }
 
     // Case 6: FacadeSys.CreateEmployeeMethod

@@ -7,8 +7,8 @@ public class PartTimeInfoManager {
 
     // === Instance Variables ===
 
-    private Userable user;
-    private PartTimeEmployee partTimeEmployee;
+    private final Userable user;
+    private final PartTimeEmployee partTimeEmployee;
 
     /* === Representation Invariants ===
      * The ID of the Employee and User is unique.
@@ -176,7 +176,6 @@ public class PartTimeInfoManager {
         this.user.setAddress(address);
     }
 
-
     /**
      * This method will set the attendance for the Employee.
      *
@@ -184,7 +183,6 @@ public class PartTimeInfoManager {
     public void setAttendenceForEmployee(){
         this.partTimeEmployee.setAttendance();
     }
-
 
     /**
      * This method will set the wage for the Employee.
@@ -194,7 +192,6 @@ public class PartTimeInfoManager {
         this.partTimeEmployee.setWage(wage);
     }
 
-
     /**
      * This method will set the department for the Employee.
      *
@@ -203,7 +200,6 @@ public class PartTimeInfoManager {
         this.partTimeEmployee.setDepartment(department);
     }
 
-
     /**
      * This method will set the level for the Employee.
      *
@@ -211,7 +207,6 @@ public class PartTimeInfoManager {
     public void setLevelForEmployee(int level){
         this.partTimeEmployee.setLevel(level);
     }
-
 
     /**
      * This method will set the schedule for the Employee.

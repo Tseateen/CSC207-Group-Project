@@ -12,9 +12,11 @@ import java.util.NoSuchElementException;
 public class LoginList implements Iterable<Userable>, Serializable{
 
     private final List<Userable> UserList;
+    private String idCounter;
 
     public LoginList(){
         this.UserList = new ArrayList<Userable>();
+        this.idCounter = "1";
     }
 
     public void addUser(String accountNumber, String password, String name, String phone, String address, String id){
@@ -60,6 +62,13 @@ public class LoginList implements Iterable<Userable>, Serializable{
         this.UserList.add(user);
     }
 
+    public String getID(){
+        return this.idCounter;
+    }
+
+    public void readID(String ID) {
+        this.idCounter = ID;
+    }
     // === Iterator Design Pattern ===
     @Override
     public Iterator<Userable> iterator() {
