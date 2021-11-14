@@ -253,7 +253,7 @@ public class WorkFacade {
 
         for(Userable user: this.loginList){
             if(user.getID().equals(LeaderID)){
-                this.groupList.addGroup(user,workID);
+                this.groupList.addGroup(user.getID(),workID);
                 return true;
             }
         }

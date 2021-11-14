@@ -1,5 +1,6 @@
 package test.UsesCasesTest;
 
+
 import main.UsesCases.*;
 import main.Entity.*;
 import org.junit.Before;
@@ -12,9 +13,9 @@ public class FullTimeInfoManager_test {
 
     @Before
     public void Setup(){
-        Userable user1 = new User("111", "123456", "Lily", "4203456789",
+        String user1 = new User("111", "123456", "Lily", "4203456789",
                 "10 King St.", "8888");
-        Userable user2 = new User("222", "098765", "Cathy", "4301223456",
+        String user2 = new User("222", "098765", "Cathy", "4301223456",
                 "10 King St.", "9999");
         FullTimeEmployee fte1 = new FullTimeEmployee("HR", "Manager", 10000, 1, "8888");
         FullTimeEmployee fte2 = new FullTimeEmployee("IT", 2500, 5, "9999");
