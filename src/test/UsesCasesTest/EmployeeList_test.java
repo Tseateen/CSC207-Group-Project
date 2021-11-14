@@ -17,7 +17,7 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testAddEmployee(){
-        EL.addEmployee("IT", 3000, "", 4, "Pending", "3056");
+        EL.addEmployee("IT", 3000, "", 4, "Pending");
         for (Employee e: EL) {
             if (e.getID().equals("3056")){
                 assertEquals(e.getLevel(), 4);
@@ -43,7 +43,7 @@ public class EmployeeList_test {
     @Test(timeout = 100)
     public void testGetSize(){
         int size = EL.getSize();
-        EL.addEmployee("IT", 3000, "", 4, "Pending", "3056");
+        EL.addEmployee("IT", 3000, "", 4, "Pending");
         assertEquals(EL.getSize(), (size + 1));
     }
 }

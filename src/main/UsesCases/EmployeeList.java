@@ -13,6 +13,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
     // === Instance Variables ===
 
     private final List<Employee> EmployeeList;
+    private int idCounter;
 
     /* === Representation Invariants ===
      * The EmployeeList should have at least one Employee inside one company having the top authority level, which is 0.
@@ -20,6 +21,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
 
     public EmployeeList(){
         this.EmployeeList = new ArrayList<Employee>();
+        this.idCounter = 1;
     }
 
 
@@ -34,14 +36,15 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
      * @param status the status of the employee, "pending" by default.
      * @param id the id of the employee.
      */
-    public void addEmployee(String department, int wage, String position,  int level, String status, String id) {
+    public void addEmployee(String department, int wage, String position,  int level, String status) {
         if (status.equals("F")) {
-            Employee employee = new FullTimeEmployee(department, position, wage, level, id);
+            Employee employee = new FullTimeEmployee(department, position, wage, level, String.valueOf(this.idCounter));
             this.EmployeeList.add(employee);
         } else if (status.equals("P") && position.equals("N")) {
-            Employee employee = new PartTimeEmployee(department, wage, level, id);
+            Employee employee = new PartTimeEmployee(department, wage, level, String.valueOf(this.idCounter));
             this.EmployeeList.add(employee);
         }
+        this.idCounter += 1;
     }
     public void initialize(){
         Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
@@ -90,6 +93,14 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
      */
     public void readInput(Employee employee){
         this.EmployeeList.add(employee);
+    }
+
+    public int getID(){
+        return this.idCounter;
+    }
+
+    public void readID(int ID) {
+        this.idCounter = ID;
     }
 
 
