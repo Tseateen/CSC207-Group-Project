@@ -37,6 +37,8 @@ public interface Workable extends Serializable{
     public abstract String getSign();
 
     public abstract void setSign(String sign);
+
+    public abstract void setEnd_time(String time);
 }
 
 

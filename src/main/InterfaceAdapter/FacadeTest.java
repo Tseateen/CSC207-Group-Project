@@ -115,10 +115,21 @@ public class FacadeTest {
         return result;
     }
 
+    public String showDetail(String work_id) {
+        if (levelVerifier(this.workFacade.workLevel(work_id))||this.workFacade.isMember(work_id, this.username)) {
+            String result = "";
+            for (String i : this.workFacade.showWorkDetail(work_id)){
+                result = result + i + "\n";
+            }
+            return result;
+        }
+        return "Can't check";
+    }
+
 
     public boolean assignLeaderToWork(String work_id, String leader_id) {
-        if (this.workFacade.workExist(work_id) && this.levelVerifier(this.accountFacade.workLevel(user_id))) {
-            if (this.accountFacade.userExist(user_id) && this.levelVerifier(this.accountFacade.userLevel(user_id))){
+        if (this.workFacade.workExist(work_id) && this.levelVerifier(this.workFacade.workLevel(work_id))) {
+            if (this.accountFacade.userExist(leader_id) && this.levelVerifier(this.accountFacade.userLevel(leader_id))){
                 this.workFacade.assignLeader(work_id, leader_id, username);
                 return true;
             }
@@ -146,12 +157,8 @@ public class FacadeTest {
     }
 
 
-    public boolean extendWork(String days, String work_id) {
-        try {
-            return this.workFacade.extendWork(Integer.valueOf(days), work_id, this.username);
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    public void extendWork(String days, String work_id) {
+        this.workFacade.extendWork( this.username,work_id, days);
     }
 
     //=============================

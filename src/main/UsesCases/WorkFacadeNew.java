@@ -105,6 +105,17 @@ public class WorkFacadeNew {
         return false;
     }
 
+    public boolean isMember (String user_id, String work_id) {
+        for (Group g: this.groupList) {
+            if (g.getWorkID().equals(work_id)){
+                return (g.getLeaderId().equals(user_id)||g.getMembers().contains(work_id));
+            }
+        }
+        return false;
+    }
+
+
+
     public boolean Distributer(String leader_id, String work_id, String user_id) {
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(work_id)){
@@ -120,6 +131,13 @@ public class WorkFacadeNew {
         this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)));
     }
 
-    public void extendWork(String user_id, String work_id, String extend_d)
+    public String workLevel(String work_id) {
+        return String.valueOf(this.workList.getWork(work_id).getLevel());
+    }
+
+    public void extendWork(String user_id, String work_id, String extend_date) {
+        WorkManager workManager = new WorkManager();
+        workManager.extendWork(this.workList.getWork(work_id), extend_date);
+    }
 
 }
