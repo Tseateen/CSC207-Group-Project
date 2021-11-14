@@ -261,18 +261,24 @@ public class AccountFacade {
      * @param response The value that the client want to set
      */
     public void setFullTimeBasicInfo(String option, String response) {
-        FullTimeEmployee employee = (FullTimeEmployee) this.employee;
+        Userable user = findUserHelper();
+        FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
         switch (option) {
             case "1":
-                this.user.setName(response);
+                user.setName(response);
+                break;
             case "2":
-                this.user.setPassword(response);
+                user.setPassword(response);
+                break;
             case "3":
-                this.user.setPhone(response);
+                user.setPhone(response);
+                break;
             case "4":
-                this.user.setAddress(response);
+                user.setAddress(response);
+                break;
             case "5":
                 employee.setAttendance();
+                break;
 
         }
     }
@@ -333,12 +339,14 @@ public class AccountFacade {
      * @return An int represent the authority level of an employee
      */
     public int user_Level() {
+        Employee employee = this.findEmployeeHelper();
+        String employeeType = this.findEmployeeTypeHelper();
         if (employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee employee = (PartTimeEmployee) this.employee;
-            return employee.getLevel();
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employee;
+            return partTimeEmployee.getLevel();
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.employee;
-            return employee.getLevel();
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employee;
+            return fullTimeEmployee.getLevel();
         }
     }
 
