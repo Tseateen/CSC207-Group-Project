@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.*;
 public class FacadeTest {
+    private String employeeType;
+    // === DataFile ===
     private final DataGateway fileGateway;
     private final LoginList loginList;
     private final EmployeeList employeeList;
@@ -23,8 +25,8 @@ public class FacadeTest {
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacadeNew workFacade;
-    private final GroupManager groupManager;
-    private final WorkManager workManager;
+
+
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
@@ -33,19 +35,15 @@ public class FacadeTest {
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
         this.verifier = new Verifier(this.loginList);
-        this.fileGateway = new DataGateway(this.loginList, this.employeeList);
-        this.accountFacade = new AccountFacade(this.loginList, this.employeeList,username);
         this.workList = new WorkList();
-        this.groupManager = new GroupManager();
         this.groupList = new GroupList();
         this.journalList = new JournalList();
-        this.workManager = new WorkManager();
+        this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
+        this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
 
-        this.workFacade = new WorkFacadeNew(this.workList, this.loginList, this.employeeList,
-                this.groupList, this.journalList);
+        this.workFacade = new WorkFacadeNew(this.workList, this.loginList, this.employeeList, this.groupList, this.journalList);
     }
-
     // === System methods ===
 
     public boolean systemStart(String username, String password) {
@@ -96,15 +94,25 @@ public class FacadeTest {
         }
         return result;
     }
+    public String showWorkDetail() {
 
+    }
 
-    public String showAllWorkLeaded(){
-        return this.workFacade.(this.username);
+    public String showAllWorkLed(){
+        String result = "";
+        for (String i : this.workFacade.workOfLed(this.username)){
+            result = result + i + "\n";
+        }
+        return result;
     }
 
 
     public String showAllLowerWork() {
-        return this.workFacade.lowerWorks(this.username);
+        String result = "";
+        for (String i : this.workFacade.workOfLowerLevel(this.username)){
+            result = result + i + "\n";
+        }
+        return result;
     }
 
 
@@ -128,8 +136,8 @@ public class FacadeTest {
     }
 
 
-    public boolean createWork(ArrayList<String> info_list) {
-        return this.workFacade.Creator(this.username, info_list);
+    public void createWork(ArrayList<String> info_list) {
+        this.workFacade.createWork(this.username, info_list);
     }
 
 

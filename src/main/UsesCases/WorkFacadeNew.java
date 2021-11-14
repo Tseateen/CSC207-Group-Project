@@ -120,6 +120,6 @@ public class WorkFacadeNew {
         this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)));
     }
 
-    public void
+    public void extendWork(String user_id, String work_id, String extend_d)
 
 }

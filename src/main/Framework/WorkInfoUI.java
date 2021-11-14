@@ -22,7 +22,7 @@ public class WorkInfoUI {
     public void run(){
         Scanner keyIn = new Scanner(System.in);
         System.out.println("=== Following is your work ===");
-        facadeSys.checkWorkInfo();
+        this.facadeSys.showAllWorkNeedToDo();
         System.out.println(
                 "You only can check your work here! \n" +
                 "If you want to check more detail on your particular work, please type Y. \n" +
@@ -34,7 +34,7 @@ public class WorkInfoUI {
             while (noExist){
                 System.out.println("Please give the ID of the work that you want to check !");
                 String ID = keyIn.nextLine();
-                facadeSys.checkWorkInfo(ID);
+                this.facadeSys.showWorkDetail(ID);
                 System.out.println("If you want to check another work in detail, please type C.\n " +
                         "Otherwise, please type E to exist");
                 action = keyIn.nextLine();

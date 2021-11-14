@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.*;
 
 
 public class CreateWorkUI {
@@ -26,23 +27,23 @@ public class CreateWorkUI {
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;
+        boolean invalidCreate = false;
         while (noExist){
         String[] WorkInfoArray = {"name", "ID", "Department", "level"};
-        String name , ID, Department, level;
-        Map<Integer, String> work_info = new HashMap<>();
-        int counter = 0;
-        for(String each_work_info: WorkInfoArray){
-            System.out.println("Please type the " + each_work_info + " of new work");
-            String info = keyIn.nextLine();
-            work_info.put(counter, info);
-            counter ++;
+            List<String> work_info = new ArrayList<String>();
+        do{
+            work_info.clear();
+            for(String each_work_info: WorkInfoArray){
+                    System.out.println("Please type the " + each_work_info + " of new work");
+                String info = keyIn.nextLine();
+                work_info.add(info);
         }
-        boolean SuccessCreatNewWork = this.facadeSys.createWork(
-                work_info.get(0),
-                work_info.get(1),
-                work_info.get(2),
-                work_info.get(3));
-            if (SuccessCreatNewWork){
+            if (!this.facadeSys.levelVerifier(work_info.get(3))){
+                    System.out.println("You can not create a work that has a higher level than you! Please reassign the work");
+                    invalidCreate = true;
+            }
+            }while(invalidCreate);
+            this.facadeSys.createWork(work_info);
                 System.out.println(
                         "If you want to create another work, please type C. \n" +
                         " Otherwise, please type E to exist");
@@ -50,9 +51,7 @@ public class CreateWorkUI {
                 if(action.equalsIgnoreCase("E")){
                     noExist = false;
                 }
-            }else {
-                System.out.println("You cannot create this level of the work! Please type again.");
-            }
+
         }
     }
 }
