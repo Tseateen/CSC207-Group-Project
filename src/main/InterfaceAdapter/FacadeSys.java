@@ -1,6 +1,7 @@
 package main.InterfaceAdapter;
 
 import main.Entity.*;
+
 import main.UsesCases.*;
 
 
@@ -159,12 +160,12 @@ public class FacadeSys {
 
     public void distributeWork(String employeeID, String workID) {
 
-        List<Userable> members = new ArrayList<>();
+        List<String> members = new ArrayList<>();
         String[] parts;
         parts = employeeID.split(" ");
         try {
             for (String eid : parts) {
-                for (Userable u : this.loginList) {
+                for (String u : this.loginList) {
                     if (!((findAllWorkers().contains(u.getID())))) {
                         System.out.println("You can only choose the employees shown above");
                         return;
@@ -239,47 +240,6 @@ public class FacadeSys {
     public List<String> checkLowerEmployeeSalary(String id, String option) {
         return this.accountFacade.lowerEmployeeCheck(id, option);
         }
-    }
+}
     // ==================================================
 
-//    public void UserWorkInfoChange(String userid, String option, String info) {
-//
-//        Employee employee = null;
-//        Userable user = null;
-//        try {
-//            for (Employee e : this.employeeList) {
-//                if (e.getID().equals(userid)) {
-//                    employee = e;
-//                    break;
-//                }
-//
-//                for (Userable u : this.loginList) {
-//                    if (u.getID().equals(userid)) {
-//                        user = u;
-//                        break;
-//                    }
-//
-//                    if (!(levelVerifier(Integer.toString(e.getLevel())))) {// Need to be in UI?
-//                        System.out.println("You cannot change info to this employee, please try again.");
-//                        return;
-//                    }
-//
-//                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "FullTimeEmployee")) {
-//                        accountFacade.setFullTimeAdvancedInfo(option, info);
-//                        System.out.println("The information is successfully updated");
-//                    }
-//
-//                    if (Objects.equals(accountFacade.employeeTypeByID(user.getID()), "PartTimeEmployee")) {
-//                        if ((!Objects.equals(option, "1")) && (!Objects.equals(option, "2")) && (!Objects.equals(option, "3"))) {
-//                            System.out.println("Part Time Employee does not have these infos");
-//                        }
-//                        return;
-//                    }
-//                    accountFacade.setPartTimeAdvancedInfo(option, info);
-//                    System.out.println("The information is successfully updated");
-//                }
-//            }
-//        }catch (Exception e){
-//            System.out.println("Error occurred in FacadeSys.UserWorkInfoChange");
-//        }
-//    }

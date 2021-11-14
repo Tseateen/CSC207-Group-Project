@@ -34,7 +34,7 @@ public class User implements Userable, Serializable {
      * @param address Address for this user.
      * @param id Unique identity for this user.
      */
-    public User(String usernameNumber,String password, String name, String phone, String address, String id){
+    public User(String usernameNumber, String password, String name, String phone, String address, String id){
         this.id = id;
         this.username = usernameNumber;
         this.password = password;
@@ -168,6 +168,9 @@ public class User implements Userable, Serializable {
      */
     @Override
     public boolean equals(Object obj) {
+        if(obj instanceof String) {
+            return this.id.equals(obj);
+        }
         if(!(obj instanceof User)){
             return false;
         }

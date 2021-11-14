@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.Group;
-import main.Entity.Userable;
+
 
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class GroupList implements Iterable<Group> {
      * @param workID the workID of the group, which is unique and linked to the work.
      *
      */
-    public void addGroup(Userable leader, String workID){
+    public void addGroup(String leader, String workID){
         Group group = new Group(leader, workID);
         GroupList.add(group);
     }

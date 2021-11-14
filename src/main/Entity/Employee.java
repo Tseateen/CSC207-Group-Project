@@ -3,6 +3,7 @@ package main.Entity;
 import java.io.Serializable;
 import java.util.HashMap;
 
+
 public abstract class Employee implements Serializable {
 
     // === Instance Variables ===

@@ -18,9 +18,9 @@ public class LoginList_test {
     @Test
     public void testAddUser(){
         LL.addUser("111", "123456", "Lily", "4203456789",
-                "10 King St.", "8888");
+                "10 King St.");
         for (Userable u: LL){
-            if (u.getID().equals("8888")){
+            if (u.getID().equals("1")){
                 assertEquals(u.getPassword(), "123456");
                 assertEquals(u.getName(), "Lily");
                 assertEquals(u.getAddress(), "10 King St.");
@@ -36,9 +36,9 @@ public class LoginList_test {
     @Test
     public void testDeleteUser(){
         int l = LL.getSize();
-        LL.deleteUser("8888");
+        LL.deleteUser("1");
         for (Userable u: LL){
-            assertNotEquals(u.getID(), "8888");
+            assertNotEquals(u.getID(), "1");
         }
         assertEquals(LL.getSize(), l - 1);
     }
