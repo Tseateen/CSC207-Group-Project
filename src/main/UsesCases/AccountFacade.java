@@ -359,11 +359,8 @@ public class AccountFacade {
      */
     public void CreateNewAccount(String[] userinfo) {
         try {
-            int idCounter = this.loginList.getSize();
-            String id = String.valueOf(idCounter);
-            this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
-            this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
-            idCounter += 1;
+            this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4]);
+            this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9]);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Unable to create account due to uncompleted information");
         }

@@ -59,7 +59,7 @@ public class FileReadWrite implements ReadWrite{
         for(Userable user: UserFile){
             loginList.readInput(user);
         }
-        String oldID = UserFile.getID();
+        int oldID = UserFile.getID();
         loginList.readID(oldID);
         return UserFile;
     }
@@ -75,6 +75,8 @@ public class FileReadWrite implements ReadWrite{
         for(Employee employee: EmployeeFile){
             employeeList.readInput(employee);
         }
+        int oldID = EmployeeFile.getID();
+        employeeList.readID(oldID);
         return employeeList;
     }
     @Override

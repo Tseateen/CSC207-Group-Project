@@ -15,9 +15,9 @@ public class Verifier_test {
     public void Setup(){
         LL = new LoginList();
         LL.addUser("111", "123456", "Lily", "4203456789",
-                "10 King St.", "8888");
+                "10 King St.");
         Userable u1 = new User("111", "123456", "Lily", "4203456789",
-                 "10 King St.", "8888");
+                 "10 King St.","1");
         VV = new Verifier(LL);
 
     }
