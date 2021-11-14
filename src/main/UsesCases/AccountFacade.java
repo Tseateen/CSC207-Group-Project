@@ -12,7 +12,6 @@ public class AccountFacade {
     private final EmployeeList employeeList;
     private final PayManager managerPay;
     private final Verifier managerVerifier;
-    private int idCounter;
     private final String employeeType;
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
@@ -358,7 +357,7 @@ public class AccountFacade {
      */
     public void CreateNewAccount(String[] userinfo) {
         try {
-            idCounter = this.loginList.getSize();
+            int idCounter = this.loginList.getSize();
             String id = String.valueOf(idCounter);
             this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
             this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
