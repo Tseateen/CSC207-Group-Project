@@ -12,14 +12,13 @@ public class AccountFacade {
     private final EmployeeList employeeList;
     private final PayManager managerPay;
     private final Verifier managerVerifier;
-    private static int idCounter = 1;
+    private int idCounter;
     private final String employeeType;
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
-
         this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
        this.employeeType = "";
@@ -37,19 +36,6 @@ public class AccountFacade {
         return this.findEmployeeTypeHelper();
     }
 
-
-    // return all the info at the same time (馬哥的idea)
-    public ArrayList<String> partTimeEmployeeInfo() {
-        ArrayList<String> info = new ArrayList<>();
-        info.add(this.user.getName());
-        info.add(this.user.getID());
-        info.add(this.user.getUsername());
-        info.add(this.user.getPassword());
-        info.add(this.user.getPhone());
-        info.add(this.user.getAddress());
-        info.add(this.employee.getDepartment());
-        return info;
-    }
 
     /**
      * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
@@ -78,6 +64,7 @@ public class AccountFacade {
         return info;
     }
 
+
     /**
      * Get the schedule of a part time employee
      *
@@ -87,6 +74,7 @@ public class AccountFacade {
         PartTimeEmployee employee = (PartTimeEmployee) this.employee;
         return employee.getSchedule();
     }
+
 
     /**
      * Get the integer information of a full time employee such as total vacation with salary and vacation used
@@ -100,6 +88,7 @@ public class AccountFacade {
         intValue[1] = employee.getVacationUsed();
         return intValue;
     }
+
 
     /**
      * Set the basic information of a part time employee includes name, password, phone number, address, and attendance
@@ -286,6 +275,7 @@ public class AccountFacade {
      */
     public boolean CreateNewAccount(String[] userinfo) {
         try {
+            idCounter = this.loginList.getSize();
             String id = String.valueOf(idCounter);
             this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4], id);
             this.employeeList.addEmployee(userinfo[5], Integer.parseInt(userinfo[6]), userinfo[7], Integer.parseInt(userinfo[8]), userinfo[9], id);
