@@ -32,12 +32,13 @@ public class Work implements Workable, Serializable {
      * @param department The department responsible for this Work.
      *
      */
-    public Work(String name, String id, String department, int level)  {
+    public Work(String name, String id, String department, String requirement, int level)  {
         this.name = name;
         this.id = id;
         this.level = level;
         this.state = "Pending";
         this.department = department;
+        this.requirement = requirement;
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
         this.create_time = String.valueOf(now.getTime());
