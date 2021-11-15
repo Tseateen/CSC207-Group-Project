@@ -16,10 +16,10 @@ public class DistributeWorkUI {
         Scanner keyIn = new Scanner(System.in);
         System.out.println("Following are the work IDs of the work which are lead by you: " +
                 "choose the work ID where you want to choose members");
-        System.out.println(this.facadeSys.showAllWorkLed);
+        System.out.println(this.facadeSys.showAllWorkLed());
         String workID = keyIn.nextLine();
         System.out.println("Following are the employees information you can assign as members");
-        System.out.println(this.facadeSys.showAllLowerUser);
+        System.out.println(this.facadeSys.());
         System.out.println("Enter the employee ID for the group members");
         String employeeID = keyIn.nextLine();
         if (this.facadeSys.distributeWork(employeeID, workID)){

@@ -43,7 +43,8 @@ public class WorkFacadeNew {
         ArrayList<String> result = new ArrayList<String>();
         for (Workable w: this.workList) {
             if (w.getLevel() > Integer.parseInt(Level)) {
-                result.add(this.showWorkDetail(w.getID()).get(0) + " " + this.showWorkDetail(w.getID()).get(1) + "\n");
+                result.add(this.showWorkDetail(w.getID()).get(0) + " " + this.showWorkDetail(w.getID()).get(1) + " "
+                + this.showWorkDetail(w.getID()).get(2) + "\n");
             }
         }
         return result;
@@ -65,25 +66,23 @@ public class WorkFacadeNew {
             }
         }
         for (String s: work_ids) {
-            result.add(this.showWorkDetail(s).get(0) + " " + this.showWorkDetail(s).get(1) + "\n");
+            result.add(this.showWorkDetail(s).get(0) + " " + this.showWorkDetail(s).get(1) + " "
+                    + this.showWorkDetail(s).get(2) + "\n");
         }
         return result;
     }
 
     public ArrayList<String> showWorkDetail(String work_id) {
         ArrayList<String> result = new ArrayList<String>();
-        for (Workable w: this.workList) {
-            if (w.getID().equals(work_id)) {
-                result.add(w.getName());
-                result.add(w.getID());
-                result.add(String.valueOf(w.getLevel()));
-                result.add(w.getDescribe());
-                result.add(w.getRequirement());
-                result.add(w.getStart_time());
-                result.add(w.getEnd_time());
-                break;
-            }
-        }
+        Workable w = this.workList.getWork(work_id);
+        result.add(w.getName());
+        result.add(w.getID());
+        result.add(w.getState());
+        result.add(String.valueOf(w.getLevel()));
+        result.add(w.getDescribe());
+        result.add(w.getRequirement());
+        result.add(w.getStart_time());
+        result.add(w.getEnd_time());
         // Here can add group info
         return result;
     }
@@ -127,7 +126,7 @@ public class WorkFacadeNew {
         return false;
     }
 
-    public void createWork(String user_id, ArrayList<String> info) {
+    public void workCreator(String user_id, ArrayList<String> info) {
         this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)));
     }
 
@@ -140,4 +139,24 @@ public class WorkFacadeNew {
         workManager.extendWork(this.workList.getWork(work_id), extend_date);
     }
 
+    public String changeWorkInfo(String user_id, String work_id, String opt, String changeTo) {
+        Workable w = this.workList.getWork(work_id);
+        switch (opt) {
+            case "DESCRIBE":
+                w.setDescribe(changeTo);
+                break;
+            case "REQ":
+                w.setRequirement(changeTo);
+                break;
+            case "STATE":
+                w.setState(changeTo);
+                break;
+            case "SIGN":
+                w.setSign(changeTo);
+                break;
+            default:
+                return "Nothing Changed";
+        }
+        return "Success";
+    }
 }

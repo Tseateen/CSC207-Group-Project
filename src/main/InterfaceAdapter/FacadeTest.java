@@ -148,7 +148,7 @@ public class FacadeTest {
 
 
     public void createWork(ArrayList<String> info_list) {
-        this.workFacade.createWork(this.username, info_list);
+        this.workFacade.workCreator(this.username, info_list);
     }
 
 

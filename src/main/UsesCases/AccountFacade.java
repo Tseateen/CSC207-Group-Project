@@ -236,16 +236,9 @@ public class AccountFacade {
      *
      * @return An int represent the authority level of an employee
      */
-    public int user_Level() {
-        Employee employee = this.findEmployeeHelper();
-        String employeeType = this.findEmployeeTypeHelper();
-        if (employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employee;
-            return partTimeEmployee.getLevel();
-        } else {
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employee;
-            return fullTimeEmployee.getLevel();
-        }
+    public String user_Level(String username) {
+        Employee e = this.employeeList.getEmployee(username);
+        return String.valueOf(e.getLevel());
     }
 
     /**
@@ -455,4 +448,7 @@ public class AccountFacade {
         return 0;
     }
     // ==================================================
+    public ArrayList<String> getLowerUser(String level) {
+        for ()
+    }
 }
