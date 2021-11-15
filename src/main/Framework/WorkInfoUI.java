@@ -34,7 +34,7 @@ public class WorkInfoUI {
                 System.out.println("Please give the ID of the work that you want to check !");
                 String ID = keyIn.nextLine();
                 if (this.facadeSys.checkWorkExist(ID)){
-                    this.facadeSys.showWorkDetail(ID);
+                    System.out.println(this.facadeSys.showWorkDetail(ID));
                 }else{
                     System.out.println("This work does not exist");
                 }
