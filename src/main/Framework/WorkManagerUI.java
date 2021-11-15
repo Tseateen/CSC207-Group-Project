@@ -20,7 +20,7 @@ public class WorkManagerUI {
         CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
         PrepareForWorkUI prepareForWork = new PrepareForWorkUI(this.facadeSys);
         DistributeWorkUI distributeWork = new DistributeWorkUI(this.facadeSys);
-        KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
+//        KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
         CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
         CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
@@ -49,17 +49,14 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "3":
-                    // TODO: 為什麼 create 完 work 才assign leader?會不會有Work 沒有Leader?
-                    // TODO: 剩一點點未完成
                     prepareForWork.run();
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "4":
-                    // TODO: UI NotFinish
                     distributeWork.run();
                     break;
                 case "5":
-                    kpiAssignUI.run();
+//                    kpiAssignUI.run();
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "6":

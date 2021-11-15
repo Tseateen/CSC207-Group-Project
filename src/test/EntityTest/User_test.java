@@ -1,13 +1,14 @@
 package test.EntityTest;
 
 import main.Entity.User;
+import main.Entity.Userable;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class User_test {
-    User U1;
+    Userable U1;
     @Before
     public void setUp() {
         U1 = new User("andy1234", "a12345", "Andy", "412345678",

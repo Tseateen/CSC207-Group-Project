@@ -2,7 +2,6 @@ package main.UsesCases;
 
 import main.Entity.*;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,7 +34,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
      * @param position the position of the employee, usually it is "N".
      * @param level the level of the employee. With smaller numbers, the employee has higher authority level.
      * @param status the status of the employee, "pending" by default.
-     * @param id the id of the employee.
      */
     public void addEmployee(String department, int wage, String position,  int level, String status) {
         if (status.equals("F")) {
@@ -50,6 +48,21 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
     public void initialize(){
         Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
         this.EmployeeList.add(admin);
+    }
+
+    /**
+     * This method will find the Employee from the EmployeeList.
+     *
+     * @param user_id the employee's id that needs to be deleted.
+     * @return the Employee found.
+     */
+    public Employee getEmployee(String user_id) {
+        for (Employee e: this.EmployeeList) {
+            if (e.getID().equals(user_id)) {
+                return e;
+            }
+        }
+        return null;
     }
 
 

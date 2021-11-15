@@ -17,14 +17,14 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testAddEmployee(){
-        EL.addEmployee("IT", 3000, "", 4, "Pending");
+        EL.addEmployee("IT", 3000, "0", 4, "F");
+        assertEquals(EL.getSize(), 1);
         for (Employee e: EL) {
-            if (e.getID().equals("3056")){
                 assertEquals(e.getLevel(), 4);
                 assertEquals(e.getDepartment(), "IT");
                 assertEquals(e.getWage(), 3000);
-                assertEquals(e.getID(), "3056");
-            }
+                assertEquals(e.getID(), "1");
+
         }
     }
 
@@ -44,6 +44,6 @@ public class EmployeeList_test {
     public void testGetSize(){
         int size = EL.getSize();
         EL.addEmployee("IT", 3000, "", 4, "Pending");
-        assertEquals(EL.getSize(), (size + 1));
+        assertEquals((size + 1), EL.getSize());
     }
 }

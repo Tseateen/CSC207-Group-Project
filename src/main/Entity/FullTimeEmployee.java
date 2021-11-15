@@ -2,19 +2,18 @@ package main.Entity;
 
 import java.io.Serializable;
 
-
 public class FullTimeEmployee extends Employee implements Serializable {
 
     // === Instance Variables ===
 
     // The total annual paid leave for this employee.
-    private int totalVacationWithSalary;
+    private static int totalVacationWithSalary;
     // the number of annual leave have been used by this employee.
-    private int vacationUsed;
+    private static int vacationUsed;
     // The position of this employee. For instance, sales, engineer, manger....
-    private String position;
+    private static String position;
     // The state of employee. For instance, working, vacation...
-    private String state = "Working";
+    private static String state = "Working";
 
     /* === Representation Invariants ===
      * totalVacationWithSalary should always equal or greater than 0.

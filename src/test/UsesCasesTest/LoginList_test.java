@@ -1,7 +1,8 @@
 package test.UsesCasesTest;
 
+
+import main.Entity.Userable;
 import main.UsesCases.*;
-import main.Entity.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -35,11 +36,10 @@ public class LoginList_test {
 
     @Test
     public void testDeleteUser(){
-        int l = LL.getSize();
         LL.deleteUser("1");
         for (Userable u: LL){
             assertNotEquals(u.getID(), "1");
         }
-        assertEquals(LL.getSize(), l - 1);
+        assertEquals(LL.getSize(), 0);
     }
 }
