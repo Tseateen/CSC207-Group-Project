@@ -19,6 +19,7 @@ public class WorkList_test {
     @Test
     public void testAddWork(){
         WL.addWork("Project 1", "1111", "IT", "2", 2);
+        assertEquals(WL.getSize(), 1);
         for (Workable w: WL){
             if (w.getID().equals("1111")){
                 assertEquals(w.getName(), "Project 1");
@@ -31,7 +32,7 @@ public class WorkList_test {
 
     @Test
     public void testGetSize(){
-        assertEquals(WL.getSize(), 1);
+        assertEquals(WL.getSize(), 0);
     }
 
 }

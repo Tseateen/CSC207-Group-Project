@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 public class Group implements Iterable<String>, Serializable {
     private String leader_id;
-    private List<String> groupMembers = new ArrayList<String>();
+    private final ArrayList<String> groupMembers = new ArrayList<String>();
     private String workid;
 
 
@@ -46,7 +46,7 @@ public class Group implements Iterable<String>, Serializable {
      *
      * @return This method will return the members of this group.
      */
-    public List<String> getMembers() {
+    public ArrayList<String> getMembers() {
         return this.groupMembers;
     }
 
@@ -57,12 +57,12 @@ public class Group implements Iterable<String>, Serializable {
     /**
      * This method add a new member to the group.
      *
-     * @param member The member who is going to be added to the group.
+     * @param id The member who is going to be added to the group.
      * @return This method will return true iff the member is successfully added to the group.
      */
-    public boolean addMember(String member) {
-        if (!this.groupMembers.contains(member)) {
-            this.groupMembers.add(member);
+    public boolean addMember(String id) {
+        if (!this.groupMembers.contains(id)) {
+            this.groupMembers.add(id);
             return true;
         }return false;
     }

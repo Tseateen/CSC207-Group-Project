@@ -36,11 +36,10 @@ public class LoginList_test {
 
     @Test
     public void testDeleteUser(){
-        int l = LL.getSize();
         LL.deleteUser("1");
         for (Userable u: LL){
             assertNotEquals(u.getID(), "1");
         }
-        assertEquals(LL.getSize(), l - 1);
+        assertEquals(LL.getSize(), 0);
     }
 }

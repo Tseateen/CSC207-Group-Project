@@ -70,14 +70,4 @@ public class PartTimeEmployee_test {
         assertEquals(Part_time_employee_2.getAttendance(), 3);
     }
 
-    @Test(timeout = 100)
-    public void testSchedule(){
-        HashMap<String, String[]> scd = new HashMap<>();
-        String[] time = {"09:00", "12:30", "15:30"};
-        scd.put("Monday", time);
-        assertEquals(Part_time_employee_1.getSchedule(), new HashMap<String, String[]>());
-        Part_time_employee_1.setSchedule(scd);
-        assertEquals(Part_time_employee_1.getSchedule(), scd);
-        assertEquals(Part_time_employee_2.getSchedule(), scd);
-    }
 }
