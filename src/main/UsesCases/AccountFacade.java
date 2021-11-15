@@ -23,6 +23,11 @@ public class AccountFacade {
         this.employeeType = "";
         this.user = this.findUserHelper();
         this.employee = this.findEmployeeHelper();
+
+    }
+
+    public String getUserID() {
+        return this.user.getID();
     }
 
     /**
@@ -236,8 +241,8 @@ public class AccountFacade {
      *
      * @return An int represent the authority level of an employee
      */
-    public String user_Level(String username) {
-        Employee e = this.employeeList.getEmployee(username);
+    public String user_Level(String user_id) {
+        Employee e = this.employeeList.getEmployee(user_id);
         return String.valueOf(e.getLevel());
     }
 
@@ -341,7 +346,7 @@ public class AccountFacade {
             return false;
         }
         int LevelWantToCreate = Integer.parseInt(level);
-        return LevelWantToCreate > Integer.parseInt(this.user_Level(this.username));
+        return LevelWantToCreate > Integer.parseInt(this.user_Level(this.getUserID()));
     }
 
     // Case 6: FacadeSys.CreateEmployeeMethod

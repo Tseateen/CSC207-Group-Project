@@ -27,14 +27,16 @@ public class Group_test {
         Userable[] m1 = {p2, p3};
         // Group constructor
         G1 = new Group(p1.getID(), "w123");
+        G1.addMember(p2.getID());
+        G1.addMember(p3.getID());
     }
 
 
     @Test(timeout = 100)
     public void testLeader() {
-        assertEquals(G1.getLeaderId(), p1);
+        assertEquals(G1.getLeaderId(), p1.getID());
         G1.setLeaderId(p2.getID());
-        assertEquals(G1.getLeaderId(), p2);
+        assertEquals(G1.getLeaderId(), p2.getID());
         Userable p4 = new User("lily123", "li23456", "Lily", "411111111",
                 "123 Bloor Street", "004");
         G1.setLeaderId(p4.getID());
@@ -46,8 +48,8 @@ public class Group_test {
         assertTrue(G1.getMembers().contains(p2.getID()));
         Userable p4 = new User("lily123", "li23456", "Lily", "411111111",
                 "123 Bloor Street", "004");
-        G1.setLeaderId(p4.getID());
-        assertTrue(G1.getMembers().contains(p1.getID()));
+        G1.addMember(p4.getID());
+        assertTrue(G1.getMembers().contains(p4.getID()));
     }
 
     @Test(timeout = 100)

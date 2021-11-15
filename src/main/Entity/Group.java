@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Group implements Iterable<String>, Serializable {
-    private final String leader_id;
+    private String leader_id;
     private List<String> groupMembers = new ArrayList<String>();
     private String workid;
 
@@ -28,18 +28,8 @@ public class Group implements Iterable<String>, Serializable {
      * @param leader_id This method set a new leader for the group.
      */
     public void setLeaderId(String leader_id){
-        if (this.groupMembers.contains(leader_id)){
-            int leaderIndex = this.groupMembers.indexOf(leader_id);
-            String previousLeader = this.groupMembers.get(0);
-            this.groupMembers.set(0, leader_id);
-            this.groupMembers.set(leaderIndex, previousLeader);
-        }
-        else{
-            String previousLeader = this.groupMembers.get(0);
-            this.groupMembers.set(0, leader_id);
-            this.groupMembers.add(previousLeader);
-
-        }
+        this.leader_id = leader_id;
+        this.groupMembers.remove(leader_id);
     }
 
 
@@ -51,20 +41,6 @@ public class Group implements Iterable<String>, Serializable {
         return this.leader_id;
     }
 
-
-    /**
-     *
-     * @param members This method set a new group of members for the group.
-     */
-    //leader does not change, all the members are replaced
-    public void setMembers(String[] members) {
-        List<String> newGroupMemebers = new ArrayList<>();
-        newGroupMemebers.add(this.groupMembers.get(0));
-        for(String member: members){
-            newGroupMemebers.add(member);
-        }
-        this.groupMembers = newGroupMemebers;
-    }
 
     /**
      *
@@ -97,11 +73,8 @@ public class Group implements Iterable<String>, Serializable {
      * @param member The member who is going to be removed from the group.
      * @return This method will return true iff the member is successfully removed from the group.
      */
-    public boolean deleteMember(String member){
-        if (!this.groupMembers.contains(member)){
-            return false;
-        }this.groupMembers.remove(member);
-        return true;
+    public void deleteMember(String member){
+        this.groupMembers.remove(member);
     }
 
     /**
