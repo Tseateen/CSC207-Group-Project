@@ -8,7 +8,6 @@ public class AccountFacade {
     private final String username;
     private final LoginList loginList;
     private final EmployeeList employeeList;
-    private final PayManager managerPay;
     private final Verifier managerVerifier;
 
 
@@ -16,7 +15,6 @@ public class AccountFacade {
         this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
-        this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
 
     }

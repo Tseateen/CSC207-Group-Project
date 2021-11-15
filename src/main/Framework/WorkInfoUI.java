@@ -28,7 +28,6 @@ public class WorkInfoUI {
                 "If you want to check more detail on your particular work, please type Y. \n" +
                         "Otherwise, please type N \n.");
         String action = keyIn.nextLine();
-        // TODO: check 可以變更好
         if(action.equalsIgnoreCase("Y")){
             boolean noExist = true;
             while (noExist){

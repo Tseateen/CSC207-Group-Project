@@ -20,8 +20,6 @@ public class DataGateway {
     }
 
     public void ReadInputFileToLoginList(){
-        // TODO: 寫入 AccountList
-        // TODO: Double check the error
         try {
             System.out.println("Reading User File");
             this.fileManager.readUserFromFileTo(this.loginList);
@@ -35,7 +33,6 @@ public class DataGateway {
     }
 
     public void ReadInputFileToEmployeeList(){
-        // TODO: 寫入 EmployeeList
         try {
             System.out.println("Reading Employee File");
             this.fileManager.readEmployeeFromFileTo(this.employeeList);
