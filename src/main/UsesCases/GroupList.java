@@ -3,13 +3,13 @@ package main.UsesCases;
 import main.Entity.Group;
 
 
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class GroupList implements Iterable<Group> {
+public class GroupList implements Iterable<Group>, Serializable {
 
     // === Instance Variables ===
 

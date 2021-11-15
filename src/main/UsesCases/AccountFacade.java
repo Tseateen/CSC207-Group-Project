@@ -44,6 +44,7 @@ public class AccountFacade {
         ArrayList<String> info = new ArrayList<>();
         Userable user = this.findUserHelper();
         String employeeType = this.findEmployeeTypeHelper();
+        Employee employee = this.findEmployeeHelper();
         info.add(user.getName());
         info.add(user.getID());
         info.add(user.getUsername());
@@ -51,10 +52,10 @@ public class AccountFacade {
         info.add(user.getPhone());
         info.add(user.getAddress());
         if (employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.findEmployeeHelper();
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employee;
             info.add(partTimeEmployee.getDepartment());
         } else {
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.findEmployeeHelper();
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employee;
             info.add(fullTimeEmployee.getDepartment());
             info.add(fullTimeEmployee.getPosition());
             info.add(fullTimeEmployee.getState());
