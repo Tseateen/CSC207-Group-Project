@@ -114,18 +114,18 @@ public class FacadeSys {
 
     // ================== Work UI Method ================
     public String showAllWorkNeedToDo() {
-        String result = "";
+        StringBuilder result = new StringBuilder("");
         for (String i : this.workFacade.workOfMine(this.userID)){
-            result = result + i + "\n";
+            result.append(i).append("\n");
         }
-        return result;
+        return result.toString();
     }
     public String showWorkDetail(String work_id) {
-        String result = "";
-        for (String i : this.workFacade.showWorkDetail(work_id)){
-            result = result + i + "\n";
+        StringBuilder result = new StringBuilder("");
+        for (String i : this.workFacade.showWorkDetail(this.userID)){
+            result.append(i).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     public ArrayList<String> showAllWorkLed(){
@@ -134,11 +134,11 @@ public class FacadeSys {
 
 
     public String showAllLowerWork() {
-        String result = "";
+        StringBuilder result = new StringBuilder("");
         for (String i : this.workFacade.workOfLowerLevel(this.userID)){
-            result = result + i + "\n";
+            result.append(i).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     public String showDetail(String work_id) {
@@ -223,11 +223,11 @@ public class FacadeSys {
     }
 
     public String showAllLowerUser() {
-        String result = "";
-        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.userID))){
-            result = result + i + "\n";
+        StringBuilder result = new StringBuilder("");
+        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.userID))) {
+            result.append(i).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
     //=====================================
