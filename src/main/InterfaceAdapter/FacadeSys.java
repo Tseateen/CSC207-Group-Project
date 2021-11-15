@@ -25,6 +25,7 @@ public class FacadeSys {
     private final GroupList groupList;
     private final JournalList journalList;
     private final String username;
+    private final String user_id;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
@@ -45,7 +46,7 @@ public class FacadeSys {
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
-
+        this.user_id = this.accountFacade.getUserID();
         this.workFacade = new WorkFacade(this.workList, this.groupList, this.journalList);
     }
 
@@ -112,7 +113,7 @@ public class FacadeSys {
     // ================== Work UI Method ================
     public String showAllWorkNeedToDo() {
         String result = "";
-        for (String i : this.workFacade.workOfMine(this.username)){
+        for (String i : this.workFacade.workOfMine(this.user_id)){
             result = result + i + "\n";
         }
         return result;
@@ -127,7 +128,7 @@ public class FacadeSys {
 
     public String showAllWorkLed(){
         String result = "";
-        for (String i : this.workFacade.workOfLed(this.username)){
+        for (String i : this.workFacade.workOfLed(this.user_id)){
             result = result + i + "\n";
         }
         return result;
@@ -136,14 +137,14 @@ public class FacadeSys {
 
     public String showAllLowerWork() {
         String result = "";
-        for (String i : this.workFacade.workOfLowerLevel(this.username)){
+        for (String i : this.workFacade.workOfLowerLevel(this.user_id)){
             result = result + i + "\n";
         }
         return result;
     }
 
     public String showDetail(String work_id) {
-        if (levelVerifier(this.workFacade.workLevel(work_id))||this.workFacade.isMember(work_id, this.username)) {
+        if (levelVerifier(this.workFacade.workLevel(work_id))||this.workFacade.isMember(work_id, this.user_id)) {
             String result = "";
             for (String i : this.workFacade.showWorkDetail(work_id)){
                 result = result + i + "\n";
@@ -157,7 +158,7 @@ public class FacadeSys {
     public boolean assignLeaderToWork(String work_id, String leader_id) {
         if (this.workFacade.workExist(work_id) && this.levelVerifier(this.workFacade.workLevel(work_id))) {
             if (this.accountFacade.userExists(leader_id) && this.levelVerifier(this.accountFacade.user_Level(leader_id))){
-                this.workFacade.assignLeader(work_id, leader_id, username);
+                this.workFacade.assignLeader(work_id, leader_id, this.user_id);
                 return true;
             }
         }
@@ -166,26 +167,26 @@ public class FacadeSys {
 
 
     public boolean distributeWork(String work_id, String user_id) {
-        if (this.workFacade.verifierLeader(username, work_id) &&
+        if (this.workFacade.verifierLeader(this.user_id, work_id) &&
                 this.levelVerifier(this.accountFacade.user_Level(user_id))) {
-            return this.workFacade.Distributer(username, work_id, user_id);
+            return this.workFacade.Distributer(this.user_id, work_id, user_id);
         }
         return false;
     }
 
 
     public void createWork(ArrayList<String> info_list) {
-        this.workFacade.workCreator(this.username, info_list);
+        this.workFacade.workCreator(this.user_id, info_list);
     }
 
 
 
     public void extendWork(String days, String work_id) {
-        this.workFacade.extendWork( this.username,work_id, days);
+        this.workFacade.extendWork( this.user_id,work_id, days);
     }
 
     public boolean checkLeaderOf(String work_id) {
-        return this.workFacade.verifierLeader(this.username, work_id);
+        return this.workFacade.verifierLeader(this.user_id, work_id);
     }
 
     public boolean checkWorkExist(String work_id) {
@@ -225,7 +226,7 @@ public class FacadeSys {
 
     public String showAllLowerUser() {
         String result = "";
-        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.username))){
+        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.user_id))){
             result = result + i + "\n";
         }
         return result;
@@ -236,7 +237,7 @@ public class FacadeSys {
         try {
             if (level.length() != 1) {return false;}
             int num_level = Integer.parseInt(level);
-            return num_level > Integer.parseInt(this.accountFacade.user_Level(this.username));
+            return num_level > Integer.parseInt(this.accountFacade.user_Level(this.user_id));
         } catch (NumberFormatException e) {
             return false;
         }
