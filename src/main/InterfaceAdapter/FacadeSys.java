@@ -1,7 +1,5 @@
 package main.InterfaceAdapter;
 
-import main.Entity.*;
-
 import main.UsesCases.*;
 
 
@@ -27,6 +25,7 @@ public class FacadeSys {
     private final GroupList groupList;
     private final JournalList journalList;
     private final String username;
+    private String userID;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
@@ -47,8 +46,7 @@ public class FacadeSys {
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
-
-        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList);
+        this.workFacade = new WorkFacade(this.workList, this.groupList, this.journalList);
     }
 
 
@@ -58,7 +56,10 @@ public class FacadeSys {
     public boolean systemStart(String username, String password) {
         this.fileGateway.ReadInputFileToLoginList();
         this.fileGateway.ReadInputFileToEmployeeList();
+        this.fileGateway.ReadInputFileToWorkList();
+        this.fileGateway.ReadInputFileToGroupList();
         this.employeeType = this.accountFacade.getEmployeeType();
+        this.userID = this.accountFacade.getUserID();
         return this.verifier.verifyForLogin(username, password);
     }
 
@@ -112,102 +113,82 @@ public class FacadeSys {
     // ==================================================
 
     // ================== Work UI Method ================
-
-    // Case 1: Check Person Work Information.
-    public void checkWorkInfo() {
-        // TODO : Presenter
-        System.out.println(this.workFacade.SelfWork(username));
-    }
-
-    // Overload
-    public void checkWorkInfo(String ID) {
-        // TODO : Presenter
-        System.out.println(this.workFacade.WorkDetail(ID));
-    }
-    // ==================================
-
-    // Case 2: Creating new Work
-    public boolean createWork(String name, String ID, String Department, String level) {
-        boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
-        if (validLevelGiven){
-            // TODO: Presenter : Print WorkID
-            String WorkID = this.workFacade.workCreate(name, ID, Department, level);
+    public String showAllWorkNeedToDo() {
+        String result = "";
+        for (String i : this.workFacade.workOfMine(this.userID)){
+            result = result + i + "\n";
         }
-        return validLevelGiven;
+        return result;
     }
-    // ==================================
-
-    // Case 3: Start a work with assigning leader
-    public List<String> findCurrentUserWork() {
-        return this.workFacade.AssignableWorkList(this.accountFacade);
-    }
-
-    public ArrayList<String> findAllWorkers(){
-        return this.workFacade.AllWorkers(this.accountFacade);
-    }
-
-
-    public boolean AssignALeaderToWork(String WorkID, String LeaderID) {
-        return this.workFacade.CreateNewGroup(WorkID,LeaderID);
-    }
-    // ==================================
-
-    // Case 4: Distribute a work
-    public List<String> findLeadWorkList() {
-        return this.workFacade.findLeadWork(this.username);
-    }
-
-
-    public void distributeWork(String employeeID, String workID) {
-
-        List<String> members = new ArrayList<>();
-        String[] parts;
-        parts = employeeID.split(" ");
-        try {
-            for (String eid : parts) {
-                for (String u : this.loginList) {
-                    if (!((findAllWorkers().contains(u.getID())))) {
-                        System.out.println("You can only choose the employees shown above");
-                        return;
-                    }
-                    if (u.getID().equals(eid)) {
-                        members.add(u);
-                        break;
-                    }
-                }
-            }
-            for (Group g : this.groupList) {
-                if (g.getWorkID().equals(workID)) {
-                    //this.groupManager.addMembers(members, g);
-                    break;
-                }
-            }
-        }catch (Exception e){
-            System.out.println("Error occurred in FacadeSys.distributeWork");
+    public String showWorkDetail(String work_id) {
+        String result = "";
+        for (String i : this.workFacade.showWorkDetail(work_id)){
+            result = result + i + "\n";
         }
-    }
-    // ==================================
-
-    // Case 5: Assign KPI
-    public boolean checkLeaderResult(String workID){
-        return this.workFacade.checkLeader(workID,this.username);
+        return result;
     }
 
-    public List<String> findWorkKpiMemberList(String WorkID) {
-        return this.workFacade.findWorkKpiMember(WorkID);
+    public ArrayList<String> showAllWorkLed(){
+        return this.workFacade.workOfLed(this.userID);
     }
 
-    public void giveKpi(String workID, String employeeID, String kpi){
-        this.workFacade.setKpi(workID, employeeID, kpi);
-    }
-    // ==================================
 
-    public void WorkUpdate() {
-        /* Todo: This one is designed for employee to report their work progress
-         *  we need to record their message to Journal. And if the work finished,
-         *  only leader!!! can to change work's statues to 'Finished'. There may be some more steps needed.
-         *  also, if the user is this work's leader, they can choose to extend due date
-         */
+    public String showAllLowerWork() {
+        String result = "";
+        for (String i : this.workFacade.workOfLowerLevel(this.userID)){
+            result = result + i + "\n";
+        }
+        return result;
+    }
+
+    public String showDetail(String work_id) {
+        if (levelVerifier(this.workFacade.workLevel(work_id))||this.workFacade.isMember(work_id, this.userID)) {
+            String result = "";
+            for (String i : this.workFacade.showWorkDetail(work_id)){
+                result = result + i + "\n";
+            }
+            return result;
+        }
+        return "Can't check";
+    }
+
+
+    public boolean assignLeaderToWork(String work_id, String leader_id) {
+        if (this.workFacade.workExist(work_id) && this.levelVerifier(this.workFacade.workLevel(work_id))) {
+            if (this.accountFacade.userExists(leader_id) && this.levelVerifier(this.accountFacade.user_Level(leader_id))){
+                this.workFacade.assignLeader(work_id, leader_id, this.userID);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean distributeWork(String work_id, String userID) {
+        if (this.workFacade.verifierLeader(this.userID, work_id) &&
+                this.levelVerifier(this.accountFacade.user_Level(userID))) {
+            return this.workFacade.Distributer(this.userID, work_id, userID);
+        }
+        return false;
+    }
+
+
+    public void createWork(ArrayList<String> info_list) {
+        this.workFacade.workCreator(this.userID, info_list);
+    }
+
+
+
+    public void extendWork(String days, String work_id) {
+        this.workFacade.extendWork( this.userID,work_id, days);
+    }
+
+//    public boolean checkLeaderOf(String work_id) {
+//        return this.workFacade.verifierLeader(this.userID, work_id);
+//    }
+
+    public boolean checkWorkExist(String work_id) {
+        return this.workFacade.workExist(work_id);
     }
 
 
@@ -239,7 +220,24 @@ public class FacadeSys {
     // Case 8: Check all lower level employees' salary-related information
     public List<String> checkLowerEmployeeSalary(String id, String option) {
         return this.accountFacade.lowerEmployeeCheck(id, option);
-        }
-}
-    // ==================================================
+    }
 
+    public String showAllLowerUser() {
+        String result = "";
+        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.userID))){
+            result = result + i + "\n";
+        }
+        return result;
+    }
+
+    //=====================================
+    public boolean levelVerifier(String level) {
+        try {
+            if (level.length() != 1) {return false;}
+            int num_level = Integer.parseInt(level);
+            return num_level > Integer.parseInt(this.accountFacade.user_Level(this.userID));
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+}

@@ -48,6 +48,28 @@ public class DataGateway {
 
     }
 
+    public void  ReadInputFileToWorkList(){
+        try{
+            System.out.println("Reading Work File");
+            this.fileManager.readWorkFromFileTo(this.workList);
+        }catch(IOException e){
+            System.out.println("No work data in the file so far");
+        }catch (ClassNotFoundException e1){
+            System.out.println("No such a class");
+        }
+    }
+
+    public void ReadInputFileToGroupList(){
+        try{
+            System.out.println("Reading Group File");
+            this.fileManager.readGroupFromFileTo(this.groupList);
+        }catch(IOException e){
+            System.out.println("No group data in the file so far");
+        }catch (ClassNotFoundException e1){
+            System.out.println("No such a class");
+        }
+    }
+
     public void WriteOutputFile(){
         try {
             this.fileManager.writeUserToFile(this.loginList);

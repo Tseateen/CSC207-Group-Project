@@ -26,7 +26,6 @@ public class LoginList implements Iterable<Userable>, Serializable{
     }
 
     public void initialize(){
-        //TODO: what's the highest level for admin?
         Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
         this.UserList.add(admin);
     }
@@ -46,9 +45,9 @@ public class LoginList implements Iterable<Userable>, Serializable{
         }
     }
 
-    public Userable getUser(String username){
+    public Userable getUser(String user_id){
         for(Userable user: this.UserList){
-            if(user.getUsername().equals(username)) {
+            if(user.getID().equals(user_id)) {
                 return user;
             }
         }

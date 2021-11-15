@@ -16,7 +16,7 @@ public class JournalList implements Iterable<Journal> {
         this.journalList = new ArrayList<Journal>();
     }
 
-    public void addGroup(String workID){
+    public void addJournal(String workID){
         Journal journal = new Journal(workID);
         journalList.add(journal);
     }
@@ -35,6 +35,15 @@ public class JournalList implements Iterable<Journal> {
             this.journalList.remove(this.journalList.get(index));
             return true;
         }
+    }
+
+    public Journal getJournal(String work_id) {
+        for (Journal j : this.journalList) {
+            if (j.getId().equals(work_id)) {
+                return j;
+            }
+        }
+        return null;
     }
 
     public int getSize(){
