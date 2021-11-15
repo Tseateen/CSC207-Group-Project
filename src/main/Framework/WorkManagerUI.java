@@ -20,7 +20,7 @@ public class WorkManagerUI {
         CreateWorkUI createWorkUI = new CreateWorkUI(this.facadeSys);
         PrepareForWorkUI prepareForWork = new PrepareForWorkUI(this.facadeSys);
         DistributeWorkUI distributeWork = new DistributeWorkUI(this.facadeSys);
-        KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
+//        KPIAssignUI kpiAssignUI = new KPIAssignUI(this.facadeSys);
         CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
         CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
@@ -59,7 +59,7 @@ public class WorkManagerUI {
                     distributeWork.run();
                     break;
                 case "5":
-                    kpiAssignUI.run();
+//                    kpiAssignUI.run();
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "6":

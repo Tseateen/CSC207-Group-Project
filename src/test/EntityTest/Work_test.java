@@ -10,7 +10,7 @@ public class Work_test {
     Work Work_1;
 
     public void setUp() {
-        Work_1 = new Work("Programming Work", "001", "IT", 1);
+//        Work_1 = new Work("Programming Work", "001", "IT", 1);
     }
 
     @Test(timeout = 100)

@@ -29,8 +29,8 @@ public class CreateWorkUI {
         boolean noExist = true;
         boolean invalidCreate = false;
         while (noExist){
-        String[] WorkInfoArray = {"name", "ID", "Department", "level"};
-            List<String> work_info = new ArrayList<String>();
+        String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level"};
+            ArrayList<String> work_info = new ArrayList<String>();
         do{
             work_info.clear();
             for(String each_work_info: WorkInfoArray){
@@ -38,7 +38,7 @@ public class CreateWorkUI {
                 String info = keyIn.nextLine();
                 work_info.add(info);
         }
-            if (!this.facadeSys.levelVerifier(work_info.get(3))){
+            if (!this.facadeSys.levelVerifier(work_info.get(4))){
                     System.out.println("You can not create a work that has a higher level than you! Please reassign the work");
                     invalidCreate = true;
             }

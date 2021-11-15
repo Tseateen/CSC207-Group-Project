@@ -6,13 +6,11 @@ import java.util.*;
 public class AccountFacade {
 
     private final String username;
-    private final Userable user;
-    private final Employee employee;
     private final LoginList loginList;
     private final EmployeeList employeeList;
     private final PayManager managerPay;
     private final Verifier managerVerifier;
-    private final String employeeType;
+
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
@@ -20,14 +18,11 @@ public class AccountFacade {
         this.employeeList = employeeList;
         this.managerPay = new PayManager();
         this.managerVerifier = new Verifier(this.loginList);
-        this.employeeType = "";
-        this.user = this.findUserHelper();
-        this.employee = this.findEmployeeHelper();
 
     }
 
     public String getUserID() {
-        return this.user.getID();
+        return this.findUserHelper().getID();
     }
 
     /**
@@ -73,7 +68,7 @@ public class AccountFacade {
      * @return A HashMap that contains the schedule of a part time employee
      */
     public HashMap<String, String[]> getSchedulefromPartTimeEmployee() {
-        PartTimeEmployee employee = (PartTimeEmployee) this.employee;
+        PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
         return employee.getSchedule();
     }
 
@@ -124,7 +119,7 @@ public class AccountFacade {
      * @param response The value that the client want to set
      */
     public void setPartTimeAdvancedInfo(String option, String response) {
-        PartTimeEmployee employee = (PartTimeEmployee) this.employee;
+        PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
         switch (option) {
             case "1":
                 employee.setDepartment(response);
@@ -153,7 +148,7 @@ public class AccountFacade {
      * @param schedule The new/updated schedule for a part time employee
      */
     public void setSchedule(HashMap<String, String[]> schedule) {
-        PartTimeEmployee employee = (PartTimeEmployee) this.employee;
+        PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
         employee.setSchedule(schedule);
     }
 
@@ -193,7 +188,7 @@ public class AccountFacade {
      * @param response The value that the client want to set
      */
     public void setFullTimeAdvancedInfo(String option, String response) {
-        FullTimeEmployee employee = (FullTimeEmployee) this.employee;
+        FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
         switch (option) {
             case "1":
                 employee.setDepartment(response);
@@ -445,7 +440,7 @@ public class AccountFacade {
         ArrayList<String> users = new ArrayList<String>();
         for (Employee e: this.employeeList) {
             if (e.getLevel() > Integer.parseInt(level)) {
-                users.add(this.loginList.getUser(e.getID()) + " " + e.getID()
+                users.add(this.loginList.getUser(e.getID()).getName() + " " + e.getID()
                         + " " + e.getLevel() + " " + e.getDepartment() + "\n");
             }
         }
