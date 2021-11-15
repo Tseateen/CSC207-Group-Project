@@ -1,6 +1,5 @@
 package main.InterfaceAdapter;
 
-import main.Entity.*;
 import main.UsesCases.*;
 
 
@@ -29,7 +28,7 @@ public class FacadeSys {
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
-    private final WorkFacadeNew workFacade;
+    private final WorkFacade workFacade;
 
 
 
@@ -47,7 +46,7 @@ public class FacadeSys {
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
 
-        this.workFacade = new WorkFacade(this.workList, this.loginList, this.employeeList, this.groupList, this.journalList);
+        this.workFacade = new WorkFacade(this.workList, this.groupList, this.journalList);
     }
 
 
@@ -180,10 +179,6 @@ public class FacadeSys {
     }
 
 
-    public boolean updateWork(String option, String work_id, String result) {
-        return this.workFacade.Updater(this.username, option, work_id, result);
-    }
-
 
     public void extendWork(String days, String work_id) {
         this.workFacade.extendWork( this.username,work_id, days);
@@ -226,6 +221,14 @@ public class FacadeSys {
     // Case 8: Check all lower level employees' salary-related information
     public List<String> checkLowerEmployeeSalary(String id, String option) {
         return this.accountFacade.lowerEmployeeCheck(id, option);
+    }
+
+    public String showAllLowerUser() {
+        String result = "";
+        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.username))){
+            result = result + i + "\n";
+        }
+        return result;
     }
 
     //=====================================

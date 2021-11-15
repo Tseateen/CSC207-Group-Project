@@ -341,7 +341,7 @@ public class AccountFacade {
             return false;
         }
         int LevelWantToCreate = Integer.parseInt(level);
-        return LevelWantToCreate > this.user_Level();
+        return LevelWantToCreate > Integer.parseInt(this.user_Level(this.username));
     }
 
     // Case 6: FacadeSys.CreateEmployeeMethod
@@ -400,10 +400,10 @@ public class AccountFacade {
                     employeeCheckList.add(Objects.toString(employee.getAttendance()));
                     break;
                 case "3":
-                    employeeCheckList.add(Objects.toString(getTotalVacationByID(id)));
+                    employeeCheckList.add(Objects.toString(getVacationTotalAndUsed(id).get(1)));
                     break;
                 case "4":
-                    employeeCheckList.add(Objects.toString(getVacationUsedByID(id)));
+                    employeeCheckList.add(Objects.toString(getVacationTotalAndUsed(id).get(0)));
                     break;
             }
 
@@ -424,31 +424,26 @@ public class AccountFacade {
         return validemployees;
     }
 
-    public int getTotalVacationByID(String id){
-        for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(id)) {
-                if (employee instanceof FullTimeEmployee) {
-                    return ((FullTimeEmployee) employee).getTotalVacationWithSalary();
-                }
-            }
-            // TODO: throw new Exception("Part time employee does not have vacation");
-        }
-        return 0;
-    }
 
-    public int getVacationUsedByID(String id){
-        for (Employee employee : this.employeeList) {
-            if (employee.getID().equals(id)) {
-                if (employee instanceof FullTimeEmployee) {
-                    return ((FullTimeEmployee) employee).getVacationUsed();
-                }
-            }
-            // TODO: throw new Exception("Part time employee does not have vacation");
+    public ArrayList<String> getVacationTotalAndUsed(String id){
+        ArrayList<String> vac = new ArrayList<String>();
+        Employee e = this.employeeList.getEmployee(id);
+        if (e instanceof PartTimeEmployee) {
+            return vac;
         }
-        return 0;
+        vac.add(String.valueOf(((FullTimeEmployee)e).getVacationUsed()));
+        vac.add(String.valueOf(((FullTimeEmployee)e).getTotalVacationWithSalary()));
+        return vac;
     }
     // ==================================================
-    public ArrayList<String> getLowerUser(String level) {
-        for ()
+    public ArrayList<String> getLowerUsers(String level) {
+        ArrayList<String> users = new ArrayList<String>();
+        for (Employee e: this.employeeList) {
+            if (e.getLevel() > Integer.parseInt(level)) {
+                users.add(this.loginList.getUser(e.getID()) + " " + e.getID()
+                        + " " + e.getLevel() + " " + e.getDepartment() + "\n");
+            }
+        }
+        return users;
     }
 }
