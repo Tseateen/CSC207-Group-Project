@@ -14,12 +14,12 @@ import static org.junit.Assert.*;
 public class GroupList_test {
     GroupList GL;
     Userable user1;
-    ArrayList<String> memberList;
+    ArrayList<String> memberList = new ArrayList<String>();
 
     @Before
     public void Setup() {
         GL = new GroupList();
-        Userable user1 = new User("111", "123456", "Lily", "4203456789",
+        user1 = new User("111", "123456", "Lily", "4203456789",
                 "10 King St.", "8888");
         memberList.add(user1.getID());
     }
@@ -30,16 +30,22 @@ public class GroupList_test {
         GL.addGroup(user1.getID(), "2222");
         for (Group eachGroup : GL) {
             if (eachGroup.getWorkID().equals("2222")) {
-                List<String> membersList = eachGroup.getMembers();
-                assertEquals(eachGroup.getLeaderId(), membersList.get(0));
+                eachGroup.addMember("111");
             }
         }
+        for (Group eachGroup : GL) {
+            if (eachGroup.getWorkID().equals("2222")) {
+                List<String> membersList = eachGroup.getMembers();
+                assertEquals("111", membersList.get(0));
+            }
+        }
+
     }
 
 
     @Test(timeout = 100)
     public void testGetSize(){
-        assertEquals(GL.getSize(), 1);
+        assertEquals(GL.getSize(), 0);
     }
 
 

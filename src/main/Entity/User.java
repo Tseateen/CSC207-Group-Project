@@ -19,7 +19,6 @@ public class User implements Userable, Serializable {
     private String phone;
     // The living address of this user.
     private String address;
-    //TODO: Delete vacation instance variable.
 
     /* === Representation Invariants ===
      * id should be unique, and it cannot be modified after initial
