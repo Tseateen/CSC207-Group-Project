@@ -128,12 +128,8 @@ public class FacadeSys {
         return result;
     }
 
-    public String showAllWorkLed(){
-        String result = "";
-        for (String i : this.workFacade.workOfLed(this.userID)){
-            result = result + i + "\n";
-        }
-        return result;
+    public ArrayList<String> showAllWorkLed(){
+        return this.workFacade.workOfLed(this.userID);
     }
 
 
