@@ -12,10 +12,6 @@ HR System is an application designed for information technology industries that 
 
 - FacadeSys, AccountFacade, and WorkFacade: 
 When we started designing the controller, we realized that we just needed to throw the UI functionality into a class and let that class control the use case. So we have facadeSys, which can call all use cases by calling the accountFacade and workFacade.
-	
-
-## UML Diagram
-The diagram can be accessed [here](https://lucid.app/lucidchart/9cec037d-f77d-48f4-9f61-015444782cca/edit?viewport_loc=-347%2C761%2C2991%2C1392%2CHWEp-vi-RSFO&invitationId=inv_ffb26101-c08f-4cd2-a8c6-5570b213e850)
 
 
 ## Brief Description of How SOLID Principle Implemented
