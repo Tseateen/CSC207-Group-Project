@@ -29,7 +29,7 @@ public class FullTimeEmployee_test {
 
     @Test(timeout = 100)
     public void testPosition() {
-        assertEquals(Full_time_employee_1.getPosition(), "");
+        assertEquals(Full_time_employee_1.getPosition(), "Manager");
         assertEquals(Full_time_employee_2.getPosition(), "");
         Full_time_employee_2.setPosition("Manager");
         assertEquals(Full_time_employee_2.getPosition(), "Manager");
@@ -80,7 +80,7 @@ public class FullTimeEmployee_test {
         assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), 0);
         Full_time_employee_1.setTotalVacationWithSalary(5);
         Full_time_employee_2.setTotalVacationWithSalary(2);
-        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), 2);
+        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), 5);
         assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), 2);
     }
 
@@ -90,7 +90,7 @@ public class FullTimeEmployee_test {
         assertEquals(Full_time_employee_2.getVacationUsed(), 0);
         Full_time_employee_1.setVacationUsed(3);
         Full_time_employee_2.setVacationUsed(1);
-        assertEquals(Full_time_employee_1.getVacationUsed(), 1);
+        assertEquals(Full_time_employee_1.getVacationUsed(), 3);
         assertEquals(Full_time_employee_2.getVacationUsed(), 1);
     }
 

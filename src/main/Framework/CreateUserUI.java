@@ -26,13 +26,12 @@ public class CreateUserUI {
         Scanner keyIn = new Scanner(System.in);
         boolean noExist = true;
         while (noExist){
-            String[] WorkInfoArray = {"the username", "the password", "the name", "the phone", "the address", "the department", "the wage",
-                    "N for part-time employee. Please type the position", "level", "P for part-time employee, F for full time employee. Please type the status"};
-            String username, password, name, phone, address, department, wage, position, level, status;
+            String[] WorkInfoArray = {"username", "password", "name", "phone", "address", "department", "wage",
+                    "N for Part-Time Employee! Please enter the position", "level", "F for Full Time Employee! P for Part-Time Employee! Please enter the status"};
             Map<Integer, String> user_info = new HashMap<>();
             int counter = 0;
             for(String each_work_info: WorkInfoArray){
-                System.out.println("Please type " + each_work_info + " of new user");
+                System.out.println("Please enter " + each_work_info + " of new user");
                 String info = keyIn.nextLine();
                 user_info.put(counter, info);
                 counter ++;
