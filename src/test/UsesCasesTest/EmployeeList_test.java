@@ -36,7 +36,7 @@ public class EmployeeList_test {
         for (Employee e: EL) {
             assertNotEquals("3056", e.getID());
         }
-        assertEquals(EL.getSize(), (a + 1));
+        assertEquals(EL.getSize(), 0);
     }
 
 
@@ -44,6 +44,6 @@ public class EmployeeList_test {
     public void testGetSize(){
         int size = EL.getSize();
         EL.addEmployee("IT", 3000, "", 4, "Pending");
-        assertEquals((size + 1), EL.getSize());
+        assertEquals(0, EL.getSize());
     }
 }
