@@ -39,7 +39,7 @@ public class HomePage {
                     System.out.println("Successfully exit");
                     break;
                 default:
-                    System.out.println("Please give the correct action");
+                    System.out.println("Please enter the correct action");
                     break;
             }
         }
