@@ -8,14 +8,12 @@ public class AccountFacade {
     private final String username;
     private final LoginList loginList;
     private final EmployeeList employeeList;
-    private final Verifier managerVerifier;
 
 
     public AccountFacade(LoginList loginList, EmployeeList employeeList, String username) {
         this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
-        this.managerVerifier = new Verifier(this.loginList);
 
     }
 
@@ -29,20 +27,18 @@ public class AccountFacade {
      * @return a String that contains the type of the employee
      */
     public String getEmployeeType() {
-        System.out.println(this.findEmployeeTypeHelper());
         return this.findEmployeeTypeHelper();
     }
 
     /**
-     * Get the basic infomation of an employee such as name, ID, username, password, phone number, address, and department.
+     * Get the basic information of an employee such as name, ID, username, password, phone number, address, and department.
      *
-     * @return The ArrayList that contains the basic informaiton of an employee
+     * @return The ArrayList that contains the basic information of an employee
      */
     public ArrayList<String> employeeInfo() {
         ArrayList<String> info = new ArrayList<>();
         Userable user = this.findUserHelper();
         String employeeType = this.findEmployeeTypeHelper();
-        Employee employee = this.findEmployeeHelper();
         info.add(user.getName());
         info.add(user.getID());
         info.add(user.getUsername());
@@ -50,10 +46,10 @@ public class AccountFacade {
         info.add(user.getPhone());
         info.add(user.getAddress());
         if (employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employee;
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.findEmployeeHelper();
             info.add(partTimeEmployee.getDepartment());
         } else {
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employee;
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.findEmployeeHelper();
             info.add(fullTimeEmployee.getDepartment());
             info.add(fullTimeEmployee.getPosition());
             info.add(fullTimeEmployee.getState());

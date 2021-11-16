@@ -21,7 +21,6 @@ public class DataGateway {
 
     public void ReadInputFileToLoginList(){
         try {
-            System.out.println("Reading User File");
             this.fileManager.readUserFromFileTo(this.loginList);
         }catch (IOException e){
             this.loginList.initialize();
@@ -34,7 +33,6 @@ public class DataGateway {
 
     public void ReadInputFileToEmployeeList(){
         try {
-            System.out.println("Reading Employee File");
             this.fileManager.readEmployeeFromFileTo(this.employeeList);
         }catch (IOException e){
             this.employeeList.initialize();
@@ -47,7 +45,6 @@ public class DataGateway {
 
     public void  ReadInputFileToWorkList(){
         try{
-            System.out.println("Reading Work File");
             this.fileManager.readWorkFromFileTo(this.workList);
         }catch(IOException e){
             System.out.println("No work data in the file so far");
@@ -58,7 +55,6 @@ public class DataGateway {
 
     public void ReadInputFileToGroupList(){
         try{
-            System.out.println("Reading Group File");
             this.fileManager.readGroupFromFileTo(this.groupList);
         }catch(IOException e){
             System.out.println("No group data in the file so far");

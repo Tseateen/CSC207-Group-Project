@@ -2,7 +2,6 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -13,17 +12,21 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to the HR System!");
         Scanner keyIn = new Scanner(System.in);
-        System.out.println("Please type your account username:");
+        boolean correctInfo = false;
+        while(!correctInfo) {
+        System.out.println("Please enter your account username:");
         String username = keyIn.nextLine();
-        System.out.println("Please type your account password:");
+        System.out.println("Please enter your account password:");
         String password = keyIn.nextLine();
         FacadeSys facadeSys = new FacadeSys(username);
         boolean result = facadeSys.systemStart(username,password);
-        if (result){
+        if (result) {
             HomePage homePage = new HomePage(facadeSys);
             homePage.run();
-        }else{
-            System.out.println("Account username doesn't exist or password does not match. Please type again!");
+            correctInfo = true;
+        } else {
+            System.out.println("Account username doesn't exist or password does not match. Please enter again! \n");
+        }
         }
     }
 }

@@ -67,7 +67,6 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public String personalInfo(){
-        System.out.println(this.employeeType);
         String presentInfo = "";
         if (this.employeeType.equals("PartTimeEmployee")){
             ArrayList<String> info = this.accountFacade.employeeInfo();

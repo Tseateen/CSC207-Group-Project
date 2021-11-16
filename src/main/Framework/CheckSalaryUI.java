@@ -33,11 +33,13 @@ public class CheckSalaryUI {
                     "iv) Check lower level employees' vacation used, please type 4; " + "\n" +
                     "v) Otherwise, please type E to exit;");
             String check_option = keyIn.nextLine();
-            if (!check_option.equalsIgnoreCase("E")) {
+            if (check_option.equals("E")) {
+               break;
+            }else {
                 List<String> result = this.facadeSys.checkLowerEmployeeSalary(id, check_option);
                 for (String info : result) {
                     System.out.print(info + " ");
-                }
+            }
                 System.out.println();
                 System.out.println("If you want to check other type of the information from the lower level employees," +
                         " please type C. Otherwise, please type E to exist");

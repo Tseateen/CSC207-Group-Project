@@ -26,16 +26,16 @@ public class User implements Userable, Serializable {
 
     /**
      * Construct a User, giving them the given username number, password, name, phone number, address and unique id.
-     * @param usernameNumber username number for this user.
+     * @param username username number for this user.
      * @param password Password for this user.
      * @param name Name for this user.
      * @param phone Phone number for this user.
      * @param address Address for this user.
      * @param id Unique identity for this user.
      */
-    public User(String usernameNumber,String password, String name, String phone, String address, String id){
+    public User(String username,String password, String name, String phone, String address, String id){
         this.id = id;
-        this.username = usernameNumber;
+        this.username = username;
         this.password = password;
         this.name = name;
         this.phone = phone;

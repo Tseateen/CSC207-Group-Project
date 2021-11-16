@@ -7,13 +7,13 @@ public class FullTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 
     // The total annual paid leave for this employee.
-    private static int totalVacationWithSalary;
+    private int totalVacationWithSalary;
     // the number of annual leave have been used by this employee.
-    private static int vacationUsed;
+    private int vacationUsed;
     // The position of this employee. For instance, sales, engineer, manger....
-    private static String position;
+    private String position;
     // The state of employee. For instance, working, vacation...
-    private static String state = "Working";
+    private String state = "Working";
 
     /* === Representation Invariants ===
      * totalVacationWithSalary should always equal or greater than 0.
