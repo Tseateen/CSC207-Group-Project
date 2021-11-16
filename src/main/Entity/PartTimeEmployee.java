@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class PartTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 
-    // TODO: Should we implement this with key=week(i.e. Monday), value= time segment by string.
     // The schedule of this PartTime employee.
     private HashMap<String, String[]> schedule;
 
@@ -14,7 +13,7 @@ public class PartTimeEmployee extends Employee implements Serializable {
      * @param department Department for this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
-     * @param id
+     * @param id the id of employee
      */
     public PartTimeEmployee(String department, int wage, int level, String id) {
         super(id, department, wage, level);

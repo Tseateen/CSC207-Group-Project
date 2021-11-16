@@ -23,7 +23,7 @@ public class PrepareForWorkUI {
     public void run(){
             Scanner keyIn = new Scanner(System.in);
             System.out.println("Following are the work that you can do:");
-            // TODO: Use presenter later
+            // Use presenter later
             System.out.println(this.facadeSys.showAllLowerWork());
             System.out.println("Enter the workID you want to work on:");
             String workID = keyIn.nextLine();
@@ -32,7 +32,6 @@ public class PrepareForWorkUI {
             System.out.println("Enter the employee ID for the group leader (You can only choose " +
                     "between yourself and one of the employees shown above)");
             String leaderID = keyIn.nextLine();
-            //TODO: 尚未做完！ 需要繼續判斷SuccessAssignAGroupOfWork
             if (this.facadeSys.assignLeaderToWork(workID, leaderID)) {
                 System.out.println("Assign leader successfully");
             } else {

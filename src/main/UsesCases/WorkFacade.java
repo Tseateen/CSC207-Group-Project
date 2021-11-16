@@ -1,8 +1,6 @@
 package main.UsesCases;
 
 import main.Entity.Group;
-import main.Entity.Work;
-import main.Entity.Journal;
 import main.Entity.Workable;
 
 import java.util.ArrayList;
@@ -11,12 +9,10 @@ public class WorkFacade {
 
     private final WorkList workList;
     private final GroupList groupList;
-    private final JournalList journalList;
 
-    public WorkFacade(WorkList workList, GroupList groupList, JournalList journalList) {
+    public WorkFacade(WorkList workList, GroupList groupList) {
         this.workList = workList;
         this.groupList = groupList;
-        this.journalList = journalList;
     }
 
     public boolean workExist(String work_id) {
@@ -35,7 +31,7 @@ public class WorkFacade {
     }
 
     public ArrayList<String> workOfLowerLevel(String Level) {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (Workable w: this.workList) {
             if (w.getLevel() > Integer.parseInt(Level)) {
                 result.add(this.showWorkDetail(w.getID()).get(0) + " " + this.showWorkDetail(w.getID()).get(1) + " "
@@ -47,8 +43,8 @@ public class WorkFacade {
 
 
     private ArrayList<String> getWorkList(String type, String id) {
-        ArrayList<String> result = new ArrayList<String>();
-        ArrayList<String> work_ids = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> work_ids = new ArrayList<>();
         boolean inList = false;
         for (Group g: this.groupList) {
             if (type.equals("Mine")) {
@@ -68,7 +64,7 @@ public class WorkFacade {
     }
 
     public ArrayList<String> showWorkDetail(String work_id) {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         Workable w = this.workList.getWork(work_id);
         result.add(w.getName());
         result.add(w.getID());
@@ -82,7 +78,7 @@ public class WorkFacade {
         return result;
     }
 
-    public void assignLeader(String work_id, String leader_id, String user_id) {
+    public void assignLeader(String work_id, String leader_id) {
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(work_id)) {
                 g.setLeaderId(leader_id);
@@ -110,7 +106,7 @@ public class WorkFacade {
 
 
 
-    public boolean Distributer(String leader_id, String work_id, String user_id) {
+    public boolean Distributor(String work_id, String user_id) {
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(work_id)){
                 if (g.getMembers().contains(user_id)) {return false;}
@@ -121,7 +117,7 @@ public class WorkFacade {
         return false;
     }
 
-    public void workCreator(String user_id, ArrayList<String> info) {
+    public void workCreator( ArrayList<String> info) {
         this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)));
     }
 
@@ -129,12 +125,12 @@ public class WorkFacade {
         return String.valueOf(this.workList.getWork(work_id).getLevel());
     }
 
-    public void extendWork(String user_id, String work_id, String extend_date) {
+    public void extendWork(String work_id, String extend_date) {
         WorkManager workManager = new WorkManager();
         workManager.extendWork(this.workList.getWork(work_id), extend_date);
     }
 
-    public String changeWorkInfo(String user_id, String work_id, String opt, String changeTo) {
+    public String changeWorkInfo(String work_id, String opt, String changeTo) {
         Workable w = this.workList.getWork(work_id);
         switch (opt) {
             case "DESCRIBE":

@@ -28,14 +28,13 @@ public class WorkInfoUI {
                 "If you want to check more detail on your particular work, please type Y. \n" +
                         "Otherwise, please type N \n.");
         String action = keyIn.nextLine();
-        // TODO: check 可以變更好
         if(action.equalsIgnoreCase("Y")){
             boolean noExist = true;
             while (noExist){
                 System.out.println("Please give the ID of the work that you want to check !");
                 String ID = keyIn.nextLine();
                 if (this.facadeSys.checkWorkExist(ID)){
-                    this.facadeSys.showWorkDetail(ID);
+                    System.out.println(this.facadeSys.showWorkDetail(ID));
                 }else{
                     System.out.println("This work does not exist");
                 }

@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 public class Group implements Iterable<String>, Serializable {
     private String leader_id;
-    private List<String> groupMembers;
+    private List<String> groupMembers = new ArrayList<String>();
     private String workid;
 
 
@@ -20,7 +20,6 @@ public class Group implements Iterable<String>, Serializable {
      */
     public Group(String leader_id, String workid){
         this.leader_id = leader_id;
-        this.groupMembers = new ArrayList<>();
         this.workid = workid;
     }
 
