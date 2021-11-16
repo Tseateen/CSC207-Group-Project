@@ -15,42 +15,40 @@ When we started designing the controller, we realized that we just needed to thr
 	
 
 ## UML Diagram
+The diagram can be accessed [here](https://lucid.app/lucidchart/9cec037d-f77d-48f4-9f61-015444782cca/edit?viewport_loc=-347%2C761%2C2991%2C1392%2CHWEp-vi-RSFO&invitationId=inv_ffb26101-c08f-4cd2-a8c6-5570b213e850)
 
 
 ## Brief Description of How SOLID Principle Implemented
 
 - Single Responsibility Principle
     - Classes in the UsesCases have a single responsibility.
-        - WorkManager only assigns work to the Employees.
-        - FullTimeInfoManager and PartTimeInfoManager only get and set information for the specific types of the employees.
-        - EmployeeList only stores the information of employees with add and delete methods.
-        - FileReadWrite only reads and writes files.
-        - GroupList only stores the information of groups with add and delete methods.
-        - GroupManager only modifies group information, addMembers and resetMembers and changeLeaders.
-        - JournalList only stores journals by adding Group and deleteJournal.
-        - JournalManager manages Journal.
-        - LoginList stores the User information and adds and deletes users.
-        - Verifier only verifies the User information.
-        - WorkList only stores the Work information inside.
-        - WorkManager only manages the Work like changing the states of the Work.
+        - `WorkManager` only assigns work to the Employees.
+        - `EmployeeList` only stores the information of employees with add and delete methods.
+        - `FileReadWrite` only reads and writes files.
+        - `GroupList` only stores the information of groups with add and delete methods.
+        - `GroupManager` only modifies group information, addMembers and resetMembers and changeLeaders.
+        - `LoginList` stores the User information and adds and deletes users.
+        - `Verifier` only verifies the User information.
+        - `WorkList` only stores the Work information inside.
+        - `WorkManager` only manages the Work like changing the states of the Work.
 
 
 - Open/Close Principle
-    - Our Employee class can have different types of employee by extending the Employee class, but not limited to part time and full time Employee, which is open to extend but closed to modification.
+    - Our `Employee` class can have different types of employee by extending the `Employee` class, but not limited to part time and full time Employee, which is open to extend but closed to modification.
 
 
 - Liskov Substitution Principle
     - We tried not to override the methods from the parent class.
         - Any class that extends the User should be able to have a profile inside the system with a unique ID.
-        - For example, our FullTimeEmployee class and PartTimeEmployee class did not override their parent class, the Employee class.
+        - For example, our `FullTimeEmployee` class and `PartTimeEmployee` class did not override their parent class, the Employee class.
 
 
 - Interface Segregation Principle
-    - The interfaces Userable and Workable are small and specific to the implementation of the functions used by the User and Work classes.
+    - The interfaces `Userable` and `Workable` are small and specific to the implementation of the functions used by the `User` and `Work` classes.
 
 
 - Dependency Inversion Principle
-    - We designed the Userable interface so that our code does not violate the Dependency Inversion Principle. If we do not have this Userable interface, when a SecondUser class is implemented, AccountManager is depending on only User class, which means we have to add code that lets the AccountManager also depend on SecondUser. But if AccountManager is dependant on Userable, as long as the User class and SecondUser implemented this interface, the code is extendable and only needs little edition. 
+    - We designed the `Userable` interface so that our code does not violate the Dependency Inversion Principle. If we do not have this `Userable` interface, when a `SecondUser` class is implemented, `AccountManager` is depending on only `User` class, which means we have to add code that lets the `AccountManager` also depend on `SecondUser`. But if `AccountManager` is dependent on `Userable`, as long as the `User` class and `SecondUser` implemented this interface, the code is extendable and only needs little edition. 
     - Same with workable.
 
 ## Clean Architecture
