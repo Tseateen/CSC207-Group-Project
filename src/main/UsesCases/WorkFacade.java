@@ -130,24 +130,33 @@ public class WorkFacade {
         workManager.extendWork(this.workList.getWork(work_id), extend_date);
     }
 
-    public String changeWorkInfo(String work_id, String opt, String changeTo) {
+    public boolean changeWorkInfo(String work_id, String opt, String changeTo) {
         Workable w = this.workList.getWork(work_id);
         switch (opt) {
             case "DESCRIBE":
                 w.setDescribe(changeTo);
-                break;
+                return true;
             case "REQ":
                 w.setRequirement(changeTo);
-                break;
+                return true;
             case "STATE":
                 w.setState(changeTo);
-                break;
+                return true;
             case "SIGN":
                 w.setSign(changeTo);
-                break;
+                return true;
             default:
-                return "Nothing Changed";
+                return false;
         }
-        return "Success";
+    }
+
+    public void deleteEmployee(String userID) {
+        GroupManager groupManager = new GroupManager();
+        for (Group g : this.groupList) {
+            if (g.getLeaderId().equals(userID)) {
+                groupManager.resetGroup(g);
+            }
+            g.deleteMember(userID);
+        }
     }
 }
