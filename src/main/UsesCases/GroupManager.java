@@ -43,4 +43,13 @@ public class GroupManager {
         group.setLeaderId(user);
     }
 
+    /**
+     * This method will reset the whole Group.
+     *
+     * @param group the Group information.
+     */
+    public void resetGroup(Group group) {
+        this.resetMember(group);
+        this.changeLeader(group, "");
+    }
 }
