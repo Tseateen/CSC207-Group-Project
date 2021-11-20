@@ -13,9 +13,6 @@ import java.util.*;
 
 
 public class FacadeSysTest {
-
-    // === Instance Variables ===
-    private String employeeType;
     // === DataFile ===
     private final DataGateway fileGateway;
     private final LoginList loginList;
@@ -43,7 +40,7 @@ public class FacadeSysTest {
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
-        this.accountFacade = new AccountFacadeTest(this.loginList, this.employeeList,this.username);
+        this.accountFacade = new AccountFacadeTest(this.loginList, this.employeeList);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
     }
 
@@ -56,8 +53,7 @@ public class FacadeSysTest {
         this.fileGateway.ReadInputFileToEmployeeList();
         this.fileGateway.ReadInputFileToWorkList();
         this.fileGateway.ReadInputFileToGroupList();
-        this.employeeType = this.accountFacade.getEmployeeType();
-        this.userID = this.accountFacade.getUserID();
+        this.userID = this.accountFacade.getUserID(this.username);
         return this.verifier.verifyForLogin(username, password);
     }
 
@@ -69,10 +65,6 @@ public class FacadeSysTest {
     public String personalInfo(){
         ArrayList<String> info = this.accountFacade.infoCheck(this.userID);
         return this.listToString(info);
-    }
-
-    public String checkSalary(){
-        return this.accountFacade.checkSalary(this.userID);
     }
 
     public boolean setPersonalInfo(String option, String response){
@@ -109,7 +101,7 @@ public class FacadeSysTest {
 
     public boolean assignLeaderToWork(String work_id, String leader_id) {
         if (this.workFacade.workExist(work_id) && this.levelVerifier(this.workFacade.workLevel(work_id))) {
-            if (this.accountFacade.userExists(leader_id) && this.levelVerifier(this.accountFacade.user_Level(leader_id))){
+            if (this.accountFacade.userExists(leader_id) && this.levelVerifier(this.accountFacade.userLevel(leader_id))){
                 this.workFacade.assignLeader(work_id, leader_id);
                 return true;
             }
@@ -153,23 +145,25 @@ public class FacadeSysTest {
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
     // Case 6: Create a user
+    public boolean AccountVerifier(String username) {
+        return Objects.isNull(this.accountFacade.getUserID(username)); // return true if username not exist
+    }
+
     public boolean createUser(String username, String password, String name, String phone, String address,
                               String department, String wage, String position, String level, String status) {
-        boolean validLevelGiven = this.levelVerifier(level);
-        if (validLevelGiven){
-            String[] userinfo = {username, password, name, phone, address, department, wage, position, level, status};
-            this.accountFacade.CreateNewAccount(userinfo);
-        }
-        return validLevelGiven;
+        String[] userinfo = {username, password, name, phone, address, department, wage, position, level, status};
+        return this.accountFacade.createNewAccount(userinfo);
     }
     // ==================================
 
     // Case 7: Delete a user
     public boolean deleteUser(String userid) {
         if (this.levelVerifier(this.accountFacade.userLevel(userid))) {
-            this.accountFacade.deleteEmpolyee(userid);
-            this.workFacade.deleteEmployee(userid);
-            return true;
+            if (this.accountFacade.deleteEmployee(userid)){
+                this.workFacade.deleteEmployee(userid);
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -185,7 +179,7 @@ public class FacadeSysTest {
     }
 
     public String showAllLowerUser() {
-        ArrayList<String> users = this.accountFacade.getLowerUsers(accountFacade.userLevel(this.userID));
+        ArrayList<String> users = this.accountFacade.getLowerUsers(this.accountFacade.userLevel(this.userID));
         return this.listToString(users);
     }
 

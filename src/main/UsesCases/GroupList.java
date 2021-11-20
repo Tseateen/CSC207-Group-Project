@@ -44,7 +44,6 @@ public class GroupList implements Iterable<Group>, Serializable {
      * @return whether the Group has been successfully deleted.
      *
      */
-
     public boolean deleteUser(String id){
         int index = -1;
 
@@ -59,6 +58,21 @@ public class GroupList implements Iterable<Group>, Serializable {
             this.GroupList.remove(this.GroupList.get(index));
             return true;
         }
+    }
+
+    /**
+     * This method will find the Employee from the EmployeeList.
+     *
+     * @param workID the group's id that needs to be found.
+     * @return the group found.
+     */
+    protected Group getGroup(String workID) {
+        for (Group g: this.GroupList) {
+            if (g.getWorkID().equals(workID)) {
+                return g;
+            }
+        }
+        return null;
     }
 
 
