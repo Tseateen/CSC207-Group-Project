@@ -10,43 +10,50 @@ import java.util.NoSuchElementException;
 
 public class WorkList implements Iterable<Workable>, Serializable {
 
-    private final List<Workable> WorkList;
+    private final List<Workable> workList;
 
     public WorkList(){
-        this.WorkList = new ArrayList<Workable>();
+        this.workList = new ArrayList<Workable>();
     }
 
     public void addWork(String name, String id, String department, String requirement, int level){
         Workable work = new Work(name,id,department, requirement,level);
-        WorkList.add(work);
+        workList.add(work);
     }
 
     public boolean deleteWork(String id){
         int index = -1;
 
         for(int i = 0; i < this.getSize(); i ++){
-            if(this.WorkList.get(i).getID().equals(id)){
+            if(this.workList.get(i).getID().equals(id)){
                 index = i;
             }
         }
         if(index == -1){
             return false;
         }else{
-            this.WorkList.remove(this.WorkList.get(index));
+            this.workList.remove(this.workList.get(index));
             return true;
         }
     }
 
     public int getSize(){
-        return WorkList.size();
+        return workList.size();
     }
+
 
     public void readInput(Work work) {
-        this.WorkList.add(work);
+        this.workList.add(work);
     }
 
-    public Workable getWork(String work_id) {
-        for (Workable w: this.WorkList) {
+    /**
+     * This method will find the Employee from the EmployeeList.
+     *
+     * @param work_id the work's id that needs to be found.
+     * @return the Work found.
+     */
+    protected Workable getWork(String work_id) {
+        for (Workable w: this.workList) {
             if (w.getID().equals(work_id)) {
                 return w;
             }
@@ -67,7 +74,7 @@ public class WorkList implements Iterable<Workable>, Serializable {
 
         @Override
         public boolean hasNext() {
-            return curr_index < WorkList.size();
+            return curr_index < workList.size();
         }
 
         @Override
@@ -75,7 +82,7 @@ public class WorkList implements Iterable<Workable>, Serializable {
             Workable work;
 
             try {
-                work = WorkList.get(curr_index);
+                work = workList.get(curr_index);
             } catch (IndexOutOfBoundsException e){
                 throw new NoSuchElementException();
             }
@@ -84,7 +91,7 @@ public class WorkList implements Iterable<Workable>, Serializable {
         }
 
         public void add(Work work){
-            WorkList.add(work);
+            workList.add(work);
         }
     }
 }

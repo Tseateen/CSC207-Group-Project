@@ -53,10 +53,10 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
     /**
      * This method will find the Employee from the EmployeeList.
      *
-     * @param user_id the employee's id that needs to be deleted.
+     * @param user_id the employee's id that needs to be found.
      * @return the Employee found.
      */
-    public Employee getEmployee(String user_id) {
+    protected Employee getEmployee(String user_id) {
         for (Employee e: this.EmployeeList) {
             if (e.getID().equals(user_id)) {
                 return e;

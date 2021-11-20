@@ -45,7 +45,13 @@ public class LoginList implements Iterable<Userable>, Serializable{
         }
     }
 
-    public Userable getUser(String user_id){
+    /**
+     * This method will find the Employee from the EmployeeList.
+     *
+     * @param user_id the user's id that needs to be found.
+     * @return the User found.
+     */
+    protected Userable getUser(String user_id){
         for(Userable user: this.UserList){
             if(user.getID().equals(user_id)) {
                 return user;
