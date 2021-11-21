@@ -6,11 +6,17 @@ import java.io.IOException;
 
 public class DataGateway {
 
+    // === DataFile ===
     private final FileReadWrite fileManager;
     private final LoginList loginList;
     private final EmployeeList employeeList;
     private final GroupList groupList;
     private final WorkList workList;
+
+
+    /**
+     * Construct the DataGateway, managing the information from UsesCases.
+     */
     public DataGateway(LoginList loginList, EmployeeList employeeList, GroupList groupList, WorkList workList){
         this.loginList = loginList;
         this.employeeList = employeeList;
@@ -19,6 +25,11 @@ public class DataGateway {
         this.fileManager = new FileReadWrite();
     }
 
+
+    // === System methods ===
+    /**
+     * Read the input file from interface to the UsesCase, LoginList.
+     */
     public void ReadInputFileToLoginList(){
         try {
             this.fileManager.readUserFromFileTo(this.loginList);
@@ -31,6 +42,10 @@ public class DataGateway {
 
     }
 
+
+    /**
+     * Read the input file from interface to the UsesCase, EmployeeList.
+     */
     public void ReadInputFileToEmployeeList(){
         try {
             this.fileManager.readEmployeeFromFileTo(this.employeeList);
@@ -43,6 +58,10 @@ public class DataGateway {
 
     }
 
+
+    /**
+     * Read the input file from interface to the UsesCase, WorkList.
+     */
     public void  ReadInputFileToWorkList(){
         try{
             this.fileManager.readWorkFromFileTo(this.workList);
@@ -53,6 +72,10 @@ public class DataGateway {
         }
     }
 
+
+    /**
+     * Read the input file from interface to the UsesCase, GroupList.
+     */
     public void ReadInputFileToGroupList(){
         try{
             this.fileManager.readGroupFromFileTo(this.groupList);
@@ -63,6 +86,10 @@ public class DataGateway {
         }
     }
 
+
+    /**
+     * Write the output file from interface to the UsesCases.
+     */
     public void WriteOutputFile(){
         try {
             this.fileManager.writeUserToFile(this.loginList);

@@ -2,17 +2,24 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
 public class HomePage {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a HomePage
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public HomePage(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+
+    /**
+     * Run the HomePage
+     */
     public void run() throws Exception {
         Scanner keyIn = new Scanner(System.in);
         PersonalManagerUI personal = new PersonalManagerUI(facadeSys);

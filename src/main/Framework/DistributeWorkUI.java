@@ -2,16 +2,23 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class DistributeWorkUI {
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a DistributeWorkUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public DistributeWorkUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+
+    /**
+     * Run the DistributeWorkUI
+     */
     public void run() {
         Scanner keyIn = new Scanner(System.in);
         System.out.println("Following are the work IDs of the work which are lead by you: " +

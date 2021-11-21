@@ -1,18 +1,25 @@
 package main.Framework;
 
-import main.InterfaceAdapter.*;
+import main.InterfaceAdapter.FacadeSys;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class WorkManagerUI {
 
     private final FacadeSys facadeSys;
 
+    /**
+     * Construct a WorkManagerUI
+     * @param facadeSys A FacadeSys type object that is going to be used in the UI
+     */
     public WorkManagerUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
 
+
+    /**
+     * Run the WorkManagerUI
+     */
     public void run(){
         Scanner keyIn = new Scanner(System.in);
 
