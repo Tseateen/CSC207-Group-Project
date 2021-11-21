@@ -31,7 +31,6 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testDeleteEmployee(){
-        int a = EL.getSize();
         EL.deleteEmployee("3056");
         for (Employee e: EL) {
             assertNotEquals("3056", e.getID());
@@ -42,7 +41,6 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testGetSize(){
-        int size = EL.getSize();
         EL.addEmployee("IT", 3000, "", 4, "Pending");
         assertEquals(0, EL.getSize());
     }
