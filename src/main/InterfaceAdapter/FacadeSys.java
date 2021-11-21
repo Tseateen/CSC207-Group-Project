@@ -23,7 +23,7 @@ public class FacadeSys {
     private final Verifier verifier;
     private final WorkList workList;
     private final GroupList groupList;
-    private final String username;
+    private String username;
     private String userID;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
@@ -35,14 +35,13 @@ public class FacadeSys {
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
      */
-    public FacadeSys(String username) {
+    public FacadeSys() {
         this.loginList = new LoginList();
         this.employeeList = new EmployeeList();
         this.verifier = new Verifier(this.loginList);
         this.workList = new WorkList();
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
-        this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
     }
@@ -52,6 +51,7 @@ public class FacadeSys {
 
 
     public boolean systemStart(String username, String password) {
+        this.username = username;
         this.fileGateway.ReadInputFileToLoginList();
         this.fileGateway.ReadInputFileToEmployeeList();
         this.fileGateway.ReadInputFileToWorkList();

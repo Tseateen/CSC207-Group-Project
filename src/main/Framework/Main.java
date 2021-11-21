@@ -9,6 +9,7 @@ public class Main {
     /**
      * Start the HR System
      */
+    /*
     public static void main(String[] args) throws Exception {
         System.out.println("Welcome to the HR System!");
         Scanner keyIn = new Scanner(System.in);
@@ -29,4 +30,6 @@ public class Main {
         }
         }
     }
+     */
 }
+
