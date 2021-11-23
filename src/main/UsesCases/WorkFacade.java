@@ -276,7 +276,6 @@ public class WorkFacade {
      * Delete the people previously working on the Work.
      *
      * @param userID the ID of the Employee, either he is the leader or the member of the Work.
-     *
      */
     public void deleteEmployee(String userID) {
         GroupManager groupManager = new GroupManager();
