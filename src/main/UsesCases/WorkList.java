@@ -52,7 +52,7 @@ public class WorkList implements Iterable<Workable>, Serializable {
      * @param work_id the work's id that needs to be found.
      * @return the Work found.
      */
-    protected Workable getWork(String work_id) {
+    public Workable getWork(String work_id) {
         for (Workable w: this.workList) {
             if (w.getID().equals(work_id)) {
                 return w;

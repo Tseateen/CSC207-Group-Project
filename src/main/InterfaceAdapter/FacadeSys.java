@@ -29,6 +29,8 @@ public class FacadeSys {
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacade workFacade;
+    private final IWorkManager workManager;
+    private final WorkManagerController workManagerController;
 
 
 
@@ -45,6 +47,8 @@ public class FacadeSys {
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
+        this.workManager = new WorkManager();
+        this.workManagerController = new WorkManagerController(this.workList,workManager);
     }
 
 
@@ -166,7 +170,7 @@ public class FacadeSys {
 
 
     public void extendWork(String days, String work_id) {
-        this.workFacade.extendWork( work_id, days);
+        this.workManagerController.extendWork(work_id, days);
     }
 
 //    public boolean checkLeaderOf(String work_id) {
