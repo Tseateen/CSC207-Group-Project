@@ -19,7 +19,9 @@ public class FacadeSys {
     // === DataFile ===
     private final DataGateway fileGateway;
     private final LoginList loginList;
+    private final LoginListController loginListController;
     private final EmployeeList employeeList;
+    private final EmployeeListController employeeListController;
     private final Verifier verifier;
     private final WorkList workList;
     private final GroupList groupList;
@@ -39,7 +41,9 @@ public class FacadeSys {
      */
     public FacadeSys(String username) {
         this.loginList = new LoginList();
+        this.loginListController = new LoginListController(this.loginList);
         this.employeeList = new EmployeeList();
+        this.employeeListController = new EmployeeListController(this.employeeList);
         this.verifier = new Verifier(this.loginList);
         this.workList = new WorkList();
         this.groupList = new GroupList();
@@ -189,8 +193,8 @@ public class FacadeSys {
                               String department, String wage, String position, String level, String status) {
         boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
         if (validLevelGiven){
-            String[] userinfo = {username, password, name, phone, address, department, wage, position, level, status};
-            this.accountFacade.CreateNewAccount(userinfo);
+            this.loginListController.addUser(username, password, name,phone, address);
+            this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status);
         }
         return validLevelGiven;
     }
