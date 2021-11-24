@@ -7,7 +7,7 @@ import main.Entity.Workable;
 
 import java.sql.Timestamp;
 
-public class WorkManager {
+public class WorkManager implements IWorkManager{
 
 
     /**
