@@ -4,7 +4,14 @@ import main.Entity.FullTimeEmployee;
 import main.Entity.PartTimeEmployee;
 
 public class SalaryCalculator {
+    private final KPICalculator KPIcalculator;
 
+    /**
+     * Construct a SalaryCalculator.
+     */
+    public SalaryCalculator(KPICalculator kpiCalculator) {
+        this.KPIcalculator = kpiCalculator;
+    }
 
     /**
      * Calculate the total salary to be paid for a part-time employee.
@@ -50,6 +57,6 @@ public class SalaryCalculator {
      * @return An int that represent the bonus salary from the KPI of this full-time employee.
      */
     public int calculateBonusFromKPI(FullTimeEmployee fullTimeEmployee){
-        return getKPI(fullTimeEmployee.getID());
+        return this.KPIcalculator.calculateKPI(fullTimeEmployee.getID());
     }
 }
