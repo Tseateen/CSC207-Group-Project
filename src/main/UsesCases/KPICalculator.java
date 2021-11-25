@@ -66,5 +66,4 @@ public record KPICalculator(GroupList groupList, WorkList workList) {
             }
         }
     }
-
 }
