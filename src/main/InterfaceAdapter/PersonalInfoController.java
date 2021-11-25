@@ -67,10 +67,13 @@ public class PersonalInfoController {
             switch (option){
                 case "1":
                     this.personalManager.setDepartment(userID, response);
+                    break;
                 case "2":
                     this.personalManager.setLevel(userID, response);
+                    break;
                 case "3":
                     this.personalManager.setWage(userID, response);
+                    break;
                 case "4":
                     if(this.personalManager.setPosition(userID, response)){
                         correctAction = false;

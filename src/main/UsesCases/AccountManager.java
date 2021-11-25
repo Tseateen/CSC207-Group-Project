@@ -1,6 +1,7 @@
 package main.UsesCases;
 
 public class AccountManager {
+
     private final String username;
     private final LoginList loginList;
     private final EmployeeList employeeList;
