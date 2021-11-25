@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EmployeeList implements Iterable<Employee>, Serializable {
+public class EmployeeList implements Iterable<Employee>, Serializable, IEmployeeList {
 
     // === Instance Variables ===
 
@@ -45,10 +45,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
         }
         this.idCounter += 1;
     }
-    public void initialize(){
-        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
-        this.EmployeeList.add(admin);
-    }
+
 
     /**
      * This method will find the Employee from the EmployeeList.
@@ -98,6 +95,13 @@ public class EmployeeList implements Iterable<Employee>, Serializable {
         return this.EmployeeList.size();
     }
 
+
+    // === Data ===
+
+    public void initialize(){
+        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
+        this.EmployeeList.add(admin);
+    }
 
     /**
      * This method will read the input entered from the interface and call the add method to add a new employee
