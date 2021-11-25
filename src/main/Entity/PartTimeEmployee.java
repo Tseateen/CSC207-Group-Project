@@ -43,4 +43,9 @@ public class PartTimeEmployee extends Employee implements Serializable {
         this.workingHour += hours;
     }
 
+    /**
+     * Resets the working hours of the part-time employee.
+     */
+    public void resetWorkingHour() {this.workingHour = 0;}
+
 }
