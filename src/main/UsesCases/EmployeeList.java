@@ -35,6 +35,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * @param level the level of the employee. With smaller numbers, the employee has higher authority level.
      * @param status the status of the employee, "pending" by default.
      */
+    @Override
     public void addEmployee(String department, int wage, String position,  int level, String status) {
         if (status.equals("F")) {
             Employee employee = new FullTimeEmployee(department, position, wage, level, String.valueOf(this.idCounter));
@@ -50,12 +51,13 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     /**
      * This method will find the Employee from the EmployeeList.
      *
-     * @param user_id the employee's id that needs to be found.
+     * @param userID the employee's id that needs to be found.
      * @return the Employee found.
      */
-    protected Employee getEmployee(String user_id) {
+    @Override
+    public Employee getEmployee(String userID) {
         for (Employee e: this.EmployeeList) {
-            if (e.getID().equals(user_id)) {
+            if (e.getID().equals(userID)) {
                 return e;
             }
         }
@@ -69,6 +71,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * @param id the employee's id that needs to be deleted.
      * @return whether the Employee has successfully deleted.
      */
+    @Override
     public boolean deleteEmployee(String id) {
         int index = -1;
         for(int i = 0; i < EmployeeList.size(); i ++) {
@@ -91,13 +94,14 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      *
      * @return the int of the size of the EmployeeList.
      */
+    @Override
     public int getSize(){
         return this.EmployeeList.size();
     }
 
 
     // === Data ===
-
+    @Override
     public void initialize(){
         Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
         this.EmployeeList.add(admin);
@@ -109,14 +113,17 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      *
      * @param employee the information of the Employee.
      */
+    @Override
     public void readInput(Employee employee){
         this.EmployeeList.add(employee);
     }
 
+    @Override
     public int getID(){
         return this.idCounter;
     }
 
+    @Override
     public void readID(int ID) {
         this.idCounter = ID;
     }

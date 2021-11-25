@@ -1,13 +1,12 @@
 package main.InterfaceAdapter;
 
-import main.Entity.Userable;
-import main.UsesCases.LoginList;
+import main.UsesCases.*;
 
 public class LoginListController {
 
-    private final  LoginList loginList;
+    private final  ILoginList loginList;
 
-    public LoginListController(LoginList loginList){
+    public LoginListController(ILoginList loginList){
         this.loginList = loginList;
     }
 

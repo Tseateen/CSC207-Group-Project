@@ -19,6 +19,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         this.idCounter = 1;
     }
 
+    @Override
     public void addUser(String accountNumber, String password, String name, String phone, String address){
         Userable user = new User(accountNumber, password, name, phone, address, String.valueOf(this.idCounter));
         this.UserList.add(user);
@@ -26,6 +27,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
 
+    @Override
     public boolean deleteUser(String id){
         int index = -1;
 
@@ -48,6 +50,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      * @param user_id the user's id that needs to be found.
      * @return the User found.
      */
+    @Override
     public Userable getUser(String user_id){
         for(Userable user: this.UserList){
             if(user.getID().equals(user_id)) {
@@ -57,24 +60,29 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         return null;
     }
 
+    @Override
     public int getSize(){
         return UserList.size();
     }
 
+    @Override
     public int getID(){
         return this.idCounter;
     }
 
     // ===== Data ====
+    @Override
     public void initialize(){
         Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
         this.UserList.add(admin);
     }
 
+    @Override
     public void readInput(Userable user) {
         this.UserList.add(user);
     }
 
+    @Override
     public void readID(int ID) {
         this.idCounter = ID;
     }
