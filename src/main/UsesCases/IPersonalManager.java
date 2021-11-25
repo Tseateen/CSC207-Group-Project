@@ -7,7 +7,10 @@ public interface IPersonalManager {
 
     public abstract ArrayList<String> employeeInfo();
     public abstract int getWorkingHourFromPartTimeEmployee();
-    public abstract int checkSalary();
+    public abstract int checkTotalSalary();
+    public abstract int checkMinimumWage();
+    public abstract int checkVacationBonus();
+    public abstract int checkKPIBonus();
     public abstract ArrayList<String> vacationInfo();
     public abstract String getUserLevel(String userID);
     public abstract void setName(String name);

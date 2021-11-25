@@ -9,14 +9,19 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
     private final String username;
     private final ILoginList loginList;
     private final IEmployeeList employeeList;
+    private final KPICalculator kpiCalculator;
+    private final SalaryCalculator salaryCalculator;
 
     /**
      * Construct the PersonalManager, managing the information from other UsesCases.
      */
-    public PersonalManager(ILoginList loginList, IEmployeeList employeeList, String username) {
+    public PersonalManager(ILoginList loginList, IEmployeeList employeeList, String username, GroupList groupList,
+                           WorkList workList) {
         this.username = username;
         this.loginList = loginList;
         this.employeeList = employeeList;
+        this.kpiCalculator = new KPICalculator(groupList, workList);
+        this.salaryCalculator = new SalaryCalculator(this.kpiCalculator);
 
     }
 
@@ -64,14 +69,24 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
         return employee.getWorkingHour();
     }
 
-    //==== retrieve employee's wage information ===
+    //==== retrieve employee's salary information ===
     /**
-     * Check the salary of an employee.
+     * Check the total salary of an employee (including bonus).
      *
      * @return An int that represent the salary/wage of an employee.
      */
     @Override
-    public int checkSalary() {
+    public int checkTotalSalary() {
+        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
+            PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
+            return this.salaryCalculator.calculatePartTimeSalary(employee);
+        } else {
+            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
+            return this.salaryCalculator.calculateFullTimeSalary(employee);
+        }
+    }
+    @Override
+    public int checkMinimumWage() {
         if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
             PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
             return employee.getWage();
@@ -80,8 +95,26 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
             return employee.getWage();
         }
     }
+    @Override
+    public int checkVacationBonus() {
+        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
+            return 0;
+        } else {
+            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
+            return this.salaryCalculator.calculateBonusFromVacation(employee);
+        }
+    }
+    @Override
+    public int checkKPIBonus(){
+        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
+            return 0;
+        } else {
+            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
+            return this.salaryCalculator.calculateBonusFromKPI(employee);
+        }
+    }
 
-    // ==== retrieve fill time employee's vacation information =====
+    // ==== retrieve full time employee's vacation information =====
     @Override
     public ArrayList<String> vacationInfo() {
         ArrayList<String> vacationList = new ArrayList<>();
