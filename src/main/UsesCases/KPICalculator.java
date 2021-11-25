@@ -39,31 +39,37 @@ public record KPICalculator(GroupList groupList, WorkList workList) {
         long milliSeconds = Long.parseLong(now);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
+        //int date = calendar.get(Calendar.DATE);
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
 
         for (Group group : this.groupList) {
             if (group.getLeaderId().equals(userid)) {
-                checkTimeHelper(workAsLeader, month, year, group);
+                String groupID = group.getWorkID();
+                for (Workable work : this.workList) {
+                    if (checkTimeHelper(work, groupID, month, year)){
+                        workAsLeader.add(work);
+                    }
+                }
             }
 
             if (group.getMembers().contains(userid)) {
-                checkTimeHelper(workAsMember, month, year, group);
+                String groupID = group.getWorkID();
+                for (Workable work : this.workList) {
+                    if (checkTimeHelper(work, groupID, month, year)) {
+                        workAsMember.add(work);
+                    }
+                }
             }
         }
         return userWork;
     }
 
-    // Check whether Work finished in this month
-    private void checkTimeHelper(ArrayList<Workable> workAsLeader, int month, int year, Group group) {
-        String groupID = group.getWorkID();
-        for (Workable work : this.workList) {
-            if (work.getState().equals("Finished") &&
-                    Integer.valueOf(work.getEnd_time().substring(5, 7)).equals(month) &&
-                    Integer.valueOf(work.getEnd_time().substring(0, 4)).equals(year) &&
-                    work.getID().equals(groupID)) {
-                workAsLeader.add(work);
-            }
-        }
+    private boolean checkTimeHelper(Workable work, String groupID, int month, int year){
+        return (work.getState().equals("Finished") &&
+                Integer.valueOf(work.getEnd_time().substring(5, 7)).equals(month) &&
+                Integer.valueOf(work.getEnd_time().substring(0, 4)).equals(year) &&
+                work.getID().equals(groupID));
     }
+
 }
