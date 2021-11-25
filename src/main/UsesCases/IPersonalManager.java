@@ -21,3 +21,4 @@ public interface IPersonalManager {
     public abstract boolean setPosition(String userID, String position);
     public abstract boolean setEmployeeState(String userID, String state);
 }
+
