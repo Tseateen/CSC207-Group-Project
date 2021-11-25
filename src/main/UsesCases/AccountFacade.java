@@ -72,13 +72,13 @@ public class AccountFacade {
 
 
     /**
-     * Getter method for the schedule of a part-time employee.
+     * Getter method for the working hours of a part-time employee.
      *
-     * @return A HashMap that contains the schedule of a part-time employee.
+     * @return A int that represents the working hours of a part-time employee.
      */
-    public HashMap<String, String[]> getSchedulefromPartTimeEmployee() {
+    public int getWorkingHourFromPartTimeEmployee() {
         PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
-        return employee.getSchedule();
+        return employee.getWorkingHour();
     }
 
 
@@ -156,13 +156,13 @@ public class AccountFacade {
 
 
     /**
-     * Set the schedule for a part-time employee.
+     * Add the hours that a part-time employee worked to their total working hours.
      *
-     * @param schedule The new/updated schedule for a part-time employee.
+     * @param hoursWorked The hours that a part-time employee worked.
      */
-    public void setSchedule(HashMap<String, String[]> schedule) {
+    public void addWorkingHours(int hoursWorked) {
         PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
-        employee.setSchedule(schedule);
+        employee.addWorkingHour(hoursWorked);;
     }
 
 
