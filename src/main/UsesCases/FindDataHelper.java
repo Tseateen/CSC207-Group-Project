@@ -8,5 +8,5 @@ import main.UsesCases.*;
 public interface FindDataHelper {
     public abstract Userable findUserHelper();
     public abstract Employee findEmployeeHelper();
-    public abstract String findEmployeeTypeHelper();
+    public abstract String findEmployeeTypeHelper(String userID);
 }

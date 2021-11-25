@@ -18,13 +18,16 @@ public class FacadeSys {
     private String employeeType;
     // === DataFile ===
     private final DataGateway fileGateway;
-    private final LoginList loginList;
-    private final EmployeeList employeeList;
+    private final ILoginList loginList;
+    private final LoginListController loginListController;
+    private final IEmployeeList employeeList;
+    private final EmployeeListController employeeListController;
     private final Verifier verifier;
     private final WorkList workList;
     private final GroupList groupList;
     private final String username;
     private String userID;
+    private final PersonalInfoController personalInfoController;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
@@ -39,13 +42,16 @@ public class FacadeSys {
      */
     public FacadeSys(String username) {
         this.loginList = new LoginList();
+        this.loginListController = new LoginListController(this.loginList);
         this.employeeList = new EmployeeList();
+        this.employeeListController = new EmployeeListController(this.employeeList);
         this.verifier = new Verifier(this.loginList);
         this.workList = new WorkList();
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
+        this.personalInfoController = new PersonalInfoController(this.loginList,this.employeeList,this.username);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
         this.workManager = new WorkManager();
         this.workManagerController = new WorkManagerController(this.workList,workManager);
@@ -71,40 +77,30 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public String personalInfo(){
-        String presentInfo = "";
-        if (this.employeeType.equals("PartTimeEmployee")){
-            ArrayList<String> info = this.accountFacade.employeeInfo();
-            presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-                    + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-                    + "\n Department: " + info.get(6);
-            return presentInfo;
-        }else{
-            ArrayList<String> info = this.accountFacade.employeeInfo();
-            int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
-            presentInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-                    + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-                    + "\n Department: " + info.get(6) + "\n Position: " + info.get(7) + "\n State: " +info.get(8)
-                    +"\n Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
-            return presentInfo;
-        }
+        return this.personalInfoController.personalInfo();
     }
 
     public String checkSalary(){
-        if (this.employeeType.equals("PartTimeEmployee")){
-            return String.valueOf(this.accountFacade.checkSalary());
-        }else{
-            return String.valueOf(this.accountFacade.checkSalary());
+        return this.personalInfoController.checkSalary();
+    }
+
+    public String setPersonalInfo(String option, String response){
+        if (this.personalInfoController.setPersonalInfo(option, response)){
+            return "Set personal information success!";
+        }
+        else{
+            return "Invalid option or response!";
         }
     }
 
-    public void setPersonalInfo(String option, String response){
-        if (this.employeeType.equals("PartTimeEmployee")){
-            this.accountFacade.setPartTimeBasicInfo(option, response);
-        }else{
-            this.accountFacade.setFullTimeBasicInfo(option, response);
+    public String setEmployeeInfo(String userID, String option, String response){
+        if (this.personalInfoController.setEmployeeInfo(userID, option, response)){
+            return "Set employee information success";
+        }
+        else{
+            return "Invalid option or response, or the employee does not exist!";
         }
     }
-
 
     public void checkVacation() {
         int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
@@ -189,8 +185,8 @@ public class FacadeSys {
                               String department, String wage, String position, String level, String status) {
         boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
         if (validLevelGiven){
-            String[] userinfo = {username, password, name, phone, address, department, wage, position, level, status};
-            this.accountFacade.CreateNewAccount(userinfo);
+            this.loginListController.addUser(username, password, name,phone, address);
+            this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status);
         }
         return validLevelGiven;
     }

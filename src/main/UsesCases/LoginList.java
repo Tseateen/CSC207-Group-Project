@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LoginList implements Iterable<Userable>, Serializable{
+public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
 
     private final List<Userable> UserList;
     private int idCounter;
@@ -19,16 +19,15 @@ public class LoginList implements Iterable<Userable>, Serializable{
         this.idCounter = 1;
     }
 
+    @Override
     public void addUser(String accountNumber, String password, String name, String phone, String address){
         Userable user = new User(accountNumber, password, name, phone, address, String.valueOf(this.idCounter));
         this.UserList.add(user);
         this.idCounter += 1;
     }
 
-    public void initialize(){
-        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
-        this.UserList.add(admin);
-    }
+
+    @Override
     public boolean deleteUser(String id){
         int index = -1;
 
@@ -51,7 +50,8 @@ public class LoginList implements Iterable<Userable>, Serializable{
      * @param user_id the user's id that needs to be found.
      * @return the User found.
      */
-    protected Userable getUser(String user_id){
+    @Override
+    public Userable getUser(String user_id){
         for(Userable user: this.UserList){
             if(user.getID().equals(user_id)) {
                 return user;
@@ -60,18 +60,29 @@ public class LoginList implements Iterable<Userable>, Serializable{
         return null;
     }
 
+    @Override
     public int getSize(){
         return UserList.size();
     }
 
-    public void readInput(Userable user) {
-        this.UserList.add(user);
-    }
-
+    @Override
     public int getID(){
         return this.idCounter;
     }
 
+    // ===== Data ====
+    @Override
+    public void initialize(){
+        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
+        this.UserList.add(admin);
+    }
+
+    @Override
+    public void readInput(Userable user) {
+        this.UserList.add(user);
+    }
+
+    @Override
     public void readID(int ID) {
         this.idCounter = ID;
     }

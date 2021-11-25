@@ -2,7 +2,7 @@ package main.UsesCases;
 
 import java.util.Objects;
 
-public class CheckManager {
+public class CheckManager implements ICheckManager{
     private final LoginList loginList;
     private final EmployeeList employeeList;
 
@@ -13,6 +13,7 @@ public class CheckManager {
 
     }
 
+    @Override
     public boolean userExists(String userID) {
         return !(Objects.isNull(this.loginList.getUser(userID)));
     }
