@@ -13,7 +13,6 @@ public class CheckManager implements ICheckManager{
 
     }
 
-
     @Override
     public boolean userExists(String userID) {
         return !(Objects.isNull(this.loginList.getUser(userID)));

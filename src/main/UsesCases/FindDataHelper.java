@@ -10,4 +10,3 @@ public interface FindDataHelper {
     public abstract Employee findEmployeeHelper();
     public abstract String findEmployeeTypeHelper(String userID);
 }
-

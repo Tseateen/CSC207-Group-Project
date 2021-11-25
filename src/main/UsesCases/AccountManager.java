@@ -15,7 +15,6 @@ public class AccountManager {
         this.employeeList = employeeList;
     }
 
-
     public boolean createNewAccount(String[] userinfo) {
         try {
             this.loginList.addUser(userinfo[0], userinfo[1], userinfo[2], userinfo[3], userinfo[4]);

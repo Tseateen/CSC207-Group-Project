@@ -84,7 +84,6 @@ public class FacadeSys {
         return this.personalInfoController.checkSalary();
     }
 
-
     public String setPersonalInfo(String option, String response){
         if (this.personalInfoController.setPersonalInfo(option, response)){
             return "Set personal information success!";

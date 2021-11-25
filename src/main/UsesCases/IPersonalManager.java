@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public interface IPersonalManager {
 
-
     public abstract ArrayList<String> employeeInfo();
     public abstract HashMap<String, String[]> getSchedulefromPartTimeEmployee();
     public abstract int checkSalary();

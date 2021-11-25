@@ -9,7 +9,5 @@ public interface IEmployeeList {
     public abstract void readInput(Employee employee);
     public abstract int getID();
     public abstract void readID(int ID);
-
-
 }
 

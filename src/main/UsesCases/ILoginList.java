@@ -11,6 +11,5 @@ public interface ILoginList {
     public abstract void initialize();
     public void readInput(Userable user);
     public void readID(int ID);
-
 }
 
