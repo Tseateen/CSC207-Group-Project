@@ -5,33 +5,19 @@ import java.util.HashMap;
 public class PartTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 
-    // The schedule of this PartTime employee.
-    private HashMap<String, String[]> schedule;
+    // The working hour of this PartTime employee.
+    private int workingHour;
 
     /**
      * Construct a PartTimeEmployee, giving them the given department, wage, and level.
      * @param department Department for this employee.
-     * @param wage Minimum wage for this employee.
+     * @param wage Minimum wage hourly for this employee.
      * @param level The authority level fore this employee.
      * @param id the id of employee
      */
     public PartTimeEmployee(String department, int wage, int level, String id) {
         super(id, department, wage, level);
-        this.schedule = new HashMap<String, String[]>();
-    }
-
-    /**
-     * This is an Overload Constructor for PartTimeEmployee. It also contruct PartTImeEmployee
-     * giving them the given department, wage, level and schedule.
-     *
-     * @param department Department for this employee.
-     * @param wage Minimum wage for this employee.
-     * @param level The authority level fore this employee.
-     * @param schedule The schedule of this PartTime employee.
-     */
-    public PartTimeEmployee(String department, int wage, int level,String id, HashMap<String, String[]> schedule) {
-        super(id, department, wage, level);
-        this.schedule = schedule;
+        this.workingHour = 0;
     }
 
     public PartTimeEmployee(){
@@ -41,20 +27,20 @@ public class PartTimeEmployee extends Employee implements Serializable {
 
     /**
      *
-     * @return This method returns the schedule of a part-time employee.
+     * @return This method returns the working hour of a part-time employee.
      */
 
-    public HashMap<String, String[]> getSchedule(){
-        return this.schedule;
+    public int getWorkingHour(){
+        return this.workingHour;
     }
 
     /**
      *
      *
-     * @param schedule The schedule that is going to modify a part-time employee's schedule.
+     * @param hours The hours that a part-time employee worked.
      */
-    public void setSchedule(HashMap<String, String[]> schedule){
-        this.schedule = schedule;
+    public void addWorkingHour(int hours){
+        this.workingHour += hours;
     }
 
 }

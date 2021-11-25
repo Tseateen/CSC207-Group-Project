@@ -59,9 +59,9 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
      * @return A HashMap that contains the schedule of a part-time employee.
      */
     @Override
-    public HashMap<String, String[]> getSchedulefromPartTimeEmployee() {
+    public int getWorkingHourFromPartTimeEmployee() {
         PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
-        return employee.getSchedule();
+        return employee.getWorkingHour();
     }
 
     //==== retrieve employee's wage information ===
