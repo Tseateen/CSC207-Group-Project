@@ -3,17 +3,12 @@ package main.UsesCases;
 import main.Entity.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.lang.*;
 
-public class KPICalculator {
-    private final GroupList groupList;
-    private final WorkList workList;
 
-    public KPICalculator(GroupList groupList, WorkList workList) {
-        this.groupList = groupList;
-        this.workList = workList;
-    }
+public record KPICalculator(GroupList groupList, WorkList workList) {
 
 
     public int calculateKPI(String userid) {
@@ -40,25 +35,36 @@ public class KPICalculator {
         userWork.put("Leader", workAsLeader);
         userWork.put("Member", workAsMember);
 
+        String now = String.valueOf(System.currentTimeMillis());
+        long milliSeconds = Long.parseLong(now);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+
         for (Group group : this.groupList) {
             if (group.getLeaderId().equals(userid)) {
-                String groupID = group.getWorkID();
-                for (Workable work : this.workList) {
-                    if (work.getState().equals("Finished") && work.getID().equals(groupID)) {
-                        workAsLeader.add(work);
-                    }
-                }
+                checkTimeHelper(workAsLeader, month, year, group);
             }
-            if (group.getLeaderId().equals(userid)) {
-                String groupID = group.getWorkID();
-                for (Workable work : this.workList) {
-                    if (work.getState().equals("Finished") && work.getID().equals(groupID)) {
-                        workAsMember.add(work);
-                    }
-                }
+
+            if (group.getMembers().contains(userid)) {
+                checkTimeHelper(workAsMember, month, year, group);
             }
         }
         return userWork;
+    }
+
+    // Check whether Work finished in this month
+    private void checkTimeHelper(ArrayList<Workable> workAsLeader, int month, int year, Group group) {
+        String groupID = group.getWorkID();
+        for (Workable work : this.workList) {
+            if (work.getState().equals("Finished") &&
+                    Integer.valueOf(work.getEnd_time().substring(5, 7)).equals(month) &&
+                    Integer.valueOf(work.getEnd_time().substring(0, 4)).equals(year) &&
+                    work.getID().equals(groupID)) {
+                workAsLeader.add(work);
+            }
+        }
     }
 
 }
