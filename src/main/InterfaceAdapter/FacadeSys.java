@@ -51,7 +51,8 @@ public class FacadeSys {
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
-        this.personalInfoController = new PersonalInfoController(this.loginList,this.employeeList,this.username);
+        this.personalInfoController = new PersonalInfoController(this.loginList,this.employeeList,this.username,
+                this.groupList, this.workList);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
         this.workManager = new WorkManager();
         this.workManagerController = new WorkManagerController(this.workList,workManager);
@@ -80,8 +81,17 @@ public class FacadeSys {
         return this.personalInfoController.personalInfo();
     }
 
-    public String checkSalary(){
-        return this.personalInfoController.checkSalary();
+    public String checkTotalSalary(){
+        return this.personalInfoController.checkTotalSalary();
+    }
+    public String checkMinimumWage(){
+        return this.personalInfoController.checkMinimumWage();
+    }
+    public String checkVacationBonus(){
+        return this.personalInfoController.checkVacationBonus();
+    }
+    public String checkKPIBonus(){
+        return this.personalInfoController.checkKPIBonus();
     }
 
     public String setPersonalInfo(String option, String response){

@@ -1,18 +1,16 @@
 package main.InterfaceAdapter;
 
 import main.Entity.Userable;
-import main.UsesCases.IEmployeeList;
-import main.UsesCases.ILoginList;
-import main.UsesCases.IPersonalManager;
-import main.UsesCases.PersonalManager;
+import main.UsesCases.*;
 
 import java.util.ArrayList;
 
 public class PersonalInfoController {
     private IPersonalManager personalManager;
 
-    public PersonalInfoController(ILoginList loginList, IEmployeeList employeeList, String username){
-        this.personalManager = new PersonalManager(loginList, employeeList, username);
+    public PersonalInfoController(ILoginList loginList, IEmployeeList employeeList, String username, GroupList groupList,
+                                  WorkList workList){
+        this.personalManager = new PersonalManager(loginList, employeeList, username, groupList, workList);
     }
 
 
@@ -32,8 +30,17 @@ public class PersonalInfoController {
     }
 
 
-    public String checkSalary(){
-        return String.valueOf(this.personalManager.checkSalary());
+    public String checkTotalSalary(){
+        return String.valueOf(this.personalManager.checkTotalSalary());
+    }
+    public String checkMinimumWage(){
+        return String.valueOf(this.personalManager.checkMinimumWage());
+    }
+    public String checkVacationBonus(){
+        return String.valueOf(this.personalManager.checkVacationBonus());
+    }
+    public String checkKPIBonus(){
+        return String.valueOf(this.personalManager.checkKPIBonus());
     }
 
     public boolean setPersonalInfo(String option, String response){

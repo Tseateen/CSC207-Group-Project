@@ -27,21 +27,31 @@ public class PersonalManagerUI {
         while (noExit) {
             System.out.println(
                     "i) Check your personal Info, type 1 " + "\n" +
-                            "ii) Check personal Salary, type 2 " + "\n" +
-                            "iii) Change personal Information, type 3 " + "\n" +
-                            "iv) Back to main page, type 4" + "\n");
+                            "ii) Check your total Salary (including bonus), type 2 " + "\n" +
+                            "iii) Check your minimum wage, type 3" + "\n" +
+                            "iv) Check your bonus salary from vacation, type 4" + "\n" +
+                            "v) Check your bonus salary from KPI, type 5" + "\n" +
+                            "vi) Change personal Information, type 6 " + "\n" +
+                            "vii) Back to main page, type 7" + "\n");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":
                     System.out.println(this.facadeSys.personalInfo());
                     break;
                 case "2":
-                    System.out.println(this.facadeSys.checkSalary());
+                    System.out.println(this.facadeSys.checkTotalSalary());
                     break;
                 case "3":
-                    changePersonInfo.run();
+                    System.out.println(this.facadeSys.checkMinimumWage());
                     break;
                 case "4":
+                    System.out.println(this.facadeSys.checkVacationBonus());
+                case "5":
+                    System.out.println(this.facadeSys.checkKPIBonus());
+                case "6":
+                    changePersonInfo.run();
+                    break;
+                case "7":
                     noExit = false;
                     break;
                 default:
