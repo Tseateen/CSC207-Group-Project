@@ -8,9 +8,8 @@ import java.util.ArrayList;
 public class PersonalInfoController {
     private IPersonalManager personalManager;
 
-    public PersonalInfoController(ILoginList loginList, IEmployeeList employeeList, String username, GroupList groupList,
-                                  WorkList workList){
-        this.personalManager = new PersonalManager(loginList, employeeList, username, groupList, workList);
+    public PersonalInfoController(IPersonalManager personalManager){
+        this.personalManager = personalManager;
     }
 
 

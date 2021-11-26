@@ -5,7 +5,7 @@ import main.Entity.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PersonalManager implements FindDataHelper, IPersonalManager {
+public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPersonalManager {
     private final String username;
     private final ILoginList loginList;
     private final IEmployeeList employeeList;
@@ -25,6 +25,14 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
 
     }
 
+    /**
+     * Getter method for the user using findUserHelper method and the ID of the user.
+     *
+     * @return the user found.
+     */
+    public String getUserID() {
+        return this.findUserHelper().getID();
+    }
 
     //====== Methods regarding retrieve personal information =======
     /**
@@ -238,7 +246,6 @@ public class PersonalManager implements FindDataHelper, IPersonalManager {
      *
      * @return The String that represent either a part-time employee or a full time employee.
      */
-    @Override
     public String findEmployeeTypeHelper(String userID){
         String employeeType = "";
         for (Employee employee: (EmployeeList) this.employeeList){

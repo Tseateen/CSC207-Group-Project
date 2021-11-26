@@ -22,18 +22,20 @@ public class FacadeSys {
     private final LoginListController loginListController;
     private final IEmployeeList employeeList;
     private final EmployeeListController employeeListController;
-    private final Verifier verifier;
+    private final IVerifier verifier;
     private final WorkList workList;
     private final GroupList groupList;
     private final String username;
     private String userID;
     private final PersonalInfoController personalInfoController;
+    private final VerifierController verifierController;
     // === AccountFacade ===
     private final AccountFacade accountFacade;
     // === WorkFacade ===
     private final WorkFacade workFacade;
     private final IWorkManager workManager;
     private final WorkManagerController workManagerController;
+    private final IPersonalManager personalManager;
 
 
 
@@ -45,17 +47,18 @@ public class FacadeSys {
         this.loginListController = new LoginListController(this.loginList);
         this.employeeList = new EmployeeList();
         this.employeeListController = new EmployeeListController(this.employeeList);
-        this.verifier = new Verifier(this.loginList);
         this.workList = new WorkList();
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
         this.username = username;
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
-        this.personalInfoController = new PersonalInfoController(this.loginList,this.employeeList,this.username,
-                this.groupList, this.workList);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
         this.workManager = new WorkManager();
         this.workManagerController = new WorkManagerController(this.workList,workManager);
+        this.personalManager = new PersonalManager(this.loginList, this.employeeList, this.username, this.groupList, this.workList);
+        this.personalInfoController = new PersonalInfoController(this.personalManager);
+        this.verifier = new Verifier(this.username, this.loginList, this.employeeList);
+        this.verifierController = new VerifierController(new Verifier(this.username, this.loginList, this.employeeList));
     }
 
 
@@ -69,7 +72,7 @@ public class FacadeSys {
         this.fileGateway.ReadInputFileToGroupList();
         this.employeeType = this.accountFacade.getEmployeeType();
         this.userID = this.accountFacade.getUserID();
-        return this.verifier.verifyForLogin(username, password);
+        return this.verifierController.verifyLogin(username, password);
     }
 
     public void systemEnd() throws IOException, ClassNotFoundException {
@@ -193,7 +196,7 @@ public class FacadeSys {
     // Case 6: Create a user
     public boolean createUser(String username, String password, String name, String phone, String address,
                               String department, String wage, String position, String level, String status) {
-        boolean validLevelGiven = this.accountFacade.ValidToCreateThisLevel(level);
+        boolean validLevelGiven = this.verifierController.validToCreate(level);
         if (validLevelGiven){
             this.loginListController.addUser(username, password, name,phone, address);
             this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status);
@@ -203,11 +206,11 @@ public class FacadeSys {
     // ==================================
 
     // Case 7: Delete a user
-    public boolean deleteUser(String userid) {
-        boolean validLevelGiven = this.accountFacade.userExists(userid) &&
-                this.accountFacade.ValidToCreateThisLevel(this.accountFacade.getLevel(userid));
+    public boolean deleteUser(String userID) {
+        boolean validLevelGiven = this.verifierController.verifyUserExistence(userID) &&
+                this.verifierController.validToDelete(userID);
         if (validLevelGiven) {
-            this.accountFacade.DeleteAccount(userid);
+            this.accountFacade.DeleteAccount(userID);
         }
         return validLevelGiven;
     }
