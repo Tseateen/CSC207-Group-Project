@@ -118,7 +118,7 @@ public class WorkFacade {
      * @return a list of strings with the Work information, including the name, ID, state, level, description,
      * start time, end time of the Work.
      */
-    public ArrayList<String> showWorkDetail(String workID) {
+    public ArrayList<String> showWorkDetail(String workID) {//WM
         ArrayList<String> result = new ArrayList<>();
         Workable w = this.workList.getWork(workID);
         result.add(w.getName());
@@ -140,7 +140,7 @@ public class WorkFacade {
      * @param leaderID the ID of the Employee.
      *
      */
-    public void assignLeader(String workID, String leaderID) {
+    public void assignLeader(String workID, String leaderID) {//GM
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(workID)) {
                 g.setLeaderId(leaderID);
@@ -159,7 +159,7 @@ public class WorkFacade {
      *
      * @return true iff the Employee is the Work's leader.
      */
-    public boolean verifierLeader(String userID, String workID) {
+    public boolean verifierLeader(String userID, String workID) {//GM
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
         }
@@ -175,7 +175,7 @@ public class WorkFacade {
      *
      * @return true iff the Employee is the Work's member.
      */
-    public boolean isMember (String userID, String workID) {
+    public boolean isMember (String userID, String workID) {// move to GM
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(workID)){
                 return (g.getLeaderId().equals(userID)||g.getMembers().contains(workID));
@@ -193,7 +193,7 @@ public class WorkFacade {
      *
      * @return true iff the Work has been successfully assigned to the Employee.
      */
-    public boolean Distributor(String workID, String userID) {
+    public boolean Distributor(String workID, String userID) {// move to GM
         for (Group g: this.groupList) {
             if (g.getWorkID().equals(workID)){
                 if (g.getMembers().contains(userID)) {return false;}
@@ -223,6 +223,7 @@ public class WorkFacade {
      *
      * @return a string with the authority level of the Work.
      */
+    // move to WM
     public String workLevel(String workID) {
         return String.valueOf(this.workList.getWork(workID).getLevel());
     }
@@ -251,7 +252,7 @@ public class WorkFacade {
      * @return true iff the Work information has successfully been changed.
      *
      */
-    public boolean changeWorkInfo(String workID, String opt, String changeTo) {
+    public boolean changeWorkInfo(String workID, String opt, String changeTo) {//move to WM
         Workable w = this.workList.getWork(workID);
         switch (opt) {
             case "DESCRIBE":
@@ -277,7 +278,7 @@ public class WorkFacade {
      *
      * @param userID the ID of the Employee, either he is the leader or the member of the Work.
      */
-    public void deleteEmployee(String userID) {
+    public void deleteEmployee(String userID) {// move to GM, rename deleteMember
         GroupManager groupManager = new GroupManager();
         for (Group g : this.groupList) {
             if (g.getLeaderId().equals(userID)) {
