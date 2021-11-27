@@ -188,7 +188,7 @@ public class FacadeSys {
 
     public boolean checkWorkExist(String work_id) {
         return this.workFacade.workExist(work_id);
-    }
+    }//D
 
 
     // Here are some method used to show other user information, may used in hr workers or work distribute

@@ -7,37 +7,49 @@ import main.Entity.Workable;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class WorkManager implements IWorkManager{
 
 
     /**
      * Extend a work (add extra works to the current work).
-     * @param work the work which is going to be extended.
+     * @param workID the work's id which is going to be extended.
+     * @param workList the list of work
      * @param extend_date how much date its gonna extended.
      */
-    public void extendWork(Workable work, String extend_date) {
+    public void extendWork(String workID, IWorkList workList, String extend_date) {
+        Workable work = workList.getWork(workID);
         String due = work.getEnd_time();
-        due = String.valueOf(Integer.parseInt(due) + Integer.parseInt(extend_date));
+        due = String.valueOf(Long.parseLong(due) + Long.parseLong(extend_date));
         work.setEnd_time(due);
-        autoChangeState(work);
+        autoChange(work);
     }
 
     /**
      * Change a work's state
-     * @param work the work which is going to be changed.
+     * @param workID the work's id which is going to be extended.
+     * @param workList the list of work
      * @param new_statue the state that the given work is going to be changed to.
      */
-    public void changeState(Workable work, String new_statue) {
+    public void changeState(String workID, IWorkList workList, String new_statue) {
+        Workable work = workList.getWork(workID);
         work.setState(new_statue);
-        autoChangeState(work);
+        autoChange(work);
     }
 
     /**
      * Change a work's state automatically as the time goes.
-     * @param work the work which is going to be changed.
+     * @param workID the work's id which is going to be extended.
+     * @param workList the list of work
      */
-    public void autoChangeState(Workable work) {
+    public void autoChangeState(String workID, IWorkList workList) {
+        Workable work = workList.getWork(workID);
+        this.autoChange(work);
+
+    }
+
+    private void autoChange(Workable work) {
         String statue = work.getState();
         Timestamp now = new Timestamp(System.currentTimeMillis());
         long due = Integer.parseInt(work.getEnd_time());
@@ -55,7 +67,6 @@ public class WorkManager implements IWorkManager{
         work.setState("Pending");
 
     }
-
     /**
      * Change the Work information with different options.
      *
@@ -122,38 +133,23 @@ public class WorkManager implements IWorkManager{
     }
 
     /**
-     * Check if the Work is already existed with the Work ID.
-     *
-     * @param workID the ID of the work.
-     *
-     * @return true iff the work is already existed.
-     */
-    public boolean workExist(String workID, IWorkList workList) {
-        for (Workable w: (WorkList)workList) {
-            if (w.getID().equals(workID)) {return true;}
-        }
-        return false;
-    }
-
-
-    /**
      * Get the members of the Work who are working on the Work.
      *
      * @param id the ID of the work.
      *
-     * @return a list of strings with the members.
+     * @return a list of strings with the work's id.
      */
-    public ArrayList<String> workOfMine(String id,IGroupList groupList, IWorkList workList) {
+    public ArrayList<String> workOfMember(String id,IGroupList groupList, IWorkList workList) {
         return this.getWorkList("Mine", id, groupList, workList);
     }
 
 
     /**
-     * Get the leader of the Work who is working on the Work.
+     * Get the leader's Works.
      *
-     * @param id the ID of the work.
+     * @param id the ID of the leader.
      *
-     * @return a list of strings with the leader.
+     * @return a list of strings with the work's id.
      */
     public ArrayList<String> workOfLed(String id,IGroupList groupList, IWorkList workList) {
         return this.getWorkList("Led", id, groupList, workList);
@@ -179,6 +175,17 @@ public class WorkManager implements IWorkManager{
         return result;
     }
 
+    /**
+     * Verify work exist or not
+     *
+     * @param workID the work's id which is going to be extended.
+     * @param workList the list of work
+     *
+     * @return work exist or not
+     */
+    public boolean workExist(String workID, IWorkList workList) {
+        return !Objects.isNull(workList.getWork(workID));
+    }
 
     /**
      * Get the Work information with the requirements given and the ID of the Work.
@@ -208,4 +215,5 @@ public class WorkManager implements IWorkManager{
         }
         return result;
     }
+
 }

@@ -85,7 +85,7 @@ public class Work implements Workable, Serializable {
         return this.create_time;
     }
 
-    // String Need to be the form of "YYYY/MM/DD HH:mm:ss"
+    // String Need to be the form of timestamp
     public void setEnd_time(String time) {
         this.end_time = time;
     }
@@ -134,7 +134,7 @@ public class Work implements Workable, Serializable {
      * @param time Given the start time of this Work.
      */
     @Override
-    // String Need to be the form of "YYYY/MM/DD HH:mm:ss"
+    // String Need to be the form of timestamp
     public void setStart_time(String time) {
         this.start_time = time;
     }
