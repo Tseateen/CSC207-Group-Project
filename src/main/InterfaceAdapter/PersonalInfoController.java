@@ -13,9 +13,9 @@ public class PersonalInfoController {
     }
 
 
-    public String personalInfo(){
+    public String personalInfo(ILoginList loginList, IEmployeeList employeeList, String userID){
         String personalInfo = "";
-        ArrayList<String> info = this.personalManager.employeeInfo();
+        ArrayList<String> info = this.personalManager.employeeInfo(loginList, employeeList, userID);
         personalInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
                 + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
                 + "\n Department: " + info.get(6);
@@ -29,33 +29,33 @@ public class PersonalInfoController {
     }
 
 
-    public String checkTotalSalary(){
-        return String.valueOf(this.personalManager.checkTotalSalary());
+    public String checkTotalSalary(IEmployeeList employeeList, String userID){
+        return String.valueOf(this.personalManager.checkTotalSalary(employeeList, userID));
     }
-    public String checkMinimumWage(){
-        return String.valueOf(this.personalManager.checkMinimumWage());
+    public String checkMinimumWage(IEmployeeList employeeList, String userID){
+        return String.valueOf(this.personalManager.checkMinimumWage(employeeList, userID));
     }
-    public String checkVacationBonus(){
-        return String.valueOf(this.personalManager.checkVacationBonus());
+    public String checkVacationBonus(IEmployeeList employeeList, String userID){
+        return String.valueOf(this.personalManager.checkVacationBonus(employeeList, userID));
     }
-    public String checkKPIBonus(){
-        return String.valueOf(this.personalManager.checkKPIBonus());
+    public String checkKPIBonus(IEmployeeList employeeList, String userID){
+        return String.valueOf(this.personalManager.checkKPIBonus(employeeList, userID));
     }
 
-    public boolean setPersonalInfo(String option, String response){
+    public boolean setPersonalInfo(String option, String response, ILoginList loginList, String userID){
         try{
             switch (option){
                 case "1":
-                    this.personalManager.setName(response);
+                    this.personalManager.setName(response, loginList, userID);
                     break;
                 case "2":
-                    this.personalManager.setPassword(response);
+                    this.personalManager.setPassword(response, loginList, userID);
                     break;
                 case "3":
-                    this.personalManager.setAddress(response);
+                    this.personalManager.setAddress(response, loginList, userID);
                     break;
                 case "4":
-                    this.personalManager.setPhone(response);
+                    this.personalManager.setPhone(response, loginList, userID);
                     break;
                 default:
                     return false;
@@ -67,26 +67,26 @@ public class PersonalInfoController {
     }
 
 
-    public boolean setEmployeeInfo(String userID, String option, String response){
+    public boolean setEmployeeInfo(String userID, String option, String response, IEmployeeList employeeList){
         boolean correctAction = true;
         try{
             switch (option){
                 case "1":
-                    this.personalManager.setDepartment(userID, response);
+                    this.personalManager.setDepartment(userID, response, employeeList );
                     break;
                 case "2":
-                    this.personalManager.setLevel(userID, response);
+                    this.personalManager.setLevel(userID, response, employeeList);
                     break;
                 case "3":
-                    this.personalManager.setWage(userID, response);
+                    this.personalManager.setWage(userID, response, employeeList);
                     break;
                 case "4":
-                    if(this.personalManager.setPosition(userID, response)){
+                    if(this.personalManager.setPosition(userID, response, employeeList)){
                         correctAction = false;
                     }
                     break;
                 case "5":
-                    if(this.personalManager.setEmployeeState(userID, response)){
+                    if(this.personalManager.setEmployeeState(userID, response, employeeList)){
                         correctAction = false;
                     }
                     break;

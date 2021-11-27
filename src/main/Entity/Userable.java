@@ -11,8 +11,6 @@ public interface Userable extends Serializable {
     public abstract String getName();
     public abstract void setName(String name);
     public abstract String getID();
-    public abstract String getUsername();
-    public abstract void setUsername(String account);
     public abstract String getPassword();
     public abstract void setPassword(String password);
     public abstract boolean comparePassword(String password);

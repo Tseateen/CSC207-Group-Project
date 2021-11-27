@@ -36,9 +36,9 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * @param status the status of the employee, "pending" by default.
      */
     @Override
-    public void addEmployee(String department, int wage, String position,  int level, String status) {
+    public void addEmployee(String department, int wage, String position,  int level, String status, String name) {
         if (status.equals("F")) {
-            Employee employee = new FullTimeEmployee(department, position, wage, level, String.valueOf(this.idCounter));
+            Employee employee = new FullTimeEmployee(department, position, wage, level, name.concat(String.valueOf(this.idCounter)));
             this.EmployeeList.add(employee);
         } else if (status.equals("P") && position.equals("N")) {
             Employee employee = new PartTimeEmployee(department, wage, level, String.valueOf(this.idCounter));
@@ -103,7 +103,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     // === Data ===
     @Override
     public void initialize(){
-        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "0");
+        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "Admin");
         this.EmployeeList.add(admin);
     }
 

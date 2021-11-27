@@ -10,8 +10,8 @@ public class EmployeeListController {
         this.employeeList = employeeList;
     }
 
-    public void addEmployee(String department, int wage, String position,  int level, String status){
-        this.employeeList.addEmployee(department, wage, position, level, status);
+    public void addEmployee(String department, int wage, String position,  int level, String status, String name){
+        this.employeeList.addEmployee(department, wage, position, level, status, name);
     }
 
     public void deleteEmployee(String id){

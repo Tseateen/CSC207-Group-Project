@@ -20,8 +20,8 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
     @Override
-    public void addUser(String accountNumber, String password, String name, String phone, String address){
-        Userable user = new User(accountNumber, password, name, phone, address, String.valueOf(this.idCounter));
+    public void addUser( String name, String password, String phone, String address){
+        Userable user = new User( name,name.concat(String.valueOf(this.idCounter)), password, phone, address);
         this.UserList.add(user);
         this.idCounter += 1;
     }
@@ -73,7 +73,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     // ===== Data ====
     @Override
     public void initialize(){
-        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A", "0");
+        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A");
         this.UserList.add(admin);
     }
 

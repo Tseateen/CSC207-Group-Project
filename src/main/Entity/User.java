@@ -9,8 +9,6 @@ public class User implements Userable, Serializable {
 
     // The unique id for this user.
     private final String id;
-    // The username number for this user.
-    private String username;
     // The password for this user.
     private String password;
     // The name of this user.
@@ -26,26 +24,23 @@ public class User implements Userable, Serializable {
 
     /**
      * Construct a User, giving them the given username number, password, name, phone number, address and unique id.
-     * @param username username number for this user.
-     * @param password Password for this user.
      * @param name Name for this user.
+     * @param id Unique identity for this user.
+     * @param password Password for this user.
      * @param phone Phone number for this user.
      * @param address Address for this user.
-     * @param id Unique identity for this user.
      */
-    public User(String username,String password, String name, String phone, String address, String id){
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public User(String name, String id, String password, String phone, String address){
         this.name = name;
+        this.id = id;
+        this.password = password;
         this.phone = phone;
         this.address = address;
     }
     public User(){
-        this.id = "";
-        this.username = "";
-        this.password = "";
         this.name = "";
+        this.id = "";
+        this.password = "";
         this.phone = "";
         this.address = ";";
     }
@@ -78,23 +73,6 @@ public class User implements Userable, Serializable {
         return this.id;
     }
 
-    /**
-     *
-     * @return This method will return the username number for this user.
-     */
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    /**
-     *
-     * @param username The new username number for this user
-     */
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     /**
      *
