@@ -19,6 +19,20 @@ public class GroupManager {
         }
     }
 
+    /**
+     * Delete the people previously working on the Work.
+     *
+     * @param userID the ID of the Employee, either he is the leader or the member of the Work.
+     */
+    public void deleteMember(String userID, IGroupList groupList) {
+        for (Group g : (GroupList)groupList) {
+            if (g.getLeaderId().equals(userID)) {
+                this.resetGroup(g);
+            }
+            g.deleteMember(userID);
+        }
+    }
+
 
     /**
      * This method will reset the Group members.
@@ -52,4 +66,76 @@ public class GroupManager {
         this.resetMember(group);
         this.changeLeader(group, "");
     }
+
+    /**
+     * Assign the Work to the targeted Employee.
+     *
+     * @param userID the ID of the Employee.
+     * @param workID the ID of the Work.
+     * @param groupList the list of groups
+     *
+     * @return true iff the Work has been successfully assigned to the Employee.
+     */
+    public boolean Distributor(String workID, String userID, IGroupList groupList) {
+        for (Group g: (GroupList) groupList) {
+            if (g.getWorkID().equals(workID)){
+                if (g.getMembers().contains(userID)) {return false;}
+                g.addMember(userID);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verify if the Employee is the member of the Work, i.e. he is working on this project.
+     *
+     * @param userID the ID of the Employee.
+     * @param workID the ID of the Work.
+     * @param groupList the list of groups
+     *
+     * @return true iff the Employee is the Work's member.
+     */
+    public boolean isMember (String userID, String workID, IGroupList groupList) {
+        for (Group g: (GroupList)groupList) {
+            if (g.getWorkID().equals(workID)){
+                return (g.getLeaderId().equals(userID)||g.getMembers().contains(workID));
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verify the leader of the Work.
+     *
+     * @param userID the ID of the Employee.
+     * @param workID the ID of the Work.
+     * @param groupList the list of groups
+     *
+     * @return true iff the Employee is the Work's leader.
+     */
+    public boolean verifierLeader(String userID, String workID, IGroupList groupList) {
+        for (Group g: (GroupList)groupList) {
+            if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
+        }
+        return false;
+    }
+
+    /**
+     * Set the leader of the Work and update this information in the GroupList.
+     *
+     * @param workID the ID of the Work.
+     * @param leaderID the ID of the Employee.
+     *
+     */
+    public void assignLeader(String workID, String leaderID, IGroupList groupList) {
+        for (Group g: (GroupList)groupList) {
+            if (g.getWorkID().equals(workID)) {
+                g.setLeaderId(leaderID);
+                return;
+            }
+        }
+        groupList.addGroup(leaderID, workID);
+    }
+
 }

@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class GroupList implements Iterable<Group>, Serializable {
+public class GroupList implements Iterable<Group>, IGroupList,Serializable{
 
     // === Instance Variables ===
 
@@ -66,7 +66,7 @@ public class GroupList implements Iterable<Group>, Serializable {
      * @param workID the group's id that needs to be found.
      * @return the group found.
      */
-    protected Group getGroup(String workID) {
+    public Group getGroup(String workID) {
         for (Group g: this.GroupList) {
             if (g.getWorkID().equals(workID)) {
                 return g;

@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.lang.*;
 
 
-public class KPICalculator(GroupList groupList, WorkList workList) {
+public class KPICalculator {
+
+    public GroupList groupList;
+    public WorkList workList;
 
 
     public int calculateKPI(String userid) {

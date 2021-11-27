@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class WorkList implements Iterable<Workable>, Serializable {
+public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
 
     private final List<Workable> workList;
 
