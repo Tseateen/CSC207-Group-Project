@@ -5,21 +5,14 @@ import main.Entity.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPersonalManager {
-    private final String username;
-    private final ILoginList loginList;
-    private final IEmployeeList employeeList;
+public class PersonalManager implements  IPersonalManager {
     private final KPICalculator kpiCalculator;
     private final SalaryCalculator salaryCalculator;
 
     /**
      * Construct the PersonalManager, managing the information from other UsesCases.
      */
-    public PersonalManager(ILoginList loginList, IEmployeeList employeeList, String username, GroupList groupList,
-                           WorkList workList) {
-        this.username = username;
-        this.loginList = loginList;
-        this.employeeList = employeeList;
+    public PersonalManager(GroupList groupList, WorkList workList) {
         this.kpiCalculator = new KPICalculator(groupList, workList);
         this.salaryCalculator = new SalaryCalculator(this.kpiCalculator);
 
@@ -42,21 +35,20 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
      * @return The ArrayList that contains the basic information of an employee.
      */
     @Override
-    public ArrayList<String> employeeInfo() {
+    public ArrayList<String> employeeInfo(ILoginList loginList, IEmployeeList employeeList, String userID) {
         ArrayList<String> info = new ArrayList<>();
-        Userable user = this.findUserHelper();
-        String employeeType = this.findEmployeeTypeHelper(user.getID());
+        Userable user = loginList.getUser(userID);
+        Employee employee = employeeList.getEmployee(userID);
         info.add(user.getName());
         info.add(user.getID());
-        info.add(user.getUsername());
         info.add(user.getPassword());
         info.add(user.getPhone());
         info.add(user.getAddress());
-        if (employeeType.equals("PartTimeEmployee")) {
-            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) this.findEmployeeHelper();
+        if (employee instanceof PartTimeEmployee) {
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employee;
             info.add(partTimeEmployee.getDepartment());
         } else {
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.findEmployeeHelper();
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employee;
             info.add(fullTimeEmployee.getDepartment());
             info.add(fullTimeEmployee.getPosition());
             info.add(fullTimeEmployee.getState());
@@ -72,8 +64,8 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
      * @return A HashMap that contains the schedule of a part-time employee.
      */
     @Override
-    public int getWorkingHourFromPartTimeEmployee() {
-        PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
+    public int getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID) {
+        PartTimeEmployee employee = (PartTimeEmployee) employeeList.getEmployee(userID);
         return employee.getWorkingHour();
     }
 
@@ -84,49 +76,47 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
      * @return An int that represent the salary/wage of an employee.
      */
     @Override
-    public int checkTotalSalary() {
-        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
-            PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
-            return this.salaryCalculator.calculatePartTimeSalary(employee);
+    public int checkTotalSalary(IEmployeeList employeeList, String userID) {
+        Employee employee = employeeList.getEmployee(userID);
+        if (employee instanceof PartTimeEmployee) {
+            return this.salaryCalculator.calculatePartTimeSalary((PartTimeEmployee) employee);
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
-            return this.salaryCalculator.calculateFullTimeSalary(employee);
+            return this.salaryCalculator.calculateFullTimeSalary((FullTimeEmployee) employee);
         }
     }
     @Override
-    public int checkMinimumWage() {
-        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
-            PartTimeEmployee employee = (PartTimeEmployee) this.findEmployeeHelper();
-            return employee.getWage();
+    public int checkMinimumWage(IEmployeeList employeeList, String userID) {
+        Employee employee = employeeList.getEmployee(userID);
+        if (employee instanceof PartTimeEmployee) {
+            return ((PartTimeEmployee) employee).getWage();
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
-            return employee.getWage();
+            return ((FullTimeEmployee) employee).getWage();     //不確定之後會不會有差，確定依樣的話就把if else statement 刪掉
         }
     }
     @Override
-    public int checkVacationBonus() {
-        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
+    public int checkVacationBonus(IEmployeeList employeeList, String userID) {
+        Employee employee = employeeList.getEmployee(userID);
+        if (employee instanceof  PartTimeEmployee) {
             return 0;
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
-            return this.salaryCalculator.calculateBonusFromVacation(employee);
+            return this.salaryCalculator.calculateBonusFromVacation((FullTimeEmployee) employee);
         }
     }
     @Override
-    public int checkKPIBonus(){
-        if (this.findEmployeeTypeHelper(this.findUserHelper().getID()).equals("PartTimeEmployee")) {
+    public int checkKPIBonus(IEmployeeList employeeList, String userID){
+        Employee employee = employeeList.getEmployee(userID);
+        if (employee instanceof PartTimeEmployee) {
             return 0;
         } else {
-            FullTimeEmployee employee = (FullTimeEmployee) this.findEmployeeHelper();
-            return this.salaryCalculator.calculateBonusFromKPI(employee);
+            return this.salaryCalculator.calculateBonusFromKPI((FullTimeEmployee) employee);
         }
     }
 
     // ==== retrieve full time employee's vacation information =====
     @Override
-    public ArrayList<String> vacationInfo() {
+    public ArrayList<String> vacationInfo(IEmployeeList employeeList, String userID) {
         ArrayList<String> vacationList = new ArrayList<>();
-        Employee employee = this.findEmployeeHelper();
+        Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof PartTimeEmployee) {
             return vacationList;
         }
@@ -137,54 +127,54 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
 
     // ==== retrieve user's level ====
     @Override
-    public String getUserLevel(String userID) {
-        return String.valueOf(this.employeeList.getEmployee(userID).getLevel());
+    public String getUserLevel(String userID, IEmployeeList employeeList) {
+        return String.valueOf(employeeList.getEmployee(userID).getLevel());
     }
 
 
     // ==== setter methods for changing user/employee's information ====
     @Override
-    public void setName(String response){
-        this.findUserHelper().setName(response);
+    public void setName(String response, ILoginList loginList, String userID){
+        loginList.getUser(userID).setName(response);
     }
 
     @Override
-    public void setPassword(String response){
-        this.findUserHelper().setPassword(response);
+    public void setPassword(String response, ILoginList loginList, String userID){
+        loginList.getUser(userID).setPassword(response);
     }
 
     @Override
-    public void setPhone(String response){
-        this.findUserHelper().setPhone(response);
+    public void setPhone(String response, ILoginList loginList, String userID){
+        loginList.getUser(userID).setPhone(response);
     }
 
     @Override
-    public void setAddress(String response){
-        this.findUserHelper().setAddress(response);
+    public void setAddress(String response, ILoginList loginList, String userID){
+        loginList.getUser(userID).setAddress(response);
     }
 
     @Override
-    public void setDepartment(String userID, String department){
-        Employee employee = this.employeeList.getEmployee(userID);
+    public void setDepartment(String userID, String department, IEmployeeList employeeList){
+        Employee employee = employeeList.getEmployee(userID);
         employee.setDepartment(department);
     }
 
     @Override
-    public void setLevel(String userID, String level){
-        Employee employee = this.employeeList.getEmployee(userID);
+    public void setLevel(String userID, String level, IEmployeeList employeeList){
+        Employee employee = employeeList.getEmployee(userID);
         employee.setLevel(Integer.parseInt(level));
     }
 
     @Override
-    public void setWage(String userID, String wage){
-        Employee employee = this.employeeList.getEmployee(userID);
+    public void setWage(String userID, String wage, IEmployeeList employeeList){
+        Employee employee = employeeList.getEmployee(userID);
         employee.setWage(Integer.parseInt(wage));
     }
 
     @Override
-    public boolean setPosition(String userID, String position){
+    public boolean setPosition(String userID, String position, IEmployeeList employeeList){
         try{
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.employeeList.getEmployee(userID);
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employeeList.getEmployee(userID);
             fullTimeEmployee.setPosition(position);
             return true;
         } catch (Exception e){
@@ -193,9 +183,9 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
     }
 
     @Override
-    public boolean setEmployeeState(String userID, String state){
+    public boolean setEmployeeState(String userID, String state, IEmployeeList employeeList){
         try{
-            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) this.employeeList.getEmployee(userID);
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employeeList.getEmployee(userID);
             fullTimeEmployee.setState(state);
             return true;
         } catch (Exception e){
@@ -203,62 +193,6 @@ public class PersonalManager implements FindUserHelper, FindEmployeeHelper, IPer
         }
     }
 
-
-
-
-    // ==== helper functions ====
-    /**
-     * A helper function that find the correct user based on the username.
-     *
-     * @return a Userable that represent the target user.
-     */
-    @Override
-    public Userable findUserHelper() {
-        Userable correctUser = new User();
-        for (Userable user : (LoginList) this.loginList) {
-            if (user.getUsername().equals(this.username)) {
-                return user;
-            }
-        }
-        return correctUser;
-    }
-
-
-    /**
-     * A helper function that find the correct employee based on the user by comparing the ID.
-     *
-     * @return an Employee that represent the target employee.
-     */
-    @Override
-    public Employee findEmployeeHelper() {
-        Userable user = findUserHelper();
-        for (Employee employee : (EmployeeList) this.employeeList) {
-            if (employee.getID().equals(user.getID())) {
-                return employee;
-            }
-        }
-        return null;
-    }
-
-
-    /**
-     * check if the employee is a part-time employee or full time employee.
-     *
-     * @return The String that represent either a part-time employee or a full time employee.
-     */
-    public String findEmployeeTypeHelper(String userID){
-        String employeeType = "";
-        for (Employee employee: (EmployeeList) this.employeeList){
-            if (employee.getID().equals(userID)){
-                if(employee instanceof PartTimeEmployee){
-                    employeeType = "PartTimeEmployee";
-                }else{
-                    employeeType = "FullTimeEmployee";
-                }
-            }
-        }
-        return employeeType;
-    }
 
 
 

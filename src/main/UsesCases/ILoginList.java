@@ -3,7 +3,7 @@ package main.UsesCases;
 import main.Entity.Userable;
 
 public interface ILoginList {
-    public abstract void addUser(String accountNumber, String password, String name, String phone, String address);
+    public abstract void addUser(String name, String password, String phone, String address);
     public abstract boolean deleteUser(String id);
     public abstract Userable getUser(String user_id);
     public abstract int getSize();

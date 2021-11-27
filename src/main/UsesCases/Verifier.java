@@ -9,24 +9,10 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class Verifier implements IVerifier, FindUserHelper{
+public class Verifier implements IVerifier{
 
-    // === Instance Variables ===
-
-    private final String username;
-    private final ILoginList loginList;
-    private final IEmployeeList employeeList;
-    /**
-     * Construct the Verifier.
-     */
-    public Verifier(String username, ILoginList loginList, IEmployeeList employeeList){
-        this.username = username;
-        this.loginList = loginList;
-        this.employeeList = employeeList;
-    }
-
-    public boolean userExists(String userID) {
-        return !(Objects.isNull(this.loginList.getUser(userID)));
+    public boolean userExists(String userID, ILoginList loginList) {
+        return !(Objects.isNull(loginList.getUser(userID)));
     }
     /**
      * Verify if the authority level of an employee is lower than the specific authority level.
@@ -35,64 +21,40 @@ public class Verifier implements IVerifier, FindUserHelper{
      * @return boolean represent if the specific authority level is higher than the employee's authority level.
      */
     @Override
-    public boolean ValidToCreateThisLevel(String level) {
+    public boolean ValidToCreateThisLevel(String level, IEmployeeList employeeList, String userID) {
         if (level.length() != 1) {
             return false;
         }
         int LevelWantToCreate = Integer.parseInt(level);
-        return LevelWantToCreate > Integer.parseInt(this.findUserHelper().getID());
+        Employee employee = employeeList.getEmployee(userID);
+        return LevelWantToCreate > employee.getLevel();
     }
 
     @Override
-    public boolean validToDeleteThisUser(String userID){
-        return Integer.parseInt(findLevelHelper(userID)) > Integer.parseInt(this.findUserHelper().getID());
+    public boolean validToDeleteThisUser(String targetUserID, IEmployeeList employeeList, String userID){
+        Employee targetEmployee = employeeList.getEmployee(targetUserID);
+        if (targetEmployee == null){
+            return false;
+        }else {
+            Employee employee = employeeList.getEmployee(userID);
+            return targetEmployee.getLevel() > employee.getLevel();
+        }
     }
 
     /**
      * Check if the login is valid (if the username and password are correct).
-     * @param account the account (username) of the account
+     * @param userID the ID (username) of the account
      * @param password the password of the account
      * @return true iff the username and password of the user matched
      */
     @Override
-    public boolean verifyForLogin(String account, String password) {
-        for(Userable user: (LoginList)this.loginList){
-            if(user.getUsername().equals(account) && user.getPassword().equals(password)){
+    public boolean verifyForLogin(String userID, String password, ILoginList loginList) {
+        for(Userable user: (LoginList) loginList){
+            if(user.getID().equals(userID) && user.getPassword().equals(password)){
                 return true;
             }
         }
         return false;
     }
 
-    // ==== helper functions ====
-    /**
-     * A helper function that find the correct user based on the username.
-     *
-     * @return a Userable that represent the target user.
-     */
-    @Override
-    public Userable findUserHelper() {
-        Userable correctUser = new User();
-        for (Userable user : (LoginList) this.loginList) {
-            if (user.getUsername().equals(this.username)) {
-                return user;
-            }
-        }
-        return correctUser;
-    }
-
-    /**
-     * Get the user from the EmployeeList by his ID.
-     *
-     * @param userid the ID of the targeted employee.
-     * @return the employee's level in strings.
-     */
-    public String findLevelHelper(String userid) {
-        for (Employee employee :(EmployeeList) this.employeeList){
-            if (employee.getID().equals(userid)){
-                return String.valueOf(employee.getLevel());
-            }
-        }
-        return null;
-    }
 }

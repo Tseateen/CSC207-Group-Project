@@ -55,7 +55,7 @@ public class FacadeSys {
         this.workFacade = new WorkFacade(this.workList, this.groupList);
         this.workManager = new WorkManager();
         this.workManagerController = new WorkManagerController(this.workList,workManager);
-        this.personalManager = new PersonalManager(this.loginList, this.employeeList, this.username, this.groupList, this.workList);
+        this.personalManager = new PersonalManager(this.loginList, this.employeeList, this.userID, this.groupList, this.workList);
         this.personalInfoController = new PersonalInfoController(this.personalManager);
         this.verifier = new Verifier(this.username, this.loginList, this.employeeList);
         this.verifierController = new VerifierController(new Verifier(this.username, this.loginList, this.employeeList));
@@ -72,7 +72,7 @@ public class FacadeSys {
         this.fileGateway.ReadInputFileToGroupList();
         this.employeeType = this.accountFacade.getEmployeeType();
         this.userID = this.accountFacade.getUserID();
-        return this.verifierController.verifyLogin(username, password);
+        return this.verifierController.verifyLogin(username, password, this.loginList);
     }
 
     public void systemEnd() throws IOException, ClassNotFoundException {
@@ -81,24 +81,24 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public String personalInfo(){
-        return this.personalInfoController.personalInfo();
+        return this.personalInfoController.personalInfo(this.loginList, this.employeeList, this.userID);
     }
 
     public String checkTotalSalary(){
-        return this.personalInfoController.checkTotalSalary();
+        return this.personalInfoController.checkTotalSalary(this.employeeList, this.userID);
     }
     public String checkMinimumWage(){
-        return this.personalInfoController.checkMinimumWage();
+        return this.personalInfoController.checkMinimumWage(this.employeeList, this.userID);
     }
     public String checkVacationBonus(){
-        return this.personalInfoController.checkVacationBonus();
+        return this.personalInfoController.checkVacationBonus(this.employeeList, this.userID);
     }
     public String checkKPIBonus(){
-        return this.personalInfoController.checkKPIBonus();
+        return this.personalInfoController.checkKPIBonus(this.employeeList, this.userID);
     }
 
     public String setPersonalInfo(String option, String response){
-        if (this.personalInfoController.setPersonalInfo(option, response)){
+        if (this.personalInfoController.setPersonalInfo(option, response, this.loginList, this.username)){
             return "Set personal information success!";
         }
         else{
@@ -107,7 +107,7 @@ public class FacadeSys {
     }
 
     public String setEmployeeInfo(String userID, String option, String response){
-        if (this.personalInfoController.setEmployeeInfo(userID, option, response)){
+        if (this.personalInfoController.setEmployeeInfo(userID, option, response, this.employeeList)){
             return "Set employee information success";
         }
         else{
@@ -194,21 +194,21 @@ public class FacadeSys {
     // Here are some method used to show other user information, may used in hr workers or work distribute
 
     // Case 6: Create a user
-    public boolean createUser(String username, String password, String name, String phone, String address,
+    public boolean createUser(String name, String password,  String phone, String address,
                               String department, String wage, String position, String level, String status) {
-        boolean validLevelGiven = this.verifierController.validToCreate(level);
+        boolean validLevelGiven = this.verifierController.validToCreate(level, this.employeeList, this.userID);
         if (validLevelGiven){
-            this.loginListController.addUser(username, password, name,phone, address);
-            this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status);
+            this.loginListController.addUser(name, password,phone, address);
+            this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status, name);
         }
         return validLevelGiven;
     }
     // ==================================
 
     // Case 7: Delete a user
-    public boolean deleteUser(String userID) {
-        boolean validLevelGiven = this.verifierController.verifyUserExistence(userID) &&
-                this.verifierController.validToDelete(userID);
+    public boolean deleteUser(String targetUserID) {
+        boolean validLevelGiven = this.verifierController.verifyUserExistence(targetUserID, this.loginList ) &&
+                this.verifierController.validToDelete(targetUserID, this.employeeList, this.userID);
         if (validLevelGiven) {
             this.accountFacade.DeleteAccount(userID);
         }
