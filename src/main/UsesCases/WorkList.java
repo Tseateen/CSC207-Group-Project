@@ -10,17 +10,42 @@ import java.util.NoSuchElementException;
 
 public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
 
+
+    // === Instance Variables ===
     private final List<Workable> workList;
 
+
+    /**
+     * Construct the WorkList.
+     */
     public WorkList(){
         this.workList = new ArrayList<Workable>();
     }
 
+
+    /**
+     * Add a new Work into the WorkList.
+     *
+     * @param name the Work's name.
+     * @param id the Work's ID.
+     * @param department the Work's department.
+     * @param requirement the Work's requirements.
+     * @param level the Work's level.
+     *
+     */
     public void addWork(String name, String id, String department, String requirement, int level){
         Workable work = new Work(name,id,department, requirement,level);
         workList.add(work);
     }
 
+
+    /**
+     * Delete an existed Work into the WorkList.
+     *
+     * @param id the Work's ID.
+     *
+     * @return true if the Work has been deleted.
+     */
     public boolean deleteWork(String id){
         int index = -1;
 
