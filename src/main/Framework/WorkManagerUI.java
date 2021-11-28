@@ -29,6 +29,7 @@ public class WorkManagerUI {
         DistributeWorkUI distributeWork = new DistributeWorkUI(this.facadeSys);
         CreateUserUI createUserUI = new CreateUserUI(this.facadeSys);
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
+        SetEmployeeInfoUI setEmployeeInfoUI = new SetEmployeeInfoUI(this.facadeSys);
         CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
 
         boolean noExit = true;
@@ -41,7 +42,8 @@ public class WorkManagerUI {
                             "v) Create a user, enter 5; "  + "\n" +
                             "vi) Delete a user, enter 6; "  + "\n" +
                             "vii) Check all lower level employees' salary-related information, enter 7" + "\n" +
-                            "viii) Back to main page, enter E " + "\n");
+                            "viii) Change employee's information, enter 8" + "\n" +
+                            "IX) Back to main page, enter E " + "\n");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":
@@ -71,6 +73,9 @@ public class WorkManagerUI {
                     checkSalaryUI.run();
                     System.out.println("Successfully back to main WorkUI");
                     break;
+                case "8":
+                    setEmployeeInfoUI.run();
+                    System.out.println("Successfully back to main WorkUI");
                 case "E":
                     noExit = false;
                     break;

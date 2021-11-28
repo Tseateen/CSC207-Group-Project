@@ -20,6 +20,8 @@ public class Main {
         String password = keyIn.nextLine();
         FacadeSys facadeSys = new FacadeSys(username);
         boolean result = facadeSys.systemStart(username,password);
+        InstructionUI instructionUI = new InstructionUI();
+        instructionUI.run();
         if (result) {
             HomePage homePage = new HomePage(facadeSys);
             homePage.run();
