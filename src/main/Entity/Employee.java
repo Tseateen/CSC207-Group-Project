@@ -12,7 +12,7 @@ public abstract class Employee implements Serializable {
     // The department of this employee
     private String department;
     // The minimum wage of this employee
-    private int wage;
+    private String wage;
     // The attendance of this employee
     private int attendance;
     // The authority level of this employee
@@ -28,12 +28,12 @@ public abstract class Employee implements Serializable {
      * Construct an Employee, giving them the given department,
      * wage, and level.
      *
-     * @param id
+     * @param id unique identify for the employee, same with their userid
      * @param department Department for this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
      */
-    public Employee(String id, String department, int wage, int level){
+    public Employee(String id, String department, String wage, int level){
         this.id = id;
         this.department = department;
         this.wage = wage;
@@ -44,7 +44,7 @@ public abstract class Employee implements Serializable {
     public Employee(){
         this.id = "";
         this.department = "";
-        this.wage = 0;
+        this.wage = "0";
         this.level = 0;
         this.attendance = 0;
     }
@@ -70,7 +70,7 @@ public abstract class Employee implements Serializable {
      *
      * @return the number of wage for this employee.
      */
-    public int getWage(){
+    public String getWage(){
         return this.wage;
     }
 
@@ -78,7 +78,7 @@ public abstract class Employee implements Serializable {
      *
      * @param wage This method can help admin setting the new minimum wage of this employee.
      */
-    public void setWage(int wage){
+    public void setWage(String wage){
         this.wage = wage;
     }
 

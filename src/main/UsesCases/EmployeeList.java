@@ -13,7 +13,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     // === Instance Variables ===
 
     private final List<Employee> EmployeeList;
-    private int idCounter;
 
     /* === Representation Invariants ===
      * The EmployeeList should have at least one Employee inside one company having the top authority level, which is 0.
@@ -21,7 +20,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
 
     public EmployeeList(){
         this.EmployeeList = new ArrayList<Employee>();
-        this.idCounter = 1;
     }
 
 
@@ -36,15 +34,14 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * @param status the status of the employee, "pending" by default.
      */
     @Override
-    public void addEmployee(String department, int wage, String position,  int level, String status, String name) {
+    public void addEmployee(String department, String wage, String position, String level, String status, String id) {
         if (status.equals("F")) {
-            Employee employee = new FullTimeEmployee(department, position, wage, level, name.concat(String.valueOf(this.idCounter)));
+            Employee employee = new FullTimeEmployee(department, position, wage, Integer.parseInt(level), id);
             this.EmployeeList.add(employee);
         } else if (status.equals("P") && position.equals("N")) {
-            Employee employee = new PartTimeEmployee(department, wage, level, String.valueOf(this.idCounter));
+            Employee employee = new PartTimeEmployee(department, wage, Integer.parseInt(level), id);
             this.EmployeeList.add(employee);
         }
-        this.idCounter += 1;
     }
 
 
@@ -117,18 +114,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     public void readInput(Employee employee){
         this.EmployeeList.add(employee);
     }
-
-    @Override
-    public int getID(){
-        return this.idCounter;
-    }
-
-    @Override
-    public void readID(int ID) {
-        this.idCounter = ID;
-    }
-
-
 
     @Override
     public Iterator<Employee> iterator() {

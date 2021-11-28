@@ -10,28 +10,24 @@ import java.lang.*;
 
 public class KPICalculator {
 
-    public GroupList groupList;
-    public WorkList workList;
-
-
-    public int calculateKPI(String userid) {
+    public String calculateKPI(String userid, IGroupList groupList, IWorkList workList) {
         int KPI = 0;
 
-        for (Workable work : findUserWorkHelper(userid).get("Leader")) {
+        for (Workable work : findUserWorkHelper(userid,groupList,workList).get("Leader")) {
             KPI += Math.round(1500 * Math.log10(11 - work.getLevel()));
         }
 
-        for (Workable work : findUserWorkHelper(userid).get("Member")) {
+        for (Workable work : findUserWorkHelper(userid,groupList,workList).get("Member")) {
             KPI += Math.round(1000 * Math.log10(11 - work.getLevel()));
         }
 
-        return KPI;
+        return String.valueOf(KPI);
     }
 
 
     //=== Helper Method ===
 
-    private HashMap<String, ArrayList<Workable>> findUserWorkHelper(String userid) {
+    private HashMap<String, ArrayList<Workable>> findUserWorkHelper(String userid, IGroupList groupList, IWorkList workList) {
         HashMap<String, ArrayList<Workable>> userWork = new HashMap<>();
         ArrayList<Workable> workAsLeader = new ArrayList<>();
         ArrayList<Workable> workAsMember = new ArrayList<>();
@@ -46,10 +42,10 @@ public class KPICalculator {
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
 
-        for (Group group : this.groupList) {
+        for (Group group : (GroupList)groupList) {
             if (group.getLeaderId().equals(userid)) {
                 String groupID = group.getWorkID();
-                for (Workable work : this.workList) {
+                for (Workable work : (WorkList)workList) {
                     if (checkTimeHelper(work, groupID, month, year)){
                         workAsLeader.add(work);
                     }
@@ -58,7 +54,7 @@ public class KPICalculator {
 
             if (group.getMembers().contains(userid)) {
                 String groupID = group.getWorkID();
-                for (Workable work : this.workList) {
+                for (Workable work : (WorkList)workList) {
                     if (checkTimeHelper(work, groupID, month, year)) {
                         workAsMember.add(work);
                     }

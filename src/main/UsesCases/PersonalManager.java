@@ -12,19 +12,10 @@ public class PersonalManager implements  IPersonalManager {
     /**
      * Construct the PersonalManager, managing the information from other UsesCases.
      */
-    public PersonalManager(GroupList groupList, WorkList workList) {
-        this.kpiCalculator = new KPICalculator(groupList, workList);
+    public PersonalManager() {
+        this.kpiCalculator = new KPICalculator();
         this.salaryCalculator = new SalaryCalculator(this.kpiCalculator);
 
-    }
-
-    /**
-     * Getter method for the user using findUserHelper method and the ID of the user.
-     *
-     * @return the user found.
-     */
-    public String getUserID() {
-        return this.findUserHelper().getID();
     }
 
     //====== Methods regarding retrieve personal information =======
@@ -64,7 +55,7 @@ public class PersonalManager implements  IPersonalManager {
      * @return A HashMap that contains the schedule of a part-time employee.
      */
     @Override
-    public int getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID) {
+    public String getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID) {
         PartTimeEmployee employee = (PartTimeEmployee) employeeList.getEmployee(userID);
         return employee.getWorkingHour();
     }
@@ -76,39 +67,39 @@ public class PersonalManager implements  IPersonalManager {
      * @return An int that represent the salary/wage of an employee.
      */
     @Override
-    public int checkTotalSalary(IEmployeeList employeeList, String userID) {
+    public String checkTotalSalary(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList) {
         Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof PartTimeEmployee) {
             return this.salaryCalculator.calculatePartTimeSalary((PartTimeEmployee) employee);
         } else {
-            return this.salaryCalculator.calculateFullTimeSalary((FullTimeEmployee) employee);
+            return this.salaryCalculator.calculateFullTimeSalary((FullTimeEmployee) employee, groupList, workList);
         }
     }
     @Override
-    public int checkMinimumWage(IEmployeeList employeeList, String userID) {
+    public String checkMinimumWage(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof PartTimeEmployee) {
             return ((PartTimeEmployee) employee).getWage();
         } else {
-            return ((FullTimeEmployee) employee).getWage();     //不確定之後會不會有差，確定依樣的話就把if else statement 刪掉
+            return ((FullTimeEmployee) employee).getWage();
         }
     }
     @Override
-    public int checkVacationBonus(IEmployeeList employeeList, String userID) {
+    public String checkVacationBonus(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof  PartTimeEmployee) {
-            return 0;
+            return "0";
         } else {
             return this.salaryCalculator.calculateBonusFromVacation((FullTimeEmployee) employee);
         }
     }
     @Override
-    public int checkKPIBonus(IEmployeeList employeeList, String userID){
+    public String checkKPIBonus(IEmployeeList employeeList, String userID){
         Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof PartTimeEmployee) {
-            return 0;
+            return "0";
         } else {
-            return this.salaryCalculator.calculateBonusFromKPI((FullTimeEmployee) employee);
+            return this.salaryCalculator.calculateBonusFromKPI((FullTimeEmployee) employee,);
         }
     }
 
@@ -168,7 +159,7 @@ public class PersonalManager implements  IPersonalManager {
     @Override
     public void setWage(String userID, String wage, IEmployeeList employeeList){
         Employee employee = employeeList.getEmployee(userID);
-        employee.setWage(Integer.parseInt(wage));
+        employee.setWage(wage);
     }
 
     @Override

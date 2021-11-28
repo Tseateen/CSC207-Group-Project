@@ -7,9 +7,9 @@ public class FullTimeEmployee extends Employee implements Serializable {
     // === Instance Variables ===
 
     // The total annual paid leave for this employee.
-    private int totalVacationWithSalary;
+    private String totalVacationWithSalary;
     // the number of annual leave have been used by this employee.
-    private int vacationUsed;
+    private String vacationUsed;
     // The position of this employee. For instance, sales, engineer, manger....
     private String position;
     // The state of employee. For instance, working, vacation...
@@ -30,11 +30,11 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * @param level The authority level fore this employee.
      * @param id
      */
-    public FullTimeEmployee(String department, String position, int wage, int level, String id) {
+    public FullTimeEmployee(String department, String position, String wage, int level, String id) {
         super(id, department, wage, level);
         this.position = position;
-        this.totalVacationWithSalary = 0;
-        this.vacationUsed = 0;
+        this.totalVacationWithSalary = "0";
+        this.vacationUsed = "0";
     }
 
     public FullTimeEmployee(){
@@ -47,11 +47,11 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
      */
-    public FullTimeEmployee(String department, int wage, int level, String id) {
+    public FullTimeEmployee(String department, String wage, int level, String id) {
         super(id, department, wage, level);
         this.position = "";
-        this.totalVacationWithSalary = 0;
-        this.vacationUsed = 0;
+        this.totalVacationWithSalary = "0";
+        this.vacationUsed = "0";
     }
 
     // === Regular methods ===
@@ -71,7 +71,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * purpose.
      */
     public String setPosition(String position) {
-        String op = new String(this.position);
+        String op = this.position;
         this.position = position;
         return op;
     }
@@ -80,7 +80,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      *
      * @return This method will return total annual paid leave for this employee.
      */
-    public int getTotalVacationWithSalary(){
+    public String getTotalVacationWithSalary(){
         return this.totalVacationWithSalary;
     }
 
@@ -88,7 +88,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      *
      * @param totalVacationWithSalary Given the new total annual paid leave for this employee
      */
-    public void setTotalVacationWithSalary(int totalVacationWithSalary){
+    public void setTotalVacationWithSalary(String totalVacationWithSalary){
         this.totalVacationWithSalary = totalVacationWithSalary;
     }
 
@@ -96,7 +96,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      *
      * @return This method will return the total number of annual paid leave have been used.
      */
-    public int getVacationUsed(){
+    public String getVacationUsed(){
         return this.vacationUsed;
     }
 
@@ -104,7 +104,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      *
      * @param vacationUsed Given the new total number of annual paid leave have been used.
      */
-    public void setVacationUsed(int vacationUsed){
+    public void setVacationUsed(String vacationUsed){
         this.vacationUsed = vacationUsed;
     }
 

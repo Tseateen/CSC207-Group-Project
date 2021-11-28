@@ -7,11 +7,11 @@ import java.util.HashMap;
 public interface IPersonalManager {
 
     public abstract ArrayList<String> employeeInfo(ILoginList loginList, IEmployeeList employeeList, String userID);
-    public abstract int getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID);
-    public abstract int checkTotalSalary(IEmployeeList employeeList, String userID);
-    public abstract int checkMinimumWage(IEmployeeList employeeList, String userID);
-    public abstract int checkVacationBonus(IEmployeeList employeeList, String userID);
-    public abstract int checkKPIBonus(IEmployeeList employeeList, String userID);
+    public abstract String getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID);
+    public abstract String checkTotalSalary(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList);
+    public abstract String checkMinimumWage(IEmployeeList employeeList, String userID);
+    public abstract String checkVacationBonus(IEmployeeList employeeList, String userID);
+    public abstract String checkKPIBonus(IEmployeeList employeeList, String userID);
     public abstract ArrayList<String> vacationInfo(IEmployeeList employeeList, String userID);
     public abstract String getUserLevel(String userID,IEmployeeList employeeList);
     public abstract void setName(String name, ILoginList loginList, String userID);
