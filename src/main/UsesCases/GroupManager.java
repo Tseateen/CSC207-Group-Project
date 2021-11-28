@@ -4,7 +4,7 @@ import main.Entity.*;
 
 import java.util.*;
 
-public class GroupManager {
+public class GroupManager implements IGroupManager{
 
 
     /**
