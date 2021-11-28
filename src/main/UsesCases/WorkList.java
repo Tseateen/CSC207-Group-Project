@@ -62,14 +62,26 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         }
     }
 
+
+    /**
+     * Get the total number work existed from the workList.
+     *
+     * @return the number of work.
+     */
     public int getSize(){
         return workList.size();
     }
 
 
+    /**
+     * Read the input of the work and add the new Work to the workList.
+     *
+     * @param work the Work information.
+     */
     public void readInput(Work work) {
         this.workList.add(work);
     }
+
 
     /**
      * This method will find the Employee from the EmployeeList.
@@ -85,6 +97,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         }
         return null;
     }
+
 
     // === Iterator Design Pattern ===
     @Override
