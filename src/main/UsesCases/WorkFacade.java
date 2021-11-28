@@ -238,7 +238,7 @@ public class WorkFacade {
      */
     public void extendWork(String workID, String extendDate) {
         WorkManager workManager = new WorkManager();
-        workManager.extendWork(this.workList.getWork(workID), extendDate);
+        //workManager.extendWork(this.workList.getWork(workID), extendDate);
     }
 
 

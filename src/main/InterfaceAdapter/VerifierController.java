@@ -4,36 +4,55 @@ public class VerifierController {
 
     private IVerifier verifier;
 
-    public VerifierController(IVerifier verifier){
+    public VerifierController(IVerifier verifier) {
         this.verifier = verifier;
     }
 
-    public boolean verifyUserExistence(String userID, ILoginList loginList){
-        if ((userID.matches(".*\\d.*"))){
+    public boolean verifyUserExistence(String userID, ILoginList loginList) {
+        if ((userID.matches(".*\\d.*"))) {
             return this.verifier.userExists(userID, loginList);
-        }else{
+        } else {
             return false;
         }
 
     }
 
-    public boolean validToCreate(String level, IEmployeeList employeeList, String userID){
+    public boolean validToCreate(String level, IEmployeeList employeeList, String userID) {
         if (level.matches(".*\\d.*")) {
             return this.verifier.ValidToCreateThisLevel(level, employeeList, userID);
-        }else{
+        } else {
             return false;
         }
     }
 
-    public boolean validToDelete(String targetUserID, IEmployeeList employeeList, String userID){
+    public boolean validToDelete(String targetUserID, IEmployeeList employeeList, String userID) {
         if (targetUserID.matches(".*\\d.*")) {
             return this.verifier.validToDeleteThisUser(targetUserID, employeeList, userID);
-        }else{
+        } else {
             return false;
         }
     }
 
-    public boolean verifyLogin(String username, String password, ILoginList loginList){
-        return this.verifier.verifyForLogin(username, password, loginList);
+    public boolean verifyLogin(String userID, String password, ILoginList loginList) {
+        return this.verifier.verifyForLogin(userID, password, loginList);
     }
+
+    public boolean verifyLeader(String userID, String workID, IGroupList groupList) {
+        if (workID.matches(".*\\d.*")) {
+            return this.verifier.verifierLeader(userID, workID, groupList);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean verifyLevel(String level, String userID, IEmployeeList employeeList){
+        try {
+            if (level.length() != 1) {return false;}
+            int num_level = Integer.parseInt(level);
+            return this.verifier.levelVerifier(num_level, userID, employeeList);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.Employee;
+import main.Entity.Group;
 import main.Entity.User;
 import main.Entity.Userable;
 
@@ -57,4 +58,22 @@ public class Verifier implements IVerifier{
         return false;
     }
 
+    /**
+     * Verify the leader of the Work.
+     *
+     * @param userID the ID of the Employee.
+     * @param workID the ID of the Work.
+     *
+     * @return true iff the Employee is the Work's leader.
+     */
+    public boolean verifierLeader(String userID, String workID, IGroupList groupList) {//GM
+        for (Group g: (GroupList) groupList) {
+            if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
+        }
+        return false;
+    }
+
+    public boolean levelVerifier(int level, String userID, IEmployeeList employeeList) {
+        return level > employeeList.getEmployee(userID).getLevel();
+    }
 }
