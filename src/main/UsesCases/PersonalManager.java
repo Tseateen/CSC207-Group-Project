@@ -6,16 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PersonalManager implements  IPersonalManager {
-    private final KPICalculator kpiCalculator;
+
     private final SalaryCalculator salaryCalculator;
 
     /**
      * Construct the PersonalManager, managing the information from other UsesCases.
      */
     public PersonalManager() {
-        this.kpiCalculator = new KPICalculator();
-        this.salaryCalculator = new SalaryCalculator(this.kpiCalculator);
-
+        KPICalculator kpiCalculator = new KPICalculator();
+        this.salaryCalculator = new SalaryCalculator(kpiCalculator);
     }
 
     //====== Methods regarding retrieve personal information =======

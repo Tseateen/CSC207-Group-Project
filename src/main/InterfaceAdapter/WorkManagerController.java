@@ -9,9 +9,9 @@ public class WorkManagerController {
     private final IWorkManager workManager;
     private final IGroupManager groupManager;
 
-    public WorkManagerController(IWorkManager workManager, IGroupManager groupManager){
-        this.workManager = workManager;
-        this.groupManager = groupManager;
+    public WorkManagerController(){
+        this.workManager = new WorkManager();
+        this.groupManager = new GroupManager();
     }
 
 

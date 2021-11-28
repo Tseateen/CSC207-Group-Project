@@ -2,10 +2,10 @@ package main.InterfaceAdapter;
 import main.UsesCases.*;
 public class VerifierController {
 
-    private IVerifier verifier;
+    private final IVerifier verifier;
 
-    public VerifierController(IVerifier verifier) {
-        this.verifier = verifier;
+    public VerifierController() {
+        this.verifier = new Verifier();
     }
 
     public boolean verifyUserExistence(String userID, ILoginList loginList) {
