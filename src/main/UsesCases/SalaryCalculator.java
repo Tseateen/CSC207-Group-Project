@@ -19,8 +19,10 @@ public class SalaryCalculator {
      * @param partTimeEmployee the part-time employee whose salary is going to be calculated.
      * @return An int that represents the total salary to be paid for this part-time employee.
      */
-    public int calculatePartTimeSalary(PartTimeEmployee partTimeEmployee){
-        return partTimeEmployee.getWorkingHour() * partTimeEmployee.getWage();
+    public String calculatePartTimeSalary(PartTimeEmployee partTimeEmployee){
+        Long hour = Long.parseLong(partTimeEmployee.getWorkingHour());
+        Long wage = Long.parseLong(partTimeEmployee.getWage());
+        return String.valueOf(hour * wage);
     }
 
     /**
@@ -29,9 +31,10 @@ public class SalaryCalculator {
      * @param fullTimeEmployee the full-time employee whose salary is going to be calculated.
      * @return An int that represents the total salary to be paid for this full-time employee.
      */
-    public int calculateFullTimeSalary(FullTimeEmployee fullTimeEmployee){
-        return calculateBonusFromKPI(fullTimeEmployee) + calculateBonusFromVacation(fullTimeEmployee) +
-                fullTimeEmployee.getWage();
+    public String calculateFullTimeSalary(FullTimeEmployee fullTimeEmployee, IGroupList groupList, IWorkList workList){
+        return String.valueOf( Long.parseLong(calculateBonusFromKPI(fullTimeEmployee, groupList, workList))+
+                calculateBonusFromVacation(fullTimeEmployee) +
+                fullTimeEmployee.getWage());
     }
 
     /**
@@ -40,13 +43,15 @@ public class SalaryCalculator {
      * @param fullTimeEmployee the full-time employee whose bonus salary is going to be calculated.
      * @return An int that represent the bonus salary from the vacation of this full-time employee.
      */
-    public int calculateBonusFromVacation(FullTimeEmployee fullTimeEmployee){
-        if (fullTimeEmployee.getVacationUsed() > fullTimeEmployee.getTotalVacationWithSalary()){
-                return (-(fullTimeEmployee.getVacationUsed() - fullTimeEmployee.getTotalVacationWithSalary()) *
-                        (-50 * fullTimeEmployee.getLevel() + 550));
+    public String calculateBonusFromVacation(FullTimeEmployee fullTimeEmployee){
+        if (Long.parseLong(fullTimeEmployee.getVacationUsed()) > Long.parseLong(fullTimeEmployee.getTotalVacationWithSalary())){
+                return String.valueOf(-(Long.parseLong(fullTimeEmployee.getVacationUsed()) -
+                        Long.parseLong(fullTimeEmployee.getTotalVacationWithSalary())) *
+                        (-50L * fullTimeEmployee.getLevel() + 550));
         }else{
-            return ((fullTimeEmployee.getTotalVacationWithSalary() - fullTimeEmployee.getVacationUsed())) *
-                    (fullTimeEmployee.getWage() / 30);
+            return String.valueOf(((Long.parseLong(fullTimeEmployee.getTotalVacationWithSalary()) -
+                    Long.parseLong(fullTimeEmployee.getVacationUsed()))) *
+                    (Long.parseLong(fullTimeEmployee.getWage()) / 30));
         }
     }
 
@@ -56,7 +61,7 @@ public class SalaryCalculator {
      * @param fullTimeEmployee the full-time employee whose bonus salary is going to be calculated.
      * @return An int that represent the bonus salary from the KPI of this full-time employee.
      */
-    public int calculateBonusFromKPI(FullTimeEmployee fullTimeEmployee){
-        return this.KPIcalculator.calculateKPI(fullTimeEmployee.getID());
+    public String calculateBonusFromKPI(FullTimeEmployee fullTimeEmployee, IGroupList groupList, IWorkList workList){
+        return this.KPIcalculator.calculateKPI(fullTimeEmployee.getID(), groupList, workList);
     }
 }

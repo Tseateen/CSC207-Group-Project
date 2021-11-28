@@ -20,10 +20,12 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
     @Override
-    public void addUser( String name, String password, String phone, String address){
-        Userable user = new User( name,name.concat(String.valueOf(this.idCounter)), password, phone, address);
+    public String addUser( String name, String password, String phone, String address){
+        String id = name.concat(String.valueOf(this.idCounter));
+        Userable user = new User( name, id, password, phone, address);
         this.UserList.add(user);
         this.idCounter += 1;
+        return id;
     }
 
 

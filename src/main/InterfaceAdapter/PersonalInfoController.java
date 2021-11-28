@@ -6,7 +6,7 @@ import main.UsesCases.*;
 import java.util.ArrayList;
 
 public class PersonalInfoController {
-    private IPersonalManager personalManager;
+    private final IPersonalManager personalManager;
 
     public PersonalInfoController(IPersonalManager personalManager){
         this.personalManager = personalManager;
@@ -22,15 +22,14 @@ public class PersonalInfoController {
         if (info.size() == 7){
             return personalInfo;
         }else{
-            String concatPeronalInfo = personalInfo.concat("\n Position: " + info.get(7) + "\n State: " +info.get(8)
+            return personalInfo.concat("\n Position: " + info.get(7) + "\n State: " +info.get(8)
                     +"\n Total Vacation with Salary: " + info.get(9) + "\n  Vacation Used: " + info.get(10));
-            return concatPeronalInfo;
         }
     }
 
 
-    public String checkTotalSalary(IEmployeeList employeeList, String userID){
-        return String.valueOf(this.personalManager.checkTotalSalary(employeeList, userID));
+    public String checkTotalSalary(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
+        return String.valueOf(this.personalManager.checkTotalSalary(employeeList, userID, groupList, workList));
     }
     public String checkMinimumWage(IEmployeeList employeeList, String userID){
         return String.valueOf(this.personalManager.checkMinimumWage(employeeList, userID));
