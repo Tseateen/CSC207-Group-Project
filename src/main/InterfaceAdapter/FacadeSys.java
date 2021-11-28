@@ -22,28 +22,19 @@ public class FacadeSys {
     private final LoginListController loginListController;
     private final IEmployeeList employeeList;
     private final EmployeeListController employeeListController;
-    private final IVerifier verifier;
     private final IWorkList workList;
     private final IGroupList groupList;
-    private final String username;
-    private String userID;
+    private final String userID;
     private final PersonalInfoController personalInfoController;
     private final VerifierController verifierController;
-    // === AccountFacade ===
-    private final AccountFacade accountFacade;
-    // === WorkFacade ===
-    private final WorkFacade workFacade;
-    private final IWorkManager workManager;
-    private final IGroupManager groupManager;
     private final WorkManagerController workManagerController;
-    private final IPersonalManager personalManager;
 
 
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
      */
-    public FacadeSys(String username) {
+    public FacadeSys(String userID) {
         this.loginList = new LoginList();
         this.loginListController = new LoginListController(this.loginList);
         this.employeeList = new EmployeeList();
@@ -51,16 +42,10 @@ public class FacadeSys {
         this.workList = new WorkList();
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
-        this.username = username;
-        this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
-        this.workFacade = new WorkFacade(this.workList, this.groupList);
-        this.workManager = new WorkManager();
-        this.groupManager = new GroupManager();
-        this.workManagerController = new WorkManagerController(this.workManager, this.groupManager);
-        this.personalManager = new PersonalManager(this.loginList, this.employeeList, this.userID, this.groupList, this.workList);
-        this.personalInfoController = new PersonalInfoController(this.personalManager);
-        this.verifier = new Verifier(this.username, this.loginList, this.employeeList);
-        this.verifierController = new VerifierController(new Verifier(this.username, this.loginList, this.employeeList));
+        this.userID = userID;
+        this.workManagerController = new WorkManagerController();
+        this.personalInfoController = new PersonalInfoController();
+        this.verifierController = new VerifierController();
     }
 
 
@@ -72,8 +57,6 @@ public class FacadeSys {
         this.fileGateway.ReadInputFileToEmployeeList();
         this.fileGateway.ReadInputFileToWorkList();
         this.fileGateway.ReadInputFileToGroupList();
-        this.employeeType = this.accountFacade.getEmployeeType();
-        this.userID = this.accountFacade.getUserID();
         return this.verifierController.verifyLogin(username, password, this.loginList);
     }
 
@@ -100,7 +83,7 @@ public class FacadeSys {
     }
 
     public String setPersonalInfo(String option, String response){
-        if (this.personalInfoController.setPersonalInfo(option, response, this.loginList, this.username)){
+        if (this.personalInfoController.setPersonalInfo(option, response, this.loginList, this.userID)){
             return "Set personal information success!";
         }
         else{
@@ -197,7 +180,7 @@ public class FacadeSys {
         boolean validLevelGiven = this.verifierController.validToCreate(level, this.employeeList, this.userID);
         if (validLevelGiven){
             this.loginListController.addUser(name, password,phone, address);
-            this.employeeListController.addEmployee(department,Integer.parseInt(wage),position,Integer.parseInt(level),status, name);
+            this.employeeListController.addEmployee(department,wage,position,level,status, name);
         }
         return validLevelGiven;
     }

@@ -32,6 +32,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * @param position the position of the employee, usually it is "N".
      * @param level the level of the employee. With smaller numbers, the employee has higher authority level.
      * @param status the status of the employee, "pending" by default.
+     * @param id unique identify of employee
      */
     @Override
     public void addEmployee(String department, String wage, String position, String level, String status, String id) {
