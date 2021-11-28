@@ -98,6 +98,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         return null;
     }
 
+
     // === Iterator Design Pattern ===
     @Override
     public Iterator<Workable> iterator() {
