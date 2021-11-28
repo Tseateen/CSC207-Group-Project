@@ -23,8 +23,8 @@ public class FacadeSys {
     private final IEmployeeList employeeList;
     private final EmployeeListController employeeListController;
     private final IVerifier verifier;
-    private final WorkList workList;
-    private final GroupList groupList;
+    private final IWorkList workList;
+    private final IGroupList groupList;
     private final String username;
     private String userID;
     private final PersonalInfoController personalInfoController;
@@ -34,6 +34,7 @@ public class FacadeSys {
     // === WorkFacade ===
     private final WorkFacade workFacade;
     private final IWorkManager workManager;
+    private final IGroupManager groupManager;
     private final WorkManagerController workManagerController;
     private final IPersonalManager personalManager;
 
@@ -54,7 +55,8 @@ public class FacadeSys {
         this.accountFacade = new AccountFacade(this.loginList, this.employeeList,this.username);
         this.workFacade = new WorkFacade(this.workList, this.groupList);
         this.workManager = new WorkManager();
-        this.workManagerController = new WorkManagerController(this.workList,workManager);
+        this.groupManager = new GroupManager();
+        this.workManagerController = new WorkManagerController(this.workManager, this.groupManager);
         this.personalManager = new PersonalManager(this.loginList, this.employeeList, this.userID, this.groupList, this.workList);
         this.personalInfoController = new PersonalInfoController(this.personalManager);
         this.verifier = new Verifier(this.username, this.loginList, this.employeeList);
@@ -85,7 +87,7 @@ public class FacadeSys {
     }
 
     public String checkTotalSalary(){
-        return this.personalInfoController.checkTotalSalary(this.employeeList, this.userID);
+        return this.personalInfoController.checkTotalSalary(this.employeeList, this.userID, this.groupList, this.workList);
     }
     public String checkMinimumWage(){
         return this.personalInfoController.checkMinimumWage(this.employeeList, this.userID);
@@ -124,38 +126,30 @@ public class FacadeSys {
 
     // ================== Work UI Method ================
     public String showAllWorkNeedToDo() {
-        StringBuilder result = new StringBuilder("");
-        for (String i : this.workFacade.workOfMine(this.userID)){
-            result.append(i).append("\n");
-        }
-        return result.toString();
+       return this.workManagerController.showAllWorkNeedToDo(this.userID, this.groupList, this.workList);
     }
-    public String showWorkDetail(String work_id) {
-        StringBuilder result = new StringBuilder("");
-        for (String i : this.workFacade.showWorkDetail(work_id)){
-            result.append(i).append("\n");
-        }
-        return result.toString();
+    public String showWorkDetail(String workID) {
+        return this.workManagerController.showWorkDetail(workID, this.workList);
     }
 
-    public ArrayList<String> showAllWorkLed(){
-        return this.workFacade.workOfLed(this.userID);
+    public String showAllWorkLed(){
+        return this.workManagerController.showAllWorkLed(this.userID, this.groupList, this.workList);
     }
 
 
     public String showAllLowerWork() {
-        StringBuilder result = new StringBuilder("");
-        for (String i : this.workFacade.workOfLowerLevel(this.userID)){
-            result.append(i).append("\n");
-        }
-        return result.toString();
+        return this.workManagerController.showAllLowerWork(this.userID, this.workList);
     }
 
 
-    public boolean assignLeaderToWork(String work_id, String leader_id) {
-        if (this.workFacade.workExist(work_id) && this.levelVerifier(this.workFacade.workLevel(work_id))) {
-            if (this.accountFacade.userExists(leader_id) && this.levelVerifier(this.accountFacade.user_Level(leader_id))){
-                this.workFacade.assignLeader(work_id, leader_id);
+    public boolean assignLeaderToWork(String workID, String leaderID) {
+        String workLevel = this.workManagerController.workLevel(workID,workList);
+        String leaderLevel = this.personalInfoController.userLevel(leaderID, this.employeeList);
+        if (this.workManagerController.checkWorkExist(workID, this.workList) &&
+                this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList))
+        {
+            if (this.verifierController.verifyUserExistence(leaderID, this.loginList) && this.verifierController.verifyLevel(leaderLevel,this.userID,this.employeeList)){
+                this.workManagerController.assignLeaderToWork(workID, leaderID, this.groupList);
                 return true;
             }
         }
@@ -163,31 +157,35 @@ public class FacadeSys {
     }
 
 
-    public boolean distributeWork(String work_id, String userID) {
-        if (this.workFacade.verifierLeader(this.userID, work_id) &&
-                this.levelVerifier(this.accountFacade.user_Level(userID))) {
-            return this.workFacade.Distributor(work_id, userID);
+    public boolean distributeWork(String workID, String memberID) {
+        String memberLevel = this.personalInfoController.userLevel(memberID, this.employeeList);
+        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) &&
+                this.verifierController.verifyLevel(memberLevel, this.userID, this.employeeList)) {
+            return this.workManagerController.distributeWork(workID,memberID,this.groupList);
         }
         return false;
     }
 
 
-    public void createWork(ArrayList<String> info_list) {
-        this.workFacade.workCreator(info_list);
+    public boolean createWork(ArrayList<String> info_list) {
+        if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList)) {
+            this.workManagerController.createWork(info_list, this.workList);
+            return true;
+        }else{
+            return false;
+        }
     }
 
-
-
-    public void extendWork(String days, String work_id) {
-        this.workManagerController.extendWork(work_id, days);
+    public void extendWork(String days, String workID) {
+        this.workManagerController.extendWork(workID, days, this.workList);
     }
 
 //    public boolean checkLeaderOf(String work_id) {
 //        return this.workFacade.verifierLeader(this.userID, work_id);
 //    }
 
-    public boolean checkWorkExist(String work_id) {
-        return this.workFacade.workExist(work_id);
+    public boolean checkWorkExist(String workID) {
+        return this.workManagerController.checkWorkExist(workID, this.workList);
     }//D
 
 

@@ -38,7 +38,7 @@ public class CreateWorkUI {
                 String info = keyIn.nextLine();
                 work_info.add(info);
         }
-            if (!this.facadeSys.levelVerifier(work_info.get(4))){
+            if (!this.facadeSys.createWork(work_info)){
                     System.out.println("You can not create a work that has a higher level than you! Please reassign the work");
                     invalidCreate = true;
             }

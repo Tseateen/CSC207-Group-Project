@@ -95,4 +95,7 @@ public class PersonalInfoController {
             return false;
         }
     }
+    public String userLevel(String userID, IEmployeeList employeeList){
+        return this.personalManager.getUserLevel(userID, employeeList);
+    }
 }
