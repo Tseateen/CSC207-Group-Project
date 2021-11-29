@@ -8,14 +8,15 @@ public class VerifierController {
         this.verifier = new Verifier();
     }
 
+    // === Usage: FacadeSys Worker Case (iii) ====
     public boolean verifyUserExistence(String userID, ILoginList loginList) {
         if ((userID.matches(".*\\d.*"))) {
             return this.verifier.userExists(userID, loginList);
         } else {
             return false;
         }
-
     }
+    // ==================================================
 
     public boolean validToCreate(String level, IEmployeeList employeeList, String userID) {
         if (level.matches(".*\\d.*")) {
@@ -32,6 +33,8 @@ public class VerifierController {
             return false;
         }
     }
+
+    // === Usage: FacadeSys Case (i) ====
     public boolean verifyFullTime(String userID, IEmployeeList employeeList) {
         return this.verifier.verifierFullTime(userID, employeeList);
     }
@@ -47,6 +50,7 @@ public class VerifierController {
         }
     }
 
+    // === Usage: FacadeSys Worker Case (iii) ====
     public boolean verifyLevel(String level, String userID, IEmployeeList employeeList){
         try {
             if (level.length() != 1) {return false;}
@@ -56,5 +60,6 @@ public class VerifierController {
             return false;
         }
     }
+    // ==================================================
 
 }

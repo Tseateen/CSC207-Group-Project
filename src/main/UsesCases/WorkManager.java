@@ -1,8 +1,6 @@
 package main.UsesCases;
 
-import com.sun.jdi.IntegerValue;
 import main.Entity.Group;
-import main.Entity.Work;
 import main.Entity.Workable;
 
 import java.sql.Timestamp;
@@ -16,7 +14,7 @@ public class WorkManager implements IWorkManager{
      * Extend a work (add extra works to the current work).
      * @param workID the work's id which is going to be extended.
      * @param workList the list of work
-     * @param extend_date how much date its gonna extended.
+     * @param extend_date how much date it's gonna extended.
      */
     public void extendWork(String workID, IWorkList workList, String extend_date) {
         Workable work = workList.getWork(workID);
@@ -79,7 +77,7 @@ public class WorkManager implements IWorkManager{
      *
      */
     public boolean changeWorkInfo(String workID, IWorkList workList , String opt, String changeTo) {
-        Workable w = ((WorkList)workList).getWork(workID);
+        Workable w = workList.getWork(workID);
         switch (opt) {
             case "DESCRIBE":
                 w.setDescribe(changeTo);
@@ -105,7 +103,7 @@ public class WorkManager implements IWorkManager{
      * @param workList the list of works
      * @return a string with the authority level of the Work.
      */
-    public String workLevel(String workID, IWorkList workList) {
+    public String checkWorkLevel(String workID, IWorkList workList) {
         return String.valueOf(workList.getWork(workID).getLevel());
     }
 

@@ -32,9 +32,9 @@ public class SalaryCalculator {
      * @return An int that represents the total salary to be paid for this full-time employee.
      */
     public String calculateFullTimeSalary(FullTimeEmployee fullTimeEmployee, IGroupList groupList, IWorkList workList){
-        return String.valueOf( Long.parseLong(calculateBonusFromKPI(fullTimeEmployee, groupList, workList))+
+        return Long.parseLong(calculateBonusFromKPI(fullTimeEmployee, groupList, workList)) +
                 calculateBonusFromVacation(fullTimeEmployee) +
-                fullTimeEmployee.getWage());
+                fullTimeEmployee.getWage();
     }
 
     /**

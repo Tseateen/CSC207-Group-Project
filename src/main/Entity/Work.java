@@ -23,7 +23,7 @@ public class Work implements Workable, Serializable {
      */
 
     /**
-     * Construct an Work, giving them the given name, id
+     * Construct a Work, giving them the given name, id
      * create_time, and level.
      *
      * @param name Name for this Work.
@@ -195,7 +195,7 @@ public class Work implements Workable, Serializable {
 
     /**
      *
-     * @param sign Give a sign to mark this work has group or not.
+     * @param sign Give a sign to mark this work has grouped or not.
      */
     @Override
     public void setSign(String sign) {

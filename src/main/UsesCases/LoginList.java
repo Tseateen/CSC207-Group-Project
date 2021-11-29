@@ -3,7 +3,7 @@ package main.UsesCases;
 import main.Entity.User;
 import main.Entity.Userable;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +15,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     private int idCounter;
 
     public LoginList(){
-        this.UserList = new ArrayList<Userable>();
+        this.UserList = new ArrayList<>();
         this.idCounter = 1;
     }
 
@@ -74,26 +74,43 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
 
     // ===== Data ====
     @Override
-    public void initialize(){
+    public void initialized(){
         Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A");
         this.UserList.add(admin);
     }
 
+
     @Override
-    public void readInput(Userable user) {
-        this.UserList.add(user);
+    public void readDataFromFile() throws IOException, ClassNotFoundException {
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserData.ser"));
+        InputStream buffer = new BufferedInputStream(file);
+        ObjectInput input = new ObjectInputStream(buffer);
+        LoginList UserFile = (LoginList) input.readObject();
+        input.close();
+        for(Userable user: UserFile){
+            this.UserList.add(user);
+            this.idCounter ++;
+        }
     }
 
     @Override
-    public void readID(int ID) {
-        this.idCounter = ID;
+    public void writeDataToFile() throws IOException {
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserData.ser"));
+        OutputStream buffer = new BufferedOutputStream(file);
+        ObjectOutput output = new ObjectOutputStream(buffer);
+        output.writeObject(this.UserList);
+        output.close();
     }
+
+    // ===============================
+
     // === Iterator Design Pattern ===
     @Override
     public Iterator<Userable> iterator() {
         return new LoginListIterator();
     }
-
 
     private class LoginListIterator implements Iterator<Userable>{
 

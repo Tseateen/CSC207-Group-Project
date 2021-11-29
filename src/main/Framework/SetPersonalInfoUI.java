@@ -46,7 +46,7 @@ public class SetPersonalInfoUI {
                 }
             }else {
                 System.out.println("Option does not exist. Please type again!");
-                System.out.println("");
+                System.out.println();
             }
         }
     }

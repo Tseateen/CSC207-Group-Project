@@ -2,7 +2,7 @@ package main.UsesCases;
 
 import main.Entity.*;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +19,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
      * Construct the WorkList.
      */
     public WorkList(){
-        this.workList = new ArrayList<Workable>();
+        this.workList = new ArrayList<>();
     }
 
 
@@ -72,17 +72,6 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         return workList.size();
     }
 
-
-    /**
-     * Read the input of the work and add the new Work to the workList.
-     *
-     * @param work the Work information.
-     */
-    public void readInput(Work work) {
-        this.workList.add(work);
-    }
-
-
     /**
      * This method will find the Employee from the EmployeeList.
      *
@@ -97,14 +86,38 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         }
         return null;
     }
+    // ===== Data ====
 
+    @Override
+    public void readDataFromFile() throws IOException, ClassNotFoundException {
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/WorkData.ser"));
+        InputStream buffer = new BufferedInputStream(file);
+        ObjectInput input = new ObjectInputStream(buffer);
+        WorkList workFile = (WorkList) input.readObject();
+        input.close();
+        for(Workable work: workFile){
+           this.workList.add(work);
+        }
+    }
+
+    @Override
+    public void writeDataToFile() throws IOException {
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/WorkData.ser"));
+        OutputStream buffer = new BufferedOutputStream(file);
+        ObjectOutput output = new ObjectOutputStream(buffer);
+        output.writeObject(this.workList);
+        output.close();
+    }
+
+    // ===============================
 
     // === Iterator Design Pattern ===
     @Override
     public Iterator<Workable> iterator() {
         return new WorkListIterator();
     }
-
 
     private class WorkListIterator implements Iterator<Workable>{
 

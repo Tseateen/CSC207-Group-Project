@@ -1,44 +1,42 @@
 package main.Entity;
 
-import com.sun.source.doctree.SinceTree;
-
 import java.io.Serializable;
 
 public interface Workable extends Serializable{
 
-    public abstract String getName();
+    String getName();
 
-    public abstract String getID();
+    String getID();
 
-    public abstract int getLevel();
+    int getLevel();
 
-    public abstract String getCreate_time();
+    String getCreate_time();
 
-    public abstract String getEnd_time();
+    String getEnd_time();
 
-    public abstract String getDepartment();
+    String getDepartment();
 
-    public abstract String getState();
+    String getState();
 
-    public abstract void setState(String state);
+    void setState(String state);
 
-    public abstract void setStart_time(String time);
+    void setStart_time(String time);
 
-    public abstract String getStart_time();
+    String getStart_time();
 
-    public abstract void setDescribe(String information);
+    void setDescribe(String information);
 
-    public abstract String getDescribe();
+    String getDescribe();
 
-    public abstract void setRequirement(String requirement);
+    void setRequirement(String requirement);
 
-    public abstract String getRequirement();
+    String getRequirement();
 
-    public abstract String getSign();
+    String getSign();
 
-    public abstract void setSign(String sign);
+    void setSign(String sign);
 
-    public abstract void setEnd_time(String time);
+    void setEnd_time(String time);
 }
 
 

@@ -7,20 +7,20 @@ import java.util.NoSuchElementException;
 
 public class Group implements Iterable<String>, Serializable {
     private String leader_id;
-    private List<String> groupMembers = new ArrayList<String>();
-    private String workid;
+    private final List<String> groupMembers = new ArrayList<>();
+    private String workID;
 
 
     /**
      * Construct a Group from the given leader_id,
      * members, and project.
      *
-     * @param workid The work ID of the work this group is working on.
+     * @param workID The work ID of the work this group is working on.
      * @param leader_id The leader_id of this group.
      */
-    public Group(String leader_id, String workid){
+    public Group(String leader_id, String workID){
         this.leader_id = leader_id;
-        this.workid = workid;
+        this.workID = workID;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Group implements Iterable<String>, Serializable {
     }
 
     public String getWorkID() {
-        return this.workid;
+        return this.workID;
     }
 
     /**
@@ -71,7 +71,6 @@ public class Group implements Iterable<String>, Serializable {
      * This method remove a member from the group.
      *
      * @param member The member who is going to be removed from the group.
-     * @return This method will return true iff the member is successfully removed from the group.
      */
     public void deleteMember(String member){
         this.groupMembers.remove(member);
@@ -79,10 +78,10 @@ public class Group implements Iterable<String>, Serializable {
 
     /**
      *
-     * @param workid This method set a new project for the group to work on.
+     * @param workID This method set a new project for the group to work on.
      */
-    public void setProject(String workid) {
-        this.workid = workid;
+    public void setProject(String workID) {
+        this.workID = workID;
     }
 
     /**
@@ -90,7 +89,7 @@ public class Group implements Iterable<String>, Serializable {
      * @return This method will return the project which this group is working on.
      */
     public String getProject() {
-        return this.workid;
+        return this.workID;
     }
 
 
@@ -105,7 +104,7 @@ public class Group implements Iterable<String>, Serializable {
     }
 
     /**
-     * An Iterator for Group Userables.
+     * An Iterator for Group Userable.
      */
     private class GroupIterator implements Iterator<String> {
 
@@ -135,7 +134,7 @@ public class Group implements Iterable<String>, Serializable {
 
             // List.get(i) throws an IndexOutBoundsException if
             // we call it with i >= groupMembers.size().
-            // But Iterator's next() needs to throw a
+            // But Iterators next() needs to throw a
             // NoSuchElementException if there are no more elements.
             try {
                 res = groupMembers.get(current);

@@ -3,7 +3,7 @@ package main.UsesCases;
 import main.Entity.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class PersonalManager implements IPersonalManager {
 
@@ -77,11 +77,7 @@ public class PersonalManager implements IPersonalManager {
     @Override
     public String checkMinimumWage(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
-        if (employee instanceof PartTimeEmployee) {
-            return ((PartTimeEmployee) employee).getWage();
-        } else {
-            return ((FullTimeEmployee) employee).getWage();
-        }
+        return employee.getWage();
     }
     @Override
     public String checkVacationBonus(IEmployeeList employeeList, String userID) {

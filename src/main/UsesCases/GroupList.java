@@ -3,7 +3,7 @@ package main.UsesCases;
 import main.Entity.Group;
 
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +20,7 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
      *
      */
     public GroupList(){
-        this.GroupList = new ArrayList<Group>();
+        this.GroupList = new ArrayList<>();
     }
 
 
@@ -75,7 +75,6 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
         return null;
     }
 
-
     /**
      * This method will get the size of the GroupList, i.e. the total number of the existing groups from the GroupList.
      *
@@ -86,17 +85,32 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
         return GroupList.size();
     }
 
+    // ======= Data =======
 
-    /**
-     * This method will read the input for the interface and call the add method to add a new group.
-     *
-     * @param group the group information of the Group.
-     *
-     */
-    public void readInput(Group group) {
-        this.GroupList.add(group);
+    @Override
+    public void readDataFromFile() throws IOException, ClassNotFoundException {
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream((filePath.concat("/src/Data/GroupData.ser")));
+        InputStream buffer = new BufferedInputStream(file);
+        ObjectInput input = new ObjectInputStream(buffer);
+        GroupList groupFile = (GroupList) input.readObject();
+        input.close();
+        for(Group group: groupFile){
+            this.GroupList.add(group);
+        }
+
     }
 
+    @Override
+    public void writeDataToFile() throws IOException {
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/GroupData.ser"));
+        OutputStream buffer = new BufferedOutputStream(file);
+        ObjectOutput output = new ObjectOutputStream(buffer);
+        output.writeObject(this.GroupList);
+        output.close();
+    }
+    // ===============================
 
     // === Iterator Design Pattern ===
     @Override

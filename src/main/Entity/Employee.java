@@ -1,7 +1,6 @@
 package main.Entity;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public abstract class Employee implements Serializable {
 
@@ -108,7 +107,7 @@ public abstract class Employee implements Serializable {
 
     /**
      *
-     * @param level This method can let admin to assign the new authority level for this employee.
+     * @param level This method can let admin assign the new authority level for this employee.
      */
     public void setLevel(int level){
         this.level = level;

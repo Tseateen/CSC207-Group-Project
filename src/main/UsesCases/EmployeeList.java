@@ -2,7 +2,7 @@ package main.UsesCases;
 
 import main.Entity.*;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +19,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      */
 
     public EmployeeList(){
-        this.EmployeeList = new ArrayList<Employee>();
+        this.EmployeeList = new ArrayList<>();
     }
 
 
@@ -100,26 +100,43 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
 
     // === Data ===
     @Override
-    public void initialize(){
+    public void initialized(){
         Employee admin = new FullTimeEmployee("N/A", "N/A","0", 0, "Admin");
         this.EmployeeList.add(admin);
     }
 
-    /**
-     * This method will read the input entered from the interface and call the add method to add a new employee
-     * into the EmployeeList.
-     *
-     * @param employee the information of the Employee.
-     */
     @Override
-    public void readInput(Employee employee){
-        this.EmployeeList.add(employee);
+    public void readDataFromFile() throws IOException, ClassNotFoundException {
+        String filePath = new File("").getAbsolutePath();
+        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
+        InputStream buffer = new BufferedInputStream(file);
+        ObjectInput input = new ObjectInputStream(buffer);
+        EmployeeList EmployeeFile = (EmployeeList) input.readObject();
+        input.close();
+        for(Employee employee: EmployeeFile){
+            this.EmployeeList.add(employee);
+        }
     }
 
+    @Override
+    public void writeDataToFile() throws IOException {
+        String filePath = new File("").getAbsolutePath();
+        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
+        OutputStream buffer = new BufferedOutputStream(file);
+        ObjectOutput output = new ObjectOutputStream(buffer);
+        output.writeObject(this.EmployeeList);
+        output.close();
+    }
+
+    // ===============================
+
+    // === Iterator Design Pattern ===
     @Override
     public Iterator<Employee> iterator() {
         return new EmployeeListIterator();
     }
+
+
 
 
     public class EmployeeListIterator implements Iterator<Employee>{
@@ -154,4 +171,5 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
             EmployeeList.add(employee);
         }
     }
+    // ===============================
 }
