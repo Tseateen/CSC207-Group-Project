@@ -50,7 +50,7 @@ public class FacadeSys {
         this.employeeList = new EmployeeList();
         this.employeeListController = new EmployeeListController(this.employeeList);
 
-        // Wor
+        // Work
         this.workList = new WorkList();
         this.workListController = new WorkListController(this.workList);
 
