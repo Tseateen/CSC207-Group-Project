@@ -2,7 +2,7 @@ package main.UsesCases;
 
 import main.Entity.Userable;
 
-public interface ILoginList {
+public interface ILoginList extends ReadWrite{
     public abstract String addUser(String name, String password, String phone, String address);
     public abstract boolean deleteUser(String id);
     public abstract Userable getUser(String user_id);

@@ -1,5 +1,6 @@
-package test.UsesCasesTest;
 
+package test.UsesCasesTest;
+/*
 import main.Entity.*;
 import main.UsesCases.*;
 import org.junit.Before;
@@ -176,4 +177,6 @@ public class WorkFacade_test {
         assertFalse(g2.getMembers().contains(member1.getID()));
     }
 
-}
+
+ */
+

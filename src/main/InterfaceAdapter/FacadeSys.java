@@ -14,35 +14,49 @@ import java.util.*;
 
 public class FacadeSys {
 
+    // === UI Input Data ===
+    private final String userID;
+    // ==========================
+
     // === Instance Variables ===
     private String employeeType;
-    // === DataFile ===
-    private final DataGateway fileGateway;
-    private final ILoginList loginList;
+    // ==========================
+
+    // === Controller ===
     private final LoginListController loginListController;
-    private final IEmployeeList employeeList;
     private final EmployeeListController employeeListController;
-    private final IWorkList workList;
-    private final IGroupList groupList;
-    private final String userID;
+    private final WorkListController workListController;
     private final PersonalInfoController personalInfoController;
     private final VerifierController verifierController;
     private final WorkManagerController workManagerController;
+    // ==========================
 
-
+    // === Data Related Class ===
+    private final DataGateway fileGateway;
+    private final ILoginList loginList;
+    private final IEmployeeList employeeList;
+    private final IWorkList workList;
+    private final IGroupList groupList;
 
     /**
      * Construct the admin system. This system can let admin manager employee by Uses Cases.
      */
     public FacadeSys(String userID) {
+        // UI Input
+        this.userID = userID;
+        // Login
         this.loginList = new LoginList();
         this.loginListController = new LoginListController(this.loginList);
+        // Employee
         this.employeeList = new EmployeeList();
         this.employeeListController = new EmployeeListController(this.employeeList);
+        // Work
         this.workList = new WorkList();
+        this.workListController = new WorkListController(this.workList);
+        // Group
         this.groupList = new GroupList();
         this.fileGateway = new DataGateway(this.loginList, this.employeeList, this.groupList, this.workList);
-        this.userID = userID;
+        // Initial Controller
         this.workManagerController = new WorkManagerController();
         this.personalInfoController = new PersonalInfoController();
         this.verifierController = new VerifierController();

@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.Group;
-public interface IGroupList {
+public interface IGroupList extends ReadWrite{
 
     public void addGroup(String leader, String workID);
     public boolean deleteUser(String id);
