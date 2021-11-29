@@ -8,15 +8,15 @@ public interface Userable extends Serializable {
      *
      */
 
-    public abstract String getName();
-    public abstract void setName(String name);
-    public abstract String getID();
-    public abstract String getPassword();
-    public abstract void setPassword(String password);
-    public abstract boolean comparePassword(String password);
-    public abstract String getPhone();
-    public abstract void setPhone(String phone);
-    public abstract String getAddress();
-    public abstract void setAddress(String address);
-    public abstract boolean equals(Object other);
+    String getName();
+    void setName(String name);
+    String getID();
+    String getPassword();
+    void setPassword(String password);
+    boolean comparePassword(String password);
+    String getPhone();
+    void setPhone(String phone);
+    String getAddress();
+    void setAddress(String address);
+    boolean equals(Object other);
 }

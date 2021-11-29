@@ -28,7 +28,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * @param position The position of this employee.
      * @param wage Minimum wage for this employee.
      * @param level The authority level fore this employee.
-     * @param id
+     * @param id FullTime employeeID
      */
     public FullTimeEmployee(String department, String position, String wage, int level, String id) {
         super(id, department, wage, level);

@@ -1,6 +1,5 @@
 package main.InterfaceAdapter;
 
-import main.Entity.Userable;
 import main.UsesCases.*;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class PersonalInfoController {
         this.personalManager = new PersonalManager();
     }
 
-
+    // === Usage: FacadeSys Case (i) ====
     public ArrayList<String> personalInfo(ILoginList loginList, IEmployeeList employeeList, String userID){
         ArrayList<String> personalInfo = new ArrayList<>();
         ArrayList<String> info = this.personalManager.employeeInfo(loginList, employeeList, userID);
@@ -45,6 +44,7 @@ public class PersonalInfoController {
         return String.valueOf(this.personalManager.checkKPIBonus(employeeList, userID, groupList, workList));
     }
 
+    // === Usage: FacadeSys PersonalCase (vi) ====
     public boolean setPersonalInfo(String option, String response, ILoginList loginList, String userID){
         try{
             switch (option){
@@ -68,6 +68,7 @@ public class PersonalInfoController {
             return false;
         }
     }
+    // ======================================================================
 
 
     public boolean setEmployeeInfo(String userID, String option, String response, IEmployeeList employeeList){
@@ -99,7 +100,10 @@ public class PersonalInfoController {
             return false;
         }
     }
-    public String userLevel(String userID, IEmployeeList employeeList){
+
+    // === Usage: FacadeSys Worker Case (iii) ====
+    public String checkUserLevel(String userID, IEmployeeList employeeList){
         return this.personalManager.getUserLevel(userID, employeeList);
     }
+    // ==================================================
 }

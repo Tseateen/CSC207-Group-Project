@@ -1,11 +1,10 @@
 package main.UsesCases;
 
 import main.Entity.Group;
-public interface IGroupList extends ReadWrite{
+public interface IGroupList extends IReadWrite {
 
-    public void addGroup(String leader, String workID);
-    public boolean deleteUser(String id);
-    public int getSize();
-    public Group getGroup(String workID);
-    public void readInput(Group group);
+    void addGroup(String leader, String workID);
+    boolean deleteUser(String id);
+    int getSize();
+    Group getGroup(String workID);
 }

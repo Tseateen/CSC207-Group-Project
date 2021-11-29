@@ -5,14 +5,14 @@ import main.Entity.Group;
 import java.util.List;
 
 public interface IGroupManager {
-    public void addMembers(List<String> list, Group group);
-    public boolean deleteMember(String userID, String workID, IGroupList groupList);
-    public void deleteEmployee(String userID, IGroupList groupList);
-    public void resetMember(Group group);
-    public void changeLeader(Group group, String user);
-    public void resetGroup(Group group);
-    public boolean Distributor(String workID, String userID, IGroupList groupList);
-    public boolean isMember (String userID, String workID, IGroupList groupList);
-    public boolean verifierLeader(String userID, String workID, IGroupList groupList);
-    public void assignLeader(String workID, String leaderID, IGroupList groupList);
+    void addMembers(List<String> list, Group group);
+    boolean deleteMember(String userID, String workID, IGroupList groupList);
+    void deleteEmployee(String userID, IGroupList groupList);
+    void resetMember(Group group);
+    void changeLeader(Group group, String user);
+    void resetGroup(Group group);
+    boolean Distributor(String workID, String userID, IGroupList groupList);
+    boolean isMember (String userID, String workID, IGroupList groupList);
+    boolean verifierLeader(String userID, String workID, IGroupList groupList);
+    void assignLeader(String workID, String leaderID, IGroupList groupList);
 }
