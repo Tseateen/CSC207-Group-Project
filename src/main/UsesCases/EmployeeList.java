@@ -101,7 +101,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     // === Data ===
     @Override
     public void initialize(){
-        Employee admin = new FullTimeEmployee("N/A", "N/A",0, 0, "Admin");
+        Employee admin = new FullTimeEmployee("N/A", "N/A","0", 0, "Admin");
         this.EmployeeList.add(admin);
     }
 

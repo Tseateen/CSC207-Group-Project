@@ -79,4 +79,12 @@ public class WorkManagerController {
         return this.workManager.workLevel(workID,workList);
     }
 
+    public void removeFromAll(String userID, IGroupList groupList) {
+        this.groupManager.deleteEmployee(userID, groupList);
+    }
+
+    public boolean removeOneFromGroup(String userID, String workID, IGroupList groupList) {
+        return this.groupManager.deleteMember(userID,workID,groupList);
+    }
+
 }

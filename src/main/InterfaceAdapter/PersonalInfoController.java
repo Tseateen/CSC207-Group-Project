@@ -13,18 +13,22 @@ public class PersonalInfoController {
     }
 
 
-    public String personalInfo(ILoginList loginList, IEmployeeList employeeList, String userID){
-        String personalInfo = "";
+    public ArrayList<String> personalInfo(ILoginList loginList, IEmployeeList employeeList, String userID){
+        ArrayList<String> personalInfo = new ArrayList<>();
         ArrayList<String> info = this.personalManager.employeeInfo(loginList, employeeList, userID);
-        personalInfo = "Name: " + info.get(0) + "\n ID: " + info.get(1) + "\n Username: " + info.get(2)
-                + "\n Password: " + info.get(3) + "\n Phone Number: " + info.get(4) + "\n Address: " +info.get(5)
-                + "\n Department: " + info.get(6);
-        if (info.size() == 7){
-            return personalInfo;
-        }else{
-            return personalInfo.concat("\n Position: " + info.get(7) + "\n State: " +info.get(8)
-                    +"\n Total Vacation with Salary: " + info.get(9) + "\n  Vacation Used: " + info.get(10));
+        personalInfo.add("Name: " + info.get(0) + "\n");
+        personalInfo.add("ID: " + info.get(1) + "\n");
+        personalInfo.add("Password: " + info.get(2) + "\n");
+        personalInfo.add("Phone Number: " + info.get(3) + "\n");
+        personalInfo.add("Address: " +info.get(4) + "\n");
+        personalInfo.add("Department: " + info.get(5) + "\n");
+        if (info.size() != 6) {
+            personalInfo.add("Position: " + info.get(6) + "\n");
+            personalInfo.add("State: " + info.get(7) + "\n");
+            personalInfo.add("Total Vacation with Salary: " + info.get(8) + "\n");
+            personalInfo.add("Vacation Used: " + info.get(9) + "\n");
         }
+        return personalInfo;
     }
 
 
@@ -37,8 +41,8 @@ public class PersonalInfoController {
     public String checkVacationBonus(IEmployeeList employeeList, String userID){
         return String.valueOf(this.personalManager.checkVacationBonus(employeeList, userID));
     }
-    public String checkKPIBonus(IEmployeeList employeeList, String userID){
-        return String.valueOf(this.personalManager.checkKPIBonus(employeeList, userID));
+    public String checkKPIBonus(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
+        return String.valueOf(this.personalManager.checkKPIBonus(employeeList, userID, groupList, workList));
     }
 
     public boolean setPersonalInfo(String option, String response, ILoginList loginList, String userID){

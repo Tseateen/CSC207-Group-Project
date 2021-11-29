@@ -5,25 +5,24 @@ import main.Entity.PartTimeEmployee;
 import main.Entity.Userable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserManager {
-    private final LoginList loginList;
-    private final EmployeeList employeeList;
 
     /**
-     * Construct the UserManager, managing the information from other UsesCases.
+     * Get a list of employees that has a lower level than the target employee.
+     *
+     * @param level the string of level of the targeted employee.
+     *
+     * @return a list of employee who is lower level from the EmployeeList than the targeted employee with given id.
+     *
      */
-    public UserManager(LoginList loginList, EmployeeList employeeList) {
-        this.loginList = loginList;
-        this.employeeList = employeeList;
-    }
-
-    public ArrayList<String> getLowerUsers(String level) {
+    public ArrayList<String> getLowerUsers(String level, ILoginList loginList, IEmployeeList employeeList) {
         ArrayList<String> users = new ArrayList<>();
-        for (Employee e: this.employeeList) {
+        for (Employee e: (EmployeeList)employeeList) {
             StringBuilder user = new StringBuilder();
             if (e.getLevel() > Integer.parseInt(level)) {
-                Userable u = this.loginList.getUser(e.getID());
+                Userable u = loginList.getUser(e.getID());
                 user.append(u.getName()).append(" ").append(u.getID())
                         .append(" ").append(e.getLevel()).append(" ").append(e.getDepartment());
                 if (e instanceof PartTimeEmployee) {
@@ -34,4 +33,6 @@ public class UserManager {
         }
         return users;
     }
+
+
 }

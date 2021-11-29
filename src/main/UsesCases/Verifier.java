@@ -1,9 +1,6 @@
 package main.UsesCases;
 
-import main.Entity.Employee;
-import main.Entity.Group;
-import main.Entity.User;
-import main.Entity.Userable;
+import main.Entity.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +56,18 @@ public class Verifier implements IVerifier{
     }
 
     /**
+     * Verify the employee is full-time or not
+     *
+     * @param userID the id of employee
+     * @param employeeList the list of employees
+     */
+    @Override
+    public boolean verifierFullTime(String userID, IEmployeeList employeeList) {
+        Employee e = employeeList.getEmployee(userID);
+        return e instanceof FullTimeEmployee;
+    }
+
+    /**
      * Verify the leader of the Work.
      *
      * @param userID the ID of the Employee.
@@ -66,7 +75,7 @@ public class Verifier implements IVerifier{
      *
      * @return true iff the Employee is the Work's leader.
      */
-    public boolean verifierLeader(String userID, String workID, IGroupList groupList) {//GM
+    public boolean verifierLeader(String userID, String workID, IGroupList groupList) {
         for (Group g: (GroupList) groupList) {
             if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
         }
