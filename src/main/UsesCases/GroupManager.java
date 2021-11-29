@@ -20,17 +20,41 @@ public class GroupManager implements IGroupManager{
     }
 
     /**
-     * Delete the people previously working on the Work.
+     * Delete the worker from all works. The group will be reset if they are the leader.
      *
      * @param userID the ID of the Employee, either he is the leader or the member of the Work.
+     * @param groupList the list of groups
      */
-    public void deleteMember(String userID, IGroupList groupList) {
+    public void deleteEmployee(String userID, IGroupList groupList) {
         for (Group g : (GroupList)groupList) {
             if (g.getLeaderId().equals(userID)) {
                 this.resetGroup(g);
             }
             g.deleteMember(userID);
         }
+    }
+
+    /**
+     * Delete user from specific work
+     *
+     * @param userID the id of worker
+     * @param groupList the list of group
+     * @param workID the id of work
+     *
+     * @return delete or not
+     */
+    public boolean deleteMember(String userID, String workID, IGroupList groupList) {
+        Group g = groupList.getGroup(workID);
+        if (Objects.isNull(g)) { return false;}
+        if (g.getLeaderId().equals(userID)) {
+            this.resetGroup(g);
+            return true;
+        }
+        if (g.getMembers().contains(userID)) {
+            g.deleteMember(userID);
+            return true;
+        }
+        return false;
     }
 
 

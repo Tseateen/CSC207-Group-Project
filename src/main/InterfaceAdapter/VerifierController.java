@@ -32,7 +32,9 @@ public class VerifierController {
             return false;
         }
     }
-
+    public boolean verifyFullTime(String userID, IEmployeeList employeeList) {
+        return this.verifier.verifierFullTime(userID, employeeList);
+    }
     public boolean verifyLogin(String userID, String password, ILoginList loginList) {
         return this.verifier.verifyForLogin(userID, password, loginList);
     }

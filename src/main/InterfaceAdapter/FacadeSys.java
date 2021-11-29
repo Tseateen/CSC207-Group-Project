@@ -66,7 +66,15 @@ public class FacadeSys {
 
     // === Personal UI Method ===
     public String personalInfo(){
-        return this.personalInfoController.personalInfo(this.loginList, this.employeeList, this.userID);
+        StringBuilder result = new StringBuilder("");
+        ArrayList<String> infos = this.personalInfoController.personalInfo(this.loginList,
+                this.employeeList, this.userID);
+        result.append(infos.get(0)).append(infos.get(1)).append(infos.get(3)).append(infos.get(4))
+                .append(infos.get(5));
+        if (this.verifierController.verifyFullTime(this.userID, this.employeeList)) {
+            result.append(infos.get(6));
+        }
+        return result.toString();
     }
 
     public String checkTotalSalary(){
@@ -79,7 +87,7 @@ public class FacadeSys {
         return this.personalInfoController.checkVacationBonus(this.employeeList, this.userID);
     }
     public String checkKPIBonus(){
-        return this.personalInfoController.checkKPIBonus(this.employeeList, this.userID);
+        return this.personalInfoController.checkKPIBonus(this.employeeList, this.userID, this.groupList, this.workList);
     }
 
     public String setPersonalInfo(String option, String response){
@@ -100,10 +108,13 @@ public class FacadeSys {
         }
     }
 
-    public void checkVacation() {
-        int[] infoInt = this.accountFacade.getFullTimeEmployeeInfoInt();
-        String vacationInfo = "Total Vacation with Salary: " + infoInt[0] + "\n  Vacation Used: " + infoInt[1];
-        System.out.println(vacationInfo);
+    public String checkVacation() {
+        if (!this.verifierController.verifyFullTime(this.userID, this.employeeList)) {
+            return "Not full time worker";
+        }
+        ArrayList<String> info = this.personalInfoController.personalInfo(this.loginList,
+                this.employeeList, this.userID);
+        return info.get(8) + info.get(9);
     }
     // ==================================================
 
@@ -159,8 +170,12 @@ public class FacadeSys {
         }
     }
 
-    public void extendWork(String days, String workID) {
-        this.workManagerController.extendWork(workID, days, this.workList);
+    public boolean extendWork(String days, String workID) {
+        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) ) {
+            this.workManagerController.extendWork(workID, days, this.workList);
+            return true;
+        }
+        return false;
     }
 
 //    public boolean checkLeaderOf(String work_id) {
@@ -169,7 +184,7 @@ public class FacadeSys {
 
     public boolean checkWorkExist(String workID) {
         return this.workManagerController.checkWorkExist(workID, this.workList);
-    }//D
+    }
 
 
     // Here are some method used to show other user information, may used in hr workers or work distribute
@@ -191,7 +206,9 @@ public class FacadeSys {
         boolean validLevelGiven = this.verifierController.verifyUserExistence(targetUserID, this.loginList ) &&
                 this.verifierController.validToDelete(targetUserID, this.employeeList, this.userID);
         if (validLevelGiven) {
-            this.accountFacade.DeleteAccount(userID);
+            this.employeeListController.deleteEmployee(userID);
+            this.loginListController.deleteUser(userID);
+            this.workManagerController.removeFromAll(userID, this.groupList);
         }
         return validLevelGiven;
     }
@@ -199,23 +216,24 @@ public class FacadeSys {
 
     // Case 8: Check all lower level employees' salary-related information
     public List<String> checkLowerEmployeeSalary(String id, String option) {
-        return this.accountFacade.lowerEmployeeCheck(id, option);
+        return this.accountFacade.lowerEmployeeCheck(id, option); // Todo
     }
 
     public String showAllLowerUser() {
+        UserManager u = new UserManager();
         StringBuilder result = new StringBuilder("");
-        for (String i : this.accountFacade.getLowerUsers(accountFacade.user_Level(this.userID))) {
+        for (String i : u.getLowerUsers(this.personalInfoController.userLevel(this.userID,this.employeeList),
+                this.loginList,this.employeeList)) {
             result.append(i).append("\n");
         }
         return result.toString();
     }
 
     //=====================================
-    public boolean levelVerifier(String level) {
+    public boolean levelVerifier(String otherID) {
         try {
-            if (level.length() != 1) {return false;}
-            int num_level = Integer.parseInt(level);
-            return num_level > Integer.parseInt(this.accountFacade.user_Level(this.userID));
+            this.verifierController.verifyLevel(this.personalInfoController.userLevel(this.userID,this.employeeList),
+                    otherID,this.employeeList);
         } catch (NumberFormatException e) {
             return false;
         }

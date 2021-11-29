@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface IGroupManager {
     public void addMembers(List<String> list, Group group);
-    public void deleteMember(String userID, IGroupList groupList);
+    public boolean deleteMember(String userID, String workID, IGroupList groupList);
+    public void deleteEmployee(String userID, IGroupList groupList);
     public void resetMember(Group group);
     public void changeLeader(Group group, String user);
     public void resetGroup(Group group);

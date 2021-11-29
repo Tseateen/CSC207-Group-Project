@@ -5,7 +5,7 @@ import main.Entity.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PersonalManager implements  IPersonalManager {
+public class PersonalManager implements IPersonalManager {
 
     private final SalaryCalculator salaryCalculator;
 
@@ -93,12 +93,12 @@ public class PersonalManager implements  IPersonalManager {
         }
     }
     @Override
-    public String checkKPIBonus(IEmployeeList employeeList, String userID){
+    public String checkKPIBonus(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         Employee employee = employeeList.getEmployee(userID);
         if (employee instanceof PartTimeEmployee) {
             return "0";
         } else {
-            return this.salaryCalculator.calculateBonusFromKPI((FullTimeEmployee) employee,);
+            return this.salaryCalculator.calculateBonusFromKPI((FullTimeEmployee) employee,groupList,workList);
         }
     }
 

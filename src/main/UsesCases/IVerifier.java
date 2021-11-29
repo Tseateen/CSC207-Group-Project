@@ -9,4 +9,5 @@ public interface IVerifier {
     public abstract  boolean verifyForLogin(String account, String password, ILoginList loginList);
     public boolean verifierLeader(String userID, String workID, IGroupList groupList);
     public boolean levelVerifier(int level, String userID, IEmployeeList employeeList);
+    public boolean verifierFullTime(String userID, IEmployeeList employeeList);
 }
