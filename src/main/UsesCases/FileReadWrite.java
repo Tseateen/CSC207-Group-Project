@@ -75,8 +75,8 @@ public class FileReadWrite implements ReadWrite{
         for(Employee employee: EmployeeFile){
             employeeList.readInput(employee);
         }
-        int oldID = EmployeeFile.getID();
-        employeeList.readID(oldID);
+        //int oldID = EmployeeFile.getID();
+        //employeeList.readID(oldID);
         return employeeList;
     }
     @Override
