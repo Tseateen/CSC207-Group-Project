@@ -2,10 +2,11 @@ package main.UsesCases;
 
 import main.Entity.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
-public class Verifier implements IVerifier{
+public class Verifier implements IVerifier, Serializable {
 
     public boolean userExists(String userID, ILoginList loginList) {
         return !(Objects.isNull(loginList.getUser(userID)));
@@ -75,7 +76,7 @@ public class Verifier implements IVerifier{
      */
     public boolean verifierLeader(String userID, String workID, IGroupList groupList) {
         for (Group g: (GroupList) groupList) {
-            if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
+            if (g.getWorkID().equals(workID)){return g.getLeaderID().equals(userID);}
         }
         return false;
     }

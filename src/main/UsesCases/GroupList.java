@@ -36,30 +36,6 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
         GroupList.add(group);
     }
 
-
-    /**
-     * This method will delete the existing group information from the GroupList.
-     *
-     * @param id the id of the Group.
-     * @return whether the Group has been successfully deleted.
-     *
-     */
-    public boolean deleteUser(String id){
-        int index = -1;
-
-        for(int i = 0; i < this.getSize(); i ++){
-            if(this.GroupList.get(i).getWorkID().equals(id)){
-                index = i;
-            }
-        }
-        if(index == -1){
-            return false;
-        }else{
-            this.GroupList.remove(this.GroupList.get(index));
-            return true;
-        }
-    }
-
     /**
      * This method will find the Employee from the EmployeeList.
      *

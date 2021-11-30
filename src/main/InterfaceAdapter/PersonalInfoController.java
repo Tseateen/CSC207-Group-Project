@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class PersonalInfoController {
     private final IPersonalManager personalManager;
 
-    public PersonalInfoController(){
-        this.personalManager = new PersonalManager();
+    public PersonalInfoController(IPersonalManager personalManager){
+        this.personalManager = personalManager;
     }
 
     // === Usage: FacadeSys Case (i) ====

@@ -37,7 +37,7 @@ public class Group implements Iterable<String>, Serializable {
      *
      * @return This method will return the leader of this group.
      */
-    public String getLeaderId(){
+    public String getLeaderID(){
         return this.leader_id;
     }
 

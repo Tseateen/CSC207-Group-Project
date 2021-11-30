@@ -26,7 +26,7 @@ public class PersonalManagerUI {
 
         while (noExit) {
             System.out.println(
-                    "i) Check your personal Info, type 1 " + "\n" +
+                            "i) Check your personal Info, type 1 " + "\n" +
                             "ii) Check your total Salary (including bonus), type 2 " + "\n" +
                             "iii) Check your minimum wage, type 3" + "\n" +
                             "iv) Check your bonus salary from vacation, type 4" + "\n" +

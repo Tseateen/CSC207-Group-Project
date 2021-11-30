@@ -1,6 +1,8 @@
 package main.UsesCases;
 
-public interface IVerifier {
+import java.io.Serializable;
+
+public interface IVerifier extends Serializable {
     boolean userExists(String userID, ILoginList loginList);
     boolean ValidToCreateThisLevel(String level, IEmployeeList employeeList, String userID);
     boolean validToDeleteThisUser(String targetUserID, IEmployeeList employeeList, String userID);

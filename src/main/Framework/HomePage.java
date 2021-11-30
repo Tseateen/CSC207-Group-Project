@@ -29,9 +29,9 @@ public class HomePage {
 
         while (noExit) {
             System.out.println(
-                    "i) Look at your personal information, type 1 " + "\n" +
-                            "ii) Manager your work, type 2 " + "\n" +
-                            "iii) Close system, type 3 ");
+                            "i) Look at your personal information, please type 1 " + "\n" +
+                            "ii) Manager your work, please type 2 " + "\n" +
+                            "iii) Close system, please type 3 ");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":

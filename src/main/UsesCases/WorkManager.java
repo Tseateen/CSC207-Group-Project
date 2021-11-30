@@ -3,11 +3,11 @@ package main.UsesCases;
 import main.Entity.Group;
 import main.Entity.Workable;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class WorkManager implements IWorkManager{
+public class WorkManager implements IWorkManager, Serializable {
 
 
     /**
@@ -97,17 +97,6 @@ public class WorkManager implements IWorkManager{
     }
 
     /**
-     * Get the authority level of the Work.
-     *
-     * @param workID the ID of the Work.
-     * @param workList the list of works
-     * @return a string with the authority level of the Work.
-     */
-    public String checkWorkLevel(String workID, IWorkList workList) {
-        return String.valueOf(workList.getWork(workID).getLevel());
-    }
-
-    /**
      * Get all the Work information with the Work ID.
      *
      * @param workID the ID of the Work.
@@ -149,7 +138,7 @@ public class WorkManager implements IWorkManager{
      *
      * @return a list of strings with the work's id.
      */
-    public ArrayList<String> workOfLed(String id,IGroupList groupList, IWorkList workList) {
+    public ArrayList<String> TheWorkLeadByThisUser(String id, IGroupList groupList, IWorkList workList) {
         return this.getWorkList("Led", id, groupList, workList);
     }
 
@@ -174,18 +163,6 @@ public class WorkManager implements IWorkManager{
     }
 
     /**
-     * Verify work exist or not
-     *
-     * @param workID the work's id which is going to be extended.
-     * @param workList the list of work
-     *
-     * @return work exist or not
-     */
-    public boolean workExist(String workID, IWorkList workList) {
-        return !Objects.isNull(workList.getWork(workID));
-    }
-
-    /**
      * Get the Work information with the requirements given and the ID of the Work.
      *
      * @param type the different requirements when requiring the Work information.
@@ -201,7 +178,7 @@ public class WorkManager implements IWorkManager{
             if (type.equals("Mine")) {
                 inList = g.getMembers().contains(id);
             } else if (type.equals("Led")) {
-                inList = g.getLeaderId().equals(id);
+                inList = g.getLeaderID().equals(id);
             }
             if (inList) {
                 work_ids.add(g.getWorkID());

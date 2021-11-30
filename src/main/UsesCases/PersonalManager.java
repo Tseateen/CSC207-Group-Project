@@ -2,10 +2,11 @@ package main.UsesCases;
 
 import main.Entity.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class PersonalManager implements IPersonalManager {
+public class PersonalManager implements IPersonalManager , Serializable {
 
     private final SalaryCalculator salaryCalculator;
 

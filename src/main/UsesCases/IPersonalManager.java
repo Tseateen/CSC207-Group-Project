@@ -1,8 +1,9 @@
 package main.UsesCases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface IPersonalManager {
+public interface IPersonalManager extends Serializable {
 
     ArrayList<String> employeeInfo(ILoginList loginList, IEmployeeList employeeList, String userID);
     String getWorkingHourFromPartTimeEmployee(IEmployeeList employeeList, String userID);
