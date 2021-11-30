@@ -3,10 +3,7 @@ package main.UsesCases;
 import main.Entity.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
 
@@ -38,6 +35,26 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         workList.add(work);
     }
 
+    /**
+     * Get the authority level of the Work.
+     *
+     * @param workID the ID of the Work.
+     * @return a string with the authority level of the Work.
+     */
+    public String FindWorkLevel(String workID) {
+        return String.valueOf(this.getWork(workID).getLevel());
+    }
+
+    /**
+     * Verify work exist or not
+     *
+     * @param workID the work's id which is going to be extended.
+     *
+     * @return work exist or not
+     */
+    public boolean checkWorkExist(String workID) {
+        return !Objects.isNull(this.getWork(workID));
+    }
 
     /**
      * Delete an existed Work into the WorkList.

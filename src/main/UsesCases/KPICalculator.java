@@ -2,13 +2,14 @@ package main.UsesCases;
 
 import main.Entity.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.lang.*;
 
 
-public class KPICalculator {
+public class KPICalculator implements Serializable {
 
     public String calculateKPI(String userid, IGroupList groupList, IWorkList workList) {
         int KPI = 0;
@@ -42,9 +43,9 @@ public class KPICalculator {
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
 
-        for (Group group : (GroupList)groupList) {
-            if (group.getLeaderId().equals(userid)) {
-                String groupID = group.getWorkID();
+        for (Group eachGroup : (GroupList)groupList) {
+            if (eachGroup.getLeaderID().equals(userid)) {
+                String groupID = eachGroup.getWorkID();
                 for (Workable work : (WorkList)workList) {
                     if (checkTimeHelper(work, groupID, month, year)){
                         workAsLeader.add(work);
@@ -52,8 +53,8 @@ public class KPICalculator {
                 }
             }
 
-            if (group.getMembers().contains(userid)) {
-                String groupID = group.getWorkID();
+            if (eachGroup.getMembers().contains(userid)) {
+                String groupID = eachGroup.getWorkID();
                 for (Workable work : (WorkList)workList) {
                     if (checkTimeHelper(work, groupID, month, year)) {
                         workAsMember.add(work);

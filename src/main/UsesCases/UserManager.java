@@ -4,9 +4,10 @@ import main.Entity.Employee;
 import main.Entity.PartTimeEmployee;
 import main.Entity.Userable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserManager {
+public class UserManager implements Serializable {
 
     /**
      * Get a list of employees that has a lower level than the target employee.
@@ -18,13 +19,13 @@ public class UserManager {
      */
     public ArrayList<String> getLowerUsers(String level, ILoginList loginList, IEmployeeList employeeList) {
         ArrayList<String> users = new ArrayList<>();
-        for (Employee e: (EmployeeList)employeeList) {
+        for (Employee eachEmployee: (EmployeeList)employeeList) {
             StringBuilder user = new StringBuilder();
-            if (e.getLevel() > Integer.parseInt(level)) {
-                Userable u = loginList.getUser(e.getID());
+            if (eachEmployee.getLevel() > Integer.parseInt(level)) {
+                Userable u = loginList.getUser(eachEmployee.getID());
                 user.append(u.getName()).append(" ").append(u.getID())
-                        .append(" ").append(e.getLevel()).append(" ").append(e.getDepartment());
-                if (e instanceof PartTimeEmployee) {
+                        .append(" ").append(eachEmployee.getLevel()).append(" ").append(eachEmployee.getDepartment());
+                if (eachEmployee instanceof PartTimeEmployee) {
                     user.append(" Part-Time");
                 }
                 users.add(user.toString());

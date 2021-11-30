@@ -3,7 +3,9 @@ package main.UsesCases;
 import main.Entity.FullTimeEmployee;
 import main.Entity.PartTimeEmployee;
 
-public class SalaryCalculator {
+import java.io.Serializable;
+
+public class SalaryCalculator implements Serializable {
     private final KPICalculator KPIcalculator;
 
     /**

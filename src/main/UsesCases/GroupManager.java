@@ -2,9 +2,10 @@ package main.UsesCases;
 import main.Entity.*;
 
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GroupManager implements IGroupManager{
+public class GroupManager implements IGroupManager, Serializable {
 
 
     /**
@@ -26,11 +27,11 @@ public class GroupManager implements IGroupManager{
      * @param groupList the list of groups
      */
     public void deleteEmployee(String userID, IGroupList groupList) {
-        for (Group g : (GroupList)groupList) {
-            if (g.getLeaderId().equals(userID)) {
-                this.resetGroup(g);
+        for (Group eachGroup : (GroupList)groupList) {
+            if (eachGroup.getLeaderID().equals(userID)) {
+                this.resetGroup(eachGroup);
             }
-            g.deleteMember(userID);
+            eachGroup.deleteMember(userID);
         }
     }
 
@@ -46,7 +47,7 @@ public class GroupManager implements IGroupManager{
     public boolean deleteMember(String userID, String workID, IGroupList groupList) {
         Group g = groupList.getGroup(workID);
         if (Objects.isNull(g)) { return false;}
-        if (g.getLeaderId().equals(userID)) {
+        if (g.getLeaderID().equals(userID)) {
             this.resetGroup(g);
             return true;
         }
@@ -101,10 +102,10 @@ public class GroupManager implements IGroupManager{
      * @return true iff the Work has been successfully assigned to the Employee.
      */
     public boolean Distributor(String workID, String userID, IGroupList groupList) {
-        for (Group g: (GroupList) groupList) {
-            if (g.getWorkID().equals(workID)){
-                if (g.getMembers().contains(userID)) {return false;}
-                g.addMember(userID);
+        for (Group eachGroup: (GroupList) groupList) {
+            if (eachGroup.getWorkID().equals(workID)){
+                if (eachGroup.getMembers().contains(userID)) {return false;}
+                eachGroup.addMember(userID);
                 return true;
             }
         }
@@ -123,7 +124,7 @@ public class GroupManager implements IGroupManager{
     public boolean isMember (String userID, String workID, IGroupList groupList) {
         for (Group g: (GroupList)groupList) {
             if (g.getWorkID().equals(workID)){
-                return (g.getLeaderId().equals(userID)||g.getMembers().contains(workID));
+                return (g.getLeaderID().equals(userID)||g.getMembers().contains(workID));
             }
         }
         return false;
@@ -140,7 +141,7 @@ public class GroupManager implements IGroupManager{
      */
     public boolean verifierLeader(String userID, String workID, IGroupList groupList) {
         for (Group g: (GroupList)groupList) {
-            if (g.getWorkID().equals(workID)){return g.getLeaderId().equals(userID);}
+            if (g.getWorkID().equals(workID)){return g.getLeaderID().equals(userID);}
         }
         return false;
     }

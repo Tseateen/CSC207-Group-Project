@@ -14,7 +14,9 @@ public class EmployeeListController {
         this.employeeList.addEmployee(department, wage, position, level, status, id);
     }
 
+    // === Usage: FacadeSys Worker Case (vi) ====
     public void deleteEmployee(String id){
         this.employeeList.deleteEmployee(id);
     }
+    // ==================================
 }

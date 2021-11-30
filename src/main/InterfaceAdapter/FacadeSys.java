@@ -2,30 +2,24 @@ package main.InterfaceAdapter;
 
 import main.UsesCases.*;
 import java.util.ArrayList;
-import java.util.*;
-
-
-
 
 
 public class FacadeSys {
+
+    // === Instance Variables ===
 
     // === UI Input Data ===
     private final String userID;
     // ==========================
 
-    // === Instance Variables ===
-    private String employeeType;
-    // ==========================
-
     // === Controller ===
     private final EmployeeListController employeeListController;
-    private final GroupListController groupListController;
     private final LoginListController loginListController;
     private final PersonalInfoController personalInfoController;
     private final VerifierController verifierController;
     private final WorkListController workListController;
     private final WorkManagerController workManagerController;
+    private final GroupManagerController groupManagerController;
     // ==========================
 
     // === Data Related Class ===
@@ -56,12 +50,11 @@ public class FacadeSys {
 
         // Group
         this.groupList = new GroupList();
-        this.groupListController = new GroupListController(this.groupList);
         // Initial Use Case Controller
-        this.personalInfoController = new PersonalInfoController();
-        this.verifierController = new VerifierController();
-        this.workManagerController = new WorkManagerController();
-
+        this.personalInfoController = new PersonalInfoController(new PersonalManager());
+        this.verifierController = new VerifierController(new Verifier());
+        this.workManagerController = new WorkManagerController(new WorkManager(), new GroupManager());
+        this.groupManagerController = new GroupManagerController(new GroupManager());
         // Initial DataGateway
         this.fileGateway = new DataGateway();
     }
@@ -142,16 +135,6 @@ public class FacadeSys {
     }
     // ==========================================
 
-    public String setEmployeeInfo(String userID, String option, String response){
-        // option {1: Department, 2: Level, 3: setWage, 4. Position}
-        if (this.personalInfoController.setEmployeeInfo(userID, option, response, this.employeeList)){
-            return "Set employee information success";
-        }
-        else{
-            return "Invalid option or response, or the employee does not exist!";
-        }
-    }
-
     public String checkVacation() {
         if (!this.verifierController.verifyFullTime(this.userID, this.employeeList)) {
             return "Not full time worker";
@@ -175,15 +158,26 @@ public class FacadeSys {
     }
 
     public boolean checkWorkExist(String workID) {
-        return this.workManagerController.checkWorkExist(workID, this.workList);
+        return this.workListController.checkWorkExist(workID);
+    }
+    // ==================================================
+
+    // === Case (ii) createWork ====
+    public boolean createWork(ArrayList<String> info_list) {
+        if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList)) {
+            this.workListController.createWork(info_list);
+            return true;
+        }else{
+            return false;
+        }
     }
     // ==================================================
 
     // === Case (iii) Start a work with assigning leader ====
     public boolean assignLeaderToWork(String workID, String leaderID) {
-        String workLevel = this.workManagerController.checkWorkLevel(workID,workList);
+        String workLevel = this.workListController.FindWorkLevel(workID);
         String leaderLevel = this.personalInfoController.checkUserLevel(leaderID, this.employeeList);
-        if (this.workManagerController.checkWorkExist(workID, this.workList) &&
+        if (this.workListController.checkWorkExist(workID) &&
                 this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList))
         {
             if (this.verifierController.verifyUserExistence(leaderID, this.loginList) && this.verifierController.verifyLevel(leaderLevel,this.userID,this.employeeList)){
@@ -195,53 +189,30 @@ public class FacadeSys {
     }
     // ==================================================
 
-    // === Case (iv) Distribute a work ====
+    // === Case (iv) Distribute a work ===
     public String showAllWorkLead(){
         return this.workManagerController.showAllWorkLead(this.userID, this.groupList, this.workList);
     }
-
 
     public String showAllLowerWork() {
         return this.workManagerController.showAllLowerWork(this.userID, this.workList);
     }
 
+
     public boolean distributeWork(String workID, String memberID) {
         String memberLevel = this.personalInfoController.checkUserLevel(memberID, this.employeeList);
         if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) &&
                 this.verifierController.verifyLevel(memberLevel, this.userID, this.employeeList)) {
-            return this.workManagerController.distributeWork(workID,memberID,this.groupList);
+            return this.groupManagerController.distributeWork(workID,memberID,this.groupList);
         }
         return false;
     }
     // ==================================================
 
-    public boolean createWork(ArrayList<String> info_list) {
-        if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList)) {
-            this.workManagerController.createWork(info_list, this.workList);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean extendWork(String days, String workID) {
-        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) ) {
-            this.workManagerController.extendWork(workID, days, this.workList);
-            return true;
-        }
-        return false;
-    }
-
-//    public boolean checkLeaderOf(String work_id) {
-//        return this.workFacade.verifierLeader(this.userID, work_id);
-//    }
-
-
-
-
     // Here are some method used to show other user information, may be used in hr workers or work distribute
 
-    // Case 6: Create a user
+
+    // === Case (v) Create a user ===
     public boolean createUser(String name, String password,  String phone, String address,
                               String department, String wage, String position, String level, String status) {
         boolean validLevelGiven = this.verifierController.validToCreate(level, this.employeeList, this.userID);
@@ -251,26 +222,22 @@ public class FacadeSys {
         }
         return validLevelGiven;
     }
-    // ==================================
+    // ==================================================
 
-    // Case 7: Delete a user
+    // === Case (vi) Delete a user ===
     public boolean deleteUser(String targetUserID) {
         boolean validLevelGiven = this.verifierController.verifyUserExistence(targetUserID, this.loginList ) &&
                 this.verifierController.validToDelete(targetUserID, this.employeeList, this.userID);
         if (validLevelGiven) {
             this.employeeListController.deleteEmployee(userID);
             this.loginListController.deleteUser(userID);
-            this.workManagerController.removeFromAll(userID, this.groupList);
+            this.groupManagerController.removeEmployeeFromAllRelatedGroup(userID, this.groupList);
         }
         return validLevelGiven;
     }
-    // ==================================
+    // ==================================================
 
-    // Case 8: Check all lower level employees' salary-related information
-    public List<String> checkLowerEmployeeSalary(String id, String option) {
-        return this.accountFacade.lowerEmployeeCheck(id, option); // Todo
-    }
-
+    // Case 7 Check all lower level employees' salary-related information
     public String showAllLowerUser() {
         UserManager u = new UserManager();
         StringBuilder result = new StringBuilder();
@@ -282,6 +249,28 @@ public class FacadeSys {
     }
 
     //=====================================
+
+    // === Case (viii) Change employee's information ===
+    public String setEmployeeInfo(String userID, String option, String response){
+        // option {1: Department, 2: Level, 3: setWage, 4. Position}
+        if (this.personalInfoController.setEmployeeInfo(userID, option, response, this.employeeList)){
+            return "Set employee information success";
+        }
+        else{
+            return "Invalid option or response, or the employee does not exist!";
+        }
+    }
+    //=====================================
+
+    //============ Unassign Case ================
+    public boolean extendWork(String days, String workID) {
+        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList)) {
+            this.workManagerController.extendWork(workID, days, this.workList);
+            return true;
+        }
+        return false;
+    }
+
     public boolean levelVerifier(String otherID) {
         try {
             this.verifierController.verifyLevel(this.personalInfoController.checkUserLevel(this.userID,this.employeeList),

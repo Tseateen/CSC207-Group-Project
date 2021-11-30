@@ -2,9 +2,12 @@ package main.UsesCases;
 
 import main.Entity.Workable;
 
-public interface IWorkList extends IReadWrite {
+import java.io.Serializable;
+
+public interface IWorkList extends IReadWrite , Serializable {
     void addWork(String name, String id, String department, String requirement, int level);
-    boolean deleteWork(String id);
+    String FindWorkLevel(String workID);
+    public boolean checkWorkExist(String workID);
     int getSize();
     Workable getWork(String work_id);
 }
