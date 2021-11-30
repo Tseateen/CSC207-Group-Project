@@ -83,7 +83,7 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
         OutputStream file = new FileOutputStream(filePath.concat("/src/Data/GroupData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(this.GroupList);
+        output.writeObject(this);
         output.close();
     }
     // ===============================

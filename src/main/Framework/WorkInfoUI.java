@@ -24,9 +24,9 @@ public class WorkInfoUI {
         System.out.println("=== Following is your work ===");
         System.out.println(this.facadeSys.showAllWorkNeedToDo());
         System.out.println(
-                "You only can check your work here! \n" +
-                "If you want to check more detail on your particular work, please type Y. \n" +
-                        "Otherwise, please type N \n.");
+                        "You only can see the name of work here! \n" +
+                        "If you want to check more detail on your particular work, please type Y. \n" +
+                        "Otherwise, please type any other bottom \n.");
         String action = keyIn.nextLine();
         if(action.equalsIgnoreCase("Y")){
             boolean noExist = true;

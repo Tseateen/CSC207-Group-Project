@@ -1,4 +1,5 @@
 package main.InterfaceAdapter;
+import main.Entity.Userable;
 import main.UsesCases.*;
 public class VerifierController {
 

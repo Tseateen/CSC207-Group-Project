@@ -100,7 +100,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(this.UserList);
+        output.writeObject(this);
         output.close();
     }
 

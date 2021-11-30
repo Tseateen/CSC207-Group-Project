@@ -27,22 +27,26 @@ public class CheckSalaryUI {
         System.out.println("Please enter your ID");
         String id = keyIn.nextLine();
         while (noExist) {
-            System.out.println("i) Check lower level employees' salary, please type 1; " + "\n" +
-                    "ii) Check lower level employees' attendance, please type 2;" + "\n" +
-                    "iii) Check lower level employees' total vacation with salary, please type 3; " + "\n" +
-                    "iv) Check lower level employees' vacation used, please type 4; " + "\n" +
-                    "v) Otherwise, please type E to exit;");
+            System.out.println(
+                    "i) Check lower level employees' salary, please type 1; " + "\n" +
+                    "ii) Check lower level employees' total vacation with salary, please type 2; " + "\n" +
+                    "iii) Check lower level employees' vacation used, please type 3; " + "\n" +
+                    "iv) Otherwise, please type E to exit;");
             String check_option = keyIn.nextLine();
             if (check_option.equals("E")) {
                break;
             }else {
-                List<String> result = this.facadeSys.checkLowerEmployeeSalary(id, check_option);
-                for (String info : result) {
-                    System.out.print(info + " ");
-            }
+                List<String> result = this.facadeSys.checkLowerLevelEmployeeSalary(id);
+                if(Integer.parseInt(check_option) == 1 || Integer.parseInt(check_option) == 2 || Integer.parseInt(check_option) == 3){
+                    System.out.println(result.get(Integer.parseInt(check_option)));
+                    System.out.println();
+                    System.out.println("If you want to check other type of the information from the lower level employees," +
+                            " please type any bottom. Otherwise, please type E to exist");
+                }else {
+                    System.out.println("Please give the correct action! Try again.");
+                }
                 System.out.println();
-                System.out.println("If you want to check other type of the information from the lower level employees," +
-                        " please type C. Otherwise, please type E to exist");
+                System.out.println("Otherwise, please type E to exist");
                 String action = keyIn.nextLine();
                 if (action.equalsIgnoreCase("E")) {
                     noExist = false;
