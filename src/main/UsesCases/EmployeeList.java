@@ -124,7 +124,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
         OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(this.EmployeeList);
+        output.writeObject(this);
         output.close();
     }
 

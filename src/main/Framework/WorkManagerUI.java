@@ -35,15 +35,16 @@ public class WorkManagerUI {
         boolean noExit = true;
         while (noExit) {
             System.out.println(
-                    "i) Check your own work's information, enter 1; " + "\n" +
-                            "ii) Create a work, enter 2; " + "\n" +
-                            "iii) Start a work with assigning leader, enter 3; " + "\n" +
-                            "iv) Distribute a work, enter 4; " + "\n" +
-                            "v) Create a user, enter 5; "  + "\n" +
-                            "vi) Delete a user, enter 6; "  + "\n" +
-                            "vii) Check all lower level employees' salary-related information, enter 7" + "\n" +
-                            "viii) Change employee's information, enter 8" + "\n" +
-                            "IX) Back to main page, enter E " + "\n");
+                            "i) Check your own work's information, please enter 1; " + "\n" +
+                            "ii) Create a work, please enter 2; " + "\n" +
+                            "iii) Start a work with assigning leader, please enter 3; " + "\n" +
+                            "iv) Distribute a work, please enter 4; " + "\n" +
+                            "v) Create a user, please enter 5; "  + "\n" +
+                            "vi) Delete a user, please enter 6; "  + "\n" +
+                            "vii) Check all lower level employees' salary-related information, please enter 7" + "\n" +
+                            "viii) Change employee's information, please enter 8" + "\n" +
+                            "X) Extend a Work, please enter 8" + "\n" +
+                            "Xi) Back to main page, please enter E " + "\n");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":

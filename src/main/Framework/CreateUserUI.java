@@ -3,6 +3,7 @@ package main.Framework;
 import main.InterfaceAdapter.FacadeSys;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class CreateUserUI {
                 user_info.put(counter, info);
                 counter ++;
             }
-            boolean SuccessCreatNewUser= this.facadeSys.createUser(
+            List<String> createResult = this.facadeSys.createUser(
                     user_info.get(0),
                     user_info.get(1),
                     user_info.get(2),
@@ -46,10 +47,15 @@ public class CreateUserUI {
                     user_info.get(6),
                     user_info.get(7),
                     user_info.get(8));
+
+            boolean SuccessCreatNewUser= Boolean.parseBoolean(createResult.get(0));
             if (SuccessCreatNewUser){
                 System.out.println(
-                        "If you want to create another user, please type C. \n" +
-                                " Otherwise, please type E to exist");
+                                "Please remember the following information" + "\n"
+                                + " Username For the new user is : " + createResult.get(1) + "\n"
+                                + " Password For the new user is : " + createResult.get(2) + "\n"
+                                + "If you want to create another user, please type C. \n"
+                                + " Otherwise, please type E to exist");
                 String action = keyIn.nextLine();
                 if(action.equalsIgnoreCase("E")){
                     noExist = false;

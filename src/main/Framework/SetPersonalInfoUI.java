@@ -25,7 +25,7 @@ public class SetPersonalInfoUI {
 
         while (noExit) {
             System.out.println(
-                    "i) Change your name, please type 1; " + "\n" +
+                            "i) Change your name, please type 1; " + "\n" +
                             "ii) Change your password, please type 2; " + "\n" +
                             "iii) Change your phone number, please type 3; " + "\n" +
                             "iv) Change your address, please type 4" + "\n" +

@@ -124,7 +124,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         OutputStream file = new FileOutputStream(filePath.concat("/src/Data/WorkData.ser"));
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
-        output.writeObject(this.workList);
+        output.writeObject(this);
         output.close();
     }
 

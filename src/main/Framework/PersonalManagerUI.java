@@ -21,7 +21,7 @@ public class PersonalManagerUI {
     public void run() {
         Scanner keyIn = new Scanner(System.in);
 
-        SetPersonalInfoUI changePersonInfo = new SetPersonalInfoUI(this.facadeSys);
+        SetPersonalInfoUI setPersonInfo = new SetPersonalInfoUI(this.facadeSys);
         boolean noExit = true;
 
         while (noExit) {
@@ -46,10 +46,12 @@ public class PersonalManagerUI {
                     break;
                 case "4":
                     System.out.println(this.facadeSys.checkVacationBonus());
+                    break;
                 case "5":
                     System.out.println(this.facadeSys.checkKPIBonus());
+                    break;
                 case "6":
-                    changePersonInfo.run();
+                    setPersonInfo.run();
                     break;
                 case "7":
                     noExit = false;

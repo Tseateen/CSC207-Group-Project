@@ -2,6 +2,7 @@ package main.InterfaceAdapter;
 
 import main.UsesCases.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FacadeSys {
@@ -213,14 +214,17 @@ public class FacadeSys {
 
 
     // === Case (v) Create a user ===
-    public boolean createUser(String name, String password,  String phone, String address,
-                              String department, String wage, String position, String level, String status) {
+    public List<String> createUser(String name, String password, String phone, String address,
+                                            String department, String wage, String position, String level, String status) {
+        List<String> result = new ArrayList<>();
         boolean validLevelGiven = this.verifierController.validToCreate(level, this.employeeList, this.userID);
+        result.add(String.valueOf(validLevelGiven));
         if (validLevelGiven){
-            this.loginListController.addUser(name, password,phone, address);
-            this.employeeListController.addEmployee(department,wage,position,level,status, name);
-        }
-        return validLevelGiven;
+            // Give ID
+            result.add(this.loginListController.addUser(name, password,phone, address));
+            result.add(password);
+            this.employeeListController.addEmployee(department,wage,position,level,status, name);}
+        return result;
     }
     // ==================================================
 
@@ -238,6 +242,23 @@ public class FacadeSys {
     // ==================================================
 
     // Case 7 Check all lower level employees' salary-related information
+    public List<String> checkLowerLevelEmployeeSalary(String userID) {
+        List<String> result = new ArrayList<>();
+        List<String> personalInfo = personalInfoController.personalInfo(this.loginList, this.employeeList, userID);
+        // Size < 6 means that the user id is for part-time employee
+        if (personalInfo.size() <= 6){
+            result.add(personalInfoController.checkTotalSalary(this.employeeList, userID, groupList, workList));
+        return result;
+        } else {
+            result.add(personalInfoController.checkTotalSalary(this.employeeList, userID, groupList, workList));
+            // 8 : Total Vacation with Salary:
+            result.add(personalInfo.get(8));
+            // 9 :Vacation Used
+            result.add(personalInfo.get(9));
+            return result;
+        }
+    }
+
     public String showAllLowerUser() {
         UserManager u = new UserManager();
         StringBuilder result = new StringBuilder();
@@ -262,7 +283,8 @@ public class FacadeSys {
     }
     //=====================================
 
-    //============ Unassign Case ================
+    // === Case (X) Extend a Work
+    // Before following method call, we will firstly call the method "showAllWorkLead".
     public boolean extendWork(String days, String workID) {
         if (this.verifierController.verifyLeader(this.userID, workID, this.groupList)) {
             this.workManagerController.extendWork(workID, days, this.workList);
@@ -270,14 +292,5 @@ public class FacadeSys {
         }
         return false;
     }
-
-    public boolean levelVerifier(String otherID) {
-        try {
-            this.verifierController.verifyLevel(this.personalInfoController.checkUserLevel(this.userID,this.employeeList),
-                    otherID,this.employeeList);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+    //=====================================
 }
