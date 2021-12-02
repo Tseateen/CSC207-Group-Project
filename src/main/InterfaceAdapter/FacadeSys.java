@@ -214,6 +214,7 @@ public class FacadeSys {
     // Here are some method used to show other user information, may be used in hr workers or work distribute
 
 
+
     // === Case (v) Create a user ===
     public List<String> createUser(String name, String password, String phone, String address,
                                             String department, String wage, String position, String level, String status) {

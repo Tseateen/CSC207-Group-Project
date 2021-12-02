@@ -51,6 +51,7 @@ public class PersonalManager implements IPersonalManager , Serializable {
     }
 
 
+
     /**
      * Getter method for the schedule of a part-time employee.
      *

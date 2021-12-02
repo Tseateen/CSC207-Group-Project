@@ -48,6 +48,7 @@ public class CreateUserUI {
                     user_info.get(7),
                     user_info.get(8));
 
+
             boolean SuccessCreatNewUser= Boolean.parseBoolean(createResult.get(0));
             if (SuccessCreatNewUser){
                 System.out.println(

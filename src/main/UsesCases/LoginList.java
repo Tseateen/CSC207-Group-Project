@@ -123,6 +123,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
 
+
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();

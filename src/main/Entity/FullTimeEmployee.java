@@ -21,6 +21,7 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * totalVacationWithSalary. i.e. 0 <= vacationUsed <= totalVacationWithSalary
      */
 
+
     /**
      * Construct a FullTImeEmployee, giving them the given department,
      * position, wage and level.

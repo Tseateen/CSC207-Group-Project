@@ -31,6 +31,7 @@ public class PersonalInfoController {
     }
 
 
+
     public String checkTotalSalary(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         return String.valueOf(this.personalManager.checkTotalSalary(employeeList, userID, groupList, workList));
     }

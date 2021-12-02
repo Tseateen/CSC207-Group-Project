@@ -2,6 +2,7 @@ package main.Framework;
 
 public class InstructionUI {
 
+
     public void run(){
         System.out.println("\n");
         System.out.println("General Instruction:");
