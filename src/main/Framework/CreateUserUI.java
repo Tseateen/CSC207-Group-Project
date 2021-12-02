@@ -52,7 +52,7 @@ public class CreateUserUI {
             if (SuccessCreatNewUser){
                 System.out.println(
                                 "Please remember the following information" + "\n"
-                                + " Username For the new user is : " + createResult.get(1) + "\n"
+                                + " Username/ID For the new user is : " + createResult.get(1) + "\n"
                                 + " Password For the new user is : " + createResult.get(2) + "\n"
                                 + "If you want to create another user, please type C. \n"
                                 + " Otherwise, please type E to exist");

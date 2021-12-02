@@ -14,15 +14,15 @@ public class Main {
         Scanner keyIn = new Scanner(System.in);
         boolean correctInfo = false;
         while(!correctInfo) {
-        System.out.println("Please enter your account username:");
+        System.out.println("Please enter your account username/ID:");
         String username = keyIn.nextLine();
         System.out.println("Please enter your account password:");
         String password = keyIn.nextLine();
         FacadeSys facadeSys = new FacadeSys(username);
         boolean result = facadeSys.systemStart(username,password);
         InstructionUI instructionUI = new InstructionUI();
-        instructionUI.run();
         if (result) {
+            instructionUI.run();
             HomePage homePage = new HomePage(facadeSys);
             homePage.run();
             correctInfo = true;

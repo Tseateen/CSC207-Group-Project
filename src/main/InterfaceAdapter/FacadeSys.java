@@ -196,7 +196,8 @@ public class FacadeSys {
     }
 
     public String showAllLowerWork() {
-        return this.workManagerController.showAllLowerWork(this.userID, this.workList);
+        String level = this.personalInfoController.checkUserLevel(this.userID, this.employeeList);
+        return this.workManagerController.showAllLowerWork(level, this.workList);
     }
 
 

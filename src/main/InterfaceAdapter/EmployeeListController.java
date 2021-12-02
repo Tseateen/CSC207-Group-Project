@@ -10,8 +10,8 @@ public class EmployeeListController {
         this.employeeList = employeeList;
     }
 
-    public void addEmployee(String department, String wage, String position,  String level, String status, String id){
-        this.employeeList.addEmployee(department, wage, position, level, status, id);
+    public void addEmployee(String department, String wage, String position,  String level, String status, String name){
+        this.employeeList.addEmployee(department, wage, position, level, status, name);
     }
 
     // === Usage: FacadeSys Worker Case (vi) ====
