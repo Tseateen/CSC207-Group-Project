@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class PersonalManager implements IPersonalManager , Serializable {
 
+    // === Instance Variables ===
     private final SalaryCalculator salaryCalculator;
 
     /**
@@ -49,6 +50,7 @@ public class PersonalManager implements IPersonalManager , Serializable {
         return info;
     }
 
+
     /**
      * Getter method for the schedule of a part-time employee.
      *
@@ -75,11 +77,15 @@ public class PersonalManager implements IPersonalManager , Serializable {
             return this.salaryCalculator.calculateFullTimeSalary((FullTimeEmployee) employee, groupList, workList);
         }
     }
+
+
     @Override
     public String checkMinimumWage(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
         return employee.getWage();
     }
+
+
     @Override
     public String checkVacationBonus(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
@@ -89,6 +95,8 @@ public class PersonalManager implements IPersonalManager , Serializable {
             return this.salaryCalculator.calculateBonusFromVacation((FullTimeEmployee) employee);
         }
     }
+
+
     @Override
     public String checkKPIBonus(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         Employee employee = employeeList.getEmployee(userID);

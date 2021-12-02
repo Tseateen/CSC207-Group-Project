@@ -20,6 +20,7 @@ public class GroupManager implements IGroupManager, Serializable {
         }
     }
 
+
     /**
      * Delete the worker from all works. The group will be reset if they are the leader.
      *
@@ -34,6 +35,7 @@ public class GroupManager implements IGroupManager, Serializable {
             eachGroup.deleteMember(userID);
         }
     }
+
 
     /**
      * Delete user from specific work
@@ -92,6 +94,7 @@ public class GroupManager implements IGroupManager, Serializable {
         this.changeLeader(group, "");
     }
 
+
     /**
      * Assign the Work to the targeted Employee.
      *
@@ -112,6 +115,7 @@ public class GroupManager implements IGroupManager, Serializable {
         return false;
     }
 
+
     /**
      * Verify if the Employee is the member of the Work, i.e. he is working on this project.
      *
@@ -130,6 +134,7 @@ public class GroupManager implements IGroupManager, Serializable {
         return false;
     }
 
+
     /**
      * Verify the leader of the Work.
      *
@@ -145,6 +150,7 @@ public class GroupManager implements IGroupManager, Serializable {
         }
         return false;
     }
+
 
     /**
      * Set the leader of the Work and update this information in the GroupList.

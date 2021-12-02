@@ -11,6 +11,17 @@ import java.lang.*;
 
 public class KPICalculator implements Serializable {
 
+
+    /**
+     * This method will calculate KPI for the employee.
+     *
+     * @param userid the user's ID of the targeted employee.
+     * @param groupList the list of Group.
+     * @param workList the list of Work.
+     *
+     * @return the string of KPI of the targeted employee.
+     *
+     */
     public String calculateKPI(String userid, IGroupList groupList, IWorkList workList) {
         int KPI = 0;
 

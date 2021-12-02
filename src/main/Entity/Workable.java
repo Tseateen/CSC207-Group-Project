@@ -3,6 +3,10 @@ package main.Entity;
 import java.io.Serializable;
 
 public interface Workable extends Serializable{
+    /**
+     * An interface of User class, for reducing dependency purpose.
+     *
+     */
 
     String getName();
 

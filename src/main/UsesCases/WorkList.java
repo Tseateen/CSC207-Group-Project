@@ -35,6 +35,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         workList.add(work);
     }
 
+
     /**
      * Get the authority level of the Work.
      *
@@ -44,6 +45,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     public String FindWorkLevel(String workID) {
         return String.valueOf(this.getWork(workID).getLevel());
     }
+
 
     /**
      * Verify work exist or not
@@ -55,6 +57,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     public boolean checkWorkExist(String workID) {
         return !Objects.isNull(this.getWork(workID));
     }
+
 
     /**
      * Delete an existed Work into the WorkList.
@@ -88,6 +91,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     public int getSize(){
         return workList.size();
     }
+
 
     /**
      * This method will find the Employee from the EmployeeList.

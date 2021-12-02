@@ -5,16 +5,30 @@ import java.util.Calendar;
 import java.sql.Timestamp;
 
 public class Work implements Workable, Serializable {
+
+    // === Instance Variables ===
+
+    // the name of the Work.
     private final String name;
+    // the ID of the Work.
     private final String id;
+    // the time of the Work has been created.
     private final String create_time;
+    // the time of the Work has been started.
     private String start_time;
+    // the time of the Work has been ended.
     private String end_time;
+    // the authority level of the Work.
     private final int level;
+    // the department of the Work responsible for.
     private final String department;
-    private String state; // Pending, InProgress, Finished, Expired
+    // the state of the Work: Pending, InProgress, Finished, Expired.
+    private String state;
+    // the description of the Work.
     private String describe;
+    // the requirement of the Work.
     private String requirement;
+    // whether Work has been assigned to a Group.
     private String isGroup = "0";
 
     /* === Representation Invariants ===
