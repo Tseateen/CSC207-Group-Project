@@ -19,17 +19,17 @@ public class GroupManager_test {
     @Before
     public void Setup(){
         group = new Group("001", "998");
-        leader = new User("andy1234", "a12345", "Andy", "412345678",
-                "123 Mississauga Road", "001");
+        leader = new User("Andy", "001", "a12345678",
+                "412345678", "123 Mississauga Road");
 
         group.setLeaderId("001");
 
-        member1 = new User("lily001", "l99999", "Lily", "498765432",
-                "234 Mississauga Road", "002");
-        member2 = new User("luke223", "luke123", "Luke", "466666666",
-                "567 Mississauga Road", "003");
-        member3 = new User("cathy223", "cathy0001", "Cathy", "411111111",
-                "111 Mississauga Road", "004");
+        member1 = new User("Lily", "002", "l99999999", "498765432",
+                "234 Mississauga Road");
+        member2 = new User("Luke", "003", "luke1234", "466666666",
+                "567 Mississauga Road");
+        member3 = new User("Cathy", "004", "c8888888", "411111111",
+                "111 Mississauga Road");
         work = new Work("First Work", "998", "IT", "None", 2);
 
         groupmanager = new GroupManager();
@@ -60,14 +60,14 @@ public class GroupManager_test {
     @Test
     public void testChangeLeaders(){
         groupmanager.changeLeader(group, member1.getID());
-        assertEquals(group.getLeaderId(),  member1.getID());
+        assertEquals(group.getLeaderID(),  member1.getID());
         assertFalse(group.getMembers().contains(member1.getID()));
     }
 
     @Test
     public void testResetGroup(){
         groupmanager.resetGroup(group);
-        assertEquals(group.getLeaderId(),  "");
+        assertEquals(group.getLeaderID(),  "");
         assertEquals(group.getMembers().size(), 0);
     }
 

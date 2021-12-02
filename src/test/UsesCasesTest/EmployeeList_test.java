@@ -17,7 +17,7 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testAddEmployee(){
-        EL.addEmployee("IT", 3000, "0", 4, "F");
+        EL.addEmployee("IT", "3000", "0", "4", "F", "Andy");
         assertEquals(EL.getSize(), 1);
         for (Employee e: EL) {
             assertEquals(e.getLevel(), 4);
@@ -41,7 +41,7 @@ public class EmployeeList_test {
 
     @Test(timeout = 100)
     public void testGetSize(){
-        EL.addEmployee("IT", 3000, "", 4, "Pending");
+        EL.addEmployee("IT", "3000", "", "4", "P", "Luke");
         assertEquals(0, EL.getSize());
     }
 }
