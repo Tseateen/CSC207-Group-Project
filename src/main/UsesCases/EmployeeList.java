@@ -72,23 +72,11 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      * This method will find the Employee from the EmployeeList and delete the Employee.
      *
      * @param id the employee's id that needs to be deleted.
-     * @return whether the Employee has successfully deleted.
      */
     @Override
-    public boolean deleteEmployee(String id) {
-        int index = -1;
-        for(int i = 0; i < EmployeeList.size(); i ++) {
-            if(this.EmployeeList.get(i).getID().equals(id)){
-
-                index = i;
-            }
-        }
-        if(index == -1) {
-            return false;
-        }else{
-            this.EmployeeList.remove(this.EmployeeList.get(index));
-            return true;
-        }
+    public void deleteEmployee(String id) {
+        Employee employee = this.getEmployee(id);
+        this.EmployeeList.remove(employee);
     }
 
 

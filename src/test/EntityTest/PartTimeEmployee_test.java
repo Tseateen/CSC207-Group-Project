@@ -14,12 +14,12 @@ public class PartTimeEmployee_test {
     @Before
     public void setUp(){
         // Regular FullTimeEmployee constructor
-        Part_time_employee_1 = new PartTimeEmployee("HR",4000, 4, "124");
+        Part_time_employee_1 = new PartTimeEmployee("HR","4000", 4, "124");
         // Overload FullTimeEmployee constructor
         HashMap<String, String[]> scd = new HashMap<>();
         String[] time = {"09:00", "12:30", "15:30"};
         scd.put("Monday", time);
-        Part_time_employee_2 = new PartTimeEmployee("IT", 5000, 3, "123", scd);
+        Part_time_employee_2 = new PartTimeEmployee("IT", "5000", 3, "123");
     }
 
     @Test(timeout = 100)
@@ -34,10 +34,10 @@ public class PartTimeEmployee_test {
 
     @Test(timeout = 100)
     public void testWage() {
-        assertEquals(Part_time_employee_1.getWage(), 4000);
-        assertEquals(Part_time_employee_2.getWage(), 5000);
-        Part_time_employee_1.setWage(20000);
-        assertEquals(Part_time_employee_1.getWage(), 20000);
+        assertEquals(Part_time_employee_1.getWage(), "4000");
+        assertEquals(Part_time_employee_2.getWage(), "5000");
+        Part_time_employee_1.setWage("20000");
+        assertEquals(Part_time_employee_1.getWage(), "20000");
 
     }
 
