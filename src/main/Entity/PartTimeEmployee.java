@@ -24,6 +24,7 @@ public class PartTimeEmployee extends Employee implements Serializable {
     }
     // === Regular methods ===
 
+
     /**
      *
      * @return This method returns the working hour of a part-time employee.

@@ -14,6 +14,7 @@ public class LoginListController {
         return this.loginList.addUser( name, password,  phone, address);
     }
 
+
     // === Usage: FacadeSys Worker Case (vi) ====
     public void deleteUser(String id){
         this.loginList.deleteUser(id);

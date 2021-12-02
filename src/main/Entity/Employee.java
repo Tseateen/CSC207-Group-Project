@@ -23,6 +23,7 @@ public abstract class Employee implements Serializable {
      * The number of attendance for any employee should always equal or greater than 0.
      */
 
+
     /**
      * Construct an Employee, giving them the given department,
      * wage, and level.

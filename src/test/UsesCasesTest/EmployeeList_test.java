@@ -20,10 +20,10 @@ public class EmployeeList_test {
         EL.addEmployee("IT", 3000, "0", 4, "F");
         assertEquals(EL.getSize(), 1);
         for (Employee e: EL) {
-                assertEquals(e.getLevel(), 4);
-                assertEquals(e.getDepartment(), "IT");
-                assertEquals(e.getWage(), 3000);
-                assertEquals(e.getID(), "1");
+            assertEquals(e.getLevel(), 4);
+            assertEquals(e.getDepartment(), "IT");
+            assertEquals(e.getWage(), 3000);
+            assertEquals(e.getID(), "1");
 
         }
     }

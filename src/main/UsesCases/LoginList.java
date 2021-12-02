@@ -24,7 +24,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      */
     public LoginList(){
         this.UserList = new ArrayList<>();
-        this.idCounter = 1;
+        this.idCounter = 0;
     }
 
 
@@ -41,10 +41,11 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      */
     @Override
     public String addUser(String name, String password, String phone, String address){
+        System.out.println(this.idCounter);
         String id = name.concat(String.valueOf(this.idCounter));
+        this.idCounter += 1;
         Userable user = new User( name, id, password, phone, address);
         this.UserList.add(user);
-        this.idCounter += 1;
         return id;
     }
 
@@ -120,6 +121,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A");
         this.UserList.add(admin);
     }
+
 
 
     @Override
