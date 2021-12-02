@@ -11,16 +11,36 @@ import java.util.NoSuchElementException;
 
 public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
 
+    // === Instance Variables ===
+
+    // The list contained all the user.
     private final List<Userable> UserList;
+    // The idCounter that generated the ID for the user.
     private int idCounter;
 
+
+    /**
+     * Construct the LoginList, managing the login information.
+     */
     public LoginList(){
         this.UserList = new ArrayList<>();
         this.idCounter = 1;
     }
 
+
+    /**
+     * This method will add the new User to the system.
+     *
+     * @param name the User's name.
+     * @param password the password set by the User.
+     * @param phone the phone number of User.
+     * @param address the address of the User.
+     *
+     * @return the string of userID of the new User.
+     *
+     */
     @Override
-    public String addUser( String name, String password, String phone, String address){
+    public String addUser(String name, String password, String phone, String address){
         String id = name.concat(String.valueOf(this.idCounter));
         Userable user = new User( name, id, password, phone, address);
         this.UserList.add(user);
@@ -29,6 +49,14 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
 
+    /**
+     * This method will delete the odd User from the system.
+     *
+     * @param id the User's id.
+     *
+     * @return the true iff the User has been deleted.
+     *
+     */
     @Override
     public boolean deleteUser(String id){
         int index = -1;
@@ -47,7 +75,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
     /**
-     * This method will find the Employee from the EmployeeList.
+     * This method will find the User information from the UserList.
      *
      * @param user_id the user's id that needs to be found.
      * @return the User found.
@@ -62,11 +90,25 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         return null;
     }
 
+
+    /**
+     * This method will get the amount of the total users in the system.
+     *
+     * @return the int of size of the UserList, i.e. the total number of users.
+     *
+     */
     @Override
     public int getSize(){
         return UserList.size();
     }
 
+
+    /**
+     * This method will get the ID users from the system.
+     *
+     * @return the int of ID of the User.
+     *
+     */
     @Override
     public int getID(){
         return this.idCounter;
@@ -93,6 +135,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
             this.idCounter ++;
         }
     }
+
 
     @Override
     public void writeDataToFile() throws IOException {

@@ -24,6 +24,7 @@ public class WorkManager implements IWorkManager, Serializable {
         autoChange(work);
     }
 
+
     /**
      * Change a work's state
      * @param workID the work's id which is going to be extended.
@@ -35,6 +36,7 @@ public class WorkManager implements IWorkManager, Serializable {
         work.setState(new_statue);
         autoChange(work);
     }
+
 
     /**
      * Change a work's state automatically as the time goes.

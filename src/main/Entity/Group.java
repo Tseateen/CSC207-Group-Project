@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Group implements Iterable<String>, Serializable {
+
+    // === Instance Variables ===
+
+    // The user id of the leader of the group.
     private String leader_id;
+    // The list contained all the group members.
     private final List<String> groupMembers = new ArrayList<>();
+    // the Work's ID of the group currently working on.
     private String workID;
 
 

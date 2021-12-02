@@ -6,7 +6,10 @@ import main.Entity.PartTimeEmployee;
 import java.io.Serializable;
 
 public class SalaryCalculator implements Serializable {
+
+    // === Instance Variables ===
     private final KPICalculator KPIcalculator;
+
 
     /**
      * Construct a SalaryCalculator.
@@ -14,6 +17,7 @@ public class SalaryCalculator implements Serializable {
     public SalaryCalculator(KPICalculator kpiCalculator) {
         this.KPIcalculator = kpiCalculator;
     }
+
 
     /**
      * Calculate the total salary to be paid for a part-time employee.
@@ -27,6 +31,7 @@ public class SalaryCalculator implements Serializable {
         return String.valueOf(hour * wage);
     }
 
+
     /**
      * Calculate the total salary to be paid for a full-time employee.
      *
@@ -38,6 +43,7 @@ public class SalaryCalculator implements Serializable {
                 calculateBonusFromVacation(fullTimeEmployee) +
                 fullTimeEmployee.getWage();
     }
+
 
     /**
      * Calculate the bonus salary from the vacation of a full-time employee.
@@ -56,6 +62,7 @@ public class SalaryCalculator implements Serializable {
                     (Long.parseLong(fullTimeEmployee.getWage()) / 30));
         }
     }
+
 
     /**
      * Calculate the bonus salary from the KPI of a full-time employee.

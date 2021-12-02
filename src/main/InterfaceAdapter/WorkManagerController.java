@@ -4,9 +4,14 @@ import main.UsesCases.*;
 
 public class WorkManagerController {
 
+    // === Instance Variables ===
     private final IWorkManager workManager;
     private final IGroupManager groupManager;
 
+
+    /**
+     * Construct the WorkManagerController.
+     */
     public WorkManagerController(IWorkManager workManager, IGroupManager groupManager){
         this.workManager = workManager;
         this.groupManager = groupManager;
