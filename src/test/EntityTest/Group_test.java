@@ -18,12 +18,12 @@ public class Group_test {
 
     @Before
     public void setUp() {
-        p1 = new User("andy1234", "a12345", "Andy", "412345678",
-                "Mississauga Road", "001");
-        p2 = new User("luke002", "lu2345", "Luke", "401234567",
-                "223 Allen Road", "002");
-        p3 = new User("kyle002", "k23456", "Kyle", "498765432",
-                "300 Yonge Street", "003");
+        p1 = new User("Andy", "001", "a123456", "412345678",
+                "Mississauga Road");
+        p2 = new User("Luke", "002", "l123456", "401234567",
+                "223 Allen Road");
+        p3 = new User("Kyl3", "003", "k123456", "498765432",
+                "300 Yonge Street");
 
         G1 = new Group(p1.getID(), "w123");
         G1.addMember(p2.getID());
@@ -33,29 +33,29 @@ public class Group_test {
 
     @Test(timeout = 100)
     public void testLeader() {
-        assertEquals(G1.getLeaderId(), p1.getID());
+        assertEquals(G1.getLeaderID(), p1.getID());
         String a = p2.getID();
         G1.setLeaderId(a);
-        assertEquals(G1.getLeaderId(), p2.getID());
-        Userable p4 = new User("lily123", "li23456", "Lily", "411111111",
-                "123 Bloor Street", "004");
+        assertEquals(G1.getLeaderID(), p2.getID());
+        Userable p4 = new User("Lily", "004", "li23456", "411111111",
+                "123 Bloor Street");
         G1.setLeaderId(p4.getID());
-        assertEquals(G1.getLeaderId(), p4.getID());
+        assertEquals(G1.getLeaderID(), p4.getID());
     }
 
     @Test(timeout = 100)
     public void testMembers1() {
         assertTrue(G1.getMembers().contains(p2.getID()));
-        Userable p4 = new User("lily123", "li23456", "Lily", "411111111",
-                "123 Bloor Street", "004");
+        Userable p4 = new User("Lily", "004", "li23456", "411111111",
+                "123 Bloor Street");
         G1.addMember(p4.getID());
         assertTrue(G1.getMembers().contains(p4.getID()));
     }
 
     @Test(timeout = 100)
     public void testMembers2() {
-        Userable p4 = new User("lily123", "li23456", "Lily", "411111111",
-                "123 Bloor Street", "004");
+        Userable p4 = new User("Lily", "004", "li23456", "411111111",
+                "123 Bloor Street");
         G1.addMember(p4.getID());
         assertTrue(G1.getMembers().contains(p4.getID()));
         G1.deleteMember(p3.getID());
