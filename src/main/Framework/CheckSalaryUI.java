@@ -42,7 +42,7 @@ public class CheckSalaryUI {
             }else {
                 List<String> result = this.facadeSys.checkLowerLevelEmployeeSalary(id);
                 if(Integer.parseInt(check_option) == 1 || Integer.parseInt(check_option) == 2 || Integer.parseInt(check_option) == 3){
-                    System.out.println(result.get(Integer.parseInt(check_option)));
+                    System.out.println(result.get(Integer.parseInt(check_option) - 1));
                     System.out.println();
                     System.out.println("If you want to check other type of the information from the lower level employees," +
                             " please type any bottom. Otherwise, please type E to exist");

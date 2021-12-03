@@ -24,7 +24,6 @@ public class PrepareForWorkUI {
     public void run(){
             Scanner keyIn = new Scanner(System.in);
             System.out.println("Following are the work that you can do:");
-            // Use presenter later
             System.out.println(this.facadeSys.showAllLowerWork());
             System.out.println("Enter the workID you want to work on:");
             String workID = keyIn.nextLine();
@@ -37,6 +36,7 @@ public class PrepareForWorkUI {
                 System.out.println("Assign leader successfully");
             } else {
                 System.out.println("The work ID or employee does not exist, or you level is lower than the level of work!");
+                System.out.println("");
             }
     }
 }

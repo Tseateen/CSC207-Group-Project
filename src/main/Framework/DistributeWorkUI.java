@@ -35,7 +35,8 @@ public class DistributeWorkUI {
         if (this.facadeSys.distributeWork(workID, employeeID)){
             System.out.println("Distribute work successfully");
         }else{
-            System.out.println("The level of the leader is lower than the level of the work!");
+            System.out.println("The work ID/member does not exist or he level of the leader is lower than the level of the work!");
+            System.out.println("");
         }
     }
 }

@@ -84,12 +84,15 @@ public class FacadeSys {
         StringBuilder result = new StringBuilder();
         ArrayList<String> infos = this.personalInfoController.personalInfo(this.loginList,
                 this.employeeList, this.userID);
-        // 0: Name, 1:ID, 3:Phone Number , 4:Address, 5: Department
+        // 0: Name, 1:ID, 3:Phone Number , 4:Address, 5: Department 6: Work hours (PartTime)/ position (Full Time)
         result.append(infos.get(0)).append(infos.get(1)).append(infos.get(3)).append(infos.get(4))
-                .append(infos.get(5));
-        // 6: Position
+                .append(infos.get(5)).append(infos.get(6));;
+
         if (this.verifierController.verifyFullTime(this.userID, this.employeeList)) {
-            result.append(infos.get(6));
+        // 7: Status, 8: Total vacation with salary, 9: Vacation used
+            result.append(infos.get(7));
+            result.append(infos.get(8));
+            result.append(infos.get(9));
         }
         return result.toString();
     }
@@ -134,17 +137,6 @@ public class FacadeSys {
             return "Invalid option or response!";
         }
     }
-    // ==========================================
-
-    public String checkVacation() {
-        if (!this.verifierController.verifyFullTime(this.userID, this.employeeList)) {
-            return "Not full time worker";
-        }
-        ArrayList<String> info = this.personalInfoController.personalInfo(this.loginList,
-                this.employeeList, this.userID);
-        // 8:Total Vacation 9:Vacation Used
-        return info.get(8) + info.get(9);
-    }
     // ==================================================
 
     // ================== Work UI Method ================
@@ -176,12 +168,11 @@ public class FacadeSys {
 
     // === Case (iii) Start a work with assigning leader ====
     public boolean assignLeaderToWork(String workID, String leaderID) {
-        String workLevel = this.workListController.FindWorkLevel(workID);
-        String leaderLevel = this.personalInfoController.checkUserLevel(leaderID, this.employeeList);
-        if (this.workListController.checkWorkExist(workID) &&
-                this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList))
+        if (this.workListController.checkWorkExist(workID) && this.verifierController.verifyUserExistence(leaderID, this.loginList))
         {
-            if (this.verifierController.verifyUserExistence(leaderID, this.loginList) && this.verifierController.verifyLevel(leaderLevel,this.userID,this.employeeList)){
+            String workLevel = this.workListController.FindWorkLevel(workID);
+            String leaderLevel = this.personalInfoController.checkUserLevel(leaderID, this.employeeList);
+            if (this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList)&& this.verifierController.verifyLevel(leaderLevel,this.userID,this.employeeList)){
                 this.workManagerController.assignLeaderToWork(workID, leaderID, this.groupList);
                 return true;
             }
@@ -202,10 +193,12 @@ public class FacadeSys {
 
 
     public boolean distributeWork(String workID, String memberID) {
-        String memberLevel = this.personalInfoController.checkUserLevel(memberID, this.employeeList);
-        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) &&
-                this.verifierController.verifyLevel(memberLevel, this.userID, this.employeeList)) {
-            return this.groupManagerController.distributeWork(workID,memberID,this.groupList);
+        if (this.workListController.checkWorkExist(workID) && this.verifierController.verifyUserExistence(memberID, this.loginList)) {
+            String memberLevel = this.personalInfoController.checkUserLevel(memberID, this.employeeList);
+            if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) &&
+                    this.verifierController.verifyLevel(memberLevel, this.userID, this.employeeList)) {
+                return this.groupManagerController.distributeWork(workID, memberID, this.groupList);
+            }
         }
         return false;
     }
