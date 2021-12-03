@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class HomePage {
 
-
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a HomePage

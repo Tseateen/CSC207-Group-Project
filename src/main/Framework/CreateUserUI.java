@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class CreateUserUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a CreateUserUI

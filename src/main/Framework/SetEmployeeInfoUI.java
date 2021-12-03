@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 public class SetEmployeeInfoUI {
 
-
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a SetPersonalInfoUI
@@ -16,6 +17,7 @@ public class SetEmployeeInfoUI {
     public SetEmployeeInfoUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the SetPersonalInfoUI
@@ -47,8 +49,7 @@ public class SetEmployeeInfoUI {
                     noExit = false;
                 }
             }else {
-                System.out.println("Option does not exist. Please type again!");
-                System.out.println("");
+                System.out.println("Option does not exist. Please type again!\n");
             }
         }
     }

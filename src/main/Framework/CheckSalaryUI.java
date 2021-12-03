@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CheckSalaryUI {
+
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a CheckSalaryUI
@@ -15,6 +18,7 @@ public class CheckSalaryUI {
     public CheckSalaryUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the CheckSalaryUI

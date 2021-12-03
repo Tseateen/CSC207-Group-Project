@@ -1,13 +1,18 @@
 package main.InterfaceAdapter;
 
-import main.UsesCases.GroupManager;
 import main.UsesCases.IGroupList;
 import main.UsesCases.IGroupManager;
 
 public class GroupManagerController {
 
+
+    // === Instance Variables ===
     private final IGroupManager groupManager;
 
+
+    /**
+     * Construct the GroupManagerController.
+     */
     public GroupManagerController(IGroupManager groupManager) {
         this.groupManager = groupManager;
     }

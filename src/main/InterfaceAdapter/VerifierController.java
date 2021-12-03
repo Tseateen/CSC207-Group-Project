@@ -1,10 +1,19 @@
 package main.InterfaceAdapter;
-import main.Entity.Userable;
-import main.UsesCases.*;
+
+import main.UsesCases.IEmployeeList;
+import main.UsesCases.IGroupList;
+import main.UsesCases.ILoginList;
+import main.UsesCases.IVerifier;
 public class VerifierController {
 
+
+    // === Instance Variables ===
     private final IVerifier verifier;
 
+
+    /**
+     * Construct the VerifierController.
+     */
     public VerifierController(IVerifier verifier) {
         this.verifier = verifier;
     }

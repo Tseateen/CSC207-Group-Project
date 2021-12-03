@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class SetPersonalInfoUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a SetPersonalInfoUI
@@ -15,6 +17,7 @@ public class SetPersonalInfoUI {
     public SetPersonalInfoUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the SetPersonalInfoUI

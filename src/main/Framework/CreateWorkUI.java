@@ -3,15 +3,14 @@ package main.Framework;
 import main.InterfaceAdapter.FacadeSys;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.*;
 
 
 public class CreateWorkUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a CreateWorkUI
@@ -20,6 +19,7 @@ public class CreateWorkUI {
     public CreateWorkUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the CreateWorkUI
@@ -30,7 +30,7 @@ public class CreateWorkUI {
         boolean invalidCreate = false;
         while (noExist){
         String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level"};
-            ArrayList<String> work_info = new ArrayList<String>();
+            ArrayList<String> work_info = new ArrayList<>();
         do{
             work_info.clear();
             for(String each_work_info: WorkInfoArray){

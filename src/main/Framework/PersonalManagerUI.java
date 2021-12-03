@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 public class PersonalManagerUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a PersonalManagerUI

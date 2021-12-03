@@ -2,13 +2,13 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class DeleteUserUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a DeleteUserUI
