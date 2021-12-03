@@ -68,13 +68,11 @@ public class FullTimeEmployee extends Employee implements Serializable {
     /**
      *
      * @param position Given the new position of this employee
-     * @return After assign new position for this employee, this method will return the old position for code tracking
      * purpose.
      */
-    public String setPosition(String position) {
+    public void setPosition(String position) {
         String op = this.position;
         this.position = position;
-        return op;
     }
 
     /**

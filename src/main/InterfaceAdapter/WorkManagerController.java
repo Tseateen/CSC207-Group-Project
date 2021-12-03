@@ -66,8 +66,9 @@ public class WorkManagerController {
     // === Usage: FacadeSys Worker Case (iii) ====
     public void assignLeaderToWork(String workID, String
             leaderID, IGroupList groupList) {
-        this.groupManager.assignLeader(workID,
-                leaderID, groupList);
+            this.groupManager.assignLeader(workID,
+                    leaderID, groupList);
+
     }
     // ==================================================
 

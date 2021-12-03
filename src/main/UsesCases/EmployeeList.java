@@ -38,7 +38,6 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
      */
     @Override
     public void addEmployee(String department, String wage, String position, String level, String status, String name) {
-        System.out.println(this.idCounter);
         if (status.equals("F")) {
             Employee employee = new FullTimeEmployee(department, position, wage, Integer.parseInt(level), name.concat(String.valueOf(this.idCounter)));
             this.EmployeeList.add(employee);
