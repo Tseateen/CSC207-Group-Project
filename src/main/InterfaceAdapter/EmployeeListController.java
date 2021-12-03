@@ -4,7 +4,10 @@ import main.UsesCases.IEmployeeList;
 
 public class EmployeeListController {
 
+    // === Instance Variables ===
     private final IEmployeeList employeeList;
+
+
 
     public  EmployeeListController(IEmployeeList employeeList){
         this.employeeList = employeeList;

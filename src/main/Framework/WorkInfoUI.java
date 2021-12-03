@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class WorkInfoUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a WorkIndoUI
@@ -15,6 +17,7 @@ public class WorkInfoUI {
     public WorkInfoUI(FacadeSys facadeSys){
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the WorkInfoUI

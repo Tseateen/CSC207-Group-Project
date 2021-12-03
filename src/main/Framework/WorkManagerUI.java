@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class WorkManagerUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a WorkManagerUI

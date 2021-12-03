@@ -5,7 +5,10 @@ import main.InterfaceAdapter.FacadeSys;
 import java.util.Scanner;
 
 public class DistributeWorkUI {
+
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
+
 
     /**
      * Construct a DistributeWorkUI

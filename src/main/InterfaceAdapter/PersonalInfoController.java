@@ -5,8 +5,15 @@ import main.UsesCases.*;
 import java.util.ArrayList;
 
 public class PersonalInfoController {
+
+
+    // === Instance Variables ===
     private final IPersonalManager personalManager;
 
+
+    /**
+     * Construct the PersonalInfoController.
+     */
     public PersonalInfoController(IPersonalManager personalManager){
         this.personalManager = personalManager;
     }

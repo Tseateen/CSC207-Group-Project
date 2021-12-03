@@ -1,14 +1,18 @@
 package main.InterfaceAdapter;
 
 import main.UsesCases.IWorkList;
-import main.UsesCases.WorkList;
 
 import java.util.ArrayList;
 
 public class WorkListController {
 
+    // === Instance Variables ===
     private final IWorkList workList;
 
+
+    /**
+     * Construct the WorkListController.
+     */
     public WorkListController(IWorkList workList) {
         this.workList = workList;
     }

@@ -2,11 +2,11 @@ package main.Framework;
 
 import main.InterfaceAdapter.FacadeSys;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class PrepareForWorkUI {
 
+    // === Instance Variables ===
     private final FacadeSys facadeSys;
 
     /**
@@ -16,6 +16,7 @@ public class PrepareForWorkUI {
     public PrepareForWorkUI(FacadeSys facadeSys) {
         this.facadeSys = facadeSys;
     }
+
 
     /**
      * Run the PrepareForWorkUI
