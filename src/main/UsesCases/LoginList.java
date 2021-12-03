@@ -54,25 +54,11 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      * This method will delete the odd User from the system.
      *
      * @param id the User's id.
-     *
-     * @return the true iff the User has been deleted.
-     *
      */
     @Override
-    public boolean deleteUser(String id){
-        int index = -1;
-
-        for(int i = 0; i < this.getSize(); i ++){
-            if(this.UserList.get(i).getID().equals(id)){
-                index = i;
-            }
-        }
-        if(index == -1){
-            return false;
-        }else{
-            this.UserList.remove(this.UserList.get(index));
-            return true;
-        }
+    public void deleteUser(String id){
+        Userable user = this.getUser(id);
+        this.UserList.remove(user);
     }
 
     /**

@@ -66,7 +66,6 @@ public class WorkManagerController {
     // === Usage: FacadeSys Worker Case (iii) ====
     public void assignLeaderToWork(String workID, String
             leaderID, IGroupList groupList) {
-        // TODO: We may need to use try in GM's assignLeader and return boolean
         this.groupManager.assignLeader(workID,
                 leaderID, groupList);
     }

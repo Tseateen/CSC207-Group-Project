@@ -2,6 +2,7 @@ package main.Entity;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Userable, Serializable {
 
@@ -146,9 +147,6 @@ public class User implements Userable, Serializable {
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof User)){
-            return false;
-        }
-        if (obj == null){
             return false;
         }
         if (getClass() != obj.getClass()){
