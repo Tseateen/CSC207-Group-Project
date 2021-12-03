@@ -15,19 +15,18 @@ public class Verifier_test {
     @Before
     public void Setup(){
         LL = new LoginList();
-        LL.addUser("111", "123456", "Lily", "4203456789",
-                "10 King St.");
-        Userable u1 = new User("111", "123456", "Lily", "4203456789",
-                "10 King St.","1");
-        VV = new Verifier(LL);
+        Userable u1 = new User("Lily", "002", "l99999999", "498765432",
+                "234 Mississauga Road");
+        LL.addUser(u1.getName(), u1.getPassword(), u1.getPhone(), u1.getAddress());
+        VV = new Verifier();
 
     }
 
 
     @Test
     public void testVerifyForLogin(){
-        assertTrue(VV.verifyForLogin("111", "123456"));
-        assertFalse(VV.verifyForLogin("111", "666666"));
+        assertTrue(VV.verifyForLogin("002", "l99999999", LL));
+        assertFalse(VV.verifyForLogin("002", "l666666", LL));
 
     }
 }

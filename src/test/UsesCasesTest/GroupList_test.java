@@ -19,8 +19,7 @@ public class GroupList_test {
     @Before
     public void Setup() {
         GL = new GroupList();
-        user1 = new User("111", "111",  "4203456789",
-                "10 King St.", "8888");
+
         memberList.add(user1.getID());
     }
 

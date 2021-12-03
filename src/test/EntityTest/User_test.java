@@ -11,8 +11,8 @@ public class User_test {
     Userable U1;
     @Before
     public void setUp() {
-        U1 = new User("andy1234", "a12345", "Andy", "412345678",
-                "123 Mississauga Road", "001");
+        U1 = new User("Andy", "001", "a1234567", "412345678",
+                "123 Mississauga Road");
     }
 
     @Test(timeout = 100)
@@ -27,12 +27,6 @@ public class User_test {
         assertEquals(U1.getID(), "001");
     }
 
-    @Test(timeout = 100)
-    public void testUserName() {
-        assertEquals(U1.getUsername(), "andy1234");
-        U1.setUsername("luke1234");
-        assertEquals(U1.getUsername(), "luke1234");
-    }
 
     @Test(timeout = 100)
     public void testPassword() {
