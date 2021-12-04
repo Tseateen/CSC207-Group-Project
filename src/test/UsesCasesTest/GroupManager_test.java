@@ -19,16 +19,16 @@ public class GroupManager_test {
     @Before
     public void Setup(){
         group = new Group("001", "998");
-        leader = new User("Andy", "001", "a12345678",
+        leader = new User("Andy", "Andy0", "a12345678",
                 "412345678", "123 Mississauga Road");
 
         group.setLeaderId("001");
 
-        member1 = new User("Lily", "002", "l99999999", "498765432",
+        member1 = new User("Lily", "Lily1", "l99999999", "498765432",
                 "234 Mississauga Road");
-        member2 = new User("Luke", "003", "luke1234", "466666666",
+        member2 = new User("Luke", "Luke2", "luke1234", "466666666",
                 "567 Mississauga Road");
-        member3 = new User("Cathy", "004", "c8888888", "411111111",
+        member3 = new User("Cathy", "Cath3", "c8888888", "411111111",
                 "111 Mississauga Road");
         work = new Work("First Work", "998", "IT", "None", 2);
 
@@ -49,10 +49,12 @@ public class GroupManager_test {
         assertTrue(group.getMembers().contains(member1.getID()));
         assertTrue(group.getMembers().contains(member2.getID()));
         assertTrue(group.getMembers().contains(member3.getID()));
+        assertEquals(group.getMembers().size(), 3);
+
 
         // Test resetMember
+        // Todo: The following line will raise Error.
         groupmanager.resetMember(group);
-        // Todo: The following will raise Error.
         assertEquals(group.getMembers().size(), 0);
 
     }

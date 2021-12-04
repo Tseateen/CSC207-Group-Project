@@ -11,7 +11,7 @@ public class User_test {
     Userable U1;
     @Before
     public void setUp() {
-        U1 = new User("Andy", "001", "a1234567", "412345678",
+        U1 = new User("Andy", "Andy1", "a1234567", "412345678",
                 "123 Mississauga Road");
     }
 
@@ -24,17 +24,17 @@ public class User_test {
 
     @Test(timeout = 100)
     public void testId() {
-        assertEquals(U1.getID(), "001");
+        assertEquals(U1.getID(), "Andy1");
     }
 
 
     @Test(timeout = 100)
     public void testPassword() {
-        assertEquals(U1.getPassword(), "a12345");
+        assertEquals(U1.getPassword(), "a1234567");
         U1.setPassword("l12345");
         assertEquals(U1.getPassword(), "l12345");
         assertTrue(U1.comparePassword("l12345"));
-        assertFalse(U1.comparePassword("a12345"));
+        assertFalse(U1.comparePassword("a1234567"));
     }
 
     @Test(timeout = 100)
