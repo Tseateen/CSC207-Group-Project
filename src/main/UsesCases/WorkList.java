@@ -32,7 +32,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
      */
     public void addWork(String name, String id, String department, String requirement, int level){
         Workable work = new Work(name,id,department, requirement,level);
-        workList.add(work);
+        this.workList.add(work);
     }
 
 

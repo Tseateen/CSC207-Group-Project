@@ -29,8 +29,8 @@ public class DeleteUserUI {
             System.out.println("Please enter the ID of the user you want to delete");
             String userId = keyIn.nextLine();
 
-            boolean SuccessCreatNewUser= this.facadeSys.deleteUser(userId);
-            if (SuccessCreatNewUser){
+            boolean SuccessDeleteNewUser= this.facadeSys.deleteUser(userId);
+            if (SuccessDeleteNewUser){
                 System.out.println(
                         "If you want to delete another user, please type C. \n" +
                                 " Otherwise, please type E to exist");

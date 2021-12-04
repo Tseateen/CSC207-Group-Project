@@ -28,6 +28,7 @@ public class PrepareForWorkUI {
             System.out.println("Enter the workID you want to work on:");
             String workID = keyIn.nextLine();
             System.out.println("Following are the employees information you can assign as the leader");
+            System.out.println("Name  ID  Level  Department");
             System.out.println(this.facadeSys.showAllLowerUser());
             System.out.println("Enter the employee ID for the group leader (You can only choose " +
                     "between yourself and one of the employees shown above)");

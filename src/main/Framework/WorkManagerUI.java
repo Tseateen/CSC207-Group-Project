@@ -33,6 +33,7 @@ public class WorkManagerUI {
         DeleteUserUI deleteUserUI = new DeleteUserUI(this.facadeSys);
         SetEmployeeInfoUI setEmployeeInfoUI = new SetEmployeeInfoUI(this.facadeSys);
         CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
+        ExtendWorkUI extendWorkUI = new ExtendWorkUI(this.facadeSys);
 
         boolean noExit = true;
         while (noExit) {
@@ -45,7 +46,7 @@ public class WorkManagerUI {
                             "vi) Delete a user, please enter 6; "  + "\n" +
                             "vii) Check all lower level employees' salary-related information, please enter 7" + "\n" +
                             "viii) Change employee's information, please enter 8" + "\n" +
-                            "X) Extend a Work, please enter 8" + "\n" +
+                            "X) Extend a Work, please enter 9" + "\n" +
                             "Xi) Back to main page, please enter E " + "\n");
             String action = keyIn.nextLine();
             switch (action) {
@@ -78,7 +79,12 @@ public class WorkManagerUI {
                     break;
                 case "8":
                     setEmployeeInfoUI.run();
+                    System.out.println("Successfully back to main WorkUI");;
+                    break;
+                case "9":
+                    extendWorkUI.run();
                     System.out.println("Successfully back to main WorkUI");
+                    break;
                 case "E":
                     noExit = false;
                     break;

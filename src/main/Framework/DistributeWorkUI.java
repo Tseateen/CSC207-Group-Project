@@ -29,6 +29,7 @@ public class DistributeWorkUI {
         System.out.println(this.facadeSys.showAllWorkLead());
         String workID = keyIn.nextLine();
         System.out.println("Following are the employees information you can assign as members");
+        System.out.println("Name  ID  Level  Department");
         System.out.println(this.facadeSys.showAllLowerUser());
         System.out.println("Enter the employee ID for the group members");
         String employeeID = keyIn.nextLine();
