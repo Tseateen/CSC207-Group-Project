@@ -13,9 +13,9 @@ public class FullTimeEmployee_test {
     @Before
     public void setUp() {
         // Regular FullTimeEmployee constructor
-        Full_time_employee_1 = new FullTimeEmployee("IT", "Manager", "10000", 0, "1");
+        Full_time_employee_1 = new FullTimeEmployee("IT", "Manager", "10000", 0, "Lily1");
         // Overload FullTimeEmployee constructor
-        Full_time_employee_2 = new FullTimeEmployee("HR", "5000", 1, "2");
+        Full_time_employee_2 = new FullTimeEmployee("HR", "5000", 1, "Cathy2");
     }
 
     @Test(timeout = 100)
@@ -38,10 +38,10 @@ public class FullTimeEmployee_test {
 
     @Test(timeout = 100)
     public void testWage() {
-        assertEquals(Full_time_employee_1.getWage(), 10000);
-        assertEquals(Full_time_employee_2.getWage(), 5000);
+        assertEquals(Full_time_employee_1.getWage(), "10000");
+        assertEquals(Full_time_employee_2.getWage(), "5000");
         Full_time_employee_1.setWage("20000");
-        assertEquals(Full_time_employee_1.getWage(), 20000);
+        assertEquals(Full_time_employee_1.getWage(), "20000");
 
     }
 
@@ -56,9 +56,9 @@ public class FullTimeEmployee_test {
     }
 
     @Test(timeout = 100)
-    public void testId() {
-        assertEquals(Full_time_employee_1.getID(), "1");
-        assertEquals(Full_time_employee_2.getID(), "2");
+    public void testID() {
+        assertEquals(Full_time_employee_1.getID(), "Lily1");
+        assertEquals(Full_time_employee_2.getID(), "Cathy2");
     }
 
     @Test(timeout = 100)
@@ -76,22 +76,22 @@ public class FullTimeEmployee_test {
 
     @Test(timeout = 100)
     public void testTotalVacationWithSalary() {
-        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), 0);
-        assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), 0);
+        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), "0");
+        assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), "0");
         Full_time_employee_1.setTotalVacationWithSalary("5");
         Full_time_employee_2.setTotalVacationWithSalary("2");
-        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), 5);
-        assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), 2);
+        assertEquals(Full_time_employee_1.getTotalVacationWithSalary(), "5");
+        assertEquals(Full_time_employee_2.getTotalVacationWithSalary(), "2");
     }
 
     @Test(timeout = 100)
     public void testVacationUsed() {
-        assertEquals(Full_time_employee_1.getVacationUsed(), 0);
-        assertEquals(Full_time_employee_2.getVacationUsed(), 0);
+        assertEquals(Full_time_employee_1.getVacationUsed(), "0");
+        assertEquals(Full_time_employee_2.getVacationUsed(), "0");
         Full_time_employee_1.setVacationUsed("3");
         Full_time_employee_2.setVacationUsed("1");
-        assertEquals(Full_time_employee_1.getVacationUsed(), 3);
-        assertEquals(Full_time_employee_2.getVacationUsed(), 1);
+        assertEquals(Full_time_employee_1.getVacationUsed(), "3");
+        assertEquals(Full_time_employee_2.getVacationUsed(), "1");
     }
 
     @Test(timeout = 100)

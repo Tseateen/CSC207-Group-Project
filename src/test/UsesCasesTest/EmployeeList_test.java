@@ -22,8 +22,8 @@ public class EmployeeList_test {
         for (Employee e: EL) {
             assertEquals(e.getLevel(), 4);
             assertEquals(e.getDepartment(), "IT");
-            assertEquals(e.getWage(), 3000);
-            assertEquals(e.getID(), "1");
+            assertEquals(e.getWage(), "3000");
+            assertEquals(e.getID(), "Andy0");
 
         }
     }
