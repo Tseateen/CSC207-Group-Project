@@ -66,7 +66,8 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
-        InputStream file = new FileInputStream((filePath.concat("/src/Data/GroupData.ser")));
+        String targetFIle = (filePath.concat("/src/Data/GroupData.ser"));
+        InputStream file = new FileInputStream(targetFIle);
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         GroupList groupFile = (GroupList) input.readObject();
@@ -80,7 +81,8 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
-        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/GroupData.ser"));
+        String targetFIle = (filePath.concat("/src/Data/GroupData.ser"));
+        OutputStream file = new FileOutputStream(targetFIle);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(this);

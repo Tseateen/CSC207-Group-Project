@@ -112,7 +112,8 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
-        InputStream file = new FileInputStream(filePath.concat("/src/Data/WorkData.ser"));
+        String targetFile = filePath.concat("/src/Data/WorkData.ser");
+        InputStream file = new FileInputStream(targetFile);
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         WorkList workFile = (WorkList) input.readObject();
@@ -125,7 +126,8 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
-        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/WorkData.ser"));
+        String targetFile = filePath.concat("/src/Data/WorkData.ser");
+        OutputStream file = new FileOutputStream(targetFile);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(this);
