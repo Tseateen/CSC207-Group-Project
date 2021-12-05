@@ -30,8 +30,8 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
      * @param level the Work's level.
      *
      */
-    public void addWork(String name, String id, String department, String requirement, int level){
-        Workable work = new Work(name,id,department, requirement,level);
+    public void addWork(String name, String id, String department, String requirement, int level, String endTime){
+        Workable work = new Work(name,id, department, requirement,level, endTime);
         this.workList.add(work);
     }
 

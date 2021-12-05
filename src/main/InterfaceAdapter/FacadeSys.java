@@ -255,9 +255,9 @@ public class FacadeSys {
      *
      */
     public boolean createWork(ArrayList<String> info_list) {
-        if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList)) {
-            this.workListController.createWork(info_list);
-            return true;
+        if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList) &&
+                !this.workListController.checkWorkExist(info_list.get(0))) {
+            return this.workListController.createWork(info_list);
         }else{
             return false;
         }
@@ -279,8 +279,13 @@ public class FacadeSys {
     public boolean assignLeaderToWork(String workID, String leaderID) {
         if (this.workListController.checkWorkExist(workID) && this.verifierController.verifyUserExistence(leaderID, this.loginList))
         {
+
             String workLevel = this.workListController.FindWorkLevel(workID);
             String leaderLevel = this.personalInfoController.checkUserLevel(leaderID, this.employeeList);
+            if (this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList)&& this.userID.equals(leaderID)) {
+                this.workManagerController.assignLeaderToWork(workID, leaderID, this.groupList);
+                return true;
+            }
             if (this.verifierController.verifyLevel(workLevel, this.userID, this.employeeList)&& this.verifierController.verifyLevel(leaderLevel,this.userID,this.employeeList)){
                 this.workManagerController.assignLeaderToWork(workID, leaderID, this.groupList);
                 return true;

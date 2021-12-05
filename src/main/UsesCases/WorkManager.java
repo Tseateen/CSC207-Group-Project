@@ -5,7 +5,9 @@ import main.Entity.Workable;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class WorkManager implements IWorkManager, Serializable {
 
@@ -18,9 +20,9 @@ public class WorkManager implements IWorkManager, Serializable {
      */
     public void extendWork(String workID, IWorkList workList, String extend_date) {
         Workable work = workList.getWork(workID);
-        String due = work.getEnd_time();
+        String due = work.getEndTime();
         due = String.valueOf(Long.parseLong(due) + Long.parseLong(extend_date));
-        work.setEnd_time(due);
+        work.setEndTime(due);
         autoChange(work);
     }
 
@@ -52,7 +54,7 @@ public class WorkManager implements IWorkManager, Serializable {
     private void autoChange(Workable work) {
         String statue = work.getState();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        long due = Integer.parseInt(work.getEnd_time());
+        long due = Integer.parseInt(work.getEndTime());
         if (statue.equals("Finished")) {
             return;
         }
@@ -115,8 +117,14 @@ public class WorkManager implements IWorkManager, Serializable {
         result.add(String.valueOf(w.getLevel()));
         result.add(w.getDescribe());
         result.add(w.getRequirement());
-        result.add(w.getStart_time());
-        result.add(w.getEnd_time());
+        String s = w.getCreateTime();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(Long.parseLong(s));
+        result.add(sf.format(date));
+        String s2 = w.getEndTime();
+        SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date2 = new Date(Long.parseLong(s2));
+        result.add(sf2.format(date2));
         // Here can add group info
         return result;
     }
