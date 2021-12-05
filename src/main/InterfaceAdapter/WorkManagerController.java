@@ -58,7 +58,7 @@ public class WorkManagerController {
     public String showAllLowerWork(String level, IWorkList workList) {
         StringBuilder result = new StringBuilder();
         for (String i : this.workManager.workOfLowerLevel(level, workList)){
-            result.append(i).append("\n");
+            result.append(i);
         }
         return result.toString();
     }

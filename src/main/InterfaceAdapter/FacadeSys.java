@@ -389,9 +389,9 @@ public class FacadeSys {
         boolean validLevelGiven = this.verifierController.verifyUserExistence(targetUserID, this.loginList ) &&
                 this.verifierController.validToDelete(targetUserID, this.employeeList, this.userID);
         if (validLevelGiven) {
-            this.employeeListController.deleteEmployee(userID);
-            this.loginListController.deleteUser(userID);
-            this.groupManagerController.removeEmployeeFromAllRelatedGroup(userID, this.groupList);
+            this.employeeListController.deleteEmployee(targetUserID);
+            this.loginListController.deleteUser(targetUserID);
+            this.groupManagerController.removeEmployeeFromAllRelatedGroup(targetUserID, this.groupList);
         }
         return validLevelGiven;
     }
@@ -480,7 +480,7 @@ public class FacadeSys {
      *
      */
     public boolean extendWork(String days, String workID) {
-        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList)) {
+        if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) && this.workList.checkWorkExist(workID)) {
             this.workManagerController.extendWork(workID, days, this.workList);
             return true;
         }
