@@ -44,8 +44,8 @@ public class PersonalManager implements IPersonalManager , Serializable {
             info.add(fullTimeEmployee.getDepartment());
             info.add(fullTimeEmployee.getPosition());
             info.add(fullTimeEmployee.getState());
-            info.add(String.valueOf(fullTimeEmployee.getTotalVacationWithSalary()));
-            info.add(String.valueOf(fullTimeEmployee.getVacationUsed()));
+            info.add(fullTimeEmployee.getTotalVacationWithSalary());
+            info.add(fullTimeEmployee.getVacationUsed());
         }
         return info;
     }

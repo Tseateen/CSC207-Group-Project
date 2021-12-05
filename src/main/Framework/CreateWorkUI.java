@@ -29,7 +29,7 @@ public class CreateWorkUI {
         boolean noExist = true;
         boolean invalidCreate = false;
         while (noExist){
-        String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level", "due year", "due month", "due date"};
+        String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level"};
             ArrayList<String> work_info = new ArrayList<>();
         do{
             work_info.clear();

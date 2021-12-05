@@ -30,7 +30,7 @@ public class GroupManager_test {
                 "567 Mississauga Road");
         member3 = new User("Cathy", "Cath3", "c8888888", "411111111",
                 "111 Mississauga Road");
-        work = new Work("First Work", "998", "IT", "None", 2);
+        work = new Work("First Work", "998", "IT", "None", 2,"2022-01-01");
 
         groupmanager = new GroupManager();
     }

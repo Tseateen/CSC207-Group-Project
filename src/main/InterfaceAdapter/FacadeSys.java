@@ -256,7 +256,7 @@ public class FacadeSys {
      */
     public boolean createWork(ArrayList<String> info_list) {
         if (this.verifierController.verifyLevel(info_list.get(4), this.userID, this.employeeList) &&
-                !this.workListController.checkWorkExist(info_list.get(0))) {
+                !this.workListController.checkWorkExist(info_list.get(1))) {
             return this.workListController.createWork(info_list);
         }else{
             return false;

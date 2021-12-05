@@ -72,7 +72,7 @@ public class Verifier_test {
 
     @Test
     public void testLevelVerifier(){
-        assertTrue(VV.levelVerifier(1, u1.getID(), EL));
-        assertFalse(VV.levelVerifier(9, u1.getID(), EL));
+        assertFalse(VV.levelVerifier(1, u1.getID(), EL));
+        assertTrue(VV.levelVerifier(9, u1.getID(), EL));
     }
 }

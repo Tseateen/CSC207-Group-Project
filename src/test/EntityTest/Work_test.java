@@ -12,7 +12,7 @@ public class Work_test {
 
     @Before
     public void setUp() {
-        work = new Work("First Work", "456", "IT", "None", 2);
+        work = new Work("First Work", "456", "IT", "None", 2,"2022-01-01");
     }
 
     @Test(timeout = 100)
