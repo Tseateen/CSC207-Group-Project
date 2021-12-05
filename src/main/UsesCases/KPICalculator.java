@@ -78,8 +78,8 @@ public class KPICalculator implements Serializable {
 
     private boolean checkTimeHelper(Workable work, String groupID, int month, int year){
         return (work.getState().equals("Finished") &&
-                Integer.valueOf(work.getEnd_time().substring(5, 7)).equals(month) &&
-                Integer.valueOf(work.getEnd_time().substring(0, 4)).equals(year) &&
+                Integer.valueOf(work.getEndTime().substring(5, 7)).equals(month) &&
+                Integer.valueOf(work.getEndTime().substring(0, 4)).equals(year) &&
                 work.getID().equals(groupID));
     }
 

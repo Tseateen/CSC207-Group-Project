@@ -1,7 +1,6 @@
 package main.Entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.sql.Timestamp;
 
 public class Work implements Workable, Serializable {
@@ -13,11 +12,9 @@ public class Work implements Workable, Serializable {
     // the ID of the Work.
     private final String id;
     // the time of the Work has been created.
-    private final String create_time;
-    // the time of the Work has been started.
-    private String start_time;
+    private final String createTime;
     // the time of the Work has been ended.
-    private String end_time;
+    private String endTime;
     // the authority level of the Work.
     private final int level;
     // the department of the Work responsible for.
@@ -46,7 +43,7 @@ public class Work implements Workable, Serializable {
      * @param department The department responsible for this Work.
      *
      */
-    public Work(String name, String id, String department, String requirement, int level)  {
+    public Work(String name, String id, String department, String requirement, int level, String endTime)  {
         this.name = name;
         this.id = id;
         this.level = level;
@@ -54,13 +51,8 @@ public class Work implements Workable, Serializable {
         this.department = department;
         this.requirement = requirement;
         Timestamp now = new Timestamp(System.currentTimeMillis());
-
-        this.create_time = String.valueOf(now.getTime());
-        this.start_time = null;
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(2099, Calendar.DECEMBER, 31,0,0,0);
-        Timestamp end = new Timestamp(calendar.getTimeInMillis());
-        this.end_time =String.valueOf(end.getTime());
+        this.createTime = String.valueOf(now.getTime());
+        this.endTime = endTime;
     }
 
     /**
@@ -95,13 +87,13 @@ public class Work implements Workable, Serializable {
      * @return This method will return the time that this Work is being created.
      */
     @Override
-    public String getCreate_time() {
-        return this.create_time;
+    public String getCreateTime() {
+        return this.createTime;
     }
 
     // String Need to be the form of timestamp
-    public void setEnd_time(String time) {
-        this.end_time = time;
+    public void setEndTime(String time) {
+        this.endTime = time;
     }
 
 
@@ -110,8 +102,8 @@ public class Work implements Workable, Serializable {
      * @return This method will return the estimated end time of this Work.
      */
     @Override
-    public String getEnd_time() {
-        return this.end_time;
+    public String getEndTime() {
+        return this.endTime;
     }
 
 
@@ -140,26 +132,6 @@ public class Work implements Workable, Serializable {
     @Override
     public void setState(String state) {
         this.state = state;
-    }
-
-
-    /**
-     *
-     * @param time Given the start time of this Work.
-     */
-    @Override
-    // String Need to be the form of timestamp
-    public void setStart_time(String time) {
-        this.start_time = time;
-    }
-
-    /**
-     *
-     * @return This method will return the start time of this Work.
-     */
-    @Override
-    public String getStart_time() {
-        return this.start_time;
     }
 
     /**

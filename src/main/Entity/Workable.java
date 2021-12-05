@@ -14,19 +14,15 @@ public interface Workable extends Serializable{
 
     int getLevel();
 
-    String getCreate_time();
+    String getCreateTime();
 
-    String getEnd_time();
+    String getEndTime();
 
     String getDepartment();
 
     String getState();
 
     void setState(String state);
-
-    void setStart_time(String time);
-
-    String getStart_time();
 
     void setDescribe(String information);
 
@@ -40,7 +36,7 @@ public interface Workable extends Serializable{
 
     void setSign(String sign);
 
-    void setEnd_time(String time);
+    void setEndTime(String time);
 }
 
 

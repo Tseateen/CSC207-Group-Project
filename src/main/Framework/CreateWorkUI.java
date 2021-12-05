@@ -29,7 +29,7 @@ public class CreateWorkUI {
         boolean noExist = true;
         boolean invalidCreate = false;
         while (noExist){
-        String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level"};
+        String[] WorkInfoArray = {"name", "ID", "Description", "Department", "level", "due year", "due month", "due date"};
             ArrayList<String> work_info = new ArrayList<>();
         do{
             work_info.clear();
@@ -37,9 +37,15 @@ public class CreateWorkUI {
                     System.out.println("Please type the " + each_work_info + " of new work");
                 String info = keyIn.nextLine();
                 work_info.add(info);
-        }
+                }
+            System.out.println("Please type the due date of new work, format as yyyy-mm-dd; if no due date, type null");
+            String info = keyIn.nextLine();
+            if (!info.equals("null")) {
+                work_info.add(info);
+            }
             if (!this.facadeSys.createWork(work_info)){
-                    System.out.println("You can not create a work that has a higher level than you! Please reassign the work");
+                    System.out.println("Work level is higher than yours or work already exists. Or please type the date " +
+                            "as format requirement Please reassign the work");
                     invalidCreate = true;
             }
             }while(invalidCreate);
