@@ -21,6 +21,7 @@ public class PersonalManager_test {
     PartTimeEmployee e2;
     GroupList GL;
     WorkList WL;
+    WorkManager WM;
 
     @Before
     public void Setup(){
@@ -37,11 +38,14 @@ public class PersonalManager_test {
         EL.addEmployee(e1.getDepartment(),e1.getWage(),e1.getPosition(), Integer.toString(e1.getLevel()), "F", "Lily");
         EL.addEmployee(e2.getDepartment(),e2.getWage(),"N", Integer.toString(e2.getLevel()), "P", "Cathy");
         PM = new PersonalManager();
+        WL = new WorkList();
         GL = new GroupList();
+        WM = new WorkManager();
 
         // Todo: The following commented code will raise error
-        //GL.addGroup(u1.getID(), "207");
-        //WL.addWork("Group Project", "207", "Human Resource", "Get it done", 9);
+        GL.addGroup(u1.getID(), "207");
+        WL.addWork("Group Project", "207", "Human Resource", "Get it done", 9);
+        WM.changeWorkInfo("207", WL, "SIGN", "1");
 
         e1.setTotalVacationWithSalary("2");
         e1.setVacationUsed("1");
@@ -63,8 +67,8 @@ public class PersonalManager_test {
 
     @Test
     public void testCheckTotalSalary(){
-        assertEquals("0", PM.checkTotalSalary(EL, u1.getID(), GL, WL));
-        assertEquals("6200", PM.checkTotalSalary(EL, u2.getID(), GL, WL));
+        assertEquals("6000", PM.checkTotalSalary(EL, u1.getID(), GL, WL));
+        assertEquals("0", PM.checkTotalSalary(EL, u2.getID(), GL, WL));
         // I think it needs modification, since this test cannot effectively test what the method did (KPI part)
     }
 

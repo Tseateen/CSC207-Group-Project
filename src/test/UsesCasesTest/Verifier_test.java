@@ -14,6 +14,7 @@ public class Verifier_test {
     Userable u1, u2;
     FullTimeEmployee e1;
     PartTimeEmployee e2;
+    GroupList GL;
 
 
     @Before
@@ -33,6 +34,9 @@ public class Verifier_test {
         e2 = new PartTimeEmployee("Technology", "25", 8, u2.getID());
         EL.addEmployee(e1.getDepartment(),e1.getWage(),e1.getPosition(), e1.getLevel()+"", "F", "Lily");
         EL.addEmployee(e2.getDepartment(),e2.getWage(),"N", e2.getLevel()+"", "P", "Cathy");
+
+        GL = new GroupList();
+        GL.addGroup(u1.getID(), "207");
     }
 
     @Test
@@ -46,5 +50,29 @@ public class Verifier_test {
     public void testVerifierFullTime(){
         assertTrue(VV.verifierFullTime(u1.getID(), EL));
         assertFalse(VV.verifierFullTime(u2.getID(), EL));
+    }
+
+    @Test
+    public void testValidToCreateThisLevel(){
+        assertTrue(VV.ValidToCreateThisLevel("9", EL, e1.getID()));
+        assertFalse(VV.ValidToCreateThisLevel("1", EL, e1.getID()));
+    }
+
+    @Test
+    public void testValidToDeleteThisUser(){
+        assertTrue(VV.validToDeleteThisUser(e2.getID(), EL, e1.getID()));
+        assertFalse(VV.validToDeleteThisUser(e1.getID(), EL, e2.getID()));
+    }
+
+    @Test
+    public void testVerifierLeader(){
+        assertTrue(VV.verifierLeader(u1.getID(), "207", GL));
+        assertFalse(VV.verifierLeader(u2.getID(), "207", GL));
+    }
+
+    @Test
+    public void testLevelVerifier(){
+        assertTrue(VV.levelVerifier(1, u1.getID(), EL));
+        assertFalse(VV.levelVerifier(9, u1.getID(), EL));
     }
 }
