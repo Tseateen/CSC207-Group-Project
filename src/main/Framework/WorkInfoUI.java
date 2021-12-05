@@ -30,7 +30,7 @@ public class WorkInfoUI {
                         "You only can see the name of work here! \n" +
                         "If you want to check more detail on your particular work, please type Y. \n" +
                         "Otherwise, please type any other bottom \n.");
-        String action = keyIn.nextLine();
+        String action = keyIn.nextLine().toUpperCase();
         if(action.equalsIgnoreCase("Y")){
             boolean noExist = true;
             while (noExist){
@@ -43,7 +43,7 @@ public class WorkInfoUI {
                 }
                 System.out.println("If you want to check another work in detail, please type C.\n " +
                         "Otherwise, please type E to exist");
-                action = keyIn.nextLine();
+                action = keyIn.nextLine().toUpperCase();
                 if(action.equalsIgnoreCase("E")){
                     noExist = false;
                 }

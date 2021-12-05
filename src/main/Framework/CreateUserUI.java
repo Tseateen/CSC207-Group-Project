@@ -59,7 +59,7 @@ public class CreateUserUI {
                                 + " Password For the new user is : " + createResult.get(2) + "\n"
                                 + "If you want to create another user, please type C. \n"
                                 + " Otherwise, please type E to exist");
-                String action = keyIn.nextLine();
+                String action = keyIn.nextLine().toUpperCase();
                 if(action.equalsIgnoreCase("E")){
                     noExist = false;
                 }

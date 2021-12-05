@@ -31,9 +31,9 @@ public class SetEmployeeInfoUI {
             String employeeID = keyIn.nextLine();
             System.out.println(
                     "i) Change employee's department, please type 1; " + "\n" +
-                            "ii) Change your level, please type 2; " + "\n" +
-                            "iii) Change your wage, please type 3; " + "\n" +
-                            "iv) Change your position, please type 4" + "\n");
+                            "ii) Change employee's level, please type 2; " + "\n" +
+                            "iii) Change employee's wage, please type 3; " + "\n" +
+                            "iv) Change employee's position, please type 4" + "\n");
             String option = keyIn.nextLine();
             if (option.equals("1") || option.equals("2") || option.equals("3")
                     || option.equals("4")) {
@@ -44,7 +44,7 @@ public class SetEmployeeInfoUI {
 
                 System.out.println("If you want to exist setting on other information, type E. " +
                         "Otherwise, type any other button to continuous setting.");
-                String action = keyIn.nextLine();
+                String action = keyIn.nextLine().toUpperCase();
                 if (action.equalsIgnoreCase("E")) {
                     noExit = false;
                 }
