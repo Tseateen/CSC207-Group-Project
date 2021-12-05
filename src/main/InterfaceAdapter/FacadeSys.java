@@ -492,4 +492,19 @@ public class FacadeSys {
         return false;
     }
     //=====================================
+
+    // === Case (XI) Change Work State
+
+    public void updateAllWorkState() {
+        this.workManagerController.updateStateAll(this.workList);
+    }
+
+    public boolean changeWorkState(String workID, String state){
+        if (this.workList.checkWorkExist(workID) && this.verifierController.verifyLeader(this.userID, workID, this.groupList)) {
+            this.workManagerController.changeState(workID, state, this.workList);
+            return true;
+        }
+        return false;
+
+    }
 }
