@@ -33,7 +33,7 @@ public class WorkListController {
             return true;
         }
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(info.get(6));
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(info.get(5));
             Timestamp ts = new Timestamp(date.getTime());
             String endTime =String.valueOf(ts.getTime());
             this.workList.addWork(info.get(0), info.get(1), info.get(2), info.get(3), Integer.parseInt(info.get(4)), endTime);

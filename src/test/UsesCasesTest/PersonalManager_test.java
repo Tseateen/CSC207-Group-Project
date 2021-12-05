@@ -44,7 +44,7 @@ public class PersonalManager_test {
 
         // Todo: The following commented code will raise error
         GL.addGroup(u1.getID(), "207");
-        WL.addWork("Group Project", "207", "Human Resource", "Get it done", 9);
+        WL.addWork("Group Project", "207", "Human Resource", "Get it done", 9, "2022-01-01");
         WM.changeWorkInfo("207", WL, "SIGN", "1");
 
         e1.setTotalVacationWithSalary("2");
