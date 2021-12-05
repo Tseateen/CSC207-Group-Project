@@ -42,13 +42,12 @@ public class WorkManager implements IWorkManager, Serializable {
 
     /**
      * Change a work's state automatically as the time goes.
-     * @param workID the work's id which is going to be extended.
      * @param workList the list of work
      */
-    public void autoChangeState(String workID, IWorkList workList) {
-        Workable work = workList.getWork(workID);
-        this.autoChange(work);
-
+    public void autoChangeState(IWorkList workList) {
+        for (Workable w: (WorkList)workList) {
+            this.autoChange(w);
+        }
     }
 
     private void autoChange(Workable work) {
@@ -73,30 +72,28 @@ public class WorkManager implements IWorkManager, Serializable {
      * Change the Work information with different options.
      *
      * @param workID the ID of the Work to be changed.
-     * @param opt the option with different parts of the Work information to be changed.
-     * @param changeTo the new information.
      * @param workList work list we have to find work
      *
-     * @return true iff the Work information has successfully been changed.
+     * @param opt the option with different parts of the Work information to be changed.
+     * @param changeTo the new information.
      *
      */
-    public boolean changeWorkInfo(String workID, IWorkList workList , String opt, String changeTo) {
+    public void changeWorkInfo(String workID, IWorkList workList , String opt, String changeTo) {
         Workable w = workList.getWork(workID);
         switch (opt) {
             case "DESCRIBE":
                 w.setDescribe(changeTo);
-                return true;
+                return;
             case "REQ":
                 w.setRequirement(changeTo);
-                return true;
+                return;
             case "STATE":
                 w.setState(changeTo);
-                return true;
+                return;
             case "SIGN":
                 w.setSign(changeTo);
-                return true;
+                return;
             default:
-                return false;
         }
     }
 

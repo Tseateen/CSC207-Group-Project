@@ -26,7 +26,6 @@ public class SetPersonalInfoUI {
         Scanner keyIn = new Scanner(System.in);
         boolean noExit = true;
 
-
         while (noExit) {
             System.out.println(
                             "i) Change your name, please type 1; " + "\n" +

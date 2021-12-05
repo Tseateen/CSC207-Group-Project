@@ -34,20 +34,21 @@ public class WorkManagerUI {
         SetEmployeeInfoUI setEmployeeInfoUI = new SetEmployeeInfoUI(this.facadeSys);
         CheckSalaryUI checkSalaryUI = new CheckSalaryUI(this.facadeSys);
         ExtendWorkUI extendWorkUI = new ExtendWorkUI(this.facadeSys);
+        ChangeWorkStateUI changeWorkStateUI = new ChangeWorkStateUI(this.facadeSys);
 
         boolean noExit = true;
         while (noExit) {
             System.out.println(
-                            "i) Check your own work's information, please enter 1; " + "\n" +
-                            "ii) Create a work, please enter 2; " + "\n" +
-                            "iii) Start a work with assigning leader, please enter 3; " + "\n" +
-                            "iv) Distribute a work, please enter 4; " + "\n" +
-                            "v) Create a user, please enter 5; "  + "\n" +
-                            "vi) Delete a user, please enter 6; "  + "\n" +
-                            "vii) Check all lower level employees' salary-related information, please enter 7" + "\n" +
-                            "viii) Change employee's information, please enter 8" + "\n" +
-                            "X) Extend a Work, please enter 9" + "\n" +
-                            "Xi) Back to main page, please enter E " + "\n");
+                            "I) Check your own work's information, please enter 1; " + "\n" +
+                            "II) Create a work, please enter 2; " + "\n" +
+                            "III) Start a work with assigning leader, please enter 3; " + "\n" +
+                            "IV) Distribute a work, please enter 4; " + "\n" +
+                            "V) Create a user, please enter 5; "  + "\n" +
+                            "VI) Delete a user, please enter 6; "  + "\n" +
+                            "VII) Check all lower level employees' salary-related information, please enter 7" + "\n" +
+                            "VIII) Change employee's information, please enter 8" + "\n" +
+                            "X) Extend a Work, please enter 9" + "\n" + "XI) Change State of Works, please enter 10" + "\n" +
+                            "XII) Back to main page, please enter E " + "\n");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":
@@ -79,10 +80,14 @@ public class WorkManagerUI {
                     break;
                 case "8":
                     setEmployeeInfoUI.run();
-                    System.out.println("Successfully back to main WorkUI");;
+                    System.out.println("Successfully back to main WorkUI");
                     break;
                 case "9":
                     extendWorkUI.run();
+                    System.out.println("Successfully back to main WorkUI");
+                    break;
+                case "10":
+                    changeWorkStateUI.run();
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "E":

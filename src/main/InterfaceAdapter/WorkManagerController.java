@@ -42,11 +42,6 @@ public class WorkManagerController {
         this.workManager.extendWork(workID,workList, days);
     }
 
-
-    public void changeState(String workID, String newStatus, IWorkList workList){
-        this.workManager.changeState(workID,workList, newStatus );
-    }
-
     public String showAllWorkLead(String userID, IGroupList groupList, IWorkList workList){
         StringBuilder result = new StringBuilder();
         for (String i : this.workManager.TheWorkLeadByThisUser(userID, groupList, workList)){
@@ -74,6 +69,15 @@ public class WorkManagerController {
 
     public boolean removeOneFromGroup(String userID, String workID, IGroupList groupList) {
         return this.groupManager.deleteMember(userID,workID,groupList);
+    }
+
+    // ==================================================
+    public void changeState(String workID, String newStatus, IWorkList workList){
+        this.workManager.changeState(workID, workList, newStatus);
+    }
+
+    public void updateStateAll(IWorkList workList) {
+        this.workManager.autoChangeState(workList);
     }
 
 }
