@@ -34,7 +34,7 @@ public class DeleteUserUI {
                 System.out.println(
                         "If you want to delete another user, please type C. \n" +
                                 " Otherwise, please type E to exist");
-                String action = keyIn.nextLine();
+                String action = keyIn.nextLine().toUpperCase();
                 if(action.equalsIgnoreCase("E")){
                     noExist = false;
                 }

@@ -36,7 +36,7 @@ public class CheckSalaryUI {
                     "ii) Check lower level employees' total vacation with salary, please type 2; " + "\n" +
                     "iii) Check lower level employees' vacation used, please type 3; " + "\n" +
                     "iv) Otherwise, please type E to exit;");
-            String check_option = keyIn.nextLine();
+            String check_option = keyIn.nextLine().toUpperCase();
             if (check_option.equals("E")) {
                break;
             }else {
@@ -51,7 +51,7 @@ public class CheckSalaryUI {
                 }
                 System.out.println();
                 System.out.println("Otherwise, please type E to exist");
-                String action = keyIn.nextLine();
+                String action = keyIn.nextLine().toUpperCase();
                 if (action.equalsIgnoreCase("E")) {
                     noExist = false;
                 }

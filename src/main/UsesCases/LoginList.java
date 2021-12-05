@@ -112,7 +112,8 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
-        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserData.ser"));
+        String targetFile = filePath.concat("/src/Data/UserData.ser");
+        InputStream file = new FileInputStream(targetFile);
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         LoginList UserFile = (LoginList) input.readObject();
@@ -127,7 +128,8 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
-        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserData.ser"));
+        String targetFile = filePath.concat("/src/Data/UserData.ser");
+        OutputStream file = new FileOutputStream(targetFile);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(this);

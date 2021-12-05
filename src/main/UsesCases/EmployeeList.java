@@ -100,7 +100,8 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
-        InputStream file = new FileInputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
+        String targetFile = filePath.concat("/src/Data/UserEmployeeData.ser");
+        InputStream file = new FileInputStream(targetFile);
         InputStream buffer = new BufferedInputStream(file);
         ObjectInput input = new ObjectInputStream(buffer);
         EmployeeList EmployeeFile = (EmployeeList) input.readObject();
@@ -114,7 +115,8 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
-        OutputStream file = new FileOutputStream(filePath.concat("/src/Data/UserEmployeeData.ser"));
+        String targetFIle =  filePath.concat("/src/Data/UserEmployeeData.ser");
+        OutputStream file = new FileOutputStream(targetFIle);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
         output.writeObject(this);

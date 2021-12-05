@@ -86,6 +86,7 @@ public class WorkManagerUI {
                     System.out.println("Successfully back to main WorkUI");
                     break;
                 case "E":
+                case "e":
                     noExit = false;
                     break;
                 default:
