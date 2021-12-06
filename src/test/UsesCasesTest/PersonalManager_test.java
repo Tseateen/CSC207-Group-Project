@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class PersonalManager_test {
 
-    LoginList LL;
+    LoginList loginList;
     EmployeeList EL;
     PersonalManager PM;
     UserAble u1, u2;
@@ -26,13 +26,13 @@ public class PersonalManager_test {
 
     @Before
     public void Setup(){
-        LL = new LoginList();
+        loginList = new LoginList();
         u1 = new User("Lily", "Lily0", "l99999999", "498765432",
                 "234 Mississauga Road");
         u2 = new User("Cathy", "Cathy1", "33445566", "6478888888",
                 "12 Apple Creek");
-        LL.addUser(u1.getName(), u1.getPassword(), u1.getPhone(), u1.getAddress());
-        LL.addUser(u2.getName(), u2.getPassword(), u2.getPhone(), u2.getAddress());
+        loginList.addUser(u1.getName(), u1.getPassword(), u1.getPhone(), u1.getAddress());
+        loginList.addUser(u2.getName(), u2.getPassword(), u2.getPhone(), u2.getAddress());
         EL = new EmployeeList();
         e1 = new FullTimeEmployee("Human Resource", "Manager", "6000", 4, u1.getID());
         e2 = new PartTimeEmployee("Technology", "25", 8, u2.getID());
@@ -65,12 +65,12 @@ public class PersonalManager_test {
     public void testEmployeeInfo(){
         ArrayList<String> info1 = new ArrayList<>(Arrays.asList(u2.getName(), u2.getID(), u2.getPassword(), u2.getPhone(),
                 u2.getAddress(), e2.getDepartment()));
-        assertEquals(info1, PM.employeeInfo(LL, EL, u2.getID()));
+        assertEquals(info1, PM.employeeInfo(loginList, EL, u2.getID()));
 
         ArrayList<String> info2 = new ArrayList<>( Arrays.asList(u1.getName(), u1.getID(), u1.getPassword(), u1.getPhone(),
                 u1.getAddress(), e1.getDepartment(), e1.getPosition(), e1.getState(), e1.getTotalVacationWithSalary(),
                 e1.getVacationUsed()));
-        assertEquals(info2, PM.employeeInfo(LL, EL, u1.getID()));
+        assertEquals(info2, PM.employeeInfo(loginList, EL, u1.getID()));
     }
 
 
@@ -119,9 +119,9 @@ public class PersonalManager_test {
 
     @Test
     public void testSetName(){
-        PM.setName("Luke", LL, u1.getID());
+        PM.setName("Luke", loginList, u1.getID());
 
-        for (UserAble user: LL){
+        for (UserAble user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("Luke", user.getName());
                 assertEquals("Lily0", user.getID());
@@ -131,9 +131,9 @@ public class PersonalManager_test {
 
     @Test
     public void testSetPassword(){
-        PM.setPassword("lily12345678987", LL, u1.getID());
+        PM.setPassword("lily12345678987", loginList, u1.getID());
 
-        for (UserAble user: LL){
+        for (UserAble user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("lily12345678987", user.getPassword());
             }
@@ -142,9 +142,9 @@ public class PersonalManager_test {
 
     @Test
     public void testSetAddress(){
-        PM.setAddress("314 Markham Road", LL, u1.getID());
+        PM.setAddress("314 Markham Road", loginList, u1.getID());
 
-        for (UserAble user: LL){
+        for (UserAble user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("314 Markham Road", user.getAddress());
             }
@@ -153,9 +153,9 @@ public class PersonalManager_test {
 
     @Test
     public void testSetPhone(){
-        PM.setPhone("4141414141", LL, u1.getID());
+        PM.setPhone("4141414141", loginList, u1.getID());
 
-        for (UserAble user: LL){
+        for (UserAble user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("4141414141", user.getPhone());
             }
