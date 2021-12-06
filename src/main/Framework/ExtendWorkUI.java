@@ -20,6 +20,7 @@ public class ExtendWorkUI {
         }
         else{
             System.out.println("The work does not exist or you are not valid to extend the work!");
+            System.out.println();
         }
         }
 

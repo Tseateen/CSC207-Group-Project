@@ -5,8 +5,10 @@ import main.Entity.Workable;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class WorkManager implements IWorkManager, Serializable {
@@ -16,14 +18,18 @@ public class WorkManager implements IWorkManager, Serializable {
      * Extend a work (add extra works to the current work).
      * @param workID the work's id which is going to be extended.
      * @param workList the list of work
-     * @param extend_date how much date it's gonna extended.
+     * @param extendDate how much date it's gonna extended.
      */
-    public void extendWork(String workID, IWorkList workList, String extend_date) {
-        Workable work = workList.getWork(workID);
-        String due = work.getEndTime();
-        due = String.valueOf(Long.parseLong(due) + Long.parseLong(extend_date));
-        work.setEndTime(due);
-        autoChange(work);
+    public void extendWork(String workID, IWorkList workList, String extendDate) {
+            Workable work = workList.getWork(workID);
+            Date date = new Date(Long.parseLong(work.getEndTime()));
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, Integer.parseInt(extendDate));
+            Timestamp ts = new Timestamp(cal.getTimeInMillis());
+            String due = String.valueOf(ts.getTime());
+            work.setEndTime(due);
+            this.autoChange(work);
     }
 
 
@@ -31,11 +37,11 @@ public class WorkManager implements IWorkManager, Serializable {
      * Change a work's state
      * @param workID the work's id which is going to be extended.
      * @param workList the list of work
-     * @param new_statue the state that the given work is going to be changed to.
+     * @param newStatue the state that the given work is going to be changed to.
      */
-    public void changeState(String workID, IWorkList workList, String new_statue) {
+    public void changeState(String workID, IWorkList workList, String newStatue) {
         Workable work = workList.getWork(workID);
-        work.setState(new_statue);
+        work.setState(newStatue);
         autoChange(work);
     }
 

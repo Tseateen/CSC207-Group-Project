@@ -43,7 +43,7 @@ public class CheckSalaryUI {
                 List<String> result = this.facadeSys.checkLowerLevelEmployeeSalary(id);
                 if(check_option.equals("1") || check_option.equals("2") || check_option.equals("3")){
                     System.out.println(result.get(Integer.parseInt(check_option) - 1));
-                    System.out.println("");
+                    System.out.println();
                     System.out.println("If you want to check other type of the information from the lower level employees," +
                             " please type any bottom. Otherwise, please type E to exist");
                 }else {
@@ -53,6 +53,7 @@ public class CheckSalaryUI {
                 System.out.println("Otherwise, please type E to exist");
                 String action = keyIn.nextLine().toUpperCase();
                 if (action.equalsIgnoreCase("E")) {
+                    System.out.println();
                     noExist = false;
                 }
 

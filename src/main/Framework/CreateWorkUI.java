@@ -54,6 +54,7 @@ public class CreateWorkUI {
                         " Otherwise, please type E to exist");
                 String action = keyIn.nextLine().toUpperCase();
                 if(action.equalsIgnoreCase("E")){
+                    System.out.println();
                     noExist = false;
                 }
 

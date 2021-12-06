@@ -29,7 +29,7 @@ public class WorkInfoUI {
         System.out.println(
                         "You only can see the name of work here! \n" +
                         "If you want to check more detail on your particular work, please type Y. \n" +
-                        "Otherwise, please type any other bottom \n.");
+                        "Otherwise, please type any other bottom \n");
         String action = keyIn.nextLine().toUpperCase();
         if(action.equalsIgnoreCase("Y")){
             boolean noExist = true;

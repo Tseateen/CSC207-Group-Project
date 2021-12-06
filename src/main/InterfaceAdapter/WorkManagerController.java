@@ -39,7 +39,7 @@ public class WorkManagerController {
     // ==========================================
 
     public void extendWork(String workID, String days, IWorkList workList){
-        this.workManager.extendWork(workID,workList, days);
+        this.workManager.extendWork(workID, workList, days);
     }
 
     public String showAllWorkLead(String userID, IGroupList groupList, IWorkList workList){
