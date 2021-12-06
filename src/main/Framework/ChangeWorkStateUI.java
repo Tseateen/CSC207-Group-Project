@@ -49,7 +49,7 @@ public class ChangeWorkStateUI {
                     noExit = false;
                     break;
                 default:
-                    System.out.println("Wrong action, please type again");
+                    System.out.println("Wrong action, please type again\n");
                     break;
             }
         }

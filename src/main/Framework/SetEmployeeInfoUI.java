@@ -33,7 +33,7 @@ public class SetEmployeeInfoUI {
                     "i) Change employee's department, please type 1; " + "\n" +
                             "ii) Change employee's level, please type 2; " + "\n" +
                             "iii) Change employee's wage, please type 3; " + "\n" +
-                            "iv) Change employee's position, please type 4" + "\n");
+                            "iv) Change employee's position, please type 4");
             String option = keyIn.nextLine();
             if (option.equals("1") || option.equals("2") || option.equals("3")
                     || option.equals("4")) {

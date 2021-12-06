@@ -485,6 +485,12 @@ public class FacadeSys {
      *
      */
     public boolean extendWork(String days, String workID) {
+        try {
+            Long.parseLong(days);
+        } catch (Exception e) {
+            return false;
+        }
+
         if (this.verifierController.verifyLeader(this.userID, workID, this.groupList) && this.workList.checkWorkExist(workID)) {
             this.workManagerController.extendWork(workID, days, this.workList);
             return true;
