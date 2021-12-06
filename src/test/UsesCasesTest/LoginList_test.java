@@ -1,7 +1,7 @@
 package test.UsesCasesTest;
 
 
-import main.Entity.Userable;
+import main.Entity.UserAble;
 import main.UsesCases.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class LoginList_test {
     @Test
     public void testAddUser(){
         LL.addUser("Lily", "123456", "4203456789",  "10 King St.");
-        for (Userable u: LL){
+        for (UserAble u: LL){
             if (u.getID().equals("1")){
                 assertEquals(u.getPassword(), "123456");
                 assertEquals(u.getName(), "Lily");
@@ -35,7 +35,7 @@ public class LoginList_test {
     @Test
     public void testDeleteUser(){
         LL.deleteUser("1");
-        for (Userable u: LL){
+        for (UserAble u: LL){
             assertNotEquals(u.getID(), "1");
         }
         assertEquals(LL.getSize(), 0);

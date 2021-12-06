@@ -71,7 +71,6 @@ public class FullTimeEmployee extends Employee implements Serializable {
      * purpose.
      */
     public void setPosition(String position) {
-        String op = this.position;
         this.position = position;
     }
 

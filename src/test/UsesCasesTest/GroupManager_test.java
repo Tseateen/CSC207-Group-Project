@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class GroupManager_test {
     GroupManager groupmanager;
     Group group;
-    Userable leader, member1, member2, member3;
+    UserAble leader, member1, member2, member3;
     Workable work;
 
 

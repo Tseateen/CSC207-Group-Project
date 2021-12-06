@@ -29,7 +29,7 @@ public class PersonalManager implements IPersonalManager , Serializable {
     @Override
     public ArrayList<String> employeeInfo(ILoginList loginList, IEmployeeList employeeList, String userID) {
         ArrayList<String> info = new ArrayList<>();
-        Userable user = loginList.getUser(userID);
+        UserAble user = loginList.getUser(userID);
         Employee employee = employeeList.getEmployee(userID);
         info.add(user.getName());
         info.add(user.getID());

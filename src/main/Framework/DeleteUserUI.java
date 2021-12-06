@@ -41,7 +41,7 @@ public class DeleteUserUI {
             }
             else {
                 System.out.println("You cannot delete this level of the user or there are no user to delete! Please type again.");
-                System.out.println("");
+                System.out.println();
                 noExist = false;
             }
         }
