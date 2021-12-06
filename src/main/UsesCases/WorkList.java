@@ -58,31 +58,6 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         return !Objects.isNull(this.getWork(workID));
     }
 
-
-    /**
-     * Delete an existed Work into the WorkList.
-     *
-     * @param id the Work's ID.
-     *
-     * @return true if the Work has been deleted.
-     */
-    public boolean deleteWork(String id){
-        int index = -1;
-
-        for(int i = 0; i < this.getSize(); i ++){
-            if(this.workList.get(i).getID().equals(id)){
-                index = i;
-            }
-        }
-        if(index == -1){
-            return false;
-        }else{
-            this.workList.remove(this.workList.get(index));
-            return true;
-        }
-    }
-
-
     /**
      * Get the total number work existed from the workList.
      *

@@ -16,7 +16,7 @@ public class PersonalManager_test {
     LoginList LL;
     EmployeeList EL;
     PersonalManager PM;
-    Userable u1, u2;
+    UserAble u1, u2;
     FullTimeEmployee e1;
     PartTimeEmployee e2;
     GroupList GL;
