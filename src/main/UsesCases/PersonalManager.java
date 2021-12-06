@@ -80,6 +80,13 @@ public class PersonalManager implements IPersonalManager , Serializable {
     }
 
 
+    /**
+     * Check the minimum wage of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the minimum wage of an employee.
+     */
     @Override
     public String checkMinimumWage(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
@@ -87,6 +94,13 @@ public class PersonalManager implements IPersonalManager , Serializable {
     }
 
 
+    /**
+     * Check the vocation bonus of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the vocation bonus of an employee.
+     */
     @Override
     public String checkVacationBonus(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
@@ -98,6 +112,13 @@ public class PersonalManager implements IPersonalManager , Serializable {
     }
 
 
+    /**
+     * Check the KPI bonus of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the KPI bonus of an employee.
+     */
     @Override
     public String checkKPIBonus(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         Employee employee = employeeList.getEmployee(userID);

@@ -22,6 +22,7 @@ public class WorkListController {
         this.workList = workList;
     }
 
+
     // === Usage: FacadeSys Worker Case (ii) ====
     public boolean createWork(ArrayList<String> info) {
         if (info.size() < 6) {
@@ -44,14 +45,30 @@ public class WorkListController {
     }
     // ==================================================
 
+
     // === Usage: FacadeSys Worker Case (iii) ====
+    /**
+     * Get the authority level of the Work.
+     *
+     * @param workID the ID of the Work.
+     *
+     * @return a string with the authority level of the Work.
+     */
     public String FindWorkLevel(String workID){
             return this.workList.FindWorkLevel(workID);
 
     }
     // ==================================================
 
+
     // === Usage: FacadeSys Worker Case (iii) ====
+    /**
+     * Verify work exist or not.
+     *
+     * @param workID the work's id which is going to be extended.
+     *
+     * @return work exist or not.
+     */
     public boolean checkWorkExist(String workID){
         return this.workList.checkWorkExist(workID);
     }

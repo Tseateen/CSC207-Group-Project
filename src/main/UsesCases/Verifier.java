@@ -83,6 +83,8 @@ public class Verifier implements IVerifier, Serializable {
      *
      * @param userID the ID of employee.
      * @param employeeList the list of employees.
+     *
+     * @return true iff the employee is a full-time employee.
      */
     @Override
     public boolean verifierFullTime(String userID, IEmployeeList employeeList) {

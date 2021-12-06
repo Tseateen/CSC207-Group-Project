@@ -19,6 +19,14 @@ public class PersonalInfoController {
     }
 
     // === Usage: FacadeSys Case (i) ====
+
+    /**
+     * Set up the personal information to the system.
+     *
+     * @param userID the ID of the targeted User.
+     *
+     * @return an ArrayList of strings with the information about the user.
+     */
     public ArrayList<String> personalInfo(ILoginList loginList, IEmployeeList employeeList, String userID){
         ArrayList<String> personalInfo = new ArrayList<>();
         ArrayList<String> info = this.personalManager.employeeInfo(loginList, employeeList, userID);
@@ -42,22 +50,65 @@ public class PersonalInfoController {
     }
 
 
-
+    /**
+     * Check the total salary of an employee (including bonus).
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the salary/wage of an employee.
+     */
     public String checkTotalSalary(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         return String.valueOf(this.personalManager.checkTotalSalary(employeeList, userID, groupList, workList));
     }
+
+
+    /**
+     * Check the minimum wage of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the minimum wage of an employee.
+     */
     public String checkMinimumWage(IEmployeeList employeeList, String userID){
         return String.valueOf(this.personalManager.checkMinimumWage(employeeList, userID));
     }
+
+
+    /**
+     * Check the vocation bonus of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the vocation bonus of an employee.
+     */
     public String checkVacationBonus(IEmployeeList employeeList, String userID){
         return String.valueOf(this.personalManager.checkVacationBonus(employeeList, userID));
     }
+
+
+    /**
+     * Check the KPI bonus of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return A string that represent the KPI bonus of an employee.
+     */
     public String checkKPIBonus(IEmployeeList employeeList, String userID, IGroupList groupList, IWorkList workList){
         return String.valueOf(this.personalManager.checkKPIBonus(employeeList, userID, groupList, workList));
     }
 
 
     // === Usage: FacadeSys PersonalCase (vi) ====
+
+    /**
+     * Setter method to set the personal information of a user.
+     *
+     * @param option the part the information to be set of the targeted user.
+     * @param userID the ID of the user.
+     * @param response the information will be changed to.
+     *
+     * @return true iff the personal information has been successfully set.
+     */
     public boolean setPersonalInfo(String option, String response, ILoginList loginList, String userID){
         try{
             switch (option){
@@ -83,7 +134,15 @@ public class PersonalInfoController {
     }
     // ======================================================================
 
-
+    /**
+     * Setter method to set the personal information of an employee.
+     *
+     * @param option the part the information to be set of the targeted user.
+     * @param userID the ID of the Employee.
+     * @param response the information will be changed to.
+     *
+     * @return true iff the personal information has been successfully set.
+     */
     public boolean setEmployeeInfo(String userID, String option, String response, IEmployeeList employeeList){
         boolean correctAction = true;
         try{
@@ -115,6 +174,15 @@ public class PersonalInfoController {
     }
 
     // === Usage: FacadeSys Worker Case (iii) ====
+
+
+    /**
+     * Checker method to check the user leve of an employee.
+     *
+     * @param userID the ID of the targeted user.
+     *
+     * @return the string with the user's authority level.
+     */
     public String checkUserLevel(String userID, IEmployeeList employeeList){
         return this.personalManager.getUserLevel(userID, employeeList);
     }
