@@ -42,13 +42,13 @@ public class WorkManagerUI {
                             "I) Check your own work's information, please enter 1; " + "\n" +
                             "II) Create a work, please enter 2; " + "\n" +
                             "III) Start a work with assigning leader, please enter 3; " + "\n" +
-                            "IV) Distribute a work, please enter 4; " + "\n" +
+                            "IV) Manage your work group as a leader. To distribute a work, please enter 4; " + "\n" +
                             "V) Create a user, please enter 5; "  + "\n" +
                             "VI) Delete a user, please enter 6; "  + "\n" +
                             "VII) Check all lower level employees' salary-related information, please enter 7" + "\n" +
                             "VIII) Change employee's information, please enter 8" + "\n" +
-                            "X) Extend a Work, please enter 9" + "\n" + "XI) Change State of Works, please enter 10" + "\n" +
-                            "XII) Back to main page, please enter E " + "\n");
+                            "IX) Extend a Work, please enter 9" + "\n" + "X) Change State of Works, please enter 10" + "\n" +
+                            "Back to main page, please enter E " + "\n");
             String action = keyIn.nextLine();
             switch (action) {
                 case "1":

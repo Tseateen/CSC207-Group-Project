@@ -104,7 +104,7 @@ public class PersonalManager implements IPersonalManager , Serializable {
     @Override
     public String checkVacationBonus(IEmployeeList employeeList, String userID) {
         Employee employee = employeeList.getEmployee(userID);
-        if (employee instanceof  PartTimeEmployee) {
+        if (employee instanceof PartTimeEmployee) {
             return "0";
         } else {
             return this.salaryCalculator.calculateBonusFromVacation((FullTimeEmployee) employee);
@@ -187,6 +187,50 @@ public class PersonalManager implements IPersonalManager , Serializable {
         Employee employee = employeeList.getEmployee(userID);
         employee.setWage(wage);
     }
+
+    @Override
+    public boolean setTotalVacationWithSalary(String userID, String vacation, IEmployeeList employeeList){
+        try{
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employeeList.getEmployee(userID);
+            fullTimeEmployee.setTotalVacationWithSalary(vacation);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    @Override
+    public boolean setVacationUsed(String userID, String vacationUsed, IEmployeeList employeeList){
+        try{
+            FullTimeEmployee fullTimeEmployee = (FullTimeEmployee) employeeList.getEmployee(userID);
+            fullTimeEmployee.setVacationUsed(vacationUsed);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean setWorkingHour(String userID, String hours, IEmployeeList employeeList) {
+        try{
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employeeList.getEmployee(userID);
+            partTimeEmployee.addWorkingHour(hours);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+    @Override
+    public boolean resetWorkingHour(String userID, IEmployeeList employeeList){
+        try{
+            PartTimeEmployee partTimeEmployee = (PartTimeEmployee) employeeList.getEmployee(userID);
+            partTimeEmployee.resetWorkingHour();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
 
     @Override
     public boolean setPosition(String userID, String position, IEmployeeList employeeList){

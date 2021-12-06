@@ -408,26 +408,26 @@ public class FacadeSys {
     /**
      * Check the salaries of the employees who have the lower level of authority from the targeted user.
      *
-     * @param userID the ID of the targeted user.
      *
      * @return a list of strings with the information about salaries of the applicable users.
      *
      */
-    public List<String> checkLowerLevelEmployeeSalary(String userID) {
-        List<String> result = new ArrayList<>();
-        List<String> personalInfo = personalInfoController.personalInfo(this.loginList, this.employeeList, userID);
-        // Size < 6 means that the user id is for part-time employee
-        if (personalInfo.size() <= 6){
-            result.add(personalInfoController.checkTotalSalary(this.employeeList, userID, groupList, workList));
-        return result;
-        } else {
-            result.add(personalInfoController.checkTotalSalary(this.employeeList, userID, groupList, workList));
-            // 8 : Total Vacation with Salary:
-            result.add(personalInfo.get(8));
-            // 9 :Vacation Used
-            result.add(personalInfo.get(9));
-            return result;
-        }
+    public List<String> checkLowerLevelEmployeeSalary() {
+
+            List<String> result = new ArrayList<>();
+            List<String> personalInfo = personalInfoController.personalInfo(this.loginList, this.employeeList, this.userID);
+            // Size < 6 means that the user id is for part-time employee
+            if (personalInfo.size() <= 6) {
+                result.add(personalInfoController.checkTotalSalary(this.employeeList, this.userID, groupList, workList));
+            } else {
+                result.add(personalInfoController.checkTotalSalary(this.employeeList, this.userID, groupList, workList));
+                // 8 : Total Vacation with Salary:
+                result.add(personalInfo.get(8));
+                // 9 :Vacation Used
+                result.add(personalInfo.get(9));
+            }
+                return result;
+
     }
 
 
@@ -462,9 +462,11 @@ public class FacadeSys {
      *
      */
     public String setEmployeeInfo(String userID, String option, String response){
-        // option {1: Department, 2: Level, 3: setWage, 4. Position}
-        if (this.personalInfoController.setEmployeeInfo(userID, option, response, this.employeeList)){
-            return "Set employee information success";
+        // option {1: Department, 2: Level, 3: setWage, 4. Position, 5. State, 6. Vacation with Salary, 7. Vacation Used,
+        // 8. Working hours, 9. reset working hour}
+        if (this.verifierController.verifyUserExistence(userID, this.loginList) &&
+                (this.personalInfoController.setEmployeeInfo(userID, option, response, this.employeeList))) {
+                return "Set employee information success";
         }
         else{
             return "Invalid option or response, or the employee does not exist!";
