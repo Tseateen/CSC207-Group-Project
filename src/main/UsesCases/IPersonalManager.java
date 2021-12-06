@@ -20,6 +20,10 @@ public interface IPersonalManager extends Serializable {
     void setDepartment(String userID, String Department, IEmployeeList employeeList);
     void setLevel(String userID, String level,IEmployeeList employeeList);
     void setWage(String userID, String wage, IEmployeeList employeeList);
+    boolean setTotalVacationWithSalary(String userID, String vacation, IEmployeeList employeeList);
+    boolean setVacationUsed(String userID, String vacationUsed, IEmployeeList employeeList);
+    boolean setWorkingHour(String userID, String hours, IEmployeeList employeeList);
+    boolean resetWorkingHour(String userID, IEmployeeList employeeList);
     boolean setPosition(String userID, String position, IEmployeeList employeeList);
     boolean setEmployeeState(String userID, String state, IEmployeeList employeeList);
 }

@@ -28,8 +28,6 @@ public class CheckSalaryUI {
         boolean noExist = true;
         System.out.println("You can check the salary-related information about all " +
                 "the employees whose level is lower than you");
-        System.out.println("Please enter your ID");
-        String id = keyIn.nextLine();
         while (noExist) {
             System.out.println(
                     "i) Check lower level employees' salary, please type 1; " + "\n" +
@@ -40,21 +38,26 @@ public class CheckSalaryUI {
             if (check_option.equals("E")) {
                break;
             }else {
-                List<String> result = this.facadeSys.checkLowerLevelEmployeeSalary(id);
-                if(check_option.equals("1") || check_option.equals("2") || check_option.equals("3")){
-                    System.out.println(result.get(Integer.parseInt(check_option) - 1));
+                try {
+                    List<String> result = this.facadeSys.checkLowerLevelEmployeeSalary();
+
+                    if (check_option.equals("1") || check_option.equals("2") || check_option.equals("3")) {
+                        System.out.println(result.get(Integer.parseInt(check_option) - 1));
+                        System.out.println();
+                        System.out.println("If you want to check other type of the information from the lower level employees," +
+                                " please type any bottom. Otherwise, please type E to exist");
+                    } else {
+                        System.out.println("Please give the correct action! Try again.");
+                    }
                     System.out.println();
-                    System.out.println("If you want to check other type of the information from the lower level employees," +
-                            " please type any bottom. Otherwise, please type E to exist");
-                }else {
-                    System.out.println("Please give the correct action! Try again.");
-                }
-                System.out.println();
-                System.out.println("Otherwise, please type E to exist");
-                String action = keyIn.nextLine().toUpperCase();
-                if (action.equalsIgnoreCase("E")) {
-                    System.out.println();
-                    noExist = false;
+                    System.out.println("Otherwise, please type E to exist");
+                    String action = keyIn.nextLine().toUpperCase();
+                    if (action.equalsIgnoreCase("E")) {
+                        System.out.println();
+                        noExist = false;
+                    }
+                }catch (Exception e){
+                    System.out.println("There are not lower level user exist! \n");
                 }
 
             }

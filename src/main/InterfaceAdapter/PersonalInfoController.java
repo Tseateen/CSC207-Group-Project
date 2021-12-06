@@ -157,12 +157,32 @@ public class PersonalInfoController {
                     this.personalManager.setWage(userID, response, employeeList);
                     break;
                 case "4":
-                    if(this.personalManager.setPosition(userID, response, employeeList)){
+                    if(!this.personalManager.setPosition(userID, response, employeeList)){
                         correctAction = false;
                     }
                     break;
                 case "5":
-                    if(this.personalManager.setEmployeeState(userID, response, employeeList)){
+                    if(!this.personalManager.setEmployeeState(userID, response, employeeList)){
+                        correctAction = false;
+                    }
+                    break;
+                case "6":
+                    if (!this.personalManager.setTotalVacationWithSalary(userID, response, employeeList)){
+                        correctAction = false;
+                    }
+                    break;
+                case "7":
+                    if (!this.personalManager.setVacationUsed(userID, response, employeeList)){
+                        correctAction = false;
+                    }
+                    break;
+                case "8":
+                    if (!this.personalManager.setWorkingHour(userID, response, employeeList)){
+                        correctAction = false;
+                    }
+                    break;
+                case "9":
+                    if (!this.personalManager.resetWorkingHour(userID, employeeList)){
                         correctAction = false;
                     }
                     break;
