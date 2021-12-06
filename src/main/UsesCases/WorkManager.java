@@ -53,7 +53,7 @@ public class WorkManager implements IWorkManager, Serializable {
     private void autoChange(Workable work) {
         String statue = work.getState();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        long due = Integer.parseInt(work.getEndTime());
+        long due = Long.parseLong(work.getEndTime());
         if (statue.equals("Finished")) {
             return;
         }
