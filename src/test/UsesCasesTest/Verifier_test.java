@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class Verifier_test {
-    LoginList LL;
+    LoginList loginList_vt;
     Verifier VV;
     EmployeeList EL;
     UserAble u1, u2;
@@ -19,13 +19,13 @@ public class Verifier_test {
 
     @Before
     public void Setup(){
-        LL = new LoginList();
+        loginList_vt = new LoginList();
         u1 = new User("Lily", "Lily0", "l99999999", "498765432",
                 "234 Mississauga Road");
         u2 = new User("Cathy", "Cathy1", "33445566", "6478888888",
                 "12 Apple Creek");
-        LL.addUser(u1.getName(), u1.getPassword(), u1.getPhone(), u1.getAddress());
-        LL.addUser(u2.getName(), u2.getPassword(), u2.getPhone(), u2.getAddress());
+        loginList_vt.addUser(u1.getName(), u1.getPassword(), u1.getPhone(), u1.getAddress());
+        loginList_vt.addUser(u2.getName(), u2.getPassword(), u2.getPhone(), u2.getAddress());
 
         VV = new Verifier();
 
@@ -41,8 +41,8 @@ public class Verifier_test {
 
     @Test
     public void testVerifyForLogin(){
-        assertTrue(VV.verifyForLogin(u1.getID(), u1.getPassword(), LL));
-        assertFalse(VV.verifyForLogin(u1.getID(), u2.getPassword(), LL));
+        assertTrue(VV.verifyForLogin(u1.getID(), u1.getPassword(), loginList_vt));
+        assertFalse(VV.verifyForLogin(u1.getID(), u2.getPassword(), loginList_vt));
 
     }
 
@@ -78,8 +78,8 @@ public class Verifier_test {
 
     @Test
     public void testUserExists(){
-        assertTrue(VV.userExists("Lily0", LL));
-        assertFalse(VV.userExists("Lily1", LL));
+        assertTrue(VV.userExists("Lily0", loginList_vt));
+        assertFalse(VV.userExists("Lily1", loginList_vt));
 
     }
 }

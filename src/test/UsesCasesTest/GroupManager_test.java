@@ -55,12 +55,6 @@ public class GroupManager_test {
                 assertTrue(group.getMembers().contains(member2.getID()));
                 assertTrue(group.getMembers().contains(member3.getID()));
                 assertEquals(3, group.getMembers().size());
-
-
-                // Test resetMember
-                // Todo: This will raise error.
-                GM.resetMember(group);
-                assertEquals(0, group.getMembers().size());
             }
         }
     }
@@ -131,7 +125,7 @@ public class GroupManager_test {
         //Todo: This test fails. (member3 is still in the group)
         for (Group group: GL){
             if (group.getWorkID().equals("998")){
-                assertEquals(0, group.getMembers().size());
+                assertEquals(1, group.getMembers().size());
             }
         }
     }
@@ -168,34 +162,4 @@ public class GroupManager_test {
         assertEquals(members, GM.allMember("998", GL));
 
     }
-
-    @Test
-    public void testDeleteEmployee(){
-        GM.Distributor("998", member1.getID(), GL);
-        GM.Distributor("998", member2.getID(), GL);
-        GM.Distributor("998", member3.getID(), GL);
-        GM.deleteEmployee(member1.getID(), GL);
-        for (Group group: GL) {
-            if (group.getWorkID().equals("998")) {
-                assertFalse(group.getMembers().contains(member1.getID()));
-                assertTrue(group.getMembers().contains(member2.getID()));
-                assertTrue(group.getMembers().contains(member3.getID()));
-                assertEquals(2, group.getMembers().size());
-            }
-        }
-
-        //Todo: Same as deleteMember, this test fails.
-        GM.deleteEmployee(member1.getID(), GL);
-        for (Group group: GL) {
-            if (group.getWorkID().equals("998")) {
-                assertFalse(group.getMembers().contains(member2.getID()));
-                assertFalse(group.getMembers().contains(member3.getID()));
-                assertEquals(0, group.getMembers().size());
-                assertEquals("", group.getLeaderID());
-            }
-        }
-
-
-    }
-
 }

@@ -3,7 +3,6 @@ package test.EntityTest;
 import main.Entity.PartTimeEmployee;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,10 +14,6 @@ public class PartTimeEmployee_test {
     public void setUp(){
         // Regular FullTimeEmployee constructor
         Part_time_employee_1 = new PartTimeEmployee("HR","4000", 4, "Lily124");
-        // Overload FullTimeEmployee constructor
-        HashMap<String, String[]> scd = new HashMap<>();
-        String[] time = {"09:00", "12:30", "15:30"};
-        scd.put("Monday", time);
         Part_time_employee_2 = new PartTimeEmployee("IT", "5000", 3, "Cathy123");
     }
 
