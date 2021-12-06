@@ -37,6 +37,10 @@ public interface Workable extends Serializable{
     void setSign(String sign);
 
     void setEndTime(String time);
+
+    void setIsKPI(String IsKPI);
+
+    String getIsKPI();
 }
 
 

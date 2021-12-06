@@ -1,3 +1,5 @@
+
+
 package main.UsesCases;
 
 import main.Entity.Group;
@@ -20,15 +22,15 @@ public class WorkManager implements IWorkManager, Serializable {
      * @param extendDate how much date it's gonna extended.
      */
     public void extendWork(String workID, IWorkList workList, String extendDate) {
-            Workable work = workList.getWork(workID);
-            Date date = new Date(Long.parseLong(work.getEndTime()));
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.DATE, Integer.parseInt(extendDate));
-            Timestamp ts = new Timestamp(cal.getTimeInMillis());
-            String due = String.valueOf(ts.getTime());
-            work.setEndTime(due);
-            this.autoChange(work);
+        Workable work = workList.getWork(workID);
+        Date date = new Date(Long.parseLong(work.getEndTime()));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, Integer.parseInt(extendDate));
+        Timestamp ts = new Timestamp(cal.getTimeInMillis());
+        String due = String.valueOf(ts.getTime());
+        work.setEndTime(due);
+        this.autoChange(work);
     }
 
 

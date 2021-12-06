@@ -35,4 +35,19 @@ public class WorkList_test {
         assertEquals(WL.getSize(), 0);
     }
 
+    @Test
+    public void testCheckWorkExists(){
+        WL.addWork("Project 1", "1111", "IT", "2", 2, "2022-01-01");
+        assertEquals(WL.getSize(), 1);
+        assertTrue(WL.checkWorkExist("1111"));
+        assertFalse(WL.checkWorkExist("1112"));
+
+    }
+
+    @Test
+    public void testFindWorkLevel(){
+        WL.addWork("Project 1", "1111", "IT", "2", 2, "2022-01-01");
+        assertEquals("2", WL.FindWorkLevel("1111"));
+    }
+
 }

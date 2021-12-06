@@ -39,9 +39,9 @@ public class SalaryCalculator implements Serializable {
      * @return An int that represents the total salary to be paid for this full-time employee.
      */
     public String calculateFullTimeSalary(FullTimeEmployee fullTimeEmployee, IGroupList groupList, IWorkList workList){
-        return Long.parseLong(calculateBonusFromKPI(fullTimeEmployee, groupList, workList)) +
-                calculateBonusFromVacation(fullTimeEmployee) +
-                fullTimeEmployee.getWage();
+        return Integer.toString(Integer.parseInt(calculateBonusFromKPI(fullTimeEmployee, groupList, workList)) +
+                Integer.parseInt(calculateBonusFromVacation(fullTimeEmployee)) +
+                Integer.parseInt(fullTimeEmployee.getWage()));
     }
 
 

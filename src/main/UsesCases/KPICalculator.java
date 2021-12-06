@@ -4,7 +4,6 @@ import main.Entity.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.lang.*;
 
@@ -46,20 +45,13 @@ public class KPICalculator implements Serializable {
         userWork.put("Leader", workAsLeader);
         userWork.put("Member", workAsMember);
 
-        String now = String.valueOf(System.currentTimeMillis());
-        long milliSeconds = Long.parseLong(now);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        //int date = calendar.get(Calendar.DATE);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
-
         for (Group eachGroup : (GroupList)groupList) {
             if (eachGroup.getLeaderID().equals(userid)) {
                 String groupID = eachGroup.getWorkID();
                 for (Workable work : (WorkList)workList) {
-                    if (checkTimeHelper(work, groupID, month, year)){
+                    if (checkStatusHelper(work, groupID)){
                         workAsLeader.add(work);
+                        work.setIsKPI("1");
                     }
                 }
             }
@@ -67,8 +59,10 @@ public class KPICalculator implements Serializable {
             if (eachGroup.getMembers().contains(userid)) {
                 String groupID = eachGroup.getWorkID();
                 for (Workable work : (WorkList)workList) {
-                    if (checkTimeHelper(work, groupID, month, year)) {
+                    if (checkStatusHelper(work, groupID) ) {
                         workAsMember.add(work);
+                        work.setIsKPI("1");
+
                     }
                 }
             }
@@ -76,11 +70,10 @@ public class KPICalculator implements Serializable {
         return userWork;
     }
 
-    private boolean checkTimeHelper(Workable work, String groupID, int month, int year){
+    private boolean checkStatusHelper(Workable work, String groupID){
         return (work.getState().equals("Finished") &&
-                Integer.valueOf(work.getEndTime().substring(5, 7)).equals(month) &&
-                Integer.valueOf(work.getEndTime().substring(0, 4)).equals(year) &&
-                work.getID().equals(groupID));
+                work.getID().equals(groupID)) &&
+                work.getIsKPI().equals("0");
     }
 
 }
