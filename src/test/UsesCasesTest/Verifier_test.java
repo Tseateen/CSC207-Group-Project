@@ -75,4 +75,11 @@ public class Verifier_test {
         assertFalse(VV.levelVerifier(1, u1.getID(), EL));
         assertTrue(VV.levelVerifier(9, u1.getID(), EL));
     }
+
+    @Test
+    public void testUserExists(){
+        assertTrue(VV.userExists("Lily0", LL));
+        assertFalse(VV.userExists("Lily1", LL));
+
+    }
 }

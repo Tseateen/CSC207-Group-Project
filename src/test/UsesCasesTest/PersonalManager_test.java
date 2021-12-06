@@ -22,6 +22,7 @@ public class PersonalManager_test {
     GroupList GL;
     WorkList WL;
     WorkManager WM;
+    GroupManager GM;
 
     @Before
     public void Setup(){
@@ -35,20 +36,29 @@ public class PersonalManager_test {
         EL = new EmployeeList();
         e1 = new FullTimeEmployee("Human Resource", "Manager", "6000", 4, u1.getID());
         e2 = new PartTimeEmployee("Technology", "25", 8, u2.getID());
+        e1.setTotalVacationWithSalary("2");
+        e1.setVacationUsed("1");
         EL.addEmployee(e1.getDepartment(),e1.getWage(),e1.getPosition(), Integer.toString(e1.getLevel()), "F", "Lily");
         EL.addEmployee(e2.getDepartment(),e2.getWage(),"N", Integer.toString(e2.getLevel()), "P", "Cathy");
         PM = new PersonalManager();
+        PM.setTotalVacationWithSalary(u1.getID(),"2", EL);
+        PM.setVacationUsed(u1.getID(),"1", EL);
         WL = new WorkList();
         GL = new GroupList();
         WM = new WorkManager();
+        GM = new GroupManager();
 
-        // Todo: The following commented code will raise error
         GL.addGroup(u1.getID(), "207");
         WL.addWork("Group Project", "207", "Human Resource", "Get it done", 9, "2022-01-01");
-        WM.changeWorkInfo("207", WL, "SIGN", "1");
+        GM.assignLeader("207", u1.getID(), GL);
 
-        e1.setTotalVacationWithSalary("2");
-        e1.setVacationUsed("1");
+        for (Workable work: WL){
+            if (work.getID().equals("207")){
+                work.setState("Finished");
+            }
+        }
+
+        WM.changeWorkInfo("207", WL, "SIGN", "1");
     }
 
     @Test
@@ -57,7 +67,6 @@ public class PersonalManager_test {
                 u2.getAddress(), e2.getDepartment()));
         assertEquals(info1, PM.employeeInfo(LL, EL, u2.getID()));
 
-        // Todo: TotalVacationWithSalary and VacationUsed did not change
         ArrayList<String> info2 = new ArrayList<>( Arrays.asList(u1.getName(), u1.getID(), u1.getPassword(), u1.getPhone(),
                 u1.getAddress(), e1.getDepartment(), e1.getPosition(), e1.getState(), e1.getTotalVacationWithSalary(),
                 e1.getVacationUsed()));
@@ -67,7 +76,8 @@ public class PersonalManager_test {
 
     @Test
     public void testCheckTotalSalary(){
-        assertEquals("6000", PM.checkTotalSalary(EL, u1.getID(), GL, WL));
+        //Todo: Need to test about PartTimeEmployee.
+        assertEquals("6652", PM.checkTotalSalary(EL, u1.getID(), GL, WL));
         assertEquals("0", PM.checkTotalSalary(EL, u2.getID(), GL, WL));
         // I think it needs modification, since this test cannot effectively test what the method did (KPI part)
     }
@@ -80,24 +90,82 @@ public class PersonalManager_test {
 
     @Test
     public void testCheckVacationBonus(){
-        // Todo: TotalVacationWithSalary and VacationUsed did not change
-        assertEquals("200", PM.checkVacationBonus(EL, "Lily0"));
-        assertEquals("0", PM.checkVacationBonus(EL, "Cathy1"));
+        assertEquals("200", PM.checkVacationBonus(EL, u1.getID()));
+        assertEquals("0", PM.checkVacationBonus(EL, u2.getID()));
     }
 
     @Test
     public void testCheckKPIBonus(){
-        assertEquals("0", PM.checkKPIBonus(EL, "Lily0", GL, WL));
-        assertEquals("0", PM.checkKPIBonus(EL, "Cathy1", GL, WL));
+        //Todo: Need to test more.
+        assertEquals("452", PM.checkKPIBonus(EL, u1.getID(), GL, WL));
+        assertEquals("0", PM.checkKPIBonus(EL, u2.getID(), GL, WL));
         // same issue, require further modification
     }
 
     @Test
     public void testVacationInfo(){
-        // Todo: TotalVacationWithSalary and VacationUsed did not change
         ArrayList<String> info1 = new ArrayList<>(Arrays.asList("1", "2"));
-        assertEquals(info1, PM.vacationInfo(EL, "Lily0"));
+        assertEquals(info1, PM.vacationInfo(EL, u1.getID()));
         ArrayList<String> info2 = new ArrayList<>();
-        assertEquals(info2, PM.vacationInfo(EL, "Cathy1"));
+        assertEquals(info2, PM.vacationInfo(EL, u2.getID()));
+    }
+
+    @Test
+    public void testGetWorkingHourFromPartTimeEmployee(){
+        assertEquals("0", PM.getWorkingHourFromPartTimeEmployee(EL, u2.getID()));
+        PM.setWorkingHour(u2.getID(), "6", EL);
+        assertEquals("6", PM.getWorkingHourFromPartTimeEmployee(EL, u2.getID()));
+    }
+
+    @Test
+    public void testSetName(){
+        PM.setName("Luke", LL, u1.getID());
+
+        for (UserAble user: LL){
+            if (user.getID().equals(u1.getID())){
+                assertEquals("Luke", user.getName());
+                assertEquals("Lily0", user.getID());
+            }
+        }
+    }
+
+    @Test
+    public void testSetPassword(){
+        PM.setPassword("lily12345678987", LL, u1.getID());
+
+        for (UserAble user: LL){
+            if (user.getID().equals(u1.getID())){
+                assertEquals("lily12345678987", user.getPassword());
+            }
+        }
+    }
+
+    @Test
+    public void testSetAddress(){
+        PM.setAddress("314 Markham Road", LL, u1.getID());
+
+        for (UserAble user: LL){
+            if (user.getID().equals(u1.getID())){
+                assertEquals("314 Markham Road", user.getAddress());
+            }
+        }
+    }
+
+    @Test
+    public void testSetPhone(){
+        PM.setPhone("4141414141", LL, u1.getID());
+
+        for (UserAble user: LL){
+            if (user.getID().equals(u1.getID())){
+                assertEquals("4141414141", user.getPhone());
+            }
+        }
+
+    }
+
+    @Test
+    public void testGetUserLevel(){
+        assertEquals("4",PM.getUserLevel(u1.getID(), EL));
+        assertEquals("8",PM.getUserLevel(u2.getID(), EL));
     }
 }

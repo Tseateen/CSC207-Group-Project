@@ -27,6 +27,8 @@ public class Work implements Workable, Serializable {
     private String requirement;
     // whether Work has been assigned to a Group.
     private String isGroup = "0";
+    // whether Work was calculated to KPI before.
+    private String isKPI = "0";
 
     /* === Representation Invariants ===
      * create_time should always be before or be the same as the start_time
@@ -187,5 +189,25 @@ public class Work implements Workable, Serializable {
     public void setSign(String sign) {
         this.isGroup = sign;
     }
+
+    /**
+     *
+     * @return Return a sign to show whether this work was calculated to KPI before; 0 means no, 1 means yes
+     */
+    @Override
+    public String getIsKPI() {
+        return this.isKPI;
+    }
+
+    /**
+     *
+     * @param sign Give a sign to mark this work was calculated to KPI before.
+     */
+    @Override
+    public void setIsKPI(String sign) {
+        this.isKPI = sign;
+    }
+
+
 }
 
