@@ -64,13 +64,11 @@ public class Group implements Iterable<String>, Serializable {
      * This method add a new member to the group.
      *
      * @param member The member who is going to be added to the group.
-     * @return This method will return true iff the member is successfully added to the group.
      */
-    public boolean addMember(String member) {
+    public void addMember(String member) {
         if (!this.groupMembers.contains(member)) {
             this.groupMembers.add(member);
-            return true;
-        }return false;
+        }
     }
 
     /**

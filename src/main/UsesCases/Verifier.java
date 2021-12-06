@@ -69,7 +69,7 @@ public class Verifier implements IVerifier, Serializable {
      */
     @Override
     public boolean verifyForLogin(String userID, String password, ILoginList loginList) {
-        for(Userable user: (LoginList) loginList){
+        for(UserAble user: (LoginList) loginList){
             if(user.getID().equals(userID) && user.getPassword().equals(password)){
                 return true;
             }

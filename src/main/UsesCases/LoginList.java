@@ -1,7 +1,7 @@
 package main.UsesCases;
 
 import main.Entity.User;
-import main.Entity.Userable;
+import main.Entity.UserAble;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
+public class LoginList implements Iterable<UserAble>, Serializable, ILoginList{
 
     // === Instance Variables ===
 
     // The list contained all the user.
-    private final List<Userable> UserList;
+    private final List<UserAble> UserList;
     // The idCounter that generated the ID for the user.
     private int idCounter;
 
@@ -43,7 +43,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     public String addUser(String name, String password, String phone, String address){
         String id = name.concat(String.valueOf(this.idCounter));
         this.idCounter += 1;
-        Userable user = new User( name, id, password, phone, address);
+        UserAble user = new User( name, id, password, phone, address);
         this.UserList.add(user);
         return id;
     }
@@ -56,7 +56,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      */
     @Override
     public void deleteUser(String id){
-        Userable user = this.getUser(id);
+        UserAble user = this.getUser(id);
         this.UserList.remove(user);
     }
 
@@ -67,8 +67,8 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
      * @return the User found.
      */
     @Override
-    public Userable getUser(String user_id){
-        for(Userable user: this.UserList){
+    public UserAble getUser(String user_id){
+        for(UserAble user: this.UserList){
             if(user.getID().equals(user_id)) {
                 return user;
             }
@@ -103,7 +103,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     // ===== Data ====
     @Override
     public void initialized(){
-        Userable admin = new User("Admin", "Admin", "Admin", "N/A", "N/A");
+        UserAble admin = new User("Admin", "Admin", "Admin", "N/A", "N/A");
         this.UserList.add(admin);
     }
 
@@ -118,7 +118,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         ObjectInput input = new ObjectInputStream(buffer);
         LoginList UserFile = (LoginList) input.readObject();
         input.close();
-        for(Userable user: UserFile){
+        for(UserAble user: UserFile){
             this.UserList.add(user);
             this.idCounter ++;
         }
@@ -140,11 +140,11 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
 
     // === Iterator Design Pattern ===
     @Override
-    public Iterator<Userable> iterator() {
+    public Iterator<UserAble> iterator() {
         return new LoginListIterator();
     }
 
-    private class LoginListIterator implements Iterator<Userable>{
+    private class LoginListIterator implements Iterator<UserAble>{
 
         private int curr_index = 0;
 
@@ -154,8 +154,8 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         }
 
         @Override
-        public Userable next() {
-            Userable user;
+        public UserAble next() {
+            UserAble user;
 
             try {
                 user = UserList.get(curr_index);
@@ -166,7 +166,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
             return user;
         }
 
-        public void add(Userable user){
+        public void add(UserAble user){
             UserList.add(user);
         }
     }
