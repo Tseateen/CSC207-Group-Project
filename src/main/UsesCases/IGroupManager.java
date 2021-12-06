@@ -14,4 +14,6 @@ public interface IGroupManager extends Serializable {
     void resetGroup(Group group);
     boolean Distributor(String workID, String userID, IGroupList groupList);
     void assignLeader(String workID, String leaderID, IGroupList groupList);
+    boolean groupExist(String workID, IGroupList groupList);
+    List<String> allMember(String workID, IGroupList groupList);
 }

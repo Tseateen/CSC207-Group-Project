@@ -28,6 +28,9 @@ public class ChangeWorkStateUI {
             System.out.println("I) Auto update state for all works, please enter 1" + "\n" +
                     "II) Change State for a work you led with auto state check, please enter 2" + "\n" +
                     "III) Back to main page, please enter E " + "\n");
+
+            System.out.println("Here's 4 states that you may change to:\nPending, InProgress, Finished, Expired\n" +
+                    "If you use other state, it may be auto changed");
             String action = keyIn.nextLine();
             switch (action){
                 case "1":

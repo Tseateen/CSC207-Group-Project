@@ -2,6 +2,9 @@ package main.InterfaceAdapter;
 
 import main.UsesCases.IGroupList;
 import main.UsesCases.IGroupManager;
+import main.UsesCases.IWorkList;
+
+import java.util.List;
 
 public class GroupManagerController {
 
@@ -47,5 +50,18 @@ public class GroupManagerController {
         return this.groupManager.Distributor(workID, memberID, groupList);
     }
     // ==================================================
+    // ==================================================
+
+    public boolean removeOneFromGroup(String userID, String workID, IGroupList groupList) {
+        return this.groupManager.deleteMember(userID,workID,groupList);
+    }
+
+    public boolean groupExist(String workID, IGroupList groupList) {
+        return this.groupManager.groupExist(workID,groupList);
+    }
+
+    public List<String> allMember(String workID, IGroupList groupList) {
+        return this.groupManager.allMember(workID, groupList);
+    }
 
 }

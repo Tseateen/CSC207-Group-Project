@@ -83,11 +83,6 @@ public class WorkManagerController {
                     leaderID, groupList);
 
     }
-    // ==================================================
-
-    public boolean removeOneFromGroup(String userID, String workID, IGroupList groupList) {
-        return this.groupManager.deleteMember(userID,workID,groupList);
-    }
 
     // ==================================================
     public void changeState(String workID, String newStatus, IWorkList workList){

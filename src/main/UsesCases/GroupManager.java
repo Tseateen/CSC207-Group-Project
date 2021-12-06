@@ -168,4 +168,12 @@ public class GroupManager implements IGroupManager, Serializable {
         }
         groupList.addGroup(leaderID, workID);
     }
+
+    public boolean groupExist(String workID, IGroupList groupList) {
+        return Objects.isNull(groupList.getGroup(workID));
+    }
+
+    public List<String> allMember(String workID, IGroupList groupList){
+        return groupList.getGroup(workID).getMembers();
+    }
 }
