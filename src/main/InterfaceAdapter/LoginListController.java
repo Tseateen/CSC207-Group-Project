@@ -34,8 +34,15 @@ public class LoginListController {
 
 
     // === Usage: FacadeSys Worker Case (vi) ====
-    public void deleteUser(String id){
-        this.loginList.deleteUser(id);
+
+    /**
+     * Delete User from the list.
+     *
+     * @param ID the ID of the targeted User.
+     *
+     */
+    public void deleteUser(String ID){
+        this.loginList.deleteUser(ID);
     }
     // ==================================================
 }

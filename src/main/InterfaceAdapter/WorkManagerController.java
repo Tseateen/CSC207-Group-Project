@@ -19,6 +19,7 @@ public class WorkManagerController {
 
 
     // === Usage: FacadeSys Worker Case (i) ====
+
     public String showAllWorkNeedToDo(String userID, IGroupList groupList, IWorkList workList) {
         StringBuilder result = new StringBuilder();
         for (String i : this.workManager.workOfMember(userID, groupList, workList)){
@@ -28,7 +29,16 @@ public class WorkManagerController {
     }
     // ==========================================
 
+
     // === Usage: FacadeSys Worker Case (i) ====
+    /**
+     * Get all the Work information with the Work ID.
+     *
+     * @param workID the ID of the Work.
+     *
+     * @return a list of strings with the Work information, including the name, ID, state, level, description,
+     * start time, end time of the Work.
+     */
     public String showWorkDetail(String workID, IWorkList workList) {
         StringBuilder result = new StringBuilder();
         for (String i : this.workManager.showWorkDetail(workID, workList)){
@@ -36,8 +46,16 @@ public class WorkManagerController {
         }
         return result.toString();
     }
-    // ==========================================
 
+
+    // ==========================================
+    /**
+     * Extend a work (add extra works to the current work).
+     *
+     * @param workID the work's id which is going to be extended.
+     * @param days the days to be extended of work.
+     *
+     */
     public void extendWork(String workID, String days, IWorkList workList){
         this.workManager.extendWork(workID,workList, days);
     }
