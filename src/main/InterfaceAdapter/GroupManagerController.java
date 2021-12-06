@@ -2,7 +2,6 @@ package main.InterfaceAdapter;
 
 import main.UsesCases.IGroupList;
 import main.UsesCases.IGroupManager;
-import main.UsesCases.IWorkList;
 
 import java.util.List;
 
