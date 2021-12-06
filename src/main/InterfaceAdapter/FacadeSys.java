@@ -340,6 +340,26 @@ public class FacadeSys {
         }
         return false;
     }
+
+    public boolean selfLeaderCheck(String workID) {
+        if (this.groupManagerController.groupExist(workID, this.groupList)) {
+            return this.verifierController.verifyLeader(this.userID, workID, groupList);
+        }
+        return false;
+    }
+
+    public String allGroupMember(String workID) {
+        StringBuilder result = new StringBuilder();
+        for (String id: this.groupManagerController.allMember(workID, this.groupList)) {
+            List<String> info = this.personalInfoController.personalInfo(this.loginList, this.employeeList, id);
+            result.append(info.get(0)).append(" ").append(id).append(" ").append(info.get(5)).append("\n");
+        }
+        return result.toString();
+    }
+
+    public boolean removeMember(String workID, String memberID) {
+        return this.groupManagerController.removeOneFromGroup(memberID, workID, this.groupList);
+    }
     // ==================================================
 
     // Here are some method used to show other user information, may be used in hr workers or work distribute

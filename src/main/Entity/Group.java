@@ -108,19 +108,19 @@ public class Group implements Iterable<String>, Serializable {
     }
 
     /**
-     * An Iterator for Group Userable.
+     * An Iterator for Group UserAble.
      */
     private class GroupIterator implements Iterator<String> {
 
         /**
-         * The index of the next Userable to return.
+         * The index of the next UserAble to return.
          */
         private int current = 0;
 
         /**
-         * Returns whether there is another Userable to return.
+         * Returns whether there is another UserAble to return.
          *
-         * @return True iff there is another Userable to return.
+         * @return True iff there is another UserAble to return.
          */
         @Override
         public boolean hasNext() {
@@ -128,9 +128,9 @@ public class Group implements Iterable<String>, Serializable {
         }
 
         /**
-         * Returns the next Userable.
+         * Returns the next UserAble.
          *
-         * @return the next Userable.
+         * @return the next UserAble.
          */
         @Override
         public String next() {
@@ -150,7 +150,7 @@ public class Group implements Iterable<String>, Serializable {
         }
 
         /**
-         * Removes the Userable just returned.
+         * Removes the UserAble just returned.
          */
         @Override
         public void remove() {

@@ -115,43 +115,6 @@ public class GroupManager implements IGroupManager, Serializable {
         return false;
     }
 
-
-    /**
-     * Verify if the Employee is the member of the Work, i.e. he is working on this project.
-     *
-     * @param userID the ID of the Employee.
-     * @param workID the ID of the Work.
-     * @param groupList the list of groups
-     *
-     * @return true iff the Employee is the Work's member.
-     */
-    public boolean isMember (String userID, String workID, IGroupList groupList) {
-        for (Group g: (GroupList)groupList) {
-            if (g.getWorkID().equals(workID)){
-                return (g.getLeaderID().equals(userID)||g.getMembers().contains(workID));
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Verify the leader of the Work.
-     *
-     * @param userID the ID of the Employee.
-     * @param workID the ID of the Work.
-     * @param groupList the list of groups
-     *
-     * @return true iff the Employee is the Work's leader.
-     */
-    public boolean verifierLeader(String userID, String workID, IGroupList groupList) {
-        for (Group g: (GroupList)groupList) {
-            if (g.getWorkID().equals(workID)){return g.getLeaderID().equals(userID);}
-        }
-        return false;
-    }
-
-
     /**
      * Set the leader of the Work and update this information in the GroupList.
      *
@@ -167,5 +130,13 @@ public class GroupManager implements IGroupManager, Serializable {
             }
         }
         groupList.addGroup(leaderID, workID);
+    }
+
+    public boolean groupExist(String workID, IGroupList groupList) {
+        return Objects.isNull(groupList.getGroup(workID));
+    }
+
+    public List<String> allMember(String workID, IGroupList groupList){
+        return groupList.getGroup(workID).getMembers();
     }
 }
