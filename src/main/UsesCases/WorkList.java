@@ -83,7 +83,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         return null;
     }
     // ===== Data ====
-
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
@@ -98,6 +98,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
         }
     }
 
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
@@ -112,6 +113,7 @@ public class WorkList implements Iterable<Workable>, Serializable, IWorkList {
     // ===============================
 
     // === Iterator Design Pattern ===
+    // @ Credit by UTSG CSC 207 Lecture code.
     @Override
     public Iterator<Workable> iterator() {
         return new WorkListIterator();

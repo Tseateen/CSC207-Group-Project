@@ -108,7 +108,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     }
 
 
-
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
@@ -124,7 +124,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
         }
     }
 
-
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
@@ -139,6 +139,7 @@ public class LoginList implements Iterable<Userable>, Serializable, ILoginList{
     // ===============================
 
     // === Iterator Design Pattern ===
+    // @ Credit by UTSG CSC 207 Lecture code.
     @Override
     public Iterator<Userable> iterator() {
         return new LoginListIterator();
