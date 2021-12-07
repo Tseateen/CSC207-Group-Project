@@ -3,16 +3,16 @@ package test.EntityTest;
 import main.Entity.Group;
 import main.Entity.User;
 
-import main.Entity.UserAble;
+import main.Entity.Userable;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class Group_test {
-    UserAble p1;
-    UserAble p2;
-    UserAble p3;
+    Userable p1;
+    Userable p2;
+    Userable p3;
     Group G1;
 
 
@@ -37,7 +37,7 @@ public class Group_test {
         String a = p2.getID();
         G1.setLeaderId(a);
         assertEquals(G1.getLeaderID(), p2.getID());
-        UserAble p4 = new User("Lily", "Lily4", "li23456", "411111111",
+        Userable p4 = new User("Lily", "Lily4", "li23456", "411111111",
                 "123 Bloor Street");
         G1.setLeaderId(p4.getID());
         assertEquals(G1.getLeaderID(), p4.getID());
@@ -46,7 +46,7 @@ public class Group_test {
     @Test(timeout = 100)
     public void testMembers1() {
         assertTrue(G1.getMembers().contains(p2.getID()));
-        UserAble p4 = new User("Lily", "Lily4", "li23456", "411111111",
+        Userable p4 = new User("Lily", "Lily4", "li23456", "411111111",
                 "123 Bloor Street");
         G1.addMember(p4.getID());
         assertTrue(G1.getMembers().contains(p4.getID()));
@@ -54,7 +54,7 @@ public class Group_test {
 
     @Test(timeout = 100)
     public void testMembers2() {
-        UserAble p4 = new User("Lily", "Lily4", "li23456", "411111111",
+        Userable p4 = new User("Lily", "Lily4", "li23456", "411111111",
                 "123 Bloor Street");
         G1.addMember(p4.getID());
         assertTrue(G1.getMembers().contains(p4.getID()));

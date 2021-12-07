@@ -14,7 +14,7 @@ public class GroupManager_test {
     GroupManager GM;
     Group group;
     GroupList GL;
-    UserAble leader, member1, member2, member3;
+    Userable leader, member1, member2, member3;
     Workable work;
 
 

@@ -3,7 +3,7 @@ package main.Entity;
 
 import java.io.Serializable;
 
-public class User implements UserAble, Serializable {
+public class User implements Userable, Serializable {
 
     // === Instance Variables ===
 

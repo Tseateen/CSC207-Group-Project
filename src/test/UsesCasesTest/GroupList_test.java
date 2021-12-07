@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class GroupList_test {
     GroupList GL;
-    UserAble user1;
+    Userable user1;
     ArrayList<String> memberList = new ArrayList<>();
 
     @Before

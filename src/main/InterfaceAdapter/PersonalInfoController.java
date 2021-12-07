@@ -38,7 +38,7 @@ public class PersonalInfoController {
         personalInfo.add("Address: " +info.get(4) + "\n");
         personalInfo.add("Department: " + info.get(5) + "\n");
         if (info.size() == 6) {
-           personalInfo.add("Work horus: " + this.personalManager.getWorkingHourFromPartTimeEmployee(employeeList,userID));
+           personalInfo.add("Work hours: " + this.personalManager.getWorkingHourFromPartTimeEmployee(employeeList,userID));
         }
         else{
             personalInfo.add("Position: " + info.get(6) + "\n");

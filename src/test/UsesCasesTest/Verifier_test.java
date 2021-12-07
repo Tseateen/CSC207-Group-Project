@@ -11,7 +11,7 @@ public class Verifier_test {
     LoginList loginList_vt;
     Verifier VV;
     EmployeeList EL;
-    UserAble u1, u2;
+    Userable u1, u2;
     FullTimeEmployee e1;
     PartTimeEmployee e2;
     GroupList GL;
