@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class WorkManager_test {
     LoginList LL;
     EmployeeList EL;
-    UserAble u1, u2;
+    Userable u1, u2;
     Group group;
     FullTimeEmployee e1, e2;
     GroupList GL;

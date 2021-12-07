@@ -2,7 +2,7 @@ package main.UsesCases;
 
 import main.Entity.Employee;
 import main.Entity.PartTimeEmployee;
-import main.Entity.UserAble;
+import main.Entity.Userable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class UserManager implements Serializable {
         for (Employee eachEmployee: (EmployeeList)employeeList) {
             StringBuilder user = new StringBuilder();
             if (eachEmployee.getLevel() > Integer.parseInt(level)) {
-                UserAble u = loginList.getUser(eachEmployee.getID());
+                Userable u = loginList.getUser(eachEmployee.getID());
                 user.append(u.getName()).append(" ").append(u.getID())
                         .append(" ").append(eachEmployee.getLevel()).append(" ").append(eachEmployee.getDepartment());
                 if (eachEmployee instanceof PartTimeEmployee) {

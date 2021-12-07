@@ -16,7 +16,7 @@ public class PersonalManager_test {
     LoginList loginList;
     EmployeeList EL;
     PersonalManager PM;
-    UserAble u1, u2;
+    Userable u1, u2;
     FullTimeEmployee e1;
     PartTimeEmployee e2;
     GroupList GL;
@@ -121,7 +121,7 @@ public class PersonalManager_test {
     public void testSetName(){
         PM.setName("Luke", loginList, u1.getID());
 
-        for (UserAble user: loginList){
+        for (Userable user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("Luke", user.getName());
                 assertEquals("Lily0", user.getID());
@@ -133,7 +133,7 @@ public class PersonalManager_test {
     public void testSetPassword(){
         PM.setPassword("lily12345678987", loginList, u1.getID());
 
-        for (UserAble user: loginList){
+        for (Userable user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("lily12345678987", user.getPassword());
             }
@@ -144,7 +144,7 @@ public class PersonalManager_test {
     public void testSetAddress(){
         PM.setAddress("314 Markham Road", loginList, u1.getID());
 
-        for (UserAble user: loginList){
+        for (Userable user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("314 Markham Road", user.getAddress());
             }
@@ -155,7 +155,7 @@ public class PersonalManager_test {
     public void testSetPhone(){
         PM.setPhone("4141414141", loginList, u1.getID());
 
-        for (UserAble user: loginList){
+        for (Userable user: loginList){
             if (user.getID().equals(u1.getID())){
                 assertEquals("4141414141", user.getPhone());
             }
