@@ -3,7 +3,7 @@ import main.Entity.*;
 
 import java.io.Serializable;
 
-public interface IEmployeeList extends IReadWrite, Iterative, Serializable {
+public interface IEmployeeList extends IReadWrite, initializable, Serializable {
     void addEmployee(String department, String wage, String position,
                                      String level, String status, String id);
     Employee getEmployee(String userID);

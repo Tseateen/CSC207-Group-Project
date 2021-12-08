@@ -97,6 +97,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
         this.EmployeeList.add(admin);
     }
 
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
@@ -112,6 +113,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
         }
     }
 
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     @Override
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
@@ -126,6 +128,7 @@ public class EmployeeList implements Iterable<Employee>, Serializable, IEmployee
     // ===============================
 
     // === Iterator Design Pattern ===
+    // @ Credit by UTSG CSC 207 Lecture code.
     @Override
     public Iterator<Employee> iterator() {
         return new EmployeeListIterator();

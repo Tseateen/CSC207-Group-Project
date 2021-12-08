@@ -2,6 +2,6 @@ package main.UsesCases;
 
 import java.io.Serializable;
 
-public interface Iterative extends Serializable {
+public interface initializable extends Serializable {
     void initialized();
 }

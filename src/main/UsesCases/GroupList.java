@@ -64,6 +64,7 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
     // ======= Data =======
 
     @Override
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     public void readDataFromFile() throws IOException, ClassNotFoundException {
         String filePath = new File("").getAbsolutePath();
         String targetFIle = (filePath.concat("/src/Data/GroupData.ser"));
@@ -79,6 +80,7 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
     }
 
     @Override
+    // @ Credit by UTM CSC 207 Lecture code. We have made some modification after our research.
     public void writeDataToFile() throws IOException {
         String filePath = new File("").getAbsolutePath();
         String targetFIle = (filePath.concat("/src/Data/GroupData.ser"));
@@ -91,6 +93,7 @@ public class GroupList implements Iterable<Group>, IGroupList,Serializable{
     // ===============================
 
     // === Iterator Design Pattern ===
+    // @ Credit by UTM CSC 207 Lecture code.
     @Override
     public Iterator<Group> iterator() {
         return new GroupListIterator();

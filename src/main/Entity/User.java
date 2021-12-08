@@ -144,6 +144,7 @@ public class User implements Userable, Serializable {
      * @return This method will return true iff the obj have the same Class type and id as this user.
      */
     @Override
+    // @ Credit by UTSG CSC 207 Lecture code.
     public boolean equals(Object obj) {
         if(!(obj instanceof User)){
             return false;
