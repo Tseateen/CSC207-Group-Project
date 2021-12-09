@@ -122,7 +122,6 @@ public class GroupManager_test {
         }
 
         GM.deleteMember(leader.getID(), "998", GL);
-        //Todo: This test fails. (member3 is still in the group)
         for (Group group: GL){
             if (group.getWorkID().equals("998")){
                 assertEquals(1, group.getMembers().size());
