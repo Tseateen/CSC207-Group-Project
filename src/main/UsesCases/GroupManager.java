@@ -133,7 +133,7 @@ public class GroupManager implements IGroupManager, Serializable {
     }
 
     public boolean groupExist(String workID, IGroupList groupList) {
-        return Objects.isNull(groupList.getGroup(workID));
+        return !Objects.isNull(groupList.getGroup(workID));
     }
 
     public List<String> allMember(String workID, IGroupList groupList){
