@@ -60,8 +60,7 @@ The diagram can be accessed [here](https://lucid.app/lucidchart/9cec037d-f77d-48
 - Interface Segregation Principle
     - We need to keep the interface small and specific to its functionality.
     - In Entities, the interfaces Userable and Workable are small and specific to the implementation of the functions used by the User and Work classes.
-    - In UsesCases, the iEmployeeList, iGroupList, iLoginList, iWorkList, are small and specific to the implementation of the functions, which guarantees the datalist has read input and write output functionality, used by the other Use Cases classes. Then, we can let data directly read input or written output from loginList, employeelist, grouplist, and worklist. Also, we wrote the interface initializable independentally and let IloginList, Iemployeelist, Igroup list, and Iworklist extend this interface, so that we are able to initial the data.
-
+    - We wrote ReadWrite interface, which interface can guarantee the datalist (e.g LoginList, EmployeeList, WorkList, and GroupList) has read input and write output functionality. Then, we can let data directly read input or written output from loginList, employeelist, grouplist, and worklist. Also, we did not write initial method in ReadWrite interface, we wrote this method independently  into Initializable interface. The reason is that WorkList and GroupList does not need this initial method. And then, we only let IloginList, Iemployeelist extend this interface. Therefore, we did not break Interface Segregation Principle.
 
 - Dependency Inversion Principle
     - To minimize coupling, we introduce an abstract layer between low-level classes and high-level classes by introducing the interfaces.
@@ -69,7 +68,7 @@ The diagram can be accessed [here](https://lucid.app/lucidchart/9cec037d-f77d-48
     - Same with workable.
 
 ## Clean Architecture
-Our program strictly followed the clean architecture design. We purposely built the structure of our code, so it does not violate the dependency rule. Our code had four layers, as the clean architecture states: entities, use cases, interface adapters, Frameworks.
+Our program strictly followed the clean architecture design. We purposely built the structure of our code, so it does not violate the dependency rule. Our code had four layers, as the clean architecture states: entities, use cases, interface adapters, Frameworks. The [diagram](https://lucid.app/lucidchart/5b05a46f-0a2e-40fe-bec6-25e2feed7e7a/edit?view_items=tzbzFLkOJ0jT&invitationId=inv_19995091-8505-4a87-9abb-ddff8c6af731) should be clear to show our clean architecture design.
  
 - Entities
 	- All of the objects that represent crucial business models are written as entity classes, which are the innermost cycle in the clean architecture. They can be manipulated and utilized by the use case classes.
