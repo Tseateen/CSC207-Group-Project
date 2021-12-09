@@ -76,10 +76,8 @@ public class PersonalManager_test {
 
     @Test
     public void testCheckTotalSalary(){
-        //Todo: Need to test about PartTimeEmployee.
         assertEquals("6652", PM.checkTotalSalary(EL, u1.getID(), GL, WL));
         assertEquals("0", PM.checkTotalSalary(EL, u2.getID(), GL, WL));
-        // I think it needs modification, since this test cannot effectively test what the method did (KPI part)
     }
 
     @Test
@@ -96,10 +94,8 @@ public class PersonalManager_test {
 
     @Test
     public void testCheckKPIBonus(){
-        //Todo: Need to test more.
         assertEquals("452", PM.checkKPIBonus(EL, u1.getID(), GL, WL));
         assertEquals("0", PM.checkKPIBonus(EL, u2.getID(), GL, WL));
-        // same issue, require further modification
     }
 
     @Test
