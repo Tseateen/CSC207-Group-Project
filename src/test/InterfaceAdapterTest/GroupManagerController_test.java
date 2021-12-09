@@ -49,7 +49,7 @@ public class GroupManagerController_test {
     }
     @Test
     public void testGroupExist(){
-        assertTrue(groupManagerController.groupExist("Work01", groupList));
+        assertTrue(groupManagerController.groupExist("Work0", groupList));
     }
 
     @Test

@@ -147,9 +147,7 @@ public class GroupManager_test {
 
     @Test
     public void testGroupExists(){
-        //Todo: This method is really confusing....
-        assertFalse(GM.groupExist("998", GL));
-        assertTrue(GM.groupExist("999", GL));
+        assertTrue(GM.groupExist("998", GL));
     }
 
     @Test
