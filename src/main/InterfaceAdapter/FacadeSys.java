@@ -342,8 +342,7 @@ public class FacadeSys {
     }
 
     public boolean selfLeaderCheck(String workID) {
-        String checkWorkID = workID + "1";
-        if (this.groupManagerController.groupExist(checkWorkID, this.groupList)) {
+        if (this.groupManagerController.groupExist(workID, this.groupList)) {
             return this.verifierController.verifyLeader(this.userID, workID, groupList);
         }
         return false;
